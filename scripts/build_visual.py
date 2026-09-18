@@ -33,7 +33,9 @@ BLUR_FLASH = 0.12
 
 
 def run(cmd):
-    subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+    # hard safety cap: no single block should ever legitimately take this long
+    subprocess.run(["timeout", "90"] + cmd, check=True,
+                    stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
 
 
 def build_normal(idx, s, e, zoom, out_path, punch):
@@ -59,7 +61,7 @@ def build_normal(idx, s, e, zoom, out_path, punch):
         "ffmpeg", "-y", "-ss", f"{s}", "-t", f"{dur}", "-i", SRC,
         "-filter_complex", filt, "-map", "[vout]",
         "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
-        "-pix_fmt", "yuv420p", "-r", "30", "-an", out_path,
+        "-pix_fmt", "yuv420p", "-r", "30", "-an", "-t", f"{dur}", out_path,
     ]
     run(cmd)
 
@@ -78,10 +80,10 @@ def build_cutaway(idx, s, e, bg_path, out_path):
         "ffmpeg", "-y",
         "-ss", f"{s}", "-t", f"{dur}", "-i", SRC,
         "-i", bg_path,
-        "-loop", "1", "-i", "build/circle_mask.png",
+        "-loop", "1", "-t", f"{dur}", "-i", "build/circle_mask.png",
         "-filter_complex", filt, "-map", "[vout]",
         "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
-        "-pix_fmt", "yuv420p", "-r", "30", "-an", out_path,
+        "-pix_fmt", "yuv420p", "-r", "30", "-an", "-t", f"{dur}", out_path,
     ]
     run(cmd)
 
@@ -94,6 +96,10 @@ def main():
     for idx, block in enumerate(BLOCKS):
         out_path = os.path.join(BLOCK_DIR, f"block_{idx:02d}.mp4")
         kind = block[0]
+        if os.path.exists(out_path) and os.path.getsize(out_path) > 1000:
+            print(f"[{idx+1}/{len(BLOCKS)}] {block} -- skip (exists)")
+            entries.append(out_path)
+            continue
         print(f"[{idx+1}/{len(BLOCKS)}] {block}")
         if kind == "normal":
             _, s, e, zoom = block
