@@ -3,6 +3,7 @@ build/bg2/
 build/bg_test/
 build/blocks/
 build/crop_test*.png
+build/check/
 build/audio.wav
 build/*.log
 build/vconcat.mp4
