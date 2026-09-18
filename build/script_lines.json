@@ -1,0 +1,18 @@
+[
+  {"seg": 0, "text": "Not every buyer needs a bank.", "highlight": ["buyer", "bank"]},
+  {"seg": 1, "text": "I've closed deals in days other agents said would take months.", "highlight": ["months"]},
+  {"seg": 2, "text": "The secret isn't luck, it's knowing your numbers before you walk in.", "highlight": ["numbers"]},
+  {"seg": 3, "text": "Most buyers panic about financing and let sellers control every term.", "highlight": ["panic", "control"]},
+  {"seg": 4, "text": "But when you control your numbers, you control the negotiation.", "highlight": ["control", "numbers", "negotiation"]},
+  {"seg": 5, "text": "Your financials tell a story before you say a word.", "highlight": ["financials", "word"]},
+  {"seg": 6, "text": "Income, savings, credit, all of it.", "highlight": ["income", "savings", "credit"]},
+  {"seg": 7, "text": "I walk every client through their real numbers first, then we build a strategy around exactly what works for them.", "highlight": ["numbers", "strategy"]},
+  {"seg": 8, "text": "It cost nothing to ask.", "highlight": ["nothing"]},
+  {"seg": 9, "text": "Nothing to lose either.", "highlight": ["nothing"]},
+  {"seg": 10, "text": "One phone call, one email.", "highlight": ["call", "email"]},
+  {"seg": 11, "text": "One honest conversation can save you thousands.", "highlight": ["honest", "thousands"]},
+  {"seg": 12, "text": "That's not a sales pitch.", "highlight": ["not"]},
+  {"seg": 13, "text": "That's just how good deals actually close.", "highlight": ["close"]},
+  {"seg": 14, "text": "So before you sign anything, call someone who protects you.", "highlight": ["protects"]},
+  {"seg": 15, "text": "Every single time.", "highlight": ["time"]}
+]
