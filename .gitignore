@@ -1,0 +1,18 @@
+build/bg1/
+build/bg2/
+build/bg_test/
+build/blocks/
+build/crop_test*.png
+build/audio.wav
+build/*.log
+build/vconcat.mp4
+
+# Raw uploaded source videos and rendered outputs are large binaries.
+# This session's network policy blocks the LFS transport (lfs.github.com),
+# so .mp4/.mov files are kept out of git history here and delivered to the
+# user directly instead. Remove this rule in an environment where LFS push
+# works if you want them versioned.
+source/*.mov
+source/*.mp4
+build/*.mp4
+output/*.mp4

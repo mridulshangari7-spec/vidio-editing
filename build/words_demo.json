@@ -1,0 +1,896 @@
+[
+  {
+    "word": "NOT",
+    "start": 0.0,
+    "end": 0.407,
+    "highlight": false
+  },
+  {
+    "word": "EVERY",
+    "start": 0.407,
+    "end": 0.814,
+    "highlight": false
+  },
+  {
+    "word": "DEAL",
+    "start": 0.814,
+    "end": 1.221,
+    "highlight": false
+  },
+  {
+    "word": "NEEDS",
+    "start": 1.221,
+    "end": 1.628,
+    "highlight": true
+  },
+  {
+    "word": "A",
+    "start": 1.628,
+    "end": 2.035,
+    "highlight": false
+  },
+  {
+    "word": "BANK",
+    "start": 2.035,
+    "end": 2.442,
+    "highlight": false
+  },
+  {
+    "word": "IT",
+    "start": 2.442,
+    "end": 2.849,
+    "highlight": false
+  },
+  {
+    "word": "COST",
+    "start": 2.849,
+    "end": 3.231,
+    "highlight": true
+  },
+  {
+    "word": "NOTHING",
+    "start": 3.231,
+    "end": 3.614,
+    "highlight": false
+  },
+  {
+    "word": "TO",
+    "start": 3.614,
+    "end": 3.996,
+    "highlight": false
+  },
+  {
+    "word": "ASK",
+    "start": 3.996,
+    "end": 4.378,
+    "highlight": false
+  },
+  {
+    "word": "THE",
+    "start": 4.378,
+    "end": 4.76,
+    "highlight": true
+  },
+  {
+    "word": "RIGHT",
+    "start": 4.76,
+    "end": 5.143,
+    "highlight": false
+  },
+  {
+    "word": "QUESTION",
+    "start": 5.143,
+    "end": 5.525,
+    "highlight": false
+  },
+  {
+    "word": "BEFORE",
+    "start": 5.525,
+    "end": 5.907,
+    "highlight": false
+  },
+  {
+    "word": "YOU",
+    "start": 5.907,
+    "end": 6.289,
+    "highlight": true
+  },
+  {
+    "word": "SIGN",
+    "start": 6.289,
+    "end": 6.671,
+    "highlight": false
+  },
+  {
+    "word": "ANYTHING",
+    "start": 6.671,
+    "end": 7.054,
+    "highlight": false
+  },
+  {
+    "word": "THIS",
+    "start": 7.054,
+    "end": 7.436,
+    "highlight": false
+  },
+  {
+    "word": "IS",
+    "start": 7.436,
+    "end": 7.828,
+    "highlight": true
+  },
+  {
+    "word": "HOW",
+    "start": 7.828,
+    "end": 8.219,
+    "highlight": false
+  },
+  {
+    "word": "SMART",
+    "start": 8.219,
+    "end": 8.611,
+    "highlight": false
+  },
+  {
+    "word": "BUYERS",
+    "start": 8.611,
+    "end": 9.003,
+    "highlight": false
+  },
+  {
+    "word": "PROTECT",
+    "start": 9.003,
+    "end": 9.395,
+    "highlight": true
+  },
+  {
+    "word": "THEIR",
+    "start": 9.395,
+    "end": 9.786,
+    "highlight": false
+  },
+  {
+    "word": "MONEY",
+    "start": 9.786,
+    "end": 10.178,
+    "highlight": false
+  },
+  {
+    "word": "AND",
+    "start": 10.178,
+    "end": 10.57,
+    "highlight": false
+  },
+  {
+    "word": "CLOSE",
+    "start": 10.57,
+    "end": 10.962,
+    "highlight": true
+  },
+  {
+    "word": "FASTER",
+    "start": 10.962,
+    "end": 11.353,
+    "highlight": false
+  },
+  {
+    "word": "EVERY",
+    "start": 11.353,
+    "end": 11.745,
+    "highlight": false
+  },
+  {
+    "word": "TIME",
+    "start": 11.745,
+    "end": 12.138,
+    "highlight": false
+  },
+  {
+    "word": "NOT",
+    "start": 12.138,
+    "end": 12.532,
+    "highlight": true
+  },
+  {
+    "word": "EVERY",
+    "start": 12.532,
+    "end": 12.925,
+    "highlight": false
+  },
+  {
+    "word": "DEAL",
+    "start": 12.925,
+    "end": 13.318,
+    "highlight": false
+  },
+  {
+    "word": "NEEDS",
+    "start": 13.318,
+    "end": 13.711,
+    "highlight": false
+  },
+  {
+    "word": "A",
+    "start": 13.711,
+    "end": 14.105,
+    "highlight": true
+  },
+  {
+    "word": "BANK",
+    "start": 14.105,
+    "end": 14.498,
+    "highlight": false
+  },
+  {
+    "word": "IT",
+    "start": 14.498,
+    "end": 14.891,
+    "highlight": false
+  },
+  {
+    "word": "COST",
+    "start": 14.891,
+    "end": 15.284,
+    "highlight": false
+  },
+  {
+    "word": "NOTHING",
+    "start": 15.284,
+    "end": 15.678,
+    "highlight": true
+  },
+  {
+    "word": "TO",
+    "start": 15.678,
+    "end": 16.071,
+    "highlight": false
+  },
+  {
+    "word": "ASK",
+    "start": 16.071,
+    "end": 16.462,
+    "highlight": false
+  },
+  {
+    "word": "THE",
+    "start": 16.462,
+    "end": 16.853,
+    "highlight": false
+  },
+  {
+    "word": "RIGHT",
+    "start": 16.853,
+    "end": 17.244,
+    "highlight": true
+  },
+  {
+    "word": "QUESTION",
+    "start": 17.244,
+    "end": 17.635,
+    "highlight": false
+  },
+  {
+    "word": "BEFORE",
+    "start": 17.635,
+    "end": 18.026,
+    "highlight": false
+  },
+  {
+    "word": "YOU",
+    "start": 18.026,
+    "end": 18.418,
+    "highlight": false
+  },
+  {
+    "word": "SIGN",
+    "start": 18.418,
+    "end": 18.809,
+    "highlight": true
+  },
+  {
+    "word": "ANYTHING",
+    "start": 18.809,
+    "end": 19.2,
+    "highlight": false
+  },
+  {
+    "word": "THIS",
+    "start": 19.2,
+    "end": 19.591,
+    "highlight": false
+  },
+  {
+    "word": "IS",
+    "start": 19.591,
+    "end": 19.982,
+    "highlight": false
+  },
+  {
+    "word": "HOW",
+    "start": 19.982,
+    "end": 20.373,
+    "highlight": true
+  },
+  {
+    "word": "SMART",
+    "start": 20.373,
+    "end": 20.766,
+    "highlight": false
+  },
+  {
+    "word": "BUYERS",
+    "start": 20.766,
+    "end": 21.158,
+    "highlight": false
+  },
+  {
+    "word": "PROTECT",
+    "start": 21.158,
+    "end": 21.551,
+    "highlight": false
+  },
+  {
+    "word": "THEIR",
+    "start": 21.551,
+    "end": 21.943,
+    "highlight": true
+  },
+  {
+    "word": "MONEY",
+    "start": 21.943,
+    "end": 22.336,
+    "highlight": false
+  },
+  {
+    "word": "AND",
+    "start": 22.336,
+    "end": 22.728,
+    "highlight": false
+  },
+  {
+    "word": "CLOSE",
+    "start": 22.728,
+    "end": 23.121,
+    "highlight": false
+  },
+  {
+    "word": "FASTER",
+    "start": 23.121,
+    "end": 23.513,
+    "highlight": true
+  },
+  {
+    "word": "EVERY",
+    "start": 23.513,
+    "end": 23.906,
+    "highlight": false
+  },
+  {
+    "word": "TIME",
+    "start": 23.906,
+    "end": 24.298,
+    "highlight": false
+  },
+  {
+    "word": "NOT",
+    "start": 24.298,
+    "end": 24.691,
+    "highlight": false
+  },
+  {
+    "word": "EVERY",
+    "start": 24.691,
+    "end": 25.083,
+    "highlight": true
+  },
+  {
+    "word": "DEAL",
+    "start": 25.083,
+    "end": 25.476,
+    "highlight": false
+  },
+  {
+    "word": "NEEDS",
+    "start": 25.476,
+    "end": 25.897,
+    "highlight": false
+  },
+  {
+    "word": "A",
+    "start": 25.897,
+    "end": 26.317,
+    "highlight": false
+  },
+  {
+    "word": "BANK",
+    "start": 26.317,
+    "end": 26.738,
+    "highlight": true
+  },
+  {
+    "word": "IT",
+    "start": 26.738,
+    "end": 27.159,
+    "highlight": false
+  },
+  {
+    "word": "COST",
+    "start": 27.159,
+    "end": 27.58,
+    "highlight": false
+  },
+  {
+    "word": "NOTHING",
+    "start": 27.58,
+    "end": 28.0,
+    "highlight": false
+  },
+  {
+    "word": "TO",
+    "start": 28.0,
+    "end": 28.421,
+    "highlight": true
+  },
+  {
+    "word": "ASK",
+    "start": 28.421,
+    "end": 28.818,
+    "highlight": false
+  },
+  {
+    "word": "THE",
+    "start": 28.818,
+    "end": 29.215,
+    "highlight": false
+  },
+  {
+    "word": "RIGHT",
+    "start": 29.215,
+    "end": 29.612,
+    "highlight": false
+  },
+  {
+    "word": "QUESTION",
+    "start": 29.612,
+    "end": 30.01,
+    "highlight": true
+  },
+  {
+    "word": "BEFORE",
+    "start": 30.01,
+    "end": 30.407,
+    "highlight": false
+  },
+  {
+    "word": "YOU",
+    "start": 30.407,
+    "end": 30.804,
+    "highlight": false
+  },
+  {
+    "word": "SIGN",
+    "start": 30.804,
+    "end": 31.201,
+    "highlight": false
+  },
+  {
+    "word": "ANYTHING",
+    "start": 31.201,
+    "end": 31.598,
+    "highlight": true
+  },
+  {
+    "word": "THIS",
+    "start": 31.598,
+    "end": 31.995,
+    "highlight": false
+  },
+  {
+    "word": "IS",
+    "start": 31.995,
+    "end": 32.392,
+    "highlight": false
+  },
+  {
+    "word": "HOW",
+    "start": 32.392,
+    "end": 32.79,
+    "highlight": false
+  },
+  {
+    "word": "SMART",
+    "start": 32.79,
+    "end": 33.187,
+    "highlight": true
+  },
+  {
+    "word": "BUYERS",
+    "start": 33.187,
+    "end": 33.584,
+    "highlight": false
+  },
+  {
+    "word": "PROTECT",
+    "start": 33.584,
+    "end": 33.981,
+    "highlight": false
+  },
+  {
+    "word": "THEIR",
+    "start": 33.981,
+    "end": 34.378,
+    "highlight": false
+  },
+  {
+    "word": "MONEY",
+    "start": 34.378,
+    "end": 34.775,
+    "highlight": true
+  },
+  {
+    "word": "AND",
+    "start": 34.775,
+    "end": 35.173,
+    "highlight": false
+  },
+  {
+    "word": "CLOSE",
+    "start": 35.173,
+    "end": 35.57,
+    "highlight": false
+  },
+  {
+    "word": "FASTER",
+    "start": 35.57,
+    "end": 35.967,
+    "highlight": false
+  },
+  {
+    "word": "EVERY",
+    "start": 35.967,
+    "end": 36.364,
+    "highlight": true
+  },
+  {
+    "word": "TIME",
+    "start": 36.364,
+    "end": 36.785,
+    "highlight": false
+  },
+  {
+    "word": "NOT",
+    "start": 36.785,
+    "end": 37.206,
+    "highlight": false
+  },
+  {
+    "word": "EVERY",
+    "start": 37.206,
+    "end": 37.627,
+    "highlight": false
+  },
+  {
+    "word": "DEAL",
+    "start": 37.627,
+    "end": 38.047,
+    "highlight": true
+  },
+  {
+    "word": "NEEDS",
+    "start": 38.047,
+    "end": 38.468,
+    "highlight": false
+  },
+  {
+    "word": "A",
+    "start": 38.468,
+    "end": 38.889,
+    "highlight": false
+  },
+  {
+    "word": "BANK",
+    "start": 38.889,
+    "end": 39.291,
+    "highlight": false
+  },
+  {
+    "word": "IT",
+    "start": 39.291,
+    "end": 39.694,
+    "highlight": true
+  },
+  {
+    "word": "COST",
+    "start": 39.694,
+    "end": 40.096,
+    "highlight": false
+  },
+  {
+    "word": "NOTHING",
+    "start": 40.096,
+    "end": 40.499,
+    "highlight": false
+  },
+  {
+    "word": "TO",
+    "start": 40.499,
+    "end": 40.901,
+    "highlight": false
+  },
+  {
+    "word": "ASK",
+    "start": 40.901,
+    "end": 41.298,
+    "highlight": true
+  },
+  {
+    "word": "THE",
+    "start": 41.298,
+    "end": 41.695,
+    "highlight": false
+  },
+  {
+    "word": "RIGHT",
+    "start": 41.695,
+    "end": 42.092,
+    "highlight": false
+  },
+  {
+    "word": "QUESTION",
+    "start": 42.092,
+    "end": 42.489,
+    "highlight": false
+  },
+  {
+    "word": "BEFORE",
+    "start": 42.489,
+    "end": 42.887,
+    "highlight": true
+  },
+  {
+    "word": "YOU",
+    "start": 42.887,
+    "end": 43.284,
+    "highlight": false
+  },
+  {
+    "word": "SIGN",
+    "start": 43.284,
+    "end": 43.681,
+    "highlight": false
+  },
+  {
+    "word": "ANYTHING",
+    "start": 43.681,
+    "end": 44.078,
+    "highlight": false
+  },
+  {
+    "word": "THIS",
+    "start": 44.078,
+    "end": 44.475,
+    "highlight": true
+  },
+  {
+    "word": "IS",
+    "start": 44.475,
+    "end": 44.896,
+    "highlight": false
+  },
+  {
+    "word": "HOW",
+    "start": 44.896,
+    "end": 45.317,
+    "highlight": false
+  },
+  {
+    "word": "SMART",
+    "start": 45.317,
+    "end": 45.738,
+    "highlight": false
+  },
+  {
+    "word": "BUYERS",
+    "start": 45.738,
+    "end": 46.159,
+    "highlight": true
+  },
+  {
+    "word": "PROTECT",
+    "start": 46.159,
+    "end": 46.581,
+    "highlight": false
+  },
+  {
+    "word": "THEIR",
+    "start": 46.581,
+    "end": 47.002,
+    "highlight": false
+  },
+  {
+    "word": "MONEY",
+    "start": 47.002,
+    "end": 47.423,
+    "highlight": false
+  },
+  {
+    "word": "AND",
+    "start": 47.423,
+    "end": 47.844,
+    "highlight": true
+  },
+  {
+    "word": "CLOSE",
+    "start": 47.844,
+    "end": 48.265,
+    "highlight": false
+  },
+  {
+    "word": "FASTER",
+    "start": 48.265,
+    "end": 48.703,
+    "highlight": false
+  },
+  {
+    "word": "EVERY",
+    "start": 48.703,
+    "end": 49.141,
+    "highlight": false
+  },
+  {
+    "word": "TIME",
+    "start": 49.141,
+    "end": 49.579,
+    "highlight": true
+  },
+  {
+    "word": "NOT",
+    "start": 49.579,
+    "end": 50.017,
+    "highlight": false
+  },
+  {
+    "word": "EVERY",
+    "start": 50.017,
+    "end": 50.455,
+    "highlight": false
+  },
+  {
+    "word": "DEAL",
+    "start": 50.455,
+    "end": 50.893,
+    "highlight": false
+  },
+  {
+    "word": "NEEDS",
+    "start": 50.893,
+    "end": 51.309,
+    "highlight": true
+  },
+  {
+    "word": "A",
+    "start": 51.309,
+    "end": 51.725,
+    "highlight": false
+  },
+  {
+    "word": "BANK",
+    "start": 51.725,
+    "end": 52.141,
+    "highlight": false
+  },
+  {
+    "word": "IT",
+    "start": 52.141,
+    "end": 52.558,
+    "highlight": false
+  },
+  {
+    "word": "COST",
+    "start": 52.558,
+    "end": 52.974,
+    "highlight": true
+  },
+  {
+    "word": "NOTHING",
+    "start": 52.974,
+    "end": 53.39,
+    "highlight": false
+  },
+  {
+    "word": "TO",
+    "start": 53.39,
+    "end": 53.806,
+    "highlight": false
+  },
+  {
+    "word": "ASK",
+    "start": 53.806,
+    "end": 54.222,
+    "highlight": false
+  },
+  {
+    "word": "THE",
+    "start": 54.222,
+    "end": 54.629,
+    "highlight": true
+  },
+  {
+    "word": "RIGHT",
+    "start": 54.629,
+    "end": 55.035,
+    "highlight": false
+  },
+  {
+    "word": "QUESTION",
+    "start": 55.035,
+    "end": 55.441,
+    "highlight": false
+  },
+  {
+    "word": "BEFORE",
+    "start": 55.441,
+    "end": 55.848,
+    "highlight": false
+  },
+  {
+    "word": "YOU",
+    "start": 55.848,
+    "end": 56.255,
+    "highlight": true
+  },
+  {
+    "word": "SIGN",
+    "start": 56.255,
+    "end": 56.661,
+    "highlight": false
+  },
+  {
+    "word": "ANYTHING",
+    "start": 56.661,
+    "end": 57.068,
+    "highlight": false
+  },
+  {
+    "word": "THIS",
+    "start": 57.068,
+    "end": 57.474,
+    "highlight": false
+  },
+  {
+    "word": "IS",
+    "start": 57.474,
+    "end": 57.88,
+    "highlight": true
+  },
+  {
+    "word": "HOW",
+    "start": 57.88,
+    "end": 58.287,
+    "highlight": false
+  },
+  {
+    "word": "SMART",
+    "start": 58.287,
+    "end": 58.759,
+    "highlight": false
+  },
+  {
+    "word": "BUYERS",
+    "start": 58.759,
+    "end": 59.23,
+    "highlight": false
+  },
+  {
+    "word": "PROTECT",
+    "start": 59.23,
+    "end": 59.702,
+    "highlight": true
+  },
+  {
+    "word": "THEIR",
+    "start": 59.702,
+    "end": 60.174,
+    "highlight": false
+  }
+]
