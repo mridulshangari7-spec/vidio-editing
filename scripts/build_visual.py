@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
-"""Assemble punch-in zoom cuts + circular cutaway compositing (no captions yet).
-Renders each timeline block as its own small ffmpeg process (low memory,
-resumable), concatenates them via the concat demuxer, then muxes the
-original audio back in. Outputs build/visual_demo.mp4."""
+"""Assemble a high-energy visual pass: continuous Ken-Burns zoom drift on
+every shot (never static), frequent punch cuts (max ~3.5s hold) with a
+white flash-cut, alternating framing/anchor per cut, and circular cutaway
+compositing over the animated backgrounds. Renders each block as its own
+small ffmpeg process (low memory, resumable), concatenates via the concat
+demuxer, then muxes the original audio back in.
+Outputs build/visual_demo.mp4."""
+import json
+import math
 import os
 import subprocess
 
@@ -11,62 +16,102 @@ CIRCLE_CX, CIRCLE_CY, CIRCLE_R = int(0.72 * W), int(0.47 * H), int(0.205 * W)
 FACE_CROP = "crop=480:480:120:220"
 SRC = "source/raw_source.mov"
 BLOCK_DIR = "build/blocks"
+FPS = 30
+MAX_HOLD = 3.5   # seconds -- no shot holds longer than this without a cut
+FLASH_DUR = 0.08
 
-BLOCKS = [
-    ("normal", 0.0, 2.849, 1.0),
-    ("normal", 2.849, 7.436, 1.08),
-    ("normal", 7.436, 11.745, 1.15),
-    ("normal", 11.745, 16.071, 1.08),
-    ("normal", 16.071, 20.373, 1.0),
-    ("cutaway", 20.373, 28.421, "build/bg1.mp4"),
-    ("normal", 28.421, 36.364, 1.08),
-    ("normal", 36.364, 38.889, 1.15),
-    ("normal", 38.889, 40.901, 1.08),
-    ("cutaway", 40.901, 48.265, "build/bg2.mp4"),
-    ("normal", 48.265, 50.893, 1.0),
-    ("normal", 50.893, 54.222, 1.08),
-    ("normal", 54.222, 58.287, 1.15),
-    ("normal", 58.287, 60.174, 1.08),
+# (index range in build/segments.json) -> which cutaway bg to use
+CUTAWAY_RANGES = {
+    (5, 6): "build/bg1.mp4",
+    (10, 11): "build/bg2.mp4",
+}
+
+ZOOM_CYCLE = [
+    (1.00, 1.04, 0),
+    (1.05, 1.10, -25),
+    (1.10, 1.16, 25),
+    (1.04, 1.09, -15),
 ]
-
-BLUR_FLASH = 0.12
 
 
 def run(cmd):
-    # hard safety cap: no single block should ever legitimately take this long
     subprocess.run(["timeout", "90"] + cmd, check=True,
                     stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
 
 
-def build_normal(idx, s, e, zoom, out_path, punch):
+def split_span(s, e, max_hold):
     dur = e - s
-    if abs(zoom - 1.0) < 1e-6:
-        vf = f"scale={W}:{H}"
-    else:
-        zw, zh = int(round(W * zoom)), int(round(H * zoom))
-        vf = f"scale={zw}:{zh},crop={W}:{H}:({zw}-{W})/2:({zh}-{H})/2"
+    n = max(1, math.ceil(dur / max_hold))
+    step = dur / n
+    return [(round(s + i * step, 3), round(s + (i + 1) * step, 3)) for i in range(n)]
 
-    if punch:
-        filt = (
-            f"[0:v]{vf}[z];"
-            f"[z]split=2[za][zb];"
-            f"[za]trim=0:{BLUR_FLASH},setpts=PTS-STARTPTS,boxblur=5:1[blur];"
-            f"[zb]trim=start={BLUR_FLASH},setpts=PTS-STARTPTS[sharp];"
-            f"[blur][sharp]concat=n=2:v=1:a=0[vout]"
-        )
-    else:
-        filt = f"[0:v]{vf}[vout]"
+
+def build_blocks_plan(segments):
+    covered = set()
+    for lo, hi in CUTAWAY_RANGES:
+        for i in range(lo, hi + 1):
+            covered.add(i)
+
+    plan = []
+    i = 0
+    cycle_i = 0
+    first = True
+    while i < len(segments):
+        matched_range = None
+        for (lo, hi), bg in CUTAWAY_RANGES.items():
+            if i == lo:
+                matched_range = (lo, hi, bg)
+                break
+        if matched_range:
+            lo, hi, bg = matched_range
+            s = segments[lo]["start"]
+            e = segments[hi]["end"]
+            plan.append({"kind": "cutaway", "start": s, "end": e, "bg": bg,
+                         "flash": not first})
+            first = False
+            i = hi + 1
+            continue
+
+        seg = segments[i]
+        for s, e in split_span(seg["start"], seg["end"], MAX_HOLD):
+            z0, z1, bias_x = ZOOM_CYCLE[cycle_i % len(ZOOM_CYCLE)]
+            cycle_i += 1
+            plan.append({"kind": "normal", "start": s, "end": e,
+                         "zoom0": z0, "zoom1": z1, "bias_x": bias_x,
+                         "flash": not first})
+            first = False
+        i += 1
+    return plan
+
+
+def build_normal(block, out_path):
+    s, e = block["start"], block["end"]
+    dur = e - s
+    n_frames = max(1, round(dur * FPS))
+    z0, z1, bias_x = block["zoom0"], block["zoom1"], block["bias_x"]
+
+    zoom_expr = f"{z0}+({z1}-{z0})*on/{max(1, n_frames - 1)}"
+    x_expr = f"(iw-iw/zoom)/2+{bias_x}"
+    y_expr = "(ih-ih/zoom)/2"
+
+    vf_parts = [
+        f"zoompan=z='{zoom_expr}':x='{x_expr}':y='{y_expr}':d=1:s={W}x{H}:fps={FPS}"
+    ]
+    if block["flash"]:
+        vf_parts.append(f"fade=t=in:st=0:d={FLASH_DUR}:color=white")
+    vf = ",".join(vf_parts)
 
     cmd = [
         "ffmpeg", "-y", "-ss", f"{s}", "-t", f"{dur}", "-i", SRC,
-        "-filter_complex", filt, "-map", "[vout]",
+        "-vf", vf,
         "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
-        "-pix_fmt", "yuv420p", "-r", "30", "-an", "-t", f"{dur}", out_path,
+        "-pix_fmt", "yuv420p", "-r", f"{FPS}", "-an", "-t", f"{dur}", out_path,
     ]
     run(cmd)
 
 
-def build_cutaway(idx, s, e, bg_path, out_path):
+def build_cutaway(block, out_path):
+    s, e, bg_path = block["start"], block["end"], block["bg"]
     dur = e - s
     mask_diam = 2 * CIRCLE_R
     filt = (
@@ -74,8 +119,13 @@ def build_cutaway(idx, s, e, bg_path, out_path):
         f"[2:v]format=gray[maskg];"
         f"[face][maskg]alphamerge,format=yuva420p[facea];"
         f"[1:v]trim=0:{dur},setpts=PTS-STARTPTS[bgv];"
-        f"[bgv][facea]overlay=x={CIRCLE_CX-CIRCLE_R}:y={CIRCLE_CY-CIRCLE_R}[vout]"
+        f"[bgv][facea]overlay=x={CIRCLE_CX-CIRCLE_R}:y={CIRCLE_CY-CIRCLE_R}[comp]"
     )
+    if block["flash"]:
+        filt += f";[comp]fade=t=in:st=0:d={FLASH_DUR}:color=white[vout]"
+    else:
+        filt += ";[comp]copy[vout]"
+
     cmd = [
         "ffmpeg", "-y",
         "-ss", f"{s}", "-t", f"{dur}", "-i", SRC,
@@ -83,37 +133,37 @@ def build_cutaway(idx, s, e, bg_path, out_path):
         "-loop", "1", "-t", f"{dur}", "-i", "build/circle_mask.png",
         "-filter_complex", filt, "-map", "[vout]",
         "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
-        "-pix_fmt", "yuv420p", "-r", "30", "-an", "-t", f"{dur}", out_path,
+        "-pix_fmt", "yuv420p", "-r", f"{FPS}", "-an", "-t", f"{dur}", out_path,
     ]
     run(cmd)
 
 
 def main():
+    segments = json.load(open("build/segments.json"))
+    plan = build_blocks_plan(segments)
+
     os.makedirs(BLOCK_DIR, exist_ok=True)
     list_path = os.path.join(BLOCK_DIR, "list.txt")
     entries = []
 
-    for idx, block in enumerate(BLOCKS):
+    for idx, block in enumerate(plan):
         out_path = os.path.join(BLOCK_DIR, f"block_{idx:02d}.mp4")
-        kind = block[0]
         if os.path.exists(out_path) and os.path.getsize(out_path) > 1000:
-            print(f"[{idx+1}/{len(BLOCKS)}] {block} -- skip (exists)")
+            print(f"[{idx+1}/{len(plan)}] {block['kind']} {block['start']}-{block['end']} -- skip")
             entries.append(out_path)
             continue
-        print(f"[{idx+1}/{len(BLOCKS)}] {block}")
-        if kind == "normal":
-            _, s, e, zoom = block
-            build_normal(idx, s, e, zoom, out_path, punch=(idx != 0))
+        print(f"[{idx+1}/{len(plan)}] {block}")
+        if block["kind"] == "normal":
+            build_normal(block, out_path)
         else:
-            _, s, e, bg_path = block
-            build_cutaway(idx, s, e, bg_path, out_path)
+            build_cutaway(block, out_path)
         entries.append(out_path)
 
     with open(list_path, "w") as f:
         for p in entries:
             f.write(f"file '{os.path.abspath(p)}'\n")
 
-    print("Concatenating blocks...")
+    print(f"Concatenating {len(entries)} blocks...")
     vconcat = "build/vconcat.mp4"
     run([
         "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", list_path,

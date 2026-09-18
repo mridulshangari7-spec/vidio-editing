@@ -14,23 +14,42 @@ EMOJI_FONT = "/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf"
 
 CIRCLE_CX, CIRCLE_CY, CIRCLE_R = int(0.72 * W), int(0.47 * H), int(0.205 * W)
 
-ICONS = [
-    {"emoji": "✉️", "pos": (0.27, 0.15)},   # envelope
-    {"emoji": "\U0001F4B0", "pos": (0.20, 0.42)},      # money bag
-    {"emoji": "\U0001F4F1", "pos": (0.30, 0.66)},      # phone
-]
+ICON_SETS = {
+    "money": [
+        {"emoji": "✉️", "pos": (0.27, 0.15)},   # envelope
+        {"emoji": "\U0001F4B0", "pos": (0.20, 0.42)},      # money bag
+        {"emoji": "\U0001F4F1", "pos": (0.30, 0.66)},      # phone
+    ],
+    "deal": [
+        {"emoji": "\U0001F3E0", "pos": (0.27, 0.15)},      # house
+        {"emoji": "\U0001F91D", "pos": (0.18, 0.42)},      # handshake
+        {"emoji": "\U0001F4C4", "pos": (0.30, 0.66)},      # document
+    ],
+}
+ICONS = ICON_SETS["money"]
 
-def blob_layer(t, w, h):
-    """Soft glowing purple->blue blob, animated wobble."""
-    img = Image.new("RGB", (w, h), (6, 4, 18))
-    draw = ImageDraw.Draw(img)
-    blobs = [
-        # (base_x, base_y, radius, color, phase)
+PALETTES = {
+    "purple": [
         (0.30, 0.10, 0.55, (168, 96, 220), 0.0),
         (0.65, 0.28, 0.62, (86, 70, 220), 1.4),
         (0.55, 0.55, 0.60, (56, 60, 200), 2.6),
         (0.75, 0.55, 0.42, (40, 40, 170), 0.7),
-    ]
+    ],
+    "teal": [
+        (0.30, 0.10, 0.55, (60, 200, 200), 0.0),
+        (0.65, 0.28, 0.62, (30, 140, 190), 1.4),
+        (0.55, 0.55, 0.60, (20, 90, 170), 2.6),
+        (0.75, 0.55, 0.42, (150, 190, 60), 0.7),
+    ],
+}
+PALETTE = PALETTES["purple"]
+
+
+def blob_layer(t, w, h):
+    """Soft glowing animated wobble blob."""
+    img = Image.new("RGB", (w, h), (6, 4, 18))
+    draw = ImageDraw.Draw(img)
+    blobs = PALETTE
     layer = Image.new("RGB", (w, h), (6, 4, 18))
     ld = ImageDraw.Draw(layer)
     for bx, by, br, color, phase in blobs:
@@ -135,8 +154,13 @@ def render_frame(t, duration, caption_word=None, emoji_font_cache=None):
     return img.convert("RGB")
 
 def main():
+    global ICONS, PALETTE
     duration = float(sys.argv[1])
     out_dir = sys.argv[2]
+    icon_set = sys.argv[3] if len(sys.argv) > 3 else "money"
+    palette = sys.argv[4] if len(sys.argv) > 4 else "purple"
+    ICONS = ICON_SETS[icon_set]
+    PALETTE = PALETTES[palette]
     os.makedirs(out_dir, exist_ok=True)
     n_frames = int(round(duration * FPS))
     try:

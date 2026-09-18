@@ -43,9 +43,17 @@ def fmt_time(t):
 def build(words, out_path):
     lines = [HEADER]
     for w in words:
-        color = GOLD if w.get("highlight") else WHITE
+        highlight = w.get("highlight")
+        color = GOLD if highlight else WHITE
         text = w["word"].upper()
-        styled = "{\\c%s}%s{\\c%s}" % (color, text, WHITE)
+        overshoot = 118 if highlight else 108
+        # pop-in: scale up from small+transparent, bounce past 100%, settle.
+        anim = (
+            f"\\fscx55\\fscy55\\alpha&HFF&"
+            f"\\t(0,70,\\fscx{overshoot}\\fscy{overshoot}\\alpha&H00&)"
+            f"\\t(70,120,\\fscx100\\fscy100)"
+        )
+        styled = "{%s\\c%s}%s" % (anim, color, text)
         lines.append(
             f"Dialogue: 0,{fmt_time(w['start'])},{fmt_time(w['end'])},Word,,0,0,0,,{styled}"
         )
