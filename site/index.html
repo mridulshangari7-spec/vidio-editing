@@ -2,7 +2,7 @@
 <meta name="description" content="Infinity NFC review cards. One tap with a phone opens your Google review page. Andheri East, Mumbai.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Lora:wght@400&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   color-scheme:light;
@@ -32,7 +32,7 @@ h1,p{margin:0}
 .stage{position:fixed;inset:0;z-index:0;overflow:hidden;
   background:radial-gradient(90% 70% at 50% 42%,#fbfaf7 0%,#f2f0ec 55%,#e6e2d9 100%)}
 .obj{position:absolute;inset:0;perspective:1500px;will-change:opacity,filter}
-.floor{position:absolute;left:0;top:0;width:360px;height:70px;border-radius:50%;
+.floor{position:absolute;left:0;top:0;width:400px;height:70px;border-radius:50%;
   background:radial-gradient(closest-side,rgba(30,24,12,.34),rgba(30,24,12,0));filter:blur(6px);will-change:transform,opacity}
 .veil{position:absolute;inset:0;pointer-events:none;background:
   linear-gradient(to bottom, rgba(242,240,236,.62) 0%, rgba(242,240,236,.12) 22%, rgba(242,240,236,.12) 78%, rgba(242,240,236,.66) 100%),
@@ -41,37 +41,60 @@ h1,p{margin:0}
 .grain{position:absolute;inset:-50%;opacity:.13;mix-blend-mode:multiply;pointer-events:none;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='.5'/></svg>")}
 
-/* card: black body, gold foil, real edge thickness */
+/* card: follows the printed Infinity card, cream stock with gold accents and real edge thickness */
 .card3d,.phone{position:absolute;left:0;top:0;will-change:transform}
-.card3d{width:360px;height:227px;transform-style:preserve-3d}
-.face,.edge{position:absolute;inset:0;border-radius:16px}
-.face{backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden}
-.edge{background:#2b261d}
-.edge:nth-of-type(1){transform:translateZ(-1px)}
+.card3d{width:400px;height:240px;transform-style:preserve-3d;font-family:"Poppins",var(--sans)}
+.face,.edge{position:absolute;inset:0;border-radius:12px}
+.face{backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;background:#F8F4E6;color:#1c1b19;
+  box-shadow:inset 0 0 0 1px rgba(60,48,20,.10)}
+.edge{background:#d8ceb2}
+.edge:nth-of-type(1){transform:translateZ(-1.2px)}
 .edge:nth-of-type(2){transform:translateZ(0)}
-.edge:nth-of-type(3){transform:translateZ(1px)}
-.front{transform:translateZ(1.8px);color:#D9AA45;
-  background:radial-gradient(120% 90% at 12% 0%,rgba(217,170,69,.16),transparent 55%),linear-gradient(135deg,#1c1a16 0%,#0c0b09 58%,#17150f 100%);
-  box-shadow:inset 0 0 0 1px rgba(217,170,69,.32)}
-.front .inf{position:absolute;left:26px;top:28px;width:96px;color:#D9AA45}
-.front .nfc{position:absolute;right:24px;top:24px;width:30px;height:30px;color:#D9AA45}
-.front .ln{position:absolute;left:26px;bottom:24px;font:500 9.5px/1.4 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:#E6D3A2}
-.front .ln b{display:block;font:400 19px/1.2 var(--sans);letter-spacing:-.02em;text-transform:none;color:#F3EBD6;margin-bottom:5px}
-.front::after,.back::after{content:"";position:absolute;inset:-60%;pointer-events:none;
-  background:linear-gradient(115deg,transparent 42%,rgba(255,240,205,.22) 50%,transparent 58%);transform:translateX(var(--sheen,-30%))}
-.back{transform:rotateY(180deg) translateZ(1.8px);background:linear-gradient(160deg,#fbf8f0,#ece4cf);color:#1c1b19;
-  display:grid;place-content:center;justify-items:center;gap:9px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.07)}
-.back .inf{width:124px;color:#1c1b19}
-.back .w{font:500 18px/1 var(--sans);letter-spacing:.42em;padding-left:.42em}
-.back .t{font:400 8px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:#6a655b}
-.back .g{width:44px;height:1px;background:var(--gold);margin-top:3px}
-.ripples{position:absolute;left:50%;top:50%;width:0;height:0;transform:translateZ(3px)}
-.ripples i{position:absolute;left:-60px;top:-60px;width:120px;height:120px;border-radius:50%;border:1.5px solid #D9AA45;opacity:0}
+.edge:nth-of-type(3){transform:translateZ(1.2px)}
+.front{transform:translateZ(2px)}
+.back{transform:rotateY(180deg) translateZ(2px)}
+.face::after{content:"";position:absolute;inset:-60%;pointer-events:none;
+  background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.55) 50%,transparent 58%);transform:translateX(var(--sheen,-30%));mix-blend-mode:soft-light}
+/* review side */
+.front .l{position:absolute;left:26px;top:36px;width:210px}
+.front .hi{font-size:7.4px;letter-spacing:.09em;color:#3b382f;display:flex;align-items:center;gap:5px}
+.front .hi svg{width:10px;height:10px}
+.front h3{margin:10px 0 0;font:400 27px/1.08 "Lora",Georgia,serif;letter-spacing:-.005em;color:#1c1b19}
+.front .st{display:flex;gap:4px;margin-top:11px}
+.front .st svg{width:13px;height:13px;fill:#D9A93A}
+.front .tx{margin-top:11px;font-size:8.2px;line-height:1.45;color:#2f2d27}
+.front .tx b{display:block;font-weight:500;margin-top:5px;color:#1c1b19}
+.front .rl{position:absolute;left:26px;top:196px;width:172px;height:1px;background:#D9A93A}
+.front .pw{position:absolute;left:26px;top:207px;display:flex;align-items:center;gap:7px;font-size:7px;letter-spacing:.16em;color:#3b382f}
+.front .pw svg{width:24px;height:auto;color:#1c1b19}
+.front .tap{position:absolute;right:30px;top:34px;display:flex;align-items:center;gap:22px;font-size:8px;font-weight:500;letter-spacing:.16em}
+.front .tap svg{width:20px;height:20px;color:#1c1b19}
+.qrf{position:absolute;width:96px;height:96px}
+.qrf::before,.qrf::after,.qrf i::before,.qrf i::after{content:"";position:absolute;width:18px;height:18px;border:1.6px solid #1c1b19}
+.qrf::before{left:0;top:0;border-right:0;border-bottom:0}
+.qrf::after{right:0;top:0;border-left:0;border-bottom:0}
+.qrf i::before{left:0;bottom:0;border-right:0;border-top:0}
+.qrf i::after{right:0;bottom:0;border-left:0;border-top:0}
+.qrf svg{position:absolute;inset:11px;width:74px;height:74px}
+.front .qrf{right:32px;top:61px}
+.cardcap{position:absolute;font-size:7px;letter-spacing:.2em;color:#3b382f;text-align:center;width:130px}
+.front .cardcap{right:15px;top:170px}
+/* logo side */
+.back .l{position:absolute;left:34px;top:0;bottom:0;width:190px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.back .inf{width:124px;height:auto;color:#1c1b19}
+.back .w{margin-top:8px;font:400 23px/1 "Lora",Georgia,serif;letter-spacing:.2em;padding-left:.2em}
+.back .t{margin-top:9px;font-size:6.3px;letter-spacing:.14em;color:#3b382f;white-space:nowrap}
+.back .g{margin-top:12px;width:150px;height:1px;background:#D9A93A}
+.back .ph{margin-top:10px;font-size:10px;font-weight:500;letter-spacing:.12em}
+.back .qrf{right:38px;top:56px}
+.back .cardcap{right:21px;top:166px}
+.ripples{position:absolute;left:80%;top:46%;width:0;height:0;transform:translateZ(3px)}
+.ripples i{position:absolute;left:-60px;top:-60px;width:120px;height:120px;border-radius:50%;border:1.5px solid #C9982E;opacity:0}
 .card3d.pulse .ripples i{animation:ring 1.5s cubic-bezier(.2,.6,.3,1) infinite}
 .card3d.pulse .ripples i:nth-child(2){animation-delay:.5s}
 .card3d.pulse .ripples i:nth-child(3){animation-delay:1s}
 @keyframes ring{0%{transform:scale(.2);opacity:.95}100%{transform:scale(2.8);opacity:0}}
-.card3d.pulse .front{box-shadow:inset 0 0 0 1.5px #D9AA45,0 0 50px rgba(217,170,69,.5)}
+.card3d.pulse .front{box-shadow:inset 0 0 0 1.5px #D9A93A,0 0 50px rgba(217,169,58,.45)}
 
 /* phone: titanium frame, glass */
 .phone{width:250px;height:520px;border-radius:46px;padding:3px;
@@ -146,9 +169,8 @@ h1,p{margin:0}
 .upi{align-items:center;text-align:center}
 .upi .amt{font:300 40px/1 var(--sans);font-variant-numeric:tabular-nums;margin-top:6px}
 .upi .to{font:400 11px/1.4 var(--sans);color:#555}
-.upi .qr{width:120px;height:120px;border-radius:12px;background:
-   conic-gradient(from 90deg at 30% 30%, #1C1B19 25%, transparent 0) 0 0/24px 24px,
-   #fff;box-shadow:inset 0 0 0 8px #fff, 0 0 0 1px #ddd;margin:8px auto}
+.upi .qr{width:120px;height:120px;border-radius:12px;background:#fff;padding:10px;box-shadow:0 0 0 1px #ddd;margin:8px auto}
+.upi .qr svg{width:100%;height:100%;display:block}
 .upi .pay{margin-top:auto;width:100%;background:#1C1B19;color:#F9F5EA;border-radius:12px;padding:12px;font:600 12px/1 var(--sans)}
 
 
@@ -158,8 +180,9 @@ h1,p{margin:0}
 .chrome{position:fixed;left:0;right:0;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:12px;
   padding:max(14px, calc(env(safe-area-inset-top, 0px) + 12px)) clamp(16px, 3.4vw, 44px) 14px;
   background:linear-gradient(to bottom, rgba(242,240,236,.94) 0%, rgba(242,240,236,.78) 72%, rgba(242,240,236,0) 100%)}
-.mark{display:flex;align-items:center;gap:9px;font-size:15px;letter-spacing:-.012em;color:var(--fg);min-width:0;flex-shrink:1;text-decoration:none}
-.mark-star{width:30px;height:auto;opacity:.85;flex:none}
+.mark-word{font:400 17px/1 "Lora",Georgia,serif;letter-spacing:.24em}
+.mark{display:flex;align-items:center;gap:12px;font-size:15px;letter-spacing:-.012em;color:var(--fg);min-width:0;flex-shrink:1;text-decoration:none}
+.mark-star{width:58px;height:auto;flex:none}
 .nav{display:flex;align-items:center;gap:clamp(14px, 2.4vw, 32px);flex-shrink:0}
 .nav a:not(.pill){color:var(--fg);text-decoration:none;font-size:14.5px;letter-spacing:-.008em;opacity:.88;transition:opacity .3s var(--ease)}
 .nav a:not(.pill):hover{opacity:1}
@@ -220,7 +243,8 @@ h1 em{font-style:normal;color:#8F6B17}
   .chips span{font-size:12px;padding:7px 11px}
 }
 @media (max-width:420px){
-  .mark-star{display:none}
+  .mark-star{width:44px}
+  .mark-word{font-size:14px;letter-spacing:.18em}
   .nav .pill{height:36px;padding:0 14px;font-size:13px}
   h1,.panel.top h1{max-width:11ch;font-size:clamp(28px, 10.5vw, 40px)}
   .eyebrow{font-size:11px;letter-spacing:.04em;max-width:28ch}
@@ -250,15 +274,28 @@ h1 em{font-style:normal;color:#8F6B17}
     <div class="card3d" id="card">
       <div class="edge"></div><div class="edge"></div><div class="edge"></div>
       <div class="face front">
-        <svg class="inf" viewBox="-6 -6 252 93.5"><use href="#inf"/></svg>
-        <svg class="nfc"><use href="#nfc"/></svg>
-        <div class="ln"><b>Tap for a review</b>Infinity · NFC</div>
+        <div class="l">
+          <div class="hi">THANKS A MILLION FOR YOUR VISIT <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="9.5" fill="#D9A93A"/><circle cx="7" cy="8" r="1.2" fill="#6b4e12"/><circle cx="13" cy="8" r="1.2" fill="#6b4e12"/><path d="M6 11.5q4 4 8 0" fill="none" stroke="#6b4e12" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <h3>Rate us<br>on Google</h3>
+          <div class="st"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+          <div class="tx">Tap this card on your phone<br>or scan the code to leave a review.<b>It takes a few seconds.</b></div>
+        </div>
+        <div class="rl"></div>
+        <div class="pw"><svg viewBox="-6 -6 252 93.5"><use href="#inf"/></svg>POWERED BY INFINITY</div>
+        <div class="tap">TAP <svg><use href="#nfc"/></svg></div>
+        <div class="qrf" data-qr="7"><i></i></div>
+        <div class="cardcap">SCAN TO REVIEW</div>
       </div>
       <div class="face back">
-        <svg class="inf" viewBox="-6 -6 252 93.5"><use href="#inf"/></svg>
-        <div class="w">INFINITY</div>
-        <div class="t">Your partner in business growth</div>
-        <div class="g"></div>
+        <div class="l">
+          <svg class="inf" viewBox="-6 -6 252 93.5"><use href="#inf"/></svg>
+          <div class="w">INFINITY</div>
+          <div class="t">YOUR PARTNER IN BUSINESS GROWTH</div>
+          <div class="g"></div>
+          <div class="ph">+91 79864 04564</div>
+        </div>
+        <div class="qrf" data-qr="31"><i></i></div>
+        <div class="cardcap">SCAN TO PAY</div>
       </div>
       <div class="ripples"><i></i><i></i><i></i></div>
     </div>
@@ -331,7 +368,7 @@ h1 em{font-style:normal;color:#8F6B17}
           <div class="body" style="align-items:center;width:100%">
             <div class="to">Paying <b>Your Business</b></div>
             <div class="amt">₹ 850</div>
-            <div class="qr"></div>
+            <div class="qr" data-qr="53"></div>
             <div class="to">Opens GPay, PhonePe or Paytm</div>
             <div class="pay">Pay with UPI</div>
           </div>
@@ -347,7 +384,7 @@ h1 em{font-style:normal;color:#8F6B17}
 <i class="meter" id="meter"></i>
 
 <header class="chrome">
-  <a class="mark" href="#top" data-go="0"><svg class="mark-star" viewBox="-6 -6 252 93.5" aria-hidden="true"><use href="#inf"/></svg>Infinity</a>
+  <a class="mark" href="#top" data-go="0"><svg class="mark-star" viewBox="-6 -6 252 93.5" aria-hidden="true"><use href="#inf"/></svg><span class="mark-word">INFINITY</span></a>
   <nav class="nav" aria-label="Sections">
     <a href="#tap" data-go="0.35">How it works</a>
     <a href="#links" data-go="0.86">Links</a>
@@ -404,6 +441,22 @@ h1 em{font-style:normal;color:#8F6B17}
   var chips=[].slice.call(document.querySelectorAll("#chips span"));
   var banner=document.getElementById("banner"), stars=[].slice.call(document.querySelectorAll("#stars svg"));
   var typed=document.getElementById("typed"), post=document.getElementById("post");
+
+  // Sample QR codes for the mockup: random modules around the three finder squares.
+  // They are placeholders to show the layout and do not scan.
+  function qrSvg(seed){
+    var N=25, m=[], x, y, i, r=seed>>>0;
+    function rnd(){r=(Math.imul(r,1664525)+1013904223)>>>0;return r/4294967296;}
+    function finder(ox,oy){for(y=-1;y<8;y++)for(x=-1;x<8;x++){var X=ox+x,Y=oy+y;if(X<0||Y<0||X>=N||Y>=N)continue;
+      var e=Math.max(Math.abs(x-3),Math.abs(y-3));m[Y*N+X]=(e===3||e<=1)?1:0;}}
+    for(i=0;i<N*N;i++)m[i]=rnd()<.47?1:0;
+    finder(0,0);finder(N-7,0);finder(0,N-7);
+    for(i=8;i<N-8;i++){m[6*N+i]=i%2?0:1;m[i*N+6]=i%2?0:1;}
+    var d="";
+    for(y=0;y<N;y++)for(x=0;x<N;x++)if(m[y*N+x])d+="M"+x+" "+y+"h1v1h-1z";
+    return '<svg viewBox="0 0 25 25" shape-rendering="crispEdges" aria-hidden="true"><path fill="#1c1b19" d="'+d+'"/></svg>';
+  }
+  [].forEach.call(document.querySelectorAll("[data-qr]"),function(el){el.insertAdjacentHTML("beforeend",qrSvg(Math.imul(+el.dataset.qr,2654435761)));});
   var REVIEW="Quick service and really friendly staff. Will come back!";
   var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -442,7 +495,7 @@ h1 em{font-style:normal;color:#8F6B17}
     var W=window.innerWidth, H=window.innerHeight, wide=W>=900;
     var cx=W/2, cy=H/2;
     var bob=reduce?0:Math.sin(time/1100)*5;
-    var cs=wide?clamp(W/1250,.72,1.05):clamp(W/560,.56,.74);
+    var cs=wide?clamp(W/1000,.85,1.35):clamp(W/470,.6,.84), fl=wide?1.18:1.02;
     var ps=wide?Math.min(1,H*.62/520):Math.min(.8,H*.55/520);
     var ph=520*ps;
 
@@ -454,21 +507,21 @@ h1 em{font-style:normal;color:#8F6B17}
 
     // card
     var cdx=kf(p,[[.68,0],[.78,wide?-W*.13:-W*.2],[.94,wide?-W*.13:-W*.2],[.99,wide?-W*.08:0]]);
-    var cdy=kf(p,[[0,H*.27],[.12,H*.25],[.24,0],[.30,H*.06],[.68,H*.06],[.78,H*.13],[.94,H*.13],[.99,wide?H*.33:H*.34]]);
-    var cS=cs*fs*kf(p,[[0,.9],[.14,.9],[.22,1.18],[.28,1],[.68,1],[.78,.8],[.94,.8],[.99,wide?.66:.6]]);
-    var ry=kf(p,[[.15,0],[.26,360]]);
-    var rx=kf(p,[[0,58],[.14,56],[.2,22],[.26,24],[.32,58],[.68,58],[.78,46],[.99,56]]);
+    var cdy=kf(p,[[0,wide?H*.25:H*.26],[.12,wide?H*.24:H*.25],[.24,0],[.30,H*.06],[.68,H*.06],[.78,H*.13],[.94,H*.13],[.99,wide?H*.3:H*.32]]);
+    var cS=cs*fs*kf(p,[[0,.86],[.14,.86],[.22,fl],[.28,1],[.68,1],[.78,.8],[.94,.8],[.99,wide?.66:.6]]);
+    var ry=kf(p,[[.15,0],[.20,180],[.235,180],[.27,360]]);
+    var rx=kf(p,[[0,38],[.14,40],[.2,16],[.26,18],[.32,50],[.68,50],[.78,40],[.99,44]]);
     var rz=kf(p,[[0,-20],[.14,-16],[.2,-8],[.26,-8],[.32,-16],[.68,-16],[.78,-12],[.99,-16]]);
     var idle=1-kf(p,[[.36,0],[.42,1]])+kf(p,[[.62,0],[.7,1]]);
     cdy+=bob*clamp(idle,0,1);
-    card.style.transform="translate("+(cx-180+cdx)+"px,"+(cy-113.5+cdy)+"px) scale("+cS+") rotateZ("+rz+"deg) rotateX("+rx+"deg) rotateY("+ry+"deg)";
+    card.style.transform="translate("+(cx-200+cdx)+"px,"+(cy-120+cdy)+"px) scale("+cS+") rotateZ("+rz+"deg) rotateX("+rx+"deg) rotateY("+ry+"deg)";
     var sheen=-40+((rz+20)*4)+(ry/360)*80+p*40;
     card.style.setProperty("--sheen",sheen.toFixed(1)+"%");
     card.classList.toggle("pulse",p>.47&&p<.6);
 
     // floor shadow follows the card, pinned below it
     var flip=Math.abs(Math.cos(ry*Math.PI/180));
-    floor.style.transform="translate("+(cx-180+cdx)+"px,"+(cy+cdy+120*cS)+"px) scale("+(cS*(1-.25*Math.sin(Math.PI*clamp((p-.15)/.11,0,1))))+","+cS+")";
+    floor.style.transform="translate("+(cx-200+cdx)+"px,"+(cy+cdy+105*cS)+"px) scale("+(cS*(1-.25*Math.sin(Math.PI*clamp((p-.15)/.12,0,1))))+","+cS+")";
     floor.style.opacity=(.35+.65*flip).toFixed(3);
 
     // phone
