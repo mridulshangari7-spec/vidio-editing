@@ -222,7 +222,38 @@ h1 em{font-style:normal;color:#8F6B17}
 .chips span{font-size:13px;letter-spacing:-.005em;padding:8px 14px;border-radius:999px;border:1px solid var(--rule);background:rgba(242,240,236,.6);transition:background .4s var(--ease),color .4s var(--ease),border-color .4s var(--ease)}
 .chips span.on{background:var(--fg);color:#fff;border-color:var(--fg)}
 
-.track{position:relative;z-index:1;height:760vh;min-height:4400px}
+.track{position:relative;z-index:1;height:1150vh;min-height:6600px}
+
+/* comparison */
+.versus{margin-top:clamp(22px,3vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:12px;width:min(640px,100%);text-align:left}
+.versus .col{border:1px solid var(--rule);border-radius:18px;padding:18px 20px;background:rgba(248,246,241,.72)}
+.versus .col.new{background:var(--fg);color:#fff;border-color:var(--fg)}
+.vh{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-soft);margin-bottom:12px}
+.new .vh{color:rgba(255,255,255,.6)}
+.versus ol{margin:0;padding-left:1.3em;display:grid;gap:6px;font-size:15px;letter-spacing:-.01em}
+.old ol{color:var(--fg-soft)}
+.new ol{font-size:24px;letter-spacing:-.02em}
+.new .done{margin-top:12px;font-size:14px;color:#E4C77E}
+/* industries */
+.chips.static span{background:rgba(248,246,241,.8)}
+/* try-it */
+.try{margin-top:clamp(22px,2.8vw,34px);display:grid;gap:10px;width:min(380px,100%);pointer-events:auto;text-align:left}
+.try label{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-soft)}
+.try input{height:52px;border-radius:999px;border:1px solid var(--rule);background:rgba(255,255,255,.8);padding:0 22px;
+  font:400 16px/1 var(--sans);color:var(--fg);outline:none;transition:border-color .3s var(--ease)}
+.try input:focus{border-color:var(--fg)}
+.try .pill{height:48px;font-size:15px}
+.panel.split{align-items:flex-start;text-align:left;padding-left:clamp(24px,7vw,120px);padding-right:52%}
+.panel.split .eyebrow{justify-content:flex-start}
+.panel.split h1{font-size:clamp(34px,5.2vw,78px)}
+/* floating chat */
+.wa-fab{position:fixed;z-index:45;right:clamp(14px,2.4vw,28px);bottom:max(20px, calc(env(safe-area-inset-bottom, 0px) + 16px));
+  display:inline-flex;align-items:center;gap:9px;height:48px;padding:0 18px 0 14px;border-radius:999px;background:#0a0908;color:#fff;
+  -webkit-text-fill-color:#fff;text-decoration:none;font-size:14px;font-weight:500;box-shadow:0 12px 28px -10px rgba(10,9,8,.5);
+  transition:transform .4s var(--ease)}
+.wa-fab svg{width:22px;height:22px;color:#25D366}
+.wa-fab:hover,.wa-fab:focus-visible{transform:translateY(-2px)}
+.wa-fab:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
 
 /* ---------- responsive ---------- */
 @media (max-width:900px){
@@ -239,7 +270,19 @@ h1 em{font-style:normal;color:#8F6B17}
   .sub{font-size:15px;max-width:34ch}
   .panel{padding:max(92px, calc(env(safe-area-inset-top, 0px) + 76px)) 18px max(88px, calc(env(safe-area-inset-bottom, 0px) + 72px))}
   .panel.top{padding-top:max(92px, calc(env(safe-area-inset-top, 0px) + 76px))}
-  .foot{font-size:11px;max-width:none}
+  .foot{font-size:11px;max-width:none;justify-content:flex-start;text-align:left;padding-right:84px}
+  .wa-fab{padding:0;width:52px;height:52px;justify-content:center}
+  .wa-fab span{display:none}
+  .versus{gap:8px}
+  .versus .col{padding:14px}
+  .versus ol{font-size:13px;gap:4px}
+  .new ol{font-size:19px}
+  .new .done{font-size:12.5px}
+  .panel.split{align-items:center;text-align:center;justify-content:flex-start;padding:max(92px, calc(env(safe-area-inset-top, 0px) + 76px)) 18px 88px}
+  .panel.split .eyebrow{justify-content:center}
+  .panel.split h1{font-size:clamp(30px, 9.8vw, 52px)}
+  .panel.split .sub{display:none}
+  .try{margin-top:16px}
   .chips span{font-size:12px;padding:7px 11px}
 }
 @media (max-width:420px){
@@ -315,9 +358,9 @@ h1 em{font-style:normal;color:#8F6B17}
 
         <div class="scr" data-s="review">
           <div class="sb"><span>10:24</span><span>100%</span></div>
-          <div class="url"><svg><use href="#lock"/></svg>g.page/r/your-business/review</div>
+          <div class="url"><svg><use href="#lock"/></svg>g.page/r/<span class="sl-d">your-business</span>/review</div>
           <div class="body">
-            <div class="biz"><div class="av">Y</div><div><b>Your Business</b><span>Posting publicly · Andheri East</span></div></div>
+            <div class="biz"><div class="av">Y</div><div><b class="bn">Your Business</b><span>Posting publicly · Andheri East</span></div></div>
             <div class="rate">How was your visit?</div>
             <div class="stars" id="stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
             <div class="box"><span id="typed"></span><span class="caret"></span></div>
@@ -327,18 +370,18 @@ h1 em{font-style:normal;color:#8F6B17}
 
         <div class="scr ig" data-s="ig">
           <div class="sb"><span>10:24</span><span>100%</span></div>
-          <div class="url"><svg><use href="#lock"/></svg>instagram.com/yourbusiness</div>
+          <div class="url"><svg><use href="#lock"/></svg>instagram.com/<span class="sl">yourbusiness</span></div>
           <div class="body">
             <div class="top"><div class="ring"><div>Y</div></div>
               <div class="nums"><div><b>214</b>posts</div><div><b>8,420</b>followers</div><div><b>180</b>following</div></div></div>
-            <div style="font:600 11px/1.3 var(--sans)">Your Business<br><span style="font-weight:400;color:#555">Café · Andheri East, Mumbai</span></div>
+            <div style="font:600 11px/1.3 var(--sans)"><span class="bn">Your Business</span><br><span style="font-weight:400;color:#555">Café · Andheri East, Mumbai</span></div>
             <div class="follow">Follow</div>
             <div class="grid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
           </div>
         </div>
 
         <div class="scr wa" data-s="wa">
-          <div class="head"><div class="av">Y</div><div><b>Your Business</b><span>Business account</span></div></div>
+          <div class="head"><div class="av">Y</div><div><b class="bn">Your Business</b><span>Business account</span></div></div>
           <div class="chat">
             <div class="msg">Welcome! How can we help you today?</div>
             <div class="msg me">Hi, can I book a table for 4 at 8 pm?</div>
@@ -348,10 +391,10 @@ h1 em{font-style:normal;color:#8F6B17}
 
         <div class="scr menu" data-s="menu">
           <div class="sb"><span>10:24</span><span>100%</span></div>
-          <div class="url"><svg><use href="#lock"/></svg>yourbusiness.in/menu</div>
+          <div class="url"><svg><use href="#lock"/></svg><span class="sl">yourbusiness</span>.in/menu</div>
           <div class="body">
             <div class="sub">Today’s menu</div>
-            <h4>Your Business</h4>
+            <h4 class="bn">Your Business</h4>
             <ul>
               <li>Masala chai<b>₹ 60</b></li>
               <li>Cold coffee<b>₹ 140</b></li>
@@ -364,9 +407,9 @@ h1 em{font-style:normal;color:#8F6B17}
 
         <div class="scr upi" data-s="upi">
           <div class="sb" style="width:100%"><span>10:24</span><span>100%</span></div>
-          <div class="url" style="align-self:stretch"><svg><use href="#lock"/></svg>upi://pay?pa=yourbusiness@upi</div>
+          <div class="url" style="align-self:stretch"><svg><use href="#lock"/></svg>upi://pay?pa=<span class="sl">yourbusiness</span>@upi</div>
           <div class="body" style="align-items:center;width:100%">
-            <div class="to">Paying <b>Your Business</b></div>
+            <div class="to">Paying <b class="bn">Your Business</b></div>
             <div class="amt">₹ 850</div>
             <div class="qr" data-qr="53"></div>
             <div class="to">Opens GPay, PhonePe or Paytm</div>
@@ -386,8 +429,9 @@ h1 em{font-style:normal;color:#8F6B17}
 <header class="chrome">
   <a class="mark" href="#top" data-go="0"><svg class="mark-star" viewBox="-6 -6 252 93.5" aria-hidden="true"><use href="#inf"/></svg><span class="mark-word">INFINITY</span></a>
   <nav class="nav" aria-label="Sections">
-    <a href="#tap" data-go="0.35">How it works</a>
-    <a href="#links" data-go="0.86">Links</a>
+    <a href="#tap" data-go="0.23">How it works</a>
+    <a href="#links" data-go="0.57">Links</a>
+    <a href="#try" data-go="0.91">Try it</a>
     <a href="#contact" data-go="1">Contact</a>
     <a class="pill" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener">Order a card</a>
   </nav>
@@ -398,7 +442,7 @@ h1 em{font-style:normal;color:#8F6B17}
     <p class="eyebrow">NFC review cards <span class="dot"></span> Andheri East, Mumbai</p>
     <h1>Tap once.<br>Get the <em>review.</em></h1>
     <p class="sub">One card on your counter sends every happy customer straight to your Google review page.</p>
-    <div class="cta"><a class="pill" href="#tap" data-go="0.35">See how it works</a></div>
+    <div class="cta"><a class="pill" href="#tap" data-go="0.23">See how it works</a></div>
   </section>
   <section class="panel" data-panel id="tap">
     <p class="eyebrow">Step one <span class="dot"></span> Tap</p>
@@ -415,6 +459,32 @@ h1 em{font-style:normal;color:#8F6B17}
     <h1>Any link <em>you choose.</em></h1>
     <div class="chips" id="chips"><span data-c="review">Google reviews</span><span data-c="ig">Instagram</span><span data-c="wa">WhatsApp</span><span data-c="menu">Menu</span><span data-c="upi">UPI payments</span><span>Website</span></div>
   </section>
+  <section class="panel" data-panel id="why">
+    <p class="eyebrow">Why it works <span class="dot"></span> Fewer steps, more reviews</p>
+    <h1>Five steps become <em>one tap.</em></h1>
+    <div class="versus">
+      <div class="col old"><p class="vh">Asking for a review</p>
+        <ol><li>Open Google Maps</li><li>Search your business name</li><li>Pick the right listing</li><li>Scroll to reviews</li><li>Tap “Write a review”</li></ol></div>
+      <div class="col new"><p class="vh">With an Infinity card</p>
+        <ol><li>Tap the card</li></ol><p class="done">The review box is already open.</p></div>
+    </div>
+  </section>
+  <section class="panel" data-panel id="who">
+    <p class="eyebrow">Made for your counter</p>
+    <h1>For every place customers <em>love to review.</em></h1>
+    <div class="chips static"><span>Restaurants &amp; cafés</span><span>Salons &amp; spas</span><span>Clinics &amp; dentists</span><span>Gyms &amp; studios</span><span>Hotels &amp; homestays</span><span>Retail shops</span><span>Car care</span><span>Coaching classes</span></div>
+    <p class="sub">Place it where people pay, wait or say goodbye: the billing desk, the table, the reception.</p>
+  </section>
+  <section class="panel split" data-panel id="try">
+    <p class="eyebrow">Try it <span class="dot"></span> Live preview</p>
+    <h1>See your name on <em>their screen.</em></h1>
+    <p class="sub">Type your business name. This is what your customers see after one tap.</p>
+    <form class="try" id="tryForm" autocomplete="off">
+      <label for="bizName">Business name</label>
+      <input id="bizName" name="bizName" type="text" maxlength="32" placeholder="e.g. Chai Point Andheri" enterkeyhint="done">
+      <a class="pill" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener">Get cards for this business</a>
+    </form>
+  </section>
   <section class="panel top" data-panel id="contact">
     <p class="eyebrow">Mridul Shingari <span class="dot"></span> Infinity</p>
     <h1>Put Infinity on <em>your counter.</em></h1>
@@ -428,6 +498,8 @@ h1 em{font-style:normal;color:#8F6B17}
 </main>
 
 <footer class="foot">Bindra Sateri Legacy, MIDC Central Road, Andheri East &nbsp;&middot;&nbsp; +91 79864 04564</footer>
+
+<a class="wa-fab" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener" aria-label="Chat with Infinity on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.5-.3z"/></svg><span>Chat with us</span></a>
 
 <div class="track"></div>
 
@@ -463,12 +535,18 @@ h1 em{font-style:normal;color:#8F6B17}
   // Each panel owns [fadeInStart, fadeInEnd, fadeOutStart, fadeOutEnd] of page progress.
   // The gaps between panels are dead zones: the card and phone perform alone,
   // so two panels are never readable at once.
+  // The first four cues were laid out on a 0..0.94 story and are squeezed into 0..0.62;
+  // the comparison, industries and live-preview panels follow, then contact.
+  var K=0.62/0.94;
   var CUES=[
-    [0.00,0.00,0.10,0.16],
-    [0.28,0.32,0.38,0.42],
-    [0.56,0.60,0.64,0.68],
-    [0.80,0.83,0.91,0.94],
-    [0.96,0.99,1.10,1.20]
+    [0.00,0.00,0.10*K,0.16*K],
+    [0.28*K,0.32*K,0.38*K,0.42*K],
+    [0.56*K,0.60*K,0.64*K,0.68*K],
+    [0.80*K,0.83*K,0.91*K,0.94*K],
+    [0.665,0.685,0.725,0.745],
+    [0.77,0.79,0.82,0.84],
+    [0.865,0.885,0.935,0.955],
+    [0.97,0.99,1.10,1.20]
   ];
   var DRIFT=22; // px of counter-scroll travel per panel
 
@@ -486,12 +564,17 @@ h1 em{font-style:normal;color:#8F6B17}
 
   var progress=0, sceneAt=0, ready=false, lastScr="", t0=performance.now();
 
+  var bizInput=document.getElementById("bizName");
   function readScroll(){
+    if(document.activeElement===bizInput)return; // the phone keyboard resizes the viewport; hold still while typing
     var max=document.documentElement.scrollHeight-window.innerHeight;
     progress=max>0?clamp(window.pageYOffset/max,0,1):0;
   }
 
-  function scene(p,time){
+  function mix(a,b,t){return a+(b-a)*t;}
+  function scene(q,time){
+    // q is page progress; p is the original 0..1 story the card and phone keyframes use
+    var p=q<=.62?q/K:kf(q,[[.62,.94],[.66,.95],[.955,.95],[.99,.99]]);
     var W=window.innerWidth, H=window.innerHeight, wide=W>=900;
     var cx=W/2, cy=H/2;
     var bob=reduce?0:Math.sin(time/1100)*5;
@@ -500,7 +583,10 @@ h1 em{font-style:normal;color:#8F6B17}
     var ph=520*ps;
 
     // focus: 1 = object performs in the clear, lower = pushed behind a panel's copy
-    var f=kf(p,[[0,1],[.24,1],[.29,.28],[.40,.28],[.44,1],[.56,1],[.59,.28],[.66,.28],[.69,1],[.80,1],[.83,.55],[.92,.55],[.96,1]]);
+    var f=q<=.62?kf(p,[[0,1],[.24,1],[.29,.28],[.40,.28],[.44,1],[.56,1],[.59,.28],[.66,.28],[.69,1],[.80,1],[.83,.55],[.92,.55],[.96,1]])
+                :kf(q,[[.62,.55],[.64,1],[.655,1],[.672,.18],[.845,.18],[.87,1]]);
+    // live-preview pose: phone large beside the form
+    var sp=kf(q,[[.845,0],[.875,1],[.945,1],[.968,0]]);
     obj.style.opacity=(.2+.8*f).toFixed(3);
     obj.style.filter=f<.98?"blur("+((1-f)*3).toFixed(2)+"px)":"none";
     var fs=.93+.07*f;
@@ -514,6 +600,7 @@ h1 em{font-style:normal;color:#8F6B17}
     var rz=kf(p,[[0,-20],[.14,-16],[.2,-8],[.26,-8],[.32,-16],[.68,-16],[.78,-12],[.99,-16]]);
     var idle=1-kf(p,[[.36,0],[.42,1]])+kf(p,[[.62,0],[.7,1]]);
     cdy+=bob*clamp(idle,0,1);
+    cdx=mix(cdx,wide?W*.26:-W*.9,sp); cdy=mix(cdy,wide?H*.22:H*.3,sp); cS=mix(cS,cs*(wide?.55:.5),sp);
     card.style.transform="translate("+(cx-200+cdx)+"px,"+(cy-120+cdy)+"px) scale("+cS+") rotateZ("+rz+"deg) rotateX("+rx+"deg) rotateY("+ry+"deg)";
     var sheen=-40+((rz+20)*4)+(ry/360)*80+p*40;
     card.style.setProperty("--sheen",sheen.toFixed(1)+"%");
@@ -532,8 +619,9 @@ h1 em{font-style:normal;color:#8F6B17}
     var prx=kf(p,[[.3,10],[.44,26],[.69,26],[.78,0]]);
     var pS=ps*fs*kf(p,[[.38,.74],[.69,.74],[.78,1],[.94,1],[.99,.5]]);
     if(p>.78&&p<.95)pdy+=bob*.6;
+    pdx=mix(pdx,wide?W*.2:0,sp); pdy=mix(pdy,wide?0:H*.26,sp); pS=mix(pS,wide?ps:ps*.62,sp);
     phone.style.transform="translate("+(cx-125+pdx)+"px,"+(cy-260+pdy)+"px) scale("+pS+") rotateZ("+prz+"deg) rotateX("+prx+"deg)";
-    phone.style.opacity=kf(p,[[.28,0],[.32,1]])*(wide?1:kf(p,[[.94,1],[.98,0]]));
+    phone.style.opacity=kf(p,[[.28,0],[.32,1]])*(wide?1:Math.max(sp,kf(p,[[.96,1],[.98,0]])));
 
     // what the phone shows
     var s="lock";
@@ -585,6 +673,25 @@ h1 em{font-style:normal;color:#8F6B17}
     if((v>=1&&fontsDone)||el>2500){start();return;}
     requestAnimationFrame(tick);
   })();
+
+  // Live preview: the typed name replaces "Your Business" on every phone screen,
+  // and every WhatsApp link carries it so Mridul knows who is asking.
+  var BASE="Hi Mridul, I want Infinity NFC cards for ";
+  var waLinks=[].slice.call(document.querySelectorAll('a[href^="https://wa.me/"]'));
+  function applyName(){
+    var raw=bizInput.value.trim(), name=raw||"Your Business";
+    var slug=raw.toLowerCase().replace(/[^a-z0-9]+/g,"")||"yourbusiness";
+    var dash=raw.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"your-business";
+    [].forEach.call(document.querySelectorAll(".bn"),function(e){e.textContent=name;});
+    [].forEach.call(document.querySelectorAll(".sl"),function(e){e.textContent=slug;});
+    [].forEach.call(document.querySelectorAll(".sl-d"),function(e){e.textContent=dash;});
+    [].forEach.call(document.querySelectorAll(".av,.ring div"),function(e){e.textContent=name.charAt(0).toUpperCase();});
+    var msg=BASE+(raw?raw+".":"my business.");
+    waLinks.forEach(function(a){a.href="https://wa.me/917986404564?text="+encodeURIComponent(msg);});
+  }
+  bizInput.addEventListener("input",applyName);
+  bizInput.addEventListener("blur",function(){readScroll();});
+  document.getElementById("tryForm").addEventListener("submit",function(e){e.preventDefault();bizInput.blur();});
 
   // nav links jump to a point on the timeline
   [].forEach.call(document.querySelectorAll("[data-go]"),function(a){
