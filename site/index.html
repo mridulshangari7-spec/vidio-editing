@@ -31,6 +31,7 @@ h1,p{margin:0}
 /* ---------- fixed stage: the "footage" ---------- */
 .stage{position:fixed;inset:0;z-index:0;overflow:hidden;
   background:radial-gradient(90% 70% at 50% 42%,#fbfaf7 0%,#f2f0ec 55%,#e6e2d9 100%)}
+.bgmark{position:absolute;left:50%;top:50%;width:min(135vw,1700px);height:auto;color:#0d0c0b;opacity:.045;transform:translate(-50%,-50%);will-change:transform}
 .obj{position:absolute;inset:0;perspective:1500px;will-change:opacity,filter}
 .floor{position:absolute;left:0;top:0;width:400px;height:70px;border-radius:50%;
   background:radial-gradient(closest-side,rgba(30,24,12,.34),rgba(30,24,12,0));filter:blur(6px);will-change:transform,opacity}
@@ -312,6 +313,7 @@ h1 em{font-style:normal;color:#8F6B17}
 
 <div class="stage" aria-hidden="true">
   <div class="veil"></div>
+  <svg class="bgmark" id="bgmark" viewBox="-6 -6 252 93.5" aria-hidden="true"><use href="#inf"/></svg>
   <div class="obj" id="obj">
     <div class="floor" id="floor"></div>
     <div class="card3d" id="card">
@@ -586,8 +588,8 @@ h1 em{font-style:normal;color:#8F6B17}
     var W=window.innerWidth, H=window.innerHeight, wide=W>=900;
     var cx=W/2, cy=H/2;
     var bob=reduce?0:Math.sin(time/1100)*5;
-    var cs=wide?clamp(W/1000,.85,1.35):clamp(W/470,.6,.84), fl=wide?1.18:1.02;
-    var ps=wide?Math.min(1,H*.62/520):Math.min(.8,H*.55/520);
+    var cs=wide?Math.min(clamp(W/800,1.05,1.75),H*.46/240):clamp(W/420,.66,.94), fl=wide?1.12:1;
+    var ps=wide?Math.min(1.15,H*.68/520):Math.min(.84,H*.58/520);
     var ph=520*ps;
 
     // focus: 1 = object performs in the clear, lower = pushed behind a panel's copy
@@ -601,8 +603,8 @@ h1 em{font-style:normal;color:#8F6B17}
 
     // card
     var cdx=kf(p,[[.68,0],[.78,wide?-W*.13:-W*.2],[.94,wide?-W*.13:-W*.2],[.99,wide?-W*.08:0]]);
-    var cdy=kf(p,[[0,wide?H*.25:H*.26],[.12,wide?H*.24:H*.25],[.24,0],[.30,H*.06],[.68,H*.06],[.78,H*.13],[.94,H*.13],[.99,wide?H*.3:H*.32]]);
-    var cS=cs*fs*kf(p,[[0,.86],[.14,.86],[.22,fl],[.28,1],[.68,1],[.78,.8],[.94,.8],[.99,wide?.66:.6]]);
+    var cdy=kf(p,[[0,wide?H*.3:H*.26],[.12,wide?H*.29:H*.25],[.24,0],[.30,H*.06],[.68,H*.06],[.78,H*.13],[.94,H*.13],[.99,wide?H*.3:H*.32]]);
+    var cS=cs*fs*kf(p,[[0,.86],[.14,.86],[.22,fl],[.28,1],[.68,1],[.78,.8],[.94,.8],[.99,wide?.72:.66]]);
     var ry=kf(p,[[.15,0],[.20,180],[.235,180],[.27,360]]);
     var rx=kf(p,[[0,38],[.14,40],[.2,16],[.26,18],[.32,50],[.68,50],[.78,40],[.99,44]]);
     var rz=kf(p,[[0,-20],[.14,-16],[.2,-8],[.26,-8],[.32,-16],[.68,-16],[.78,-12],[.99,-16]]);
@@ -622,7 +624,7 @@ h1 em{font-style:normal;color:#8F6B17}
 
     // phone
     var pdx=kf(p,[[.28,W*.18],[.38,W*.02],[.46,W*.01],[.69,W*.01],[.78,wide?W*.1:W*.1],[.94,wide?W*.1:W*.1],[.99,wide?W*.09:W*.12]]);
-    var hoverY=H*.06-ph*.55, touchY=H*.06+ph*(wide?.12:.04);
+    var hoverY=H*.06-ph*.4, touchY=H*.06+ph*(wide?.12:.04);
     var pdy=kf(p,[[.28,-H*.9],[.38,hoverY],[.44,hoverY],[.48,touchY],[.495,touchY+10],[.52,touchY],[.69,touchY],[.78,-H*.02],[.94,-H*.02],[.99,H*.3]]);
     var prz=kf(p,[[.28,30],[.38,-12],[.69,-12],[.78,0]]);
     var prx=kf(p,[[.3,10],[.44,26],[.69,26],[.78,0]]);
@@ -656,8 +658,10 @@ h1 em{font-style:normal;color:#8F6B17}
     var done=p>.785; post.classList.toggle("done",done); post.textContent=done?"Posted ✓":"Post";
   }
 
+  var bgmark=document.getElementById("bgmark");
   function paint(time){
     meter.style.transform="scaleX("+progress+")";
+    bgmark.style.transform="translate(-50%,calc(-50% + "+((.5-sceneAt)*16).toFixed(2)+"vh)) rotate("+((sceneAt-.5)*6).toFixed(2)+"deg)";
     for(var i=0;i<panels.length;i++){
       var c=CUES[i], el=panels[i];
       var enter=ramp(progress,c[0],c[1]), leave=ramp(progress,c[2],c[3]);
