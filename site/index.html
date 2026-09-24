@@ -1,85 +1,87 @@
 <title>Mridul Shingari – Infinity</title>
-<meta name="description" content="Infinity NFC review cards. Customers tap your card with their phone and land straight on your Google review page. Andheri East, Mumbai.">
+<meta name="description" content="Infinity NFC review cards. One tap with a phone opens your Google review page. Andheri East, Mumbai.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Poppins:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#F9F5EA; --paper-2:#F2ECDC; --ink:#1C1B19; --ink-soft:#57534B;
-  --gold:#C9982E; --gold-text:#8F6B17; --rule:#E3D9C0; --btn-ink:#F9F5EA;
-  --glow:rgba(217,170,69,.30); --floor:#EDE4CC; --nav-bg:rgba(249,245,234,.72);
-  --serif:"Lora",Georgia,"Times New Roman",serif;
-  --sans:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
-  --gutter:clamp(16px,4vw,48px);
+  color-scheme:light;
+  --fg:#0d0c0b; --fg-soft:rgba(13,12,11,.64); --fg-faint:rgba(13,12,11,.42);
+  --shade:#f2f0ec; --rule:rgba(13,12,11,.16);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --pill-bg:#0a0908; --pill-fg:#ffffff;
+  --gold:#C9982E;
+  --sans:'Inter Tight','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --serif:'Inter Tight','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    color-scheme:dark;
-    --paper:#16140F; --paper-2:#1F1C15; --ink:#F3EBD6; --ink-soft:#B9AF98;
-    --gold:#D9AA45; --gold-text:#D9AA45; --rule:#3A3426; --btn-ink:#16140F;
-    --glow:rgba(217,170,69,.22); --floor:#211D14; --nav-bg:rgba(22,20,15,.72);
-  }
-}
-:root[data-theme="dark"]{
-  color-scheme:dark;
-  --paper:#16140F; --paper-2:#1F1C15; --ink:#F3EBD6; --ink-soft:#B9AF98;
-  --gold:#D9AA45; --gold-text:#D9AA45; --rule:#3A3426; --btn-ink:#16140F;
-  --glow:rgba(217,170,69,.22); --floor:#211D14; --nav-bg:rgba(22,20,15,.72);
-}
+html{-webkit-text-size-adjust:100%}
 *,*::before,*::after{box-sizing:border-box}
-body{background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
-a{color:inherit}
-h1,h2,h3{text-wrap:balance}
-:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+body{margin:0;background:var(--shade);color:var(--fg);font-family:var(--sans);font-weight:400;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+h1,p{margin:0}
 
-/* ---------- nav ---------- */
-.nav{position:fixed;inset:0 0 auto 0;z-index:20;padding:calc(12px + env(safe-area-inset-top,0px)) var(--gutter) 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;pointer-events:none}
-.nav > *{pointer-events:auto}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:500 15px/1 var(--serif);letter-spacing:.28em}
-.logo svg{width:44px;height:auto;color:var(--ink)}
-.pills{display:flex;gap:2px;padding:4px;border-radius:99px;background:var(--nav-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--rule)}
-.pills a{font:500 13px/1 var(--sans);text-decoration:none;padding:9px 14px;border-radius:99px;color:var(--ink-soft)}
-.pills a:hover{color:var(--ink);background:var(--paper-2)}
-.cta-sm{font:500 13px/1 var(--sans);text-decoration:none;padding:11px 16px;border-radius:99px;background:var(--ink);color:var(--btn-ink)}
-@media (max-width:760px){.pills{display:none}}
+/* ---------- preloader ---------- */
+.boot{position:fixed;inset:0;z-index:90;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:var(--shade);transition:opacity .7s var(--ease),visibility .7s}
+.boot.done{opacity:0;visibility:hidden}
+.boot p{font-size:12.5px;letter-spacing:.05em;color:var(--fg-faint)}
+.bar{width:150px;height:1px;background:var(--rule);overflow:hidden}
+.bar i{display:block;height:100%;width:100%;background:var(--fg);transform:scaleX(0);transform-origin:0 50%}
 
-/* ---------- scroll scene ---------- */
-.scene{position:relative;height:460vh}
-.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;perspective:1400px;
-  background:
-    radial-gradient(60% 45% at var(--vx,64%) 60%, var(--glow), transparent 70%),
-    linear-gradient(to bottom, var(--paper) 0%, var(--paper) 58%, var(--floor) 100%)}
+/* ---------- fixed stage: the "footage" ---------- */
+.stage{position:fixed;inset:0;z-index:0;overflow:hidden;
+  background:radial-gradient(90% 70% at 50% 42%,#fbfaf7 0%,#f2f0ec 55%,#e6e2d9 100%)}
+.obj{position:absolute;inset:0;perspective:1500px;will-change:opacity,filter}
+.floor{position:absolute;left:0;top:0;width:360px;height:70px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(30,24,12,.34),rgba(30,24,12,0));filter:blur(6px);will-change:transform,opacity}
+.veil{position:absolute;inset:0;pointer-events:none;background:
+  linear-gradient(to bottom, rgba(242,240,236,.62) 0%, rgba(242,240,236,.12) 22%, rgba(242,240,236,.12) 78%, rgba(242,240,236,.66) 100%),
+  radial-gradient(100% 80% at 50% 48%, rgba(242,240,236,0) 0%, rgba(242,240,236,.34) 100%),
+  rgba(242,240,236,.20)}
+.grain{position:absolute;inset:-50%;opacity:.13;mix-blend-mode:multiply;pointer-events:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='.5'/></svg>")}
+
+/* card: black body, gold foil, real edge thickness */
 .card3d,.phone{position:absolute;left:0;top:0;will-change:transform}
 .card3d{width:360px;height:227px;transform-style:preserve-3d}
-.face{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden}
-.front{background:
-    radial-gradient(120% 90% at 15% 0%, rgba(217,170,69,.20), transparent 55%),
-    linear-gradient(135deg,#1d1b17 0%,#0f0e0c 60%,#1a1813 100%);
-  color:#D9AA45;box-shadow:inset 0 0 0 1px rgba(217,170,69,.35)}
-.front .inf{position:absolute;left:24px;top:26px;width:92px;color:#D9AA45}
-.front .nfc{position:absolute;right:22px;top:22px;width:34px;height:34px;color:#D9AA45}
-.front .chipline{position:absolute;left:24px;bottom:22px;font:500 10px/1.4 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:#E9D7A8}
-.front .chipline b{display:block;font:400 18px/1.2 var(--serif);letter-spacing:.02em;text-transform:none;color:#F3EBD6;margin-bottom:4px}
-.front::after{content:"";position:absolute;inset:-40%;background:linear-gradient(115deg,transparent 40%,rgba(255,236,190,.18) 50%,transparent 60%);transform:translateX(var(--sheen,-30%))}
-.back{transform:rotateY(180deg);background:linear-gradient(160deg,#FBF7EC,#EFE6CF);color:#1C1B19;display:grid;place-content:center;justify-items:center;gap:8px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
-.back .inf{width:120px;color:#1C1B19}
-.back .w{font:400 20px/1 var(--serif);letter-spacing:.32em;padding-left:.32em}
-.back .t{font:400 8px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#57534B}
-.back .g{width:44px;height:1px;background:#C9982E;margin-top:4px}
-.shadow{opacity:var(--sh,1);position:absolute;inset:8% 6%;border-radius:20px;background:rgba(40,28,6,.35);filter:blur(22px);transform:translateZ(-40px)}
-.ripples{position:absolute;left:50%;top:50%;width:0;height:0;transform:translateZ(2px)}
-.ripples i{position:absolute;left:-60px;top:-60px;width:120px;height:120px;border-radius:50%;border:2px solid #D9AA45;opacity:0}
-.card3d.pulse .ripples i{animation:ring 1.4s cubic-bezier(.2,.6,.3,1) infinite}
-.card3d.pulse .ripples i:nth-child(2){animation-delay:.45s}
-.card3d.pulse .ripples i:nth-child(3){animation-delay:.9s}
-@keyframes ring{0%{transform:scale(.2);opacity:.95}100%{transform:scale(2.6);opacity:0}}
-.card3d.pulse .front{box-shadow:inset 0 0 0 1.5px #D9AA45,0 0 40px rgba(217,170,69,.55)}
+.face,.edge{position:absolute;inset:0;border-radius:16px}
+.face{backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden}
+.edge{background:#2b261d}
+.edge:nth-of-type(1){transform:translateZ(-1px)}
+.edge:nth-of-type(2){transform:translateZ(0)}
+.edge:nth-of-type(3){transform:translateZ(1px)}
+.front{transform:translateZ(1.8px);color:#D9AA45;
+  background:radial-gradient(120% 90% at 12% 0%,rgba(217,170,69,.16),transparent 55%),linear-gradient(135deg,#1c1a16 0%,#0c0b09 58%,#17150f 100%);
+  box-shadow:inset 0 0 0 1px rgba(217,170,69,.32)}
+.front .inf{position:absolute;left:26px;top:28px;width:96px;color:#D9AA45}
+.front .nfc{position:absolute;right:24px;top:24px;width:30px;height:30px;color:#D9AA45}
+.front .ln{position:absolute;left:26px;bottom:24px;font:500 9.5px/1.4 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:#E6D3A2}
+.front .ln b{display:block;font:400 19px/1.2 var(--sans);letter-spacing:-.02em;text-transform:none;color:#F3EBD6;margin-bottom:5px}
+.front::after,.back::after{content:"";position:absolute;inset:-60%;pointer-events:none;
+  background:linear-gradient(115deg,transparent 42%,rgba(255,240,205,.22) 50%,transparent 58%);transform:translateX(var(--sheen,-30%))}
+.back{transform:rotateY(180deg) translateZ(1.8px);background:linear-gradient(160deg,#fbf8f0,#ece4cf);color:#1c1b19;
+  display:grid;place-content:center;justify-items:center;gap:9px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.07)}
+.back .inf{width:124px;color:#1c1b19}
+.back .w{font:500 18px/1 var(--sans);letter-spacing:.42em;padding-left:.42em}
+.back .t{font:400 8px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:#6a655b}
+.back .g{width:44px;height:1px;background:var(--gold);margin-top:3px}
+.ripples{position:absolute;left:50%;top:50%;width:0;height:0;transform:translateZ(3px)}
+.ripples i{position:absolute;left:-60px;top:-60px;width:120px;height:120px;border-radius:50%;border:1.5px solid #D9AA45;opacity:0}
+.card3d.pulse .ripples i{animation:ring 1.5s cubic-bezier(.2,.6,.3,1) infinite}
+.card3d.pulse .ripples i:nth-child(2){animation-delay:.5s}
+.card3d.pulse .ripples i:nth-child(3){animation-delay:1s}
+@keyframes ring{0%{transform:scale(.2);opacity:.95}100%{transform:scale(2.8);opacity:0}}
+.card3d.pulse .front{box-shadow:inset 0 0 0 1.5px #D9AA45,0 0 50px rgba(217,170,69,.5)}
 
-/* ---------- phone ---------- */
-.phone{width:250px;height:520px;border-radius:44px;background:#0c0c0c;padding:9px;
-  box-shadow:0 0 0 1.5px #3a3833,0 30px 60px -20px rgba(20,14,4,.55),inset 0 0 0 2px #22211e;opacity:0}
-.phone::before{content:"";position:absolute;top:18px;left:50%;width:74px;height:22px;margin-left:-37px;border-radius:12px;background:#000;z-index:5}
+/* phone: titanium frame, glass */
+.phone{width:250px;height:520px;border-radius:46px;padding:3px;
+  background:linear-gradient(145deg,#6b665c 0%,#23211d 30%,#3a3731 55%,#1b1a17 80%,#77716a 100%);
+  box-shadow:0 40px 70px -30px rgba(20,14,4,.55),0 12px 24px -12px rgba(20,14,4,.35);opacity:0}
+.phone::after{content:"";position:absolute;right:-2px;top:130px;width:3px;height:64px;border-radius:2px;background:#4a463f}
+.bezel{height:100%;border-radius:43px;background:#050505;padding:7px;position:relative}
+.bezel::before{content:"";position:absolute;top:17px;left:50%;width:72px;height:21px;margin-left:-36px;border-radius:12px;background:#000;z-index:6}
+.glare{position:absolute;inset:7px;border-radius:36px;pointer-events:none;z-index:7;
+  background:linear-gradient(125deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 32%,rgba(255,255,255,0) 70%,rgba(255,255,255,.06) 100%)}
 .screen{position:relative;height:100%;border-radius:35px;overflow:hidden;background:#fff;color:#1b1b1b;font-family:var(--sans)}
 .scr{position:absolute;inset:0;opacity:0;transition:opacity .35s ease, transform .35s ease;transform:scale(.98);display:flex;flex-direction:column}
 .scr.on{opacity:1;transform:none}
@@ -149,85 +151,86 @@ h1,h2,h3{text-wrap:balance}
    #fff;box-shadow:inset 0 0 0 8px #fff, 0 0 0 1px #ddd;margin:8px auto}
 .upi .pay{margin-top:auto;width:100%;background:#1C1B19;color:#F9F5EA;border-radius:12px;padding:12px;font:600 12px/1 var(--sans)}
 
-/* ---------- captions ---------- */
-.copy{position:absolute;left:var(--gutter);top:50%;transform:translateY(-50%);width:min(40%,470px);z-index:3}
-.cap{position:absolute;inset:auto 0 auto 0;top:0;transform:translateY(calc(-50% + 14px));opacity:0;transition:opacity .45s ease, transform .45s ease;pointer-events:none}
-.cap.on{opacity:1;transform:translateY(-50%);pointer-events:auto}
-.eyebrow{font:500 12px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--gold-text);display:flex;align-items:center;gap:10px;margin:0 0 18px}
-.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold)}
-.cap h1,.cap h2{font:400 clamp(34px,5vw,68px)/1.04 var(--serif);letter-spacing:-.015em;margin:0 0 18px}
-.cap h1 em,.cap h2 em{font-style:italic;color:var(--gold-text)}
-.cap p{margin:0;color:var(--ink-soft);font-size:clamp(14px,1.2vw,16px);max-width:34em}
-.cap .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 20px;border-radius:99px;font:500 15px/1 var(--sans);text-decoration:none;border:1.5px solid var(--ink);color:var(--ink);background:transparent}
-.btn svg{width:18px;height:18px;flex:none}
-.btn.primary{background:var(--ink);color:var(--btn-ink)}
-@media (hover:hover){.btn:hover{background:var(--paper-2)}.btn.primary:hover{background:var(--ink);opacity:.9}}
 
-/* ---------- step rail ---------- */
-.rail{position:absolute;left:var(--gutter);right:var(--gutter);bottom:calc(20px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:repeat(4,1fr);gap:10px;z-index:3;max-width:560px}
-.rail div{display:grid;gap:8px;font:500 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
-.rail div.on{color:var(--ink)}
-.rail i{display:block;height:2px;background:var(--rule);border-radius:2px;overflow:hidden}
-.rail i::after{content:"";display:block;height:100%;width:calc(var(--f,0)*100%);background:var(--gold)}
 
-@media (max-width:899px){
-  .copy{top:calc(76px + env(safe-area-inset-top,0px));left:var(--gutter);right:var(--gutter);width:auto;transform:none}
-  .cap,.cap.on{transform:none}
-  .cap{transform:translateY(10px)}
-  .cap h1,.cap h2{font-size:clamp(30px,8.4vw,44px);margin-bottom:10px}
-  .cap p{font-size:14px;line-height:1.5}
-  .cap .row,.eyebrow{display:none}
+/* ---------- scroll meter, chrome, footer ---------- */
+.meter{position:fixed;top:0;left:0;z-index:50;height:2px;width:100%;transform:scaleX(0);transform-origin:0 50%;background:var(--fg);opacity:.55}
+.chrome{position:fixed;left:0;right:0;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:max(14px, calc(env(safe-area-inset-top, 0px) + 12px)) clamp(16px, 3.4vw, 44px) 14px;
+  background:linear-gradient(to bottom, rgba(242,240,236,.94) 0%, rgba(242,240,236,.78) 72%, rgba(242,240,236,0) 100%)}
+.mark{display:flex;align-items:center;gap:9px;font-size:15px;letter-spacing:-.012em;color:var(--fg);min-width:0;flex-shrink:1;text-decoration:none}
+.mark-star{width:30px;height:auto;opacity:.85;flex:none}
+.nav{display:flex;align-items:center;gap:clamp(14px, 2.4vw, 32px);flex-shrink:0}
+.nav a:not(.pill){color:var(--fg);text-decoration:none;font-size:14.5px;letter-spacing:-.008em;opacity:.88;transition:opacity .3s var(--ease)}
+.nav a:not(.pill):hover{opacity:1}
+.pill{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 21px;border-radius:999px;
+  background:var(--pill-bg);color:var(--pill-fg);font-size:14.5px;font-weight:500;letter-spacing:-.008em;text-decoration:none;white-space:nowrap;opacity:1;
+  border:1px solid rgba(10,9,8,.12);box-shadow:0 1px 0 rgba(255,255,255,.10) inset;-webkit-text-fill-color:var(--pill-fg);
+  transition:transform .4s var(--ease),background .3s var(--ease),color .3s var(--ease)}
+.nav .pill{color:#fff;-webkit-text-fill-color:#fff}
+.pill:hover,.pill:focus-visible{transform:translateY(-2px);background:#000;color:#fff;-webkit-text-fill-color:#fff}
+.pill:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.ghost{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 24px;border-radius:999px;
+  color:var(--fg);text-decoration:none;font-size:15px;letter-spacing:-.008em;border:1px solid var(--rule);background:rgba(242,240,236,.5);
+  transition:border-color .3s var(--ease),transform .4s var(--ease);font-variant-numeric:tabular-nums}
+.ghost:hover,.ghost:focus-visible{border-color:var(--fg);transform:translateY(-2px)}
+.ghost:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.foot{position:fixed;bottom:0;left:0;right:0;z-index:40;display:flex;justify-content:center;
+  padding:14px clamp(16px, 4vw, 24px) max(16px, calc(env(safe-area-inset-bottom, 0px) + 12px));
+  font-size:12px;line-height:1.45;letter-spacing:.02em;color:var(--fg-faint);text-align:center;pointer-events:none;
+  background:linear-gradient(to top, rgba(242,240,236,.92) 0%, rgba(242,240,236,.72) 72%, rgba(242,240,236,0) 100%)}
+
+/* ---------- panels ---------- */
+.panels{position:fixed;inset:0;z-index:20;pointer-events:none}
+.panel{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:max(104px, calc(env(safe-area-inset-top, 0px) + 88px)) clamp(20px, 5vw, 60px) max(96px, calc(env(safe-area-inset-bottom, 0px) + 80px));
+  opacity:0;will-change:opacity,transform}
+.panel.top{justify-content:flex-start;padding-top:max(15vh, calc(env(safe-area-inset-top, 0px) + 96px))}
+.eyebrow{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 12px;font-size:12.5px;letter-spacing:.045em;
+  color:var(--fg-soft);margin-bottom:clamp(16px,2vw,22px);max-width:min(46ch, 100%);text-align:center}
+.eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--gold)}
+h1{font-weight:400;font-size:clamp(34px, 7.1vw, 104px);line-height:.98;letter-spacing:-.036em;max-width:15ch;text-wrap:balance}
+.panel.top h1{font-size:clamp(34px, 6.2vw, 92px)}
+h1 em{font-style:normal;color:#8F6B17}
+.sub{margin-top:clamp(18px,2.2vw,28px);font-size:clamp(15px,1.28vw,19px);line-height:1.5;letter-spacing:-.008em;color:var(--fg-soft);max-width:min(46ch, 100%);text-wrap:pretty}
+.cta{margin-top:clamp(28px,3.4vw,44px);pointer-events:auto;width:100%;display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
+.cta .pill{height:48px;padding:0 27px;font-size:15px;max-width:min(100%, 320px)}
+.chips{margin-top:clamp(20px,2.6vw,32px);display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:min(52ch,100%)}
+.chips span{font-size:13px;letter-spacing:-.005em;padding:8px 14px;border-radius:999px;border:1px solid var(--rule);background:rgba(242,240,236,.6);transition:background .4s var(--ease),color .4s var(--ease),border-color .4s var(--ease)}
+.chips span.on{background:var(--fg);color:#fff;border-color:var(--fg)}
+
+.track{position:relative;z-index:1;height:760vh;min-height:4400px}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .veil{background:
+    linear-gradient(to bottom, rgba(242,240,236,.72) 0%, rgba(242,240,236,.18) 24%, rgba(242,240,236,.18) 76%, rgba(242,240,236,.74) 100%),
+    radial-gradient(100% 80% at 50% 48%, rgba(242,240,236,0) 0%, rgba(242,240,236,.40) 100%),
+    rgba(242,240,236,.24)}
 }
-
-/* ---------- sections ---------- */
-.wrap{max-width:1120px;margin:0 auto;padding-inline:var(--gutter)}
-section.block{padding-block:clamp(64px,9vw,120px);border-top:1px solid var(--rule)}
-.kicker{font:500 12px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--gold-text);margin:0 0 14px}
-h2.big{font:400 clamp(32px,4.4vw,56px)/1.08 var(--serif);letter-spacing:-.01em;margin:0 0 16px;max-width:16em}
-h2.big em{font-style:italic;color:var(--gold-text)}
-.lede{margin:0;color:var(--ink-soft);max-width:38em;font-size:17px}
-
-.steps{list-style:none;margin:48px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,40px);counter-reset:s}
-.steps li{counter-increment:s;display:grid;gap:10px;align-content:start;border-top:1.5px solid var(--ink);padding-top:18px}
-.steps li::before{content:"Step " counter(s);font:500 12px/1 var(--mono);color:var(--gold-text);letter-spacing:.06em}
-.steps h3{font:500 20px/1.3 var(--sans);margin:0}
-.steps p{margin:0;color:var(--ink-soft);font-size:15px}
-
-.links{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:20px;overflow:hidden}
-.links article{background:var(--paper);padding:28px 24px;display:grid;gap:10px;align-content:start}
-.links .ic{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--gold);display:grid;place-items:center;color:var(--gold-text)}
-.links .ic svg{width:19px;height:19px}
-.links h3{font:500 17px/1.3 var(--sans);margin:4px 0 0}
-.links code{font:400 12px/1.4 var(--mono);color:var(--gold-text);word-break:break-all}
-.links p{margin:0;color:var(--ink-soft);font-size:14.5px}
-
-.facts{margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.facts div{display:grid;gap:6px;align-content:start}
-.facts dt{font:500 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
-.facts dd{margin:0;font:400 20px/1.3 var(--serif)}
-.facts dd small{display:block;font:400 13.5px/1.5 var(--sans);color:var(--ink-soft);margin-top:4px}
-
-.contact{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,6vw,80px);align-items:start}
-.actions{display:grid;gap:12px;margin-top:28px;max-width:420px}
-.actions .btn{border-radius:14px;min-height:54px}
-.num{margin:4px 0 0;font:500 18px/1.4 var(--mono);letter-spacing:.02em;user-select:all}
-.visit{border:1px solid var(--rule);border-radius:20px;padding:28px;background:var(--paper-2)}
-.visit h3{font:500 17px/1.3 var(--sans);margin:0 0 4px}
-address{font-style:normal;line-height:1.75;margin:10px 0 18px;color:var(--ink)}
-.link{color:var(--gold-text);font-weight:500;text-underline-offset:4px}
-
-footer{border-top:1px solid var(--rule);padding-block:28px 40px;text-align:center;color:var(--ink-soft);font-size:13px}
-footer svg{width:44px;height:auto;display:block;margin:0 auto 8px;color:var(--ink-soft)}
-
-@media (max-width:899px){
-  .steps,.contact{grid-template-columns:1fr}
-  .links{grid-template-columns:1fr 1fr}
-  .facts{grid-template-columns:1fr 1fr}
+@media (max-width:720px){
+  .nav a:not(.pill){display:none}
+  .mark{font-size:14px}
+  .nav .pill{height:38px;padding:0 16px;font-size:13.5px}
+  h1,.panel.top h1{max-width:12ch;font-size:clamp(30px, 9.8vw, 52px)}
+  .sub{font-size:15px;max-width:34ch}
+  .panel{padding:max(92px, calc(env(safe-area-inset-top, 0px) + 76px)) 18px max(88px, calc(env(safe-area-inset-bottom, 0px) + 72px))}
+  .panel.top{padding-top:max(92px, calc(env(safe-area-inset-top, 0px) + 76px))}
+  .foot{font-size:11px;max-width:none}
+  .chips span{font-size:12px;padding:7px 11px}
 }
-@media (max-width:560px){
-  .links,.facts{grid-template-columns:1fr}
-  .rail div{font-size:10px;letter-spacing:.1em}
+@media (max-width:420px){
+  .mark-star{display:none}
+  .nav .pill{height:36px;padding:0 14px;font-size:13px}
+  h1,.panel.top h1{max-width:11ch;font-size:clamp(28px, 10.5vw, 40px)}
+  .eyebrow{font-size:11px;letter-spacing:.04em;max-width:28ch}
+  .cta .pill,.cta .ghost{width:100%;max-width:280px;height:44px;padding:0 20px;font-size:14px}
+}
+@media (max-height:520px) and (orientation:landscape){
+  .panel,.panel.top{padding:max(72px, calc(env(safe-area-inset-top, 0px) + 56px)) 24px max(64px, calc(env(safe-area-inset-bottom, 0px) + 48px))}
+  h1,.panel.top h1{font-size:clamp(28px, 8vh, 44px)}
+  .sub{margin-top:12px;font-size:14px}
+  .cta{margin-top:16px}
 }
 </style>
 
@@ -238,50 +241,18 @@ footer svg{width:44px;height:auto;display:block;margin:0 auto 8px;color:var(--in
   <symbol id="lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></g></symbol>
 </svg>
 
-<header class="nav">
-  <a class="logo" href="#top" aria-label="Infinity home"><svg viewBox="-6 -6 252 93.5" aria-hidden="true"><use href="#inf"/></svg><span>INFINITY</span></a>
-  <nav class="pills" aria-label="Sections">
-    <a href="#how">How it works</a><a href="#links">Links</a><a href="#contact">Contact</a>
-  </nav>
-  <a class="cta-sm" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener">Get your card</a>
-</header>
+<div class="boot" id="boot"><div class="bar"><i id="bootBar"></i></div><p id="bootPct">LOADING 0%</p></div>
 
-<main id="top">
-<div class="scene" id="scene">
-  <div class="stage" id="stage">
-    <div class="copy" aria-live="polite">
-      <div class="cap on" data-i="0">
-        <p class="eyebrow">Smart NFC review cards</p>
-        <h1>Tap once.<br><em>Get the review.</em></h1>
-        <p>Infinity cards take your customers straight to your Google review page. No app, no typing, no searching for your name.</p>
-        <div class="row">
-          <a class="btn primary" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener">Order on WhatsApp</a>
-          <a class="btn" href="#how">See how it works</a>
-        </div>
-      </div>
-      <div class="cap" data-i="1">
-        <p class="eyebrow">Step 1 · Tap</p>
-        <h2>Hold any phone<br><em>near the card.</em></h2>
-        <p>A thin NFC chip inside the card wakes up the moment a phone touches it. It needs no battery and never needs charging.</p>
-      </div>
-      <div class="cap" data-i="2">
-        <p class="eyebrow">Step 2 · Open</p>
-        <h2>Your review page<br><em>opens instantly.</em></h2>
-        <p>The customer lands on your review box with the stars ready to tap. A happy customer finishes in under a minute.</p>
-      </div>
-      <div class="cap" data-i="3">
-        <p class="eyebrow">Step 3 · Choose</p>
-        <h2>Any link<br><em>you choose.</em></h2>
-        <p>Reviews, Instagram, WhatsApp, your menu or a UPI payment page. We set your card to open the page that matters most to your business.</p>
-      </div>
-    </div>
-
-    <div class="card3d" id="card" aria-hidden="true">
-      <div class="shadow"></div>
+<div class="stage" aria-hidden="true">
+  <div class="veil"></div>
+  <div class="obj" id="obj">
+    <div class="floor" id="floor"></div>
+    <div class="card3d" id="card">
+      <div class="edge"></div><div class="edge"></div><div class="edge"></div>
       <div class="face front">
         <svg class="inf" viewBox="-6 -6 252 93.5"><use href="#inf"/></svg>
         <svg class="nfc"><use href="#nfc"/></svg>
-        <div class="chipline"><b>Tap for a review</b>Infinity · NFC</div>
+        <div class="ln"><b>Tap for a review</b>Infinity · NFC</div>
       </div>
       <div class="face back">
         <svg class="inf" viewBox="-6 -6 252 93.5"><use href="#inf"/></svg>
@@ -291,8 +262,8 @@ footer svg{width:44px;height:auto;display:block;margin:0 auto 8px;color:var(--in
       </div>
       <div class="ripples"><i></i><i></i><i></i></div>
     </div>
-
-    <div class="phone" id="phone" aria-hidden="true">
+    <div class="phone" id="phone">
+      <div class="bezel">
       <div class="screen">
         <div class="scr lock on" data-s="lock">
           <div class="sb" style="width:100%"><span>Jio</span><span>100%</span></div>
@@ -366,152 +337,217 @@ footer svg{width:44px;height:auto;display:block;margin:0 auto 8px;color:var(--in
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="rail" id="rail" aria-hidden="true">
-      <div class="on"><i></i>Meet</div><div><i></i>Tap</div><div><i></i>Open</div><div><i></i>Choose</div>
+      </div>
+      <div class="glare"></div>
     </div>
   </div>
+  <div class="grain"></div>
 </div>
 
-<section class="block wrap" id="how" aria-labelledby="how-h">
-  <p class="kicker">How it works</p>
-  <h2 class="big" id="how-h">More Google reviews, <em>without asking twice.</em></h2>
-  <p class="lede">Most happy customers would leave a review. They just don’t want to search for your business, find the right button and type your name. Infinity removes every one of those steps.</p>
-  <ol class="steps">
-    <li><h3>Place the card where people pay</h3><p>On the billing counter, the table, the reception desk or inside the bill folder.</p></li>
-    <li><h3>The customer taps their phone</h3><p>No app to download. The phone reads the card and shows a link to open.</p></li>
-    <li><h3>Your review page opens</h3><p>They pick the stars, write a line and post. The whole thing takes less than a minute.</p></li>
-  </ol>
-</section>
+<i class="meter" id="meter"></i>
 
-<section class="block wrap" id="links" aria-labelledby="links-h">
-  <p class="kicker">One card, your link</p>
-  <h2 class="big" id="links-h">Send customers <em>wherever you need them.</em></h2>
-  <p class="lede">Google reviews are where most businesses start. Your card can open any page you want instead.</p>
-  <div class="links">
-    <article><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg></span><h3>Google reviews</h3><code>g.page/r/…/review</code><p>Opens the review box directly, so customers can rate you in seconds.</p></article>
-    <article><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></span><h3>Instagram</h3><code>instagram.com/yourbusiness</code><p>Turn every visit into a follower who sees your next post.</p></article>
-    <article><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 20l1.3-3.8A8 8 0 1 1 8 19z"/></svg></span><h3>WhatsApp chat</h3><code>wa.me/91…</code><p>Start a chat with your business for bookings, orders and questions.</p></article>
-    <article><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 3h12v18H6z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><h3>Menu or price list</h3><code>yourbusiness.in/menu</code><p>Show today’s menu, services or rates without printing new copies.</p></article>
-    <article><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v12H3z"/><path d="M3 11h18"/><path d="M7 15h3"/></svg></span><h3>UPI payment</h3><code>upi://pay?pa=…</code><p>Let customers pay you from GPay, PhonePe or Paytm with one tap.</p></article>
-    <article><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><h3>Website or visiting card</h3><code>yourbusiness.in</code><p>Share your website or a digital visiting card with your contact details.</p></article>
-  </div>
+<header class="chrome">
+  <a class="mark" href="#top" data-go="0"><svg class="mark-star" viewBox="-6 -6 252 93.5" aria-hidden="true"><use href="#inf"/></svg>Infinity</a>
+  <nav class="nav" aria-label="Sections">
+    <a href="#tap" data-go="0.35">How it works</a>
+    <a href="#links" data-go="0.86">Links</a>
+    <a href="#contact" data-go="1">Contact</a>
+    <a class="pill" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener">Order a card</a>
+  </nav>
+</header>
 
-  <dl class="facts">
-    <div><dt>App needed</dt><dd>None<small>The phone’s built-in NFC reader does the work.</small></dd></div>
-    <div><dt>Phones</dt><dd>iPhone and Android<small>iPhone XS or newer, and Android phones with NFC turned on.</small></dd></div>
-    <div><dt>Power</dt><dd>No battery<small>The chip draws power from the phone during the tap.</small></dd></div>
-    <div><dt>Older phones</dt><dd>Add a QR code<small>We also make review QR codes for any phone camera.</small></dd></div>
-  </dl>
-</section>
-
-<section class="block wrap" id="contact" aria-labelledby="contact-h">
-  <div class="contact">
-    <div>
-      <p class="kicker">Get your cards</p>
-      <h2 class="big" id="contact-h">Let’s put Infinity <em>on your counter.</em></h2>
-      <p class="lede">Tell us your business and the link you want. Mridul will set up your cards and help you place them where customers see them.</p>
-      <div class="actions">
-        <a class="btn primary" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.5-.3z"/></svg>
-          Message on WhatsApp</a>
-        <a class="btn" href="tel:+917986404564">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
-          Call Mridul</a>
-        <p class="num">+91 79864 04564</p>
-      </div>
+<main class="panels" id="top">
+  <section class="panel top" data-panel>
+    <p class="eyebrow">NFC review cards <span class="dot"></span> Andheri East, Mumbai</p>
+    <h1>Tap once.<br>Get the <em>review.</em></h1>
+    <p class="sub">One card on your counter sends every happy customer straight to your Google review page.</p>
+    <div class="cta"><a class="pill" href="#tap" data-go="0.35">See how it works</a></div>
+  </section>
+  <section class="panel" data-panel id="tap">
+    <p class="eyebrow">Step one <span class="dot"></span> Tap</p>
+    <h1>Hold any phone near the card.</h1>
+    <p class="sub">A thin NFC chip inside wakes up on contact. No app to install, no battery, nothing to charge.</p>
+  </section>
+  <section class="panel" data-panel>
+    <p class="eyebrow">Step two <span class="dot"></span> Open</p>
+    <h1>The review page opens by itself.</h1>
+    <p class="sub">Your customer lands on the review box with the stars ready. Most finish in under a minute.</p>
+  </section>
+  <section class="panel" data-panel id="links">
+    <p class="eyebrow">Step three <span class="dot"></span> Choose</p>
+    <h1>Any link <em>you choose.</em></h1>
+    <div class="chips" id="chips"><span data-c="review">Google reviews</span><span data-c="ig">Instagram</span><span data-c="wa">WhatsApp</span><span data-c="menu">Menu</span><span data-c="upi">UPI payments</span><span>Website</span></div>
+  </section>
+  <section class="panel top" data-panel id="contact">
+    <p class="eyebrow">Mridul Shingari <span class="dot"></span> Infinity</p>
+    <h1>Put Infinity on <em>your counter.</em></h1>
+    <p class="sub">Tell us your business and the link you want. We set up the cards and help you place them where customers pay.</p>
+    <div class="cta">
+      <a class="pill" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener">Order on WhatsApp</a>
+      <a class="ghost" href="tel:+917986404564">+91 79864 04564</a>
+      <a class="ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Bindra%20Sateri%20Legacy%2C%20MIDC%20Central%20Road%2C%20Andheri%20East%2C%20Mumbai%20400093" target="_blank" rel="noopener">Get directions</a>
     </div>
-    <div class="visit">
-      <h3>Mridul Shingari</h3>
-      <p style="margin:0;color:var(--ink-soft);font-size:14px">Infinity · Your partner in business growth</p>
-      <address>Bindra Sateri Legacy<br>Near Aralia Business Hotel<br>MIDC Central Road, Andheri East<br>Mumbai 400093</address>
-      <a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=Bindra%20Sateri%20Legacy%2C%20MIDC%20Central%20Road%2C%20Andheri%20East%2C%20Mumbai%20400093" target="_blank" rel="noopener">Get directions in Google Maps</a>
-    </div>
-  </div>
-</section>
+  </section>
 </main>
 
-<footer class="wrap">
-  <svg viewBox="-6 -6 252 93.5" aria-hidden="true"><use href="#inf"/></svg>
-  © 2026 Infinity · Andheri East, Mumbai
-</footer>
+<footer class="foot">Bindra Sateri Legacy, MIDC Central Road, Andheri East &nbsp;&middot;&nbsp; +91 79864 04564</footer>
+
+<div class="track"></div>
 
 <script>
 (function(){
-  const scene=document.getElementById('scene'), stage=document.getElementById('stage');
-  const card=document.getElementById('card'), phone=document.getElementById('phone');
-  const caps=[...document.querySelectorAll('.cap')], rail=[...document.querySelectorAll('#rail div')];
-  const screens={}; document.querySelectorAll('.scr').forEach(s=>screens[s.dataset.s]=s);
-  const banner=document.getElementById('banner'), stars=[...document.querySelectorAll('#stars svg')];
-  const typed=document.getElementById('typed'), post=document.getElementById('post');
-  const review='Quick service and really friendly staff. Will come back!';
-  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  "use strict";
+  var obj=document.getElementById("obj"), card=document.getElementById("card"), phone=document.getElementById("phone"), floor=document.getElementById("floor");
+  var boot=document.getElementById("boot"), bootBar=document.getElementById("bootBar"), bootPct=document.getElementById("bootPct"), meter=document.getElementById("meter");
+  var panels=[].slice.call(document.querySelectorAll("[data-panel]"));
+  var screens={}; [].forEach.call(document.querySelectorAll(".scr"),function(s){screens[s.dataset.s]=s;});
+  var chips=[].slice.call(document.querySelectorAll("#chips span"));
+  var banner=document.getElementById("banner"), stars=[].slice.call(document.querySelectorAll("#stars svg"));
+  var typed=document.getElementById("typed"), post=document.getElementById("post");
+  var REVIEW="Quick service and really friendly staff. Will come back!";
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
-  const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+  // Each panel owns [fadeInStart, fadeInEnd, fadeOutStart, fadeOutEnd] of page progress.
+  // The gaps between panels are dead zones: the card and phone perform alone,
+  // so two panels are never readable at once.
+  var CUES=[
+    [0.00,0.00,0.10,0.16],
+    [0.28,0.32,0.38,0.42],
+    [0.56,0.60,0.64,0.68],
+    [0.80,0.83,0.91,0.94],
+    [0.96,0.99,1.10,1.20]
+  ];
+  var DRIFT=22; // px of counter-scroll travel per panel
+
+  function clamp(v,a,b){return Math.min(b,Math.max(a,v));}
+  function smooth(t){return t*t*(3-2*t);}
+  function ramp(p,a,b){if(b<=a)return p>=b?1:0;return smooth(clamp((p-a)/(b-a),0,1));}
+  function eio(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
+  // keyframe track: [[p,value],...] eased between stops
   function kf(p,f){
     if(p<=f[0][0])return f[0][1];
-    for(let i=1;i<f.length;i++){const [t1,v1]=f[i],[t0,v0]=f[i-1];
-      if(p<=t1)return v0+(v1-v0)*ease((p-t0)/((t1-t0)||1));}
+    for(var i=1;i<f.length;i++){var t1=f[i][0],t0=f[i-1][0];
+      if(p<=t1)return f[i-1][1]+(f[i][1]-f[i-1][1])*eio((p-t0)/((t1-t0)||1));}
     return f[f.length-1][1];
   }
-  const PH=[0,.2,.5,.76,1];
-  let lastCap=-1, lastScr='';
 
-  function progress(){
-    if(reduce)return .66;
-    const r=scene.getBoundingClientRect(), span=scene.offsetHeight-stage.offsetHeight;
-    return clamp(-r.top/span,0,1);
+  var progress=0, sceneAt=0, ready=false, lastScr="", t0=performance.now();
+
+  function readScroll(){
+    var max=document.documentElement.scrollHeight-window.innerHeight;
+    progress=max>0?clamp(window.pageYOffset/max,0,1):0;
   }
 
-  function render(time){
-    const p=progress(), W=stage.clientWidth, H=stage.clientHeight, wide=W>=900;
-    const bob=reduce?0:Math.sin(time/900)*6;
-    const vx=wide?W*.66:W/2, vy=wide?H*.52:H*.62;
-    stage.style.setProperty('--vx',(vx/W*100).toFixed(1)+'%');
-    const cs=wide?clamp(W/1250,.7,1.05):clamp(W/620,.5,.7);
-    const ps=wide?Math.min(1,H*.6/520):Math.min(.74,H*.46/520);
+  function scene(p,time){
+    var W=window.innerWidth, H=window.innerHeight, wide=W>=900;
+    var cx=W/2, cy=H/2;
+    var bob=reduce?0:Math.sin(time/1100)*5;
+    var cs=wide?clamp(W/1250,.72,1.05):clamp(W/560,.56,.74);
+    var ps=wide?Math.min(1,H*.62/520):Math.min(.8,H*.55/520);
+    var ph=520*ps;
+
+    // focus: 1 = object performs in the clear, lower = pushed behind a panel's copy
+    var f=kf(p,[[0,1],[.24,1],[.29,.28],[.40,.28],[.44,1],[.56,1],[.59,.28],[.66,.28],[.69,1],[.80,1],[.83,.55],[.92,.55],[.96,1]]);
+    obj.style.opacity=(.2+.8*f).toFixed(3);
+    obj.style.filter=f<.98?"blur("+((1-f)*3).toFixed(2)+"px)":"none";
+    var fs=.93+.07*f;
 
     // card
-    const cdx=kf(p,[[.5,0],[.62,wide?-W*.1:-W*.24]]);
-    const cdy=kf(p,[[.5,wide?-H*.02:-H*.02],[.62,wide?H*.1:H*.1]])+bob*(1-kf(p,[[.3,0],[.36,1]]));
-    const cS=cs*kf(p,[[.5,1],[.62,wide?.78:.62]]);
-    const rz=kf(p,[[0,-26],[.2,-18],[.5,-18],[.62,-12]]);
-    const rx=kf(p,[[0,48],[.2,52],[.36,58],[.5,58],[.62,44]]);
-    const ry=kf(p,[[0,0],[.18,360]]);
-    card.style.transform=`translate(${vx-180}px,${vy-113.5}px) translate3d(${cdx}px,${cdy}px,0) scale(${cS}) rotateZ(${rz}deg) rotateX(${rx}deg) rotateY(${ry}deg)`;
-    card.style.setProperty('--sh',Math.max(0,Math.cos(ry*Math.PI/180)).toFixed(3));
-    card.style.setProperty('--sheen',(kf(p,[[0,-40],[.2,40]])+'%'));
-    card.classList.toggle('pulse',p>.37&&p<.56);
+    var cdx=kf(p,[[.68,0],[.78,wide?-W*.13:-W*.2],[.94,wide?-W*.13:-W*.2],[.99,wide?-W*.08:0]]);
+    var cdy=kf(p,[[0,H*.27],[.12,H*.25],[.24,0],[.30,H*.06],[.68,H*.06],[.78,H*.13],[.94,H*.13],[.99,wide?H*.33:H*.34]]);
+    var cS=cs*fs*kf(p,[[0,.9],[.14,.9],[.22,1.18],[.28,1],[.68,1],[.78,.8],[.94,.8],[.99,wide?.66:.6]]);
+    var ry=kf(p,[[.15,0],[.26,360]]);
+    var rx=kf(p,[[0,58],[.14,56],[.2,22],[.26,24],[.32,58],[.68,58],[.78,46],[.99,56]]);
+    var rz=kf(p,[[0,-20],[.14,-16],[.2,-8],[.26,-8],[.32,-16],[.68,-16],[.78,-12],[.99,-16]]);
+    var idle=1-kf(p,[[.36,0],[.42,1]])+kf(p,[[.62,0],[.7,1]]);
+    cdy+=bob*clamp(idle,0,1);
+    card.style.transform="translate("+(cx-180+cdx)+"px,"+(cy-113.5+cdy)+"px) scale("+cS+") rotateZ("+rz+"deg) rotateX("+rx+"deg) rotateY("+ry+"deg)";
+    var sheen=-40+((rz+20)*4)+(ry/360)*80+p*40;
+    card.style.setProperty("--sheen",sheen.toFixed(1)+"%");
+    card.classList.toggle("pulse",p>.47&&p<.6);
+
+    // floor shadow follows the card, pinned below it
+    var flip=Math.abs(Math.cos(ry*Math.PI/180));
+    floor.style.transform="translate("+(cx-180+cdx)+"px,"+(cy+cdy+120*cS)+"px) scale("+(cS*(1-.25*Math.sin(Math.PI*clamp((p-.15)/.11,0,1))))+","+cS+")";
+    floor.style.opacity=(.35+.65*flip).toFixed(3);
 
     // phone
-    const h=520*ps;
-    const pdx=kf(p,[[.2,W*.55],[.36,W*.01],[.5,W*.01],[.62,wide?W*.09:W*.12]]);
-    const pdy=kf(p,[[.2,-H*.9],[.36,h*(wide?.2:.04)],[.4,h*(wide?.26:.1)],[.44,h*(wide?.22:.06)],[.5,h*(wide?.22:.06)],[.62,wide?H*.01:-H*.04]])+(p>.6?bob*.6:0);
-    const prz=kf(p,[[.2,40],[.36,-14],[.5,-14],[.62,0]]);
-    const prx=kf(p,[[.2,0],[.36,30],[.5,30],[.62,0]]);
-    const pS=ps*kf(p,[[.36,.78],[.5,.78],[.62,1]]);
-    phone.style.transform=`translate(${vx-125}px,${vy-260}px) translate3d(${pdx}px,${pdy}px,0) scale(${pS}) rotateZ(${prz}deg) rotateX(${prx}deg)`;
-    phone.style.opacity=kf(p,[[.2,0],[.25,1]]);
+    var pdx=kf(p,[[.28,W*.18],[.38,W*.02],[.46,W*.01],[.69,W*.01],[.78,wide?W*.1:W*.1],[.94,wide?W*.1:W*.1],[.99,wide?W*.09:W*.12]]);
+    var hoverY=H*.06-ph*.55, touchY=H*.06+ph*(wide?.12:.04);
+    var pdy=kf(p,[[.28,-H*.9],[.38,hoverY],[.44,hoverY],[.48,touchY],[.495,touchY+10],[.52,touchY],[.69,touchY],[.78,-H*.02],[.94,-H*.02],[.99,H*.3]]);
+    var prz=kf(p,[[.28,30],[.38,-12],[.69,-12],[.78,0]]);
+    var prx=kf(p,[[.3,10],[.44,26],[.69,26],[.78,0]]);
+    var pS=ps*fs*kf(p,[[.38,.74],[.69,.74],[.78,1],[.94,1],[.99,.5]]);
+    if(p>.78&&p<.95)pdy+=bob*.6;
+    phone.style.transform="translate("+(cx-125+pdx)+"px,"+(cy-260+pdy)+"px) scale("+pS+") rotateZ("+prz+"deg) rotateX("+prx+"deg)";
+    phone.style.opacity=kf(p,[[.28,0],[.32,1]])*(wide?1:kf(p,[[.94,1],[.98,0]]));
 
-    // screen state
-    let s='lock';
-    if(p>=.54)s='review'; if(p>=.78)s='ig'; if(p>=.84)s='wa'; if(p>=.9)s='menu'; if(p>=.95)s='upi';
-    if(s!==lastScr){Object.values(screens).forEach(el=>el.classList.toggle('on',el.dataset.s===s));lastScr=s;}
-    banner.classList.toggle('on',p>.43);
-    const lit=Math.floor(kf(p,[[.57,0],[.66,5]])+.001);
-    stars.forEach((st,i)=>st.classList.toggle('lit',i<lit));
-    typed.textContent=review.slice(0,Math.round(kf(p,[[.66,0],[.73,review.length]])));
-    const done=p>.745; post.classList.toggle('done',done); post.textContent=done?'Posted ✓':'Post';
-
-    // captions + rail
-    let ci=0; for(let i=0;i<4;i++) if(p>=PH[i]) ci=i;
-    if(ci!==lastCap){caps.forEach((c,i)=>c.classList.toggle('on',i===ci));lastCap=ci;}
-    rail.forEach((r,i)=>{r.classList.toggle('on',i===ci);r.querySelector('i').style.setProperty('--f',clamp((p-PH[i])/(PH[i+1]-PH[i]),0,1).toFixed(3));});
+    // what the phone shows
+    var s="lock";
+    if(p>=.55)s="review"; if(p>=.845)s="ig"; if(p>=.865)s="wa"; if(p>=.885)s="menu"; if(p>=.905)s="upi"; if(p>=.95)s="review";
+    if(s!==lastScr){
+      for(var k in screens)screens[k].classList.toggle("on",k===s);
+      chips.forEach(function(c){c.classList.toggle("on",c.dataset.c===s&&p>.8&&p<.95);});
+      lastScr=s;
+    }
+    banner.classList.toggle("on",p>.5);
+    var lit=Math.floor(kf(p,[[.69,0],[.735,5]])+.001);
+    stars.forEach(function(st,i){st.classList.toggle("lit",i<lit);});
+    typed.textContent=REVIEW.slice(0,Math.round(kf(p,[[.735,0],[.775,REVIEW.length]])));
+    var done=p>.785; post.classList.toggle("done",done); post.textContent=done?"Posted ✓":"Post";
   }
 
-  if(reduce){scene.style.height='100vh';render(0);addEventListener('resize',()=>render(0));}
-  else{const loop=t=>{render(t);requestAnimationFrame(loop)};requestAnimationFrame(loop);}
+  function paint(time){
+    meter.style.transform="scaleX("+progress+")";
+    for(var i=0;i<panels.length;i++){
+      var c=CUES[i], el=panels[i];
+      var enter=ramp(progress,c[0],c[1]), leave=ramp(progress,c[2],c[3]);
+      var o=enter*(1-leave), y=(1-enter)*DRIFT-leave*DRIFT;
+      el.style.opacity=o;
+      el.style.transform="translate3d(0,"+y+"px,0)";
+      el.style.pointerEvents=o>0.6?"auto":"none";
+    }
+    scene(sceneAt,time);
+  }
+
+  // rAF loop, never cancelled. The scene eases toward the scroll position instead of
+  // snapping to it, which turns a jumpy scrub into a smooth, weighted one.
+  function frame(time){
+    var gap=progress-sceneAt;
+    if(Math.abs(gap)>0.0004)sceneAt+=reduce?gap:gap*0.115;
+    paint(time);
+    requestAnimationFrame(frame);
+  }
+
+  // Preloader: holds until the display face has loaded so the first frame is set in
+  // Inter Tight, never a fallback. Gives up after 2.5s so the page is never stranded.
+  function setProgress(v){bootBar.style.transform="scaleX("+v+")";bootPct.textContent="LOADING "+Math.round(v*100)+"%";}
+  var fontsDone=false;
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){fontsDone=true;});else fontsDone=true;
+  function start(){if(ready)return;ready=true;setProgress(1);readScroll();sceneAt=progress;setTimeout(function(){boot.classList.add("done");},180);}
+  (function tick(){
+    var el=performance.now()-t0;
+    var v=Math.min(el/700,fontsDone?1:.9);
+    setProgress(v);
+    if((v>=1&&fontsDone)||el>2500){start();return;}
+    requestAnimationFrame(tick);
+  })();
+
+  // nav links jump to a point on the timeline
+  [].forEach.call(document.querySelectorAll("[data-go]"),function(a){
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      var max=document.documentElement.scrollHeight-window.innerHeight;
+      window.scrollTo({top:parseFloat(a.dataset.go)*max,behavior:reduce?"auto":"smooth"});
+    });
+  });
+
+  window.addEventListener("scroll",readScroll,{passive:true});
+  window.addEventListener("resize",readScroll);
+
+  readScroll();
+  sceneAt=progress;
+  paint(0);
+  requestAnimationFrame(frame);
 })();
 </script>
