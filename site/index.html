@@ -206,17 +206,21 @@ h1,p{margin:0}
 
 /* ---------- panels ---------- */
 .panels{position:fixed;inset:0;z-index:20;pointer-events:none}
-.panel{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+.panel::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(56% 46% at 50% 50%, rgba(242,240,236,.92) 0%, rgba(242,240,236,.72) 45%, rgba(242,240,236,0) 100%)}
+.panel.top::before{background:radial-gradient(60% 44% at 50% 30%, rgba(242,240,236,.94) 0%, rgba(242,240,236,.7) 50%, rgba(242,240,236,0) 100%)}
+.panel.split::before{background:radial-gradient(48% 60% at 24% 50%, rgba(242,240,236,.94) 0%, rgba(242,240,236,.6) 55%, rgba(242,240,236,0) 100%)}
+.panel{isolation:isolate;position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
   padding:max(104px, calc(env(safe-area-inset-top, 0px) + 88px)) clamp(20px, 5vw, 60px) max(96px, calc(env(safe-area-inset-bottom, 0px) + 80px));
   opacity:0;will-change:opacity,transform}
 .panel.top{justify-content:flex-start;padding-top:max(15vh, calc(env(safe-area-inset-top, 0px) + 96px))}
-.eyebrow{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 12px;font-size:12.5px;letter-spacing:.045em;
+.eyebrow{font-weight:500;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 12px;font-size:12.5px;letter-spacing:.045em;
   color:var(--fg-soft);margin-bottom:clamp(16px,2vw,22px);max-width:min(46ch, 100%);text-align:center}
 .eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--gold)}
-h1{font-weight:400;font-size:clamp(34px, 7.1vw, 104px);line-height:.98;letter-spacing:-.036em;max-width:15ch;text-wrap:balance}
+h1{font-weight:500;font-size:clamp(34px, 7.1vw, 104px);line-height:.98;letter-spacing:-.042em;color:var(--fg);max-width:15ch;text-wrap:balance}
 .panel.top h1{font-size:clamp(34px, 6.2vw, 92px)}
-h1 em{font-style:normal;color:#8F6B17}
-.sub{margin-top:clamp(18px,2.2vw,28px);font-size:clamp(15px,1.28vw,19px);line-height:1.5;letter-spacing:-.008em;color:var(--fg-soft);max-width:min(46ch, 100%);text-wrap:pretty}
+h1 em{font-style:normal;color:#7A5A10}
+.sub{margin-top:clamp(18px,2.2vw,28px);font-size:clamp(15px,1.28vw,19px);line-height:1.5;letter-spacing:-.008em;color:rgba(13,12,11,.74);max-width:min(46ch, 100%);text-wrap:pretty}
 .cta{margin-top:clamp(28px,3.4vw,44px);pointer-events:auto;width:100%;display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
 .cta .pill{height:48px;padding:0 27px;font-size:15px;max-width:min(100%, 320px)}
 .chips{margin-top:clamp(20px,2.6vw,32px);display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:min(52ch,100%)}
@@ -458,7 +462,7 @@ h1 em{font-style:normal;color:#8F6B17}
   </section>
   <section class="panel" data-panel id="links">
     <p class="eyebrow">Step three <span class="dot"></span> Choose</p>
-    <h1>Any link <em>you choose.</em></h1>
+    <h1>Any link<br><em>you choose.</em></h1>
     <div class="chips" id="chips"><span data-c="review">Google reviews</span><span data-c="ig">Instagram</span><span data-c="wa">WhatsApp</span><span data-c="menu">Menu</span><span data-c="upi">UPI payments</span><span>Website</span></div>
   </section>
   <section class="panel" data-panel id="why">
@@ -593,16 +597,16 @@ h1 em{font-style:normal;color:#8F6B17}
     var ph=520*ps;
 
     // focus: 1 = object performs in the clear, lower = pushed behind a panel's copy
-    var f=q<=.62?kf(p,[[0,1],[.24,1],[.29,.28],[.40,.28],[.44,1],[.56,1],[.59,.28],[.66,.28],[.69,1],[.80,1],[.83,.55],[.92,.55],[.96,1]])
-                :kf(q,[[.62,.55],[.64,1],[.655,1],[.672,.18],[.845,.18],[.87,1]]);
+    var f=q<=.62?kf(p,[[0,1],[.24,1],[.29,.14],[.40,.14],[.44,1],[.56,1],[.59,.14],[.66,.14],[.69,1],[.80,1],[.83,wide?.9:.18],[.92,wide?.9:.18],[.96,1]])
+                :kf(q,[[.62,wide?.9:.18],[.64,1],[.655,1],[.672,.1],[.845,.1],[.87,1]]);
     // live-preview pose: phone large beside the form
     var sp=kf(q,[[.845,0],[.875,1],[.945,1],[.968,0]]);
     obj.style.opacity=(.2+.8*f).toFixed(3);
-    obj.style.filter=f<.98?"blur("+((1-f)*3).toFixed(2)+"px)":"none";
+    obj.style.filter=f<.98?"blur("+((1-f)*6).toFixed(2)+"px)":"none";
     var fs=.93+.07*f;
 
     // card
-    var cdx=kf(p,[[.68,0],[.78,wide?-W*.13:-W*.2],[.94,wide?-W*.13:-W*.2],[.99,wide?-W*.08:0]]);
+    var cdx=kf(p,[[.68,0],[.78,wide?-W*.13:-W*.2],[.80,wide?-W*.13:-W*.2],[.83,wide?-W*.33:-W*.2],[.925,wide?-W*.33:-W*.2],[.95,wide?-W*.13:-W*.2],[.99,wide?-W*.08:0]]);
     var cdy=kf(p,[[0,wide?H*.3:H*.26],[.12,wide?H*.29:H*.25],[.24,0],[.30,H*.06],[.68,H*.06],[.78,H*.13],[.94,H*.13],[.99,wide?H*.3:H*.32]]);
     var cS=cs*fs*kf(p,[[0,.86],[.14,.86],[.22,fl],[.28,1],[.68,1],[.78,.8],[.94,.8],[.99,wide?.72:.66]]);
     var ry=kf(p,[[.15,0],[.20,180],[.235,180],[.27,360]]);
@@ -623,7 +627,7 @@ h1 em{font-style:normal;color:#8F6B17}
     floor.style.opacity=((.35+.65*flip)*(1-sp)).toFixed(3);
 
     // phone
-    var pdx=kf(p,[[.28,W*.18],[.38,W*.02],[.46,W*.01],[.69,W*.01],[.78,wide?W*.1:W*.1],[.94,wide?W*.1:W*.1],[.99,wide?W*.09:W*.12]]);
+    var pdx=kf(p,[[.28,W*.18],[.38,W*.02],[.46,W*.01],[.69,W*.01],[.78,W*.1],[.80,W*.1],[.83,wide?W*.34:W*.1],[.925,wide?W*.34:W*.1],[.95,W*.1],[.99,wide?W*.09:W*.12]]);
     var hoverY=H*.06-ph*.4, touchY=H*.06+ph*(wide?.12:.04);
     var pdy=kf(p,[[.28,-H*.9],[.38,hoverY],[.44,hoverY],[.48,touchY],[.495,touchY+10],[.52,touchY],[.69,touchY],[.78,-H*.02],[.94,-H*.02],[.99,H*.3]]);
     var prz=kf(p,[[.28,30],[.38,-12],[.69,-12],[.78,0]]);
