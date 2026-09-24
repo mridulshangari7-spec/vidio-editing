@@ -410,7 +410,7 @@ h1 em{font-style:normal;color:#8F6B17}
           <div class="url" style="align-self:stretch"><svg><use href="#lock"/></svg>upi://pay?pa=<span class="sl">yourbusiness</span>@upi</div>
           <div class="body" style="align-items:center;width:100%">
             <div class="to">Paying <b class="bn">Your Business</b></div>
-            <div class="amt">₹ 850</div>
+            <div class="amt">₹ 999</div>
             <div class="qr" data-qr="53"></div>
             <div class="to">Opens GPay, PhonePe or Paytm</div>
             <div class="pay">Pay with UPI</div>
@@ -572,6 +572,14 @@ h1 em{font-style:normal;color:#8F6B17}
   }
 
   function mix(a,b,t){return a+(b-a)*t;}
+  // right edge of the live-preview copy (text, not its block), used to place the phone
+  var tryPanel=document.getElementById("try"), rng=document.createRange();
+  function tryRight(){
+    var r=0;
+    [].forEach.call(tryPanel.querySelectorAll("h1,.sub,.eyebrow"),function(el){rng.selectNodeContents(el);r=Math.max(r,rng.getBoundingClientRect().right);});
+    r=Math.max(r,tryPanel.querySelector(".try").getBoundingClientRect().right);
+    return r;
+  }
   function scene(q,time){
     // q is page progress; p is the original 0..1 story the card and phone keyframes use
     var p=q<=.62?q/K:kf(q,[[.62,.94],[.66,.95],[.955,.95],[.99,.99]]);
@@ -603,13 +611,14 @@ h1 em{font-style:normal;color:#8F6B17}
     cdx=mix(cdx,wide?W*.26:-W*.9,sp); cdy=mix(cdy,wide?H*.22:H*.3,sp); cS=mix(cS,cs*(wide?.55:.5),sp);
     card.style.transform="translate("+(cx-200+cdx)+"px,"+(cy-120+cdy)+"px) scale("+cS+") rotateZ("+rz+"deg) rotateX("+rx+"deg) rotateY("+ry+"deg)";
     var sheen=-40+((rz+20)*4)+(ry/360)*80+p*40;
+    card.style.opacity=(1-sp).toFixed(3);
     card.style.setProperty("--sheen",sheen.toFixed(1)+"%");
     card.classList.toggle("pulse",p>.47&&p<.6);
 
     // floor shadow follows the card, pinned below it
     var flip=Math.abs(Math.cos(ry*Math.PI/180));
     floor.style.transform="translate("+(cx-200+cdx)+"px,"+(cy+cdy+105*cS)+"px) scale("+(cS*(1-.25*Math.sin(Math.PI*clamp((p-.15)/.12,0,1))))+","+cS+")";
-    floor.style.opacity=(.35+.65*flip).toFixed(3);
+    floor.style.opacity=((.35+.65*flip)*(1-sp)).toFixed(3);
 
     // phone
     var pdx=kf(p,[[.28,W*.18],[.38,W*.02],[.46,W*.01],[.69,W*.01],[.78,wide?W*.1:W*.1],[.94,wide?W*.1:W*.1],[.99,wide?W*.09:W*.12]]);
@@ -619,7 +628,16 @@ h1 em{font-style:normal;color:#8F6B17}
     var prx=kf(p,[[.3,10],[.44,26],[.69,26],[.78,0]]);
     var pS=ps*fs*kf(p,[[.38,.74],[.69,.74],[.78,1],[.94,1],[.99,.5]]);
     if(p>.78&&p<.95)pdy+=bob*.6;
-    pdx=mix(pdx,wide?W*.2:0,sp); pdy=mix(pdy,wide?0:H*.26,sp); pS=mix(pS,wide?ps:ps*.62,sp);
+    if(sp>0&&wide){
+      // sit the phone just right of the preview copy, larger, centred on it
+      var sc=Math.min(1.12,H*.74/520), px=Math.min(tryRight()+56+125*sc, W-28-125*sc);
+      pdx=mix(pdx,px-cx,sp); pdy=mix(pdy,0,sp); pS=mix(pS,sc,sp);
+    }else if(sp>0){
+      // phones: directly under the form, as large as the space allows
+      var top=tryPanel.querySelector(".try").getBoundingClientRect().bottom+22, room=H-top-64;
+      var ms=clamp(room/520,.4,.72);
+      pdx=mix(pdx,0,sp); pdy=mix(pdy,top+260*ms-cy,sp); pS=mix(pS,ms,sp);
+    }
     phone.style.transform="translate("+(cx-125+pdx)+"px,"+(cy-260+pdy)+"px) scale("+pS+") rotateZ("+prz+"deg) rotateX("+prx+"deg)";
     phone.style.opacity=kf(p,[[.28,0],[.32,1]])*(wide?1:Math.max(sp,kf(p,[[.96,1],[.98,0]])));
 
