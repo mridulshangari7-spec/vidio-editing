@@ -21,8 +21,7 @@ out='''<!DOCTYPE html>
 <link rel="canonical" href="https://growwithinfinity.github.io/">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"LocalBusiness","name":"Infinity","description":"NFC review cards that open your Google review page with one tap.",
- "url":"https://growwithinfinity.github.io/","telephone":"+91-79864-04564","email":"searchinfinity@gmail.com",
- "founder":{"@type":"Person","name":"Mridul Shingari"},
+ "url":"https://growwithinfinity.github.io/","telephone":["+91-79864-04564","+91-98771-68353","+91-98782-25225","+91-93243-87537"],"email":"searchinfinity@gmail.com",
  "address":{"@type":"PostalAddress","streetAddress":"Bindra Sateri Legacy, near Aralia Business Hotel, MIDC Central Road","addressLocality":"Andheri East, Mumbai","addressRegion":"Maharashtra","postalCode":"400093","addressCountry":"IN"},
  "image":"https://growwithinfinity.github.io/og.jpg"}
 </script>
@@ -34,12 +33,12 @@ out='''<!DOCTYPE html>
 <script>
 (function(){
   // Hosted site only: a Save contact button that downloads a vCard.
-  var vcf=["BEGIN:VCARD","VERSION:3.0","N:Shingari;Mridul;;;","FN:Mridul Shingari","ORG:Infinity","TITLE:NFC review cards",
-    "TEL;TYPE=CELL:+917986404564","EMAIL:searchinfinity@gmail.com",
+  var vcf=["BEGIN:VCARD","VERSION:3.0","N:;Infinity;;;","FN:Infinity","ORG:Infinity","TITLE:NFC review cards",
+    "TEL;TYPE=CELL:+917986404564","TEL;TYPE=CELL:+919877168353","TEL;TYPE=CELL:+919878225225","TEL;TYPE=CELL:+919324387537","EMAIL:searchinfinity@gmail.com",
     "ADR;TYPE=WORK:;;Bindra Sateri Legacy, MIDC Central Road;Andheri East, Mumbai;Maharashtra;400093;India",
     "URL:https://growwithinfinity.github.io/","END:VCARD"].join("\\r\\n");
   var sc=document.createElement("a"); sc.className="ghost"; sc.textContent="Save contact";
-  sc.setAttribute("download","Mridul-Shingari-Infinity.vcf");
+  sc.setAttribute("download","Infinity-NFC-Cards.vcf");
   sc.href="data:text/vcard;charset=utf-8,"+encodeURIComponent(vcf);
   var row=document.querySelector("#contact .cta"); if(row)row.appendChild(sc);
 })();
