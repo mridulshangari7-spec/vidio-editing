@@ -552,7 +552,7 @@ h1 em{font-style:normal;color:#7A5A10}
     [0.80*K,0.83*K,0.91*K,0.94*K],
     [0.665,0.685,0.725,0.745],
     [0.77,0.79,0.82,0.84],
-    [0.865,0.885,0.935,0.955],
+    [0.85,0.865,0.95,0.965],
     [0.97,0.99,1.10,1.20]
   ];
   var DRIFT=22; // px of counter-scroll travel per panel
@@ -599,9 +599,9 @@ h1 em{font-style:normal;color:#7A5A10}
 
     // focus: 1 = object performs in the clear, lower = pushed behind a panel's copy
     var f=q<=.62?kf(p,[[0,1],[.24,1],[.29,.14],[.40,.14],[.44,1],[.56,1],[.59,.14],[.66,.14],[.69,1],[.80,1],[.83,wide?.9:.18],[.92,wide?.9:.18],[.96,1]])
-                :kf(q,[[.62,wide?.9:.18],[.64,1],[.655,1],[.672,.1],[.845,.1],[.87,1]]);
+                :kf(q,[[.62,wide?.9:.18],[.64,1],[.655,1],[.672,.1],[.835,.1],[.86,1]]);
     // live-preview pose: phone large beside the form
-    var sp=kf(q,[[.845,0],[.875,1],[.945,1],[.968,0]]);
+    var sp=kf(q,[[.835,0],[.862,1],[.952,1],[.972,0]]);
     obj.style.opacity=(.2+.8*f).toFixed(3);
     obj.style.filter=f<.98?"blur("+((1-f)*6).toFixed(2)+"px)":"none";
     var fs=.93+.07*f;
@@ -667,13 +667,16 @@ h1 em{font-style:normal;color:#7A5A10}
   function paint(time){
     meter.style.transform="scaleX("+progress+")";
     bgmark.style.transform="translate(-50%,calc(-50% + "+((.5-sceneAt)*16).toFixed(2)+"vh)) rotate("+((sceneAt-.5)*6).toFixed(2)+"deg)";
+    var typing=document.activeElement===bizInput;
     for(var i=0;i<panels.length;i++){
       var c=CUES[i], el=panels[i];
       var enter=ramp(progress,c[0],c[1]), leave=ramp(progress,c[2],c[3]);
       var o=enter*(1-leave), y=(1-enter)*DRIFT-leave*DRIFT;
+      // while the business-name box has focus, hold the preview panel fully on screen
+      if(typing){o=el.id==="try"?1:0;y=0;}
       el.style.opacity=o;
       el.style.transform="translate3d(0,"+y+"px,0)";
-      el.style.pointerEvents=o>0.6?"auto":"none";
+      el.style.pointerEvents=o>0.35?"auto":"none";
     }
     scene(sceneAt,time);
   }
@@ -681,7 +684,7 @@ h1 em{font-style:normal;color:#7A5A10}
   // rAF loop, never cancelled. The scene eases toward the scroll position instead of
   // snapping to it, which turns a jumpy scrub into a smooth, weighted one.
   function frame(time){
-    var gap=progress-sceneAt;
+    var gap=(document.activeElement===bizInput?.91:progress)-sceneAt;
     if(Math.abs(gap)>0.0004)sceneAt+=reduce?gap:gap*0.115;
     paint(time);
     requestAnimationFrame(frame);
