@@ -357,6 +357,32 @@ h1 em{font-style:normal;color:#7A5A10}
   .sub{margin-top:12px;font-size:14px}
   .cta{margin-top:16px}
 }
+
+/* tablets and small laptops: the preview panel stacks like on phones */
+@media (max-width:899px){
+  .panel.split{align-items:center;text-align:center;justify-content:flex-start;padding:max(96px, calc(env(safe-area-inset-top, 0px) + 80px)) clamp(18px,5vw,48px) 88px}
+  .panel.split .eyebrow{justify-content:center}
+  .panel.split h1{font-size:clamp(30px,6.4vw,52px)}
+  .panel.split::before{background:radial-gradient(60% 44% at 50% 30%, rgba(242,240,236,.94) 0%, rgba(242,240,236,.7) 50%, rgba(242,240,236,0) 100%)}
+}
+@media (max-width:560px){ .foot .f-x{display:none} }
+/* phones held sideways */
+@media (max-height:520px) and (orientation:landscape){
+  .panel:not(.top) .sub,.hint,.foot{display:none}
+  .wa-fab{padding:0;width:44px;height:44px;justify-content:center}
+  .wa-fab span{display:none}
+  .chips{margin-top:10px;gap:6px}
+  .chips span{padding:5px 10px;font-size:12px}
+  .versus{margin-top:12px}
+  .versus .col{padding:10px 14px}
+  .versus ol{font-size:12px;gap:2px}
+  .new ol{font-size:17px}
+  .eyebrow{margin-bottom:8px}
+  .try{margin-top:10px;gap:6px}
+  .fake,.try .pill{height:42px}
+  .cta .pill,.cta .ghost{height:40px}
+  .panel.split{padding-top:max(64px, calc(env(safe-area-inset-top, 0px) + 52px))}
+}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -588,7 +614,7 @@ h1 em{font-style:normal;color:#7A5A10}
   </form>
 </div>
 
-<footer class="foot">Bindra Sateri Legacy, MIDC Central Road, Andheri East &nbsp;&middot;&nbsp; +91 79864 04564 &nbsp;&middot;&nbsp; searchinfinity@gmail.com</footer>
+<footer class="foot"><span><span class="f-x">Bindra Sateri Legacy, MIDC Central Road, </span>Andheri East &nbsp;&middot;&nbsp; +91 79864 04564<span class="f-x"> &nbsp;&middot;&nbsp; searchinfinity@gmail.com</span></span></footer>
 
 <a class="wa-fab" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener" aria-label="Chat with Infinity on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.5-.3z"/></svg><span>Chat with us</span></a>
 
@@ -686,6 +712,15 @@ h1 em{font-style:normal;color:#7A5A10}
     return [].slice.call(h.querySelectorAll(".ln>span")).map(function(el){return {el:el,v:-1};});
   });
 
+  // ---- where the copy ends, so the card and phone can sit in the free space below it ----
+  var heroHint=panels[0].querySelector(".hint"), endCta=document.querySelector("#contact .cta"), heroBottom=0, endBottom=0;
+  function below(el){return el.offsetTop+el.offsetHeight;}
+  function measure(){heroBottom=below(heroHint); endBottom=below(endCta);}
+  window.addEventListener("resize",measure);
+  window.addEventListener("load",measure);
+  setTimeout(measure,600); setTimeout(measure,2000);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(measure);
+
   // ---- chapter rail ----
   var chap=[].slice.call(document.querySelectorAll("#chap a")), lastChap=-1;
   function readScroll(){
@@ -712,20 +747,28 @@ h1 em{font-style:normal;color:#7A5A10}
     var cs=wide?Math.min(clamp(W/900,.95,1.5),H*.4/240):clamp(W/460,.62,.86), fl=wide?1.12:1;
     var ps=wide?Math.min(1.15,H*.68/520):Math.min(.84,H*.58/520);
     var ph=520*ps;
+    if(!heroBottom)measure();
+    // first screen: card sits under the hint line; last screen: under the contact buttons
+    var heroTop=heroBottom+14, heroRoom=H-heroTop-(wide?-40:12);
+    var heroF=Math.min(.86,heroRoom/(315*cs)), heroY=heroTop+heroRoom*.5-cy, heroVis=clamp((heroRoom-70)/60,0,1);
+    var endTop=endBottom+14, endRoom=H-endTop-(wide?6:10);
+    var endCF=Math.min(wide?.72:.66,endRoom/(300*cs)), endY=endTop+endRoom*.5-cy, endVis=clamp((endRoom-70)/60,0,1);
+    var endPS=Math.max(.2,Math.min(ps*.5,(endRoom-8)/520));
+    var vis=kf(p,[[0,heroVis],[.14,heroVis],[.2,1],[.95,1],[.99,endVis]]);
 
     // focus: 1 = object performs in the clear, lower = pushed behind a panel's copy
-    var f=q<=.62?kf(p,[[0,1],[.24,1],[.29,.14],[.40,.14],[.44,1],[.56,1],[.59,.14],[.66,.14],[.69,1],[.80,1],[.83,wide?.9:.18],[.92,wide?.9:.18],[.96,1]])
-                :kf(q,[[.62,wide?.9:.18],[.64,1],[.655,1],[.672,.1],[.835,.1],[.86,1]]);
+    var f=q<=.62?kf(p,[[0,1],[.24,1],[.29,.14],[.40,.14],[.44,1],[.56,1],[.59,.14],[.66,.14],[.69,1],[.80,1],[.83,W>=1200?.9:.22],[.92,W>=1200?.9:.22],[.96,1]])
+                :kf(q,[[.62,W>=1200?.9:.22],[.64,1],[.655,1],[.672,.1],[.835,.1],[.86,1]]);
     // live-preview pose: phone large beside the form
     var sp=kf(q,[[.835,0],[.862,1],[.952,1],[.972,0]]);
-    obj.style.opacity=(.2+.8*f).toFixed(3);
+    obj.style.opacity=(.02+.98*Math.pow(f,1.3)).toFixed(3);
     obj.style.filter=f<.98?"blur("+((1-f)*6).toFixed(2)+"px)":"none";
     var fs=.93+.07*f;
 
     // card
     var cdx=kf(p,[[.68,0],[.78,wide?-W*.13:-W*.2],[.80,wide?-W*.13:-W*.2],[.83,wide?-W*.33:-W*.2],[.925,wide?-W*.33:-W*.2],[.95,wide?-W*.13:-W*.2],[.99,wide?-W*.08:0]]);
-    var cdy=kf(p,[[0,wide?H*.3:H*.26],[.12,wide?H*.29:H*.25],[.24,0],[.30,H*.06],[.68,H*.06],[.78,H*.13],[.94,H*.13],[.99,wide?H*.3:H*.32]]);
-    var cS=cs*fs*kf(p,[[0,.86],[.14,.86],[.22,fl],[.28,1],[.68,1],[.78,.8],[.94,.8],[.99,wide?.72:.66]]);
+    var cdy=kf(p,[[0,heroY],[.12,heroY-H*.01],[.24,0],[.30,H*.06],[.68,H*.06],[.78,H*.13],[.94,H*.13],[.99,endY]]);
+    var cS=cs*fs*kf(p,[[0,heroF],[.14,heroF],[.22,fl],[.28,1],[.68,1],[.78,.8],[.94,.8],[.99,endCF]]);
     var ry=kf(p,[[.15,0],[.20,180],[.235,180],[.27,360]])+flipAt*180;
     var ie=eio(intro);
     var rx=kf(p,[[0,38],[.14,40],[.2,16],[.26,18],[.32,50],[.68,50],[.78,40],[.99,44]]);
@@ -736,7 +779,7 @@ h1 em{font-style:normal;color:#7A5A10}
     cdy+=(1-ie)*H*.32; rx+=(1-ie)*28-my*6; var ryv=ry+mx*9;
     card.style.transform="translate("+(cx-200+cdx)+"px,"+(cy-120+cdy)+"px) scale("+cS+") rotateZ("+rz+"deg) rotateX("+rx+"deg) rotateY("+ryv+"deg)";
     var sheen=-40+((rz+20)*4)+(ry/360)*80+p*40+mx*30;
-    card.style.opacity=((1-sp)*ie).toFixed(3);
+    card.style.opacity=((1-sp)*ie*vis).toFixed(3);
     // gold light blooms from the card at the moment of the tap
     var fo=kf(p,[[.465,0],[.49,1],[.58,0]]);
     flash.style.opacity=fo.toFixed(3);
@@ -747,16 +790,18 @@ h1 em{font-style:normal;color:#7A5A10}
     // floor shadow follows the card, pinned below it
     var flip=Math.abs(Math.cos(ry*Math.PI/180));
     floor.style.transform="translate("+(cx-200+cdx)+"px,"+(cy+cdy+105*cS)+"px) scale("+(cS*(1-.25*Math.sin(Math.PI*clamp((p-.15)/.12,0,1))))+","+cS+")";
-    floor.style.opacity=((.35+.65*flip)*(1-sp)*ie).toFixed(3);
+    floor.style.opacity=((.35+.65*flip)*(1-sp)*ie*vis).toFixed(3);
 
     // phone
     var pdx=kf(p,[[.28,W*.18],[.38,W*.02],[.46,W*.01],[.69,W*.01],[.78,W*.1],[.80,W*.1],[.83,wide?W*.34:W*.1],[.925,wide?W*.34:W*.1],[.95,W*.1],[.99,wide?W*.09:W*.12]]);
     var hoverY=H*.06-ph*.4, touchY=H*.06+ph*(wide?.12:.04);
-    var pdy=kf(p,[[.28,-H*.9],[.38,hoverY],[.44,hoverY],[.48,touchY],[.495,touchY+10],[.52,touchY],[.69,touchY],[.78,-H*.02],[.94,-H*.02],[.99,H*.3]]);
+    var pdy=kf(p,[[.28,-H*.9],[.38,hoverY],[.44,hoverY],[.48,touchY],[.495,touchY+10],[.52,touchY],[.69,touchY],[.78,-H*.02],[.94,-H*.02],[.99,endY]]);
     var prz=kf(p,[[.28,30],[.38,-12],[.69,-12],[.78,0]]);
     var prx=kf(p,[[.3,10],[.44,26],[.69,26],[.78,0]]);
-    var pS=ps*fs*kf(p,[[.38,.74],[.69,.74],[.78,1],[.94,1],[.99,.5]]);
+    var pS=ps*fs*kf(p,[[.38,.74],[.69,.74],[.78,1],[.94,1],[.99,endPS/ps]]);
     if(p>.78&&p<.95)pdy+=bob*.6;
+    if(wide)pdx=Math.min(pdx,W/2-86-125*pS);
+    var tryVis=1;
     if(sp>0&&wide){
       // sit the phone just right of the preview copy, larger, centred on it
       var sc=Math.min(1.12,H*.74/520), px=Math.min(tryRight()+56+125*sc, W-28-125*sc);
@@ -764,11 +809,11 @@ h1 em{font-style:normal;color:#7A5A10}
     }else if(sp>0){
       // phones: directly under the form, as large as the space allows
       var top=tryPanel.querySelector(".try").getBoundingClientRect().bottom+22, room=H-top-64;
-      var ms=clamp(room/520,.4,.72);
+      var ms=clamp(room/520,.4,.72); tryVis=clamp((room-190)/80,0,1);
       pdx=mix(pdx,0,sp); pdy=mix(pdy,top+260*ms-cy,sp); pS=mix(pS,ms,sp);
     }
     phone.style.transform="translate("+(cx-125+pdx)+"px,"+(cy-260+pdy)+"px) scale("+pS+") rotateZ("+prz+"deg) rotateX("+(prx-my*4)+"deg) rotateY("+(mx*10)+"deg)";
-    phone.style.opacity=kf(p,[[.28,0],[.32,1]])*(wide?1:Math.max(sp,kf(p,[[.96,1],[.98,0]])));
+    phone.style.opacity=kf(p,[[.28,0],[.32,1]])*(wide?kf(p,[[.95,1],[.99,endVis]]):Math.max(sp*tryVis,kf(p,[[.96,1],[.98,0]])));
 
     // what the phone shows
     var s="lock";
@@ -859,6 +904,7 @@ h1 em{font-style:normal;color:#7A5A10}
     bizInput.focus(); // inside the tap handler, so phones open the keyboard
   }
   function closeSheet(){
+    setTimeout(measure,50);
     sheet.hidden=true;
     document.documentElement.style.overflow="";
     var v=bizInput.value.trim();
@@ -870,6 +916,19 @@ h1 em{font-style:normal;color:#7A5A10}
   document.getElementById("tryForm").addEventListener("submit",function(e){e.preventDefault();closeSheet();});
   sheet.addEventListener("click",function(e){if(e.target===sheet)closeSheet();});
   document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!sheet.hidden)closeSheet();});
+
+  // keyboard: arrows, Page keys and Space step between chapters
+  window.addEventListener("keydown",function(e){
+    if(isTyping()||e.altKey||e.ctrlKey||e.metaKey||/^(INPUT|TEXTAREA|BUTTON|A)$/.test((e.target.tagName||"")))return;
+    var dir=({ArrowDown:1,PageDown:1," ":e.shiftKey?-1:1,ArrowUp:-1,PageUp:-1})[e.key];
+    if(!dir)return;
+    e.preventDefault();
+    var pts=chap.map(function(a){return parseFloat(a.dataset.go);}), cur=progress, next=cur;
+    if(dir>0){for(var i=0;i<pts.length;i++)if(pts[i]>cur+.01){next=pts[i];break;}}
+    else{for(var j=pts.length-1;j>=0;j--)if(pts[j]<cur-.01){next=pts[j];break;}}
+    var max=document.documentElement.scrollHeight-window.innerHeight;
+    window.scrollTo({top:next*max,behavior:reduce?"auto":"smooth"});
+  });
 
   // nav links jump to a point on the timeline
   [].forEach.call(document.querySelectorAll("[data-go]"),function(a){
