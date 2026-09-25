@@ -40,7 +40,6 @@ out='''<!DOCTYPE html>
     "URL:https://growwithinfinity.github.io/","END:VCARD"].join("\\r\\n");
   var sc=document.createElement("a"); sc.className="ghost"; sc.textContent="Save contact";
   sc.setAttribute("download","Mridul-Shingari-Infinity.vcf");
-  sc.setAttribute("data-i18n","c.save");
   sc.href="data:text/vcard;charset=utf-8,"+encodeURIComponent(vcf);
   var row=document.querySelector("#contact .cta"); if(row)row.appendChild(sc);
 })();

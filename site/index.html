@@ -319,15 +319,6 @@ h1 em{font-style:normal;color:#7A5A10}
 .faq div{background:rgba(251,250,247,.86);border:1px solid var(--rule);border-radius:18px;padding:16px 18px}
 .faq dt{font-size:15.5px;font-weight:500;letter-spacing:-.01em;margin-bottom:4px}
 .faq dd{margin:0;font-size:14px;line-height:1.45;color:var(--fg-soft)}
-/* language switch */
-.lang{height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--rule);background:rgba(242,240,236,.6);color:var(--fg);
-  font:500 13px/1 'Inter Tight','Noto Sans Devanagari',sans-serif;cursor:pointer;transition:border-color .3s var(--ease)}
-.lang:hover,.lang:focus-visible{border-color:var(--fg)}
-.lang:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
-html[lang="hi"] body{font-family:'Inter Tight','Noto Sans Devanagari','Helvetica Neue',Helvetica,Arial,sans-serif}
-html[lang="hi"] h1{letter-spacing:0;line-height:1.14}
-html[lang="hi"] .ln{padding-block:.1em .2em;margin-block:-.1em -.2em}
-html[lang="hi"] .eyebrow,html[lang="hi"] .vh,html[lang="hi"] .try .lbl,html[lang="hi"] .sheet-card label,html[lang="hi"] .mini-cap{letter-spacing:0}
 /* floating chat */
 .wa-fab{position:fixed;z-index:45;right:clamp(14px,2.4vw,28px);bottom:max(20px, calc(env(safe-area-inset-bottom, 0px) + 16px));
   display:inline-flex;align-items:center;gap:9px;height:48px;padding:0 18px 0 14px;border-radius:999px;background:#0a0908;color:#fff;
@@ -370,7 +361,6 @@ html[lang="hi"] .eyebrow,html[lang="hi"] .vh,html[lang="hi"] .try .lbl,html[lang
   .faq dt{font-size:14.5px}
   .faq dd{font-size:13px}
   .calc{padding:14px 16px;gap:10px}
-  .lang{height:34px;padding:0 11px;font-size:12.5px}
   .chips span{font-size:12px;padding:7px 11px}
 }
 @media (max-width:420px){
@@ -565,120 +555,119 @@ html[lang="hi"] .eyebrow,html[lang="hi"] .vh,html[lang="hi"] .try .lbl,html[lang
 <header class="chrome">
   <a class="mark" href="#top" data-go="0"><svg class="mark-star" viewBox="-6 -6 252 93.5" aria-hidden="true"><use href="#inf"/></svg><span class="mark-word">INFINITY</span></a>
   <nav class="nav" aria-label="Sections">
-    <a data-i18n="nav.how" href="#tap" data-go="0.23">How it works</a>
-    <a data-i18n="nav.links" href="#links" data-go="0.57">Links</a>
-    <a href="#try" data-go="0.953" data-i18n="nav.try">Try it</a>
-    <a href="#contact" data-go="1" data-i18n="nav.contact">Contact</a>
-    <button type="button" class="lang" id="lang" aria-label="हिंदी में देखें">हिंदी</button>
-    <a class="pill" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener"><span data-i18n="nav.order">Order a card</span></a>
+    <a href="#tap" data-go="0.23">How it works</a>
+    <a href="#links" data-go="0.57">Links</a>
+    <a href="#try" data-go="0.953">Try it</a>
+    <a href="#contact" data-go="1">Contact</a>
+    <a class="pill" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener">Order a card</a>
   </nav>
 </header>
 
 <main class="panels" id="top">
   <section class="panel top" data-panel>
-    <p data-i18n="hero.eb" class="eyebrow">NFC review cards <span class="dot"></span> Andheri East, Mumbai</p>
-    <h1 data-i18n="hero.h">Tap once.<br>Get the <em>review.</em></h1>
-    <p data-i18n="hero.sub" class="sub">One card on your counter sends every happy customer straight to your Google review page.</p>
-    <div class="cta"><a class="pill" href="#tap" data-go="0.23" data-i18n="hero.cta">See how it works</a></div>
-    <p class="hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V11m0-.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-.5a6 6 0 0 1-4.9-2.5L4.8 14a1.5 1.5 0 0 1 2.4-1.8L9 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="hero.hint">Tap the card to flip it</span></p>
+    <p class="eyebrow">NFC review cards <span class="dot"></span> Andheri East, Mumbai</p>
+    <h1>Tap once.<br>Get the <em>review.</em></h1>
+    <p class="sub">One card on your counter sends every happy customer straight to your Google review page.</p>
+    <div class="cta"><a class="pill" href="#tap" data-go="0.23">See how it works</a></div>
+    <p class="hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V11m0-.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-.5a6 6 0 0 1-4.9-2.5L4.8 14a1.5 1.5 0 0 1 2.4-1.8L9 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tap the card to flip it</span></p>
   </section>
   <section class="panel" data-panel id="tap">
-    <p data-i18n="tap.eb" class="eyebrow">Step one <span class="dot"></span> Tap</p>
-    <h1 data-i18n="tap.h">Hold any phone near the card.</h1>
-    <p data-i18n="tap.sub" class="sub">A thin NFC chip inside wakes up on contact. No app to install, no battery, nothing to charge.</p>
+    <p class="eyebrow">Step one <span class="dot"></span> Tap</p>
+    <h1>Hold any phone near the card.</h1>
+    <p class="sub">A thin NFC chip inside wakes up on contact. No app to install, no battery, nothing to charge.</p>
   </section>
   <section class="panel" data-panel id="open">
-    <p data-i18n="open.eb" class="eyebrow">Step two <span class="dot"></span> Open</p>
-    <h1 data-i18n="open.h">The review page opens by itself.</h1>
-    <p data-i18n="open.sub" class="sub">Your customer lands on the review box with the stars ready. Most finish in under a minute.</p>
+    <p class="eyebrow">Step two <span class="dot"></span> Open</p>
+    <h1>The review page opens by itself.</h1>
+    <p class="sub">Your customer lands on the review box with the stars ready. Most finish in under a minute.</p>
   </section>
   <section class="panel" data-panel id="links">
-    <p data-i18n="links.eb" class="eyebrow">Step three <span class="dot"></span> Choose</p>
-    <h1 data-i18n="links.h">Any link<br><em>you choose.</em></h1>
+    <p class="eyebrow">Step three <span class="dot"></span> Choose</p>
+    <h1>Any link<br><em>you choose.</em></h1>
     <div class="chips" id="chips"><span data-c="review">Google reviews</span><span data-c="ig">Instagram</span><span data-c="wa">WhatsApp</span><span data-c="menu">Menu</span><span data-c="upi">UPI payments</span><span>Website</span></div>
   </section>
   <section class="panel" data-panel id="why">
-    <p data-i18n="why.eb" class="eyebrow">Why it works <span class="dot"></span> Fewer steps, more reviews</p>
-    <h1 data-i18n="why.h">Five steps become <em>one tap.</em></h1>
+    <p class="eyebrow">Why it works <span class="dot"></span> Fewer steps, more reviews</p>
+    <h1>Five steps become <em>one tap.</em></h1>
     <div class="versus">
-      <div class="col old"><p data-i18n="why.oldh" class="vh">Asking for a review</p>
-        <ol data-i18n="why.oldl"><li>Open Google Maps</li><li>Search your business name</li><li>Pick the right listing</li><li>Scroll to reviews</li><li>Tap “Write a review”</li></ol></div>
-      <div class="col new"><p data-i18n="why.newh" class="vh">With an Infinity card</p>
-        <ol data-i18n="why.newl"><li>Tap the card</li></ol><p data-i18n="why.done" class="done">The review box is already open.</p></div>
+      <div class="col old"><p class="vh">Asking for a review</p>
+        <ol><li>Open Google Maps</li><li>Search your business name</li><li>Pick the right listing</li><li>Scroll to reviews</li><li>Tap “Write a review”</li></ol></div>
+      <div class="col new"><p class="vh">With an Infinity card</p>
+        <ol><li>Tap the card</li></ol><p class="done">The review box is already open.</p></div>
     </div>
   </section>
   <section class="panel" data-panel id="who">
-    <p data-i18n="who.eb" class="eyebrow">Made for your counter</p>
-    <h1 data-i18n="who.h">For every place customers <em>love to review.</em></h1>
-    <div data-i18n="who.chips" class="chips static"><span>Restaurants &amp; cafés</span><span>Salons &amp; spas</span><span>Clinics &amp; dentists</span><span>Gyms &amp; studios</span><span>Hotels &amp; homestays</span><span>Retail shops</span><span>Car care</span><span>Coaching classes</span></div>
-    <p data-i18n="who.sub" class="sub">Place it where people pay, wait or say goodbye: the billing desk, the table, the reception.</p>
+    <p class="eyebrow">Made for your counter</p>
+    <h1>For every place customers <em>love to review.</em></h1>
+    <div class="chips static"><span>Restaurants &amp; cafés</span><span>Salons &amp; spas</span><span>Clinics &amp; dentists</span><span>Gyms &amp; studios</span><span>Hotels &amp; homestays</span><span>Retail shops</span><span>Car care</span><span>Coaching classes</span></div>
+    <p class="sub">Place it where people pay, wait or say goodbye: the billing desk, the table, the reception.</p>
   </section>
   <section class="panel" data-panel id="calc">
-    <p class="eyebrow" data-i18n="calc.eb">Your numbers <span class="dot"></span> Estimate</p>
-    <h1 data-i18n="calc.h">How many reviews <em>could you get?</em></h1>
+    <p class="eyebrow">Your numbers <span class="dot"></span> Estimate</p>
+    <h1>How many reviews <em>could you get?</em></h1>
     <div class="calc">
-      <div class="row"><label for="cDay" data-i18n="calc.day">Customers per day</label><output id="oDay" for="cDay">80</output>
+      <div class="row"><label for="cDay">Customers per day</label><output id="oDay" for="cDay">80</output>
         <input type="range" id="cDay" min="10" max="500" step="10" value="80"></div>
-      <div class="row"><label for="cRate" data-i18n="calc.rate">How many will tap the card</label><output id="oRate" for="cRate">3%</output>
+      <div class="row"><label for="cRate">How many will tap the card</label><output id="oRate" for="cRate">3%</output>
         <input type="range" id="cRate" min="1" max="20" step="1" value="3"></div>
-      <div class="res"><b id="oRes">72</b><span data-i18n="calc.res">new reviews a month</span></div>
-      <p class="note" data-i18n="calc.note">An estimate from your own numbers. Move the sliders to match your shop.</p>
+      <div class="res"><b id="oRes">72</b><span>new reviews a month</span></div>
+      <p class="note">An estimate from your own numbers. Move the sliders to match your shop.</p>
     </div>
   </section>
   <section class="panel" data-panel id="faq">
-    <p class="eyebrow" data-i18n="faq.eb">Questions</p>
-    <h1 data-i18n="faq.h">Good <em>to know.</em></h1>
+    <p class="eyebrow">Questions</p>
+    <h1>Good <em>to know.</em></h1>
     <dl class="faq">
-      <div><dt data-i18n="faq.q1">Do customers need an app?</dt><dd data-i18n="faq.a1">No. The phone’s built-in NFC reader opens your link.</dd></div>
-      <div><dt data-i18n="faq.q2">What if a phone can’t tap?</dt><dd data-i18n="faq.a2">They scan the QR code printed on the same card.</dd></div>
-      <div><dt data-i18n="faq.q3">Which phones work?</dt><dd data-i18n="faq.a3">iPhone XS or newer, and Android phones with NFC turned on.</dd></div>
-      <div><dt data-i18n="faq.q4">Can it open something else?</dt><dd data-i18n="faq.a4">Yes. Reviews, Instagram, WhatsApp, a menu, a payment page or your website.</dd></div>
+      <div><dt>Do customers need an app?</dt><dd>No. The phone’s built-in NFC reader opens your link.</dd></div>
+      <div><dt>What if a phone can’t tap?</dt><dd>They scan the QR code printed on the same card.</dd></div>
+      <div><dt>Which phones work?</dt><dd>iPhone XS or newer, and Android phones with NFC turned on.</dd></div>
+      <div><dt>Can it open something else?</dt><dd>Yes. Reviews, Instagram, WhatsApp, a menu, a payment page or your website.</dd></div>
     </dl>
   </section>
   <section class="panel split" data-panel id="try">
-    <p data-i18n="try.eb" class="eyebrow">Try it <span class="dot"></span> Live preview</p>
-    <h1 data-i18n="try.h">See your name on <em>their screen.</em></h1>
-    <p data-i18n="try.sub" class="sub">Type your business name. This is what your customers see after one tap.</p>
+    <p class="eyebrow">Try it <span class="dot"></span> Live preview</p>
+    <h1>See your name on <em>their screen.</em></h1>
+    <p class="sub">Type your business name. This is what your customers see after one tap.</p>
     <div class="try">
-      <span data-i18n="try.lbl" class="lbl">Business name</span>
+      <span class="lbl">Business name</span>
       <button type="button" class="fake" id="openTry"><span id="fakeText">Tap to type your business name</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button>
-      <a class="pill" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener" data-i18n="try.cta">Get cards for this business</a>
+      <a class="pill" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener">Get cards for this business</a>
     </div>
   </section>
   <section class="panel top" data-panel id="contact">
-    <p data-i18n="c.eb" class="eyebrow">Mridul Shingari <span class="dot"></span> Infinity</p>
-    <h1 data-i18n="c.h">Put Infinity on <em>your counter.</em></h1>
-    <p data-i18n="c.sub" class="sub">Tell us your business and the link you want. We set up the cards and help you place them where customers pay.</p>
+    <p class="eyebrow">Mridul Shingari <span class="dot"></span> Infinity</p>
+    <h1>Put Infinity on <em>your counter.</em></h1>
+    <p class="sub">Tell us your business and the link you want. We set up the cards and help you place them where customers pay.</p>
     <div class="cta">
-      <a class="pill" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener" data-i18n="c.wa">Order on WhatsApp</a>
+      <a class="pill" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener">Order on WhatsApp</a>
       <a class="ghost" href="tel:+917986404564">+91 79864 04564</a>
-      <a class="ghost" href="mailto:searchinfinity@gmail.com" title="searchinfinity@gmail.com" data-i18n="c.mail">Email us</a>
-      <a class="ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Bindra%20Sateri%20Legacy%2C%20MIDC%20Central%20Road%2C%20Andheri%20East%2C%20Mumbai%20400093" target="_blank" rel="noopener" data-i18n="c.dir">Get directions</a>
+      <a class="ghost" href="mailto:searchinfinity@gmail.com" title="searchinfinity@gmail.com">Email us</a>
+      <a class="ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Bindra%20Sateri%20Legacy%2C%20MIDC%20Central%20Road%2C%20Andheri%20East%2C%20Mumbai%20400093" target="_blank" rel="noopener">Get directions</a>
     </div>
   </section>
 </main>
 
 <div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
   <form class="sheet-card" id="tryForm" autocomplete="off">
-    <p data-i18n="sh.t" class="sheet-title" id="sheetTitle">See your name on their screen</p>
-    <label data-i18n="sh.l" for="bizName">Business name</label>
+    <p class="sheet-title" id="sheetTitle">See your name on their screen</p>
+    <label for="bizName">Business name</label>
     <input id="bizName" name="bizName" type="text" maxlength="32" placeholder="e.g. Chai Point Andheri" enterkeyhint="done" autocapitalize="words">
-    <p data-i18n="sh.cap" class="mini-cap">Your customers will see</p>
+    <p class="mini-cap">Your customers will see</p>
     <div class="mini">
       <div class="av">Y</div>
       <div class="mini-t"><b class="bn">Your Business</b><span>How was your visit?</span>
         <i><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></i></div>
     </div>
     <div class="sheet-row">
-      <button type="submit" class="ghost" data-i18n="sh.done">Done</button>
-      <a class="pill" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener" data-i18n="sh.wa">Get cards on WhatsApp</a>
+      <button type="submit" class="ghost">Done</button>
+      <a class="pill" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener">Get cards on WhatsApp</a>
     </div>
   </form>
 </div>
 
 <footer class="foot"><span><span class="f-x">Bindra Sateri Legacy, MIDC Central Road, </span>Andheri East &nbsp;&middot;&nbsp; +91 79864 04564<span class="f-x"> &nbsp;&middot;&nbsp; searchinfinity@gmail.com</span></span></footer>
 
-<a class="wa-fab" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener" aria-label="Chat with Infinity on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.5-.3z"/></svg><span data-i18n="fab">Chat with us</span></a>
+<a class="wa-fab" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener" aria-label="Chat with Infinity on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.5-.3z"/></svg><span>Chat with us</span></a>
 
 <div class="track"></div>
 
@@ -778,45 +767,6 @@ html[lang="hi"] .eyebrow,html[lang="hi"] .vh,html[lang="hi"] .try .lbl,html[lang
   }
   cDay.addEventListener("input",calc); cRate.addEventListener("input",calc); calc();
 
-  // ---- English / Hindi ----
-  var HI={
-    "nav.how":"कैसे काम करता है","nav.links":"लिंक","nav.try":"आज़माएँ","nav.contact":"संपर्क","nav.order":"कार्ड मँगवाएँ",
-    "hero.eb":'NFC रिव्यू कार्ड <span class="dot"></span> अंधेरी ईस्ट, मुंबई',
-    "hero.h":'बस एक टैप।<br><em>रिव्यू पक्का।</em>',
-    "hero.sub":"काउंटर पर रखा एक कार्ड हर खुश ग्राहक को सीधे आपके Google रिव्यू पेज पर ले जाता है।",
-    "hero.cta":"देखें कैसे काम करता है","hero.hint":"कार्ड पर टैप करें, वह पलट जाएगा",
-    "tap.eb":'पहला कदम <span class="dot"></span> टैप',"tap.h":"कोई भी फ़ोन कार्ड के पास लाएँ।",
-    "tap.sub":"कार्ड के अंदर की पतली NFC चिप छूते ही जाग जाती है। न ऐप, न बैटरी, न चार्जिंग।",
-    "open.eb":'दूसरा कदम <span class="dot"></span> पेज खुलता है',"open.h":"रिव्यू पेज अपने आप खुल जाता है।",
-    "open.sub":"ग्राहक सीधे रिव्यू बॉक्स पर पहुँचता है, स्टार तैयार। ज़्यादातर लोग एक मिनट से कम में लिख देते हैं।",
-    "links.eb":'तीसरा कदम <span class="dot"></span> चुनें',"links.h":'जो लिंक<br><em>आप चाहें।</em>',
-    "why.eb":'यह क्यों काम करता है <span class="dot"></span> कम कदम, ज़्यादा रिव्यू',"why.h":'पाँच कदम, अब <em>सिर्फ़ एक टैप।</em>',
-    "why.oldh":"रिव्यू माँगने पर","why.oldl":"<li>Google Maps खोलें</li><li>दुकान का नाम खोजें</li><li>सही लिस्टिंग चुनें</li><li>रिव्यू तक स्क्रॉल करें</li><li>“Write a review” दबाएँ</li>",
-    "why.newh":"Infinity कार्ड के साथ","why.newl":"<li>कार्ड पर टैप करें</li>","why.done":"रिव्यू बॉक्स पहले से खुला मिलता है।",
-    "who.eb":"आपके काउंटर के लिए","who.h":'हर वो जगह जहाँ ग्राहक <em>रिव्यू देना पसंद करते हैं।</em>',
-    "who.chips":"<span>रेस्टोरेंट और कैफ़े</span><span>सैलून और स्पा</span><span>क्लिनिक और डेंटिस्ट</span><span>जिम और स्टूडियो</span><span>होटल और होमस्टे</span><span>रिटेल दुकानें</span><span>कार केयर</span><span>कोचिंग क्लास</span>",
-    "who.sub":"इसे वहाँ रखें जहाँ लोग पेमेंट करते हैं, इंतज़ार करते हैं या विदा लेते हैं: बिलिंग डेस्क, टेबल, रिसेप्शन।",
-    "calc.eb":'आपका हिसाब <span class="dot"></span> अनुमान',"calc.h":'आपको कितने <em>रिव्यू मिल सकते हैं?</em>',
-    "calc.day":"रोज़ के ग्राहक","calc.rate":"कितने प्रतिशत कार्ड पर टैप करेंगे","calc.res":"नए रिव्यू हर महीने",
-    "calc.note":"यह आपके अपने नंबरों से बना अनुमान है। स्लाइडर अपनी दुकान के हिसाब से बदलें।",
-    "faq.eb":"सवाल-जवाब","faq.h":'<em>जानने लायक</em> बातें।',
-    "faq.q1":"क्या ग्राहक को ऐप चाहिए?","faq.a1":"नहीं। फ़ोन का अपना NFC रीडर आपका लिंक खोल देता है।",
-    "faq.q2":"अगर फ़ोन टैप न कर पाए?","faq.a2":"वे उसी कार्ड पर छपा QR कोड स्कैन कर लेते हैं।",
-    "faq.q3":"कौन से फ़ोन चलते हैं?","faq.a3":"iPhone XS या नया, और वे Android फ़ोन जिनमें NFC चालू हो।",
-    "faq.q4":"क्या कोई और लिंक खुल सकता है?","faq.a4":"हाँ। रिव्यू, Instagram, WhatsApp, मेन्यू, पेमेंट पेज या आपकी वेबसाइट।",
-    "try.eb":'आज़माएँ <span class="dot"></span> लाइव प्रीव्यू',"try.h":'ग्राहक की स्क्रीन पर <em>आपका नाम।</em>',
-    "try.sub":"अपनी दुकान का नाम लिखें। एक टैप के बाद ग्राहक यही देखेंगे।","try.lbl":"दुकान का नाम","try.cta":"इस दुकान के लिए कार्ड लें",
-    "c.eb":'Mridul Shingari <span class="dot"></span> Infinity',"c.h":'Infinity को लाएँ <em>अपने काउंटर पर।</em>',
-    "c.sub":"हमें अपनी दुकान और लिंक बताइए। हम कार्ड तैयार करेंगे और सही जगह रखने में मदद करेंगे।",
-    "c.wa":"WhatsApp पर ऑर्डर करें","c.mail":"ईमेल करें","c.dir":"रास्ता देखें","c.save":"कॉन्टैक्ट सेव करें",
-    "sh.t":"ग्राहक की स्क्रीन पर आपका नाम","sh.l":"दुकान का नाम","sh.cap":"ग्राहक यह देखेंगे","sh.done":"हो गया","sh.wa":"WhatsApp पर कार्ड मँगवाएँ",
-    "fab":"हमसे बात करें"
-  };
-  var EN={}, lang="en";
-  function i18nNodes(){return [].slice.call(document.querySelectorAll("[data-i18n]"));}
-  i18nNodes().forEach(function(n){EN[n.dataset.i18n]=n.innerHTML;});
-  var FAKE_EN="Tap to type your business name", FAKE_HI="यहाँ टैप करके नाम लिखें";
-
   // ---- headline lines, split on <br> ----
   function buildHeads(){ return panels.map(function(p){
     var h=p.querySelector("h1"); if(!h)return [];
@@ -825,28 +775,6 @@ html[lang="hi"] .eyebrow,html[lang="hi"] .vh,html[lang="hi"] .try .lbl,html[lang
   });}
   var heads=buildHeads();
 
-  function setLang(l){
-    lang=l;
-    i18nNodes().forEach(function(n){
-      var k=n.dataset.i18n;
-      if(!(k in EN))EN[k]=n.innerHTML; // nodes added later (the hosted Save contact button)
-      n.innerHTML=(l==="hi"&&HI[k]!=null)?HI[k]:EN[k];
-    });
-    heads=buildHeads();
-    document.documentElement.lang=l;
-    var lb=document.getElementById("lang");
-    lb.textContent=l==="hi"?"English":"हिंदी";
-    lb.setAttribute("aria-label",l==="hi"?"View in English":"हिंदी में देखें");
-    if(!bizInput.value.trim())document.getElementById("fakeText").textContent=l==="hi"?FAKE_HI:FAKE_EN;
-    if(l==="hi"&&!document.getElementById("devaFont")){
-      var lk=document.createElement("link"); lk.id="devaFont"; lk.rel="stylesheet";
-      lk.href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500&display=swap";
-      document.head.appendChild(lk);
-    }
-    try{localStorage.setItem("infinity-lang",l);}catch(e){}
-    setTimeout(measure,60); setTimeout(measure,700);
-  }
-  document.getElementById("lang").addEventListener("click",function(){setLang(lang==="hi"?"en":"hi");});
 
   // ---- where the copy ends, so the card and phone can sit in the free space below it ----
   var heroHint=panels[0].querySelector(".hint"), endCta=document.querySelector("#contact .cta"), heroBottom=0, endBottom=0;
@@ -1044,7 +972,7 @@ html[lang="hi"] .eyebrow,html[lang="hi"] .vh,html[lang="hi"] .try .lbl,html[lang
     sheet.hidden=true;
     document.documentElement.style.overflow="";
     var v=bizInput.value.trim();
-    fakeText.textContent=v||(lang==="hi"?FAKE_HI:FAKE_EN);
+    fakeText.textContent=v||"Tap to type your business name";
     openTry.classList.toggle("has",!!v);
     openTry.focus({preventScroll:true});
   }
@@ -1075,7 +1003,6 @@ html[lang="hi"] .eyebrow,html[lang="hi"] .vh,html[lang="hi"] .try .lbl,html[lang
     });
   });
 
-  try{if(localStorage.getItem("infinity-lang")==="hi")setTimeout(function(){setLang("hi");},0);}catch(e){}
   window.addEventListener("scroll",readScroll,{passive:true});
   window.addEventListener("resize",readScroll);
 
