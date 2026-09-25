@@ -566,7 +566,6 @@ h1 em{font-style:normal;color:#7A5A10}
       <a class="ghost" href="tel:+917986404564">+91 79864 04564</a>
       <a class="ghost" href="mailto:searchinfinity@gmail.com" title="searchinfinity@gmail.com">Email us</a>
       <a class="ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Bindra%20Sateri%20Legacy%2C%20MIDC%20Central%20Road%2C%20Andheri%20East%2C%20Mumbai%20400093" target="_blank" rel="noopener">Get directions</a>
-      <a class="ghost" id="saveContact" hidden download="Mridul-Shingari-Infinity.vcf" href="#contact">Save contact</a>
     </div>
   </section>
 </main>
@@ -858,8 +857,11 @@ h1 em{font-style:normal;color:#7A5A10}
       "TEL;TYPE=CELL:+917986404564","EMAIL:searchinfinity@gmail.com",
       "ADR;TYPE=WORK:;;Bindra Sateri Legacy, MIDC Central Road;Andheri East, Mumbai;Maharashtra;400093;India",
       "URL:https://growwithinfinity.github.io/","END:VCARD"].join("\r\n");
-    var sc=document.getElementById("saveContact");
-    sc.href="data:text/vcard;charset=utf-8,"+encodeURIComponent(vcf); sc.hidden=false;
+    // added only on the hosted site, where the browser can save the file
+    var sc=document.createElement("a"); sc.className="ghost"; sc.textContent="Save contact";
+    sc.setAttribute("download","Mridul-Shingari-Infinity.vcf");
+    sc.href="data:text/vcard;charset=utf-8,"+encodeURIComponent(vcf);
+    document.querySelector("#contact .cta").appendChild(sc);
   }
   var sheet=document.getElementById("sheet"), openTry=document.getElementById("openTry"), fakeText=document.getElementById("fakeText");
   function openSheet(){
