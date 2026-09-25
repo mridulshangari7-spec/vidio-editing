@@ -31,6 +31,19 @@ out='''<!DOCTYPE html>
 </head>
 <body>
 '''+body.strip()+'''
+<script>
+(function(){
+  // Hosted site only: a Save contact button that downloads a vCard.
+  var vcf=["BEGIN:VCARD","VERSION:3.0","N:Shingari;Mridul;;;","FN:Mridul Shingari","ORG:Infinity","TITLE:NFC review cards",
+    "TEL;TYPE=CELL:+917986404564","EMAIL:searchinfinity@gmail.com",
+    "ADR;TYPE=WORK:;;Bindra Sateri Legacy, MIDC Central Road;Andheri East, Mumbai;Maharashtra;400093;India",
+    "URL:https://growwithinfinity.github.io/","END:VCARD"].join("\\r\\n");
+  var sc=document.createElement("a"); sc.className="ghost"; sc.textContent="Save contact";
+  sc.setAttribute("download","Mridul-Shingari-Infinity.vcf");
+  sc.href="data:text/vcard;charset=utf-8,"+encodeURIComponent(vcf);
+  var row=document.querySelector("#contact .cta"); if(row)row.appendChild(sc);
+})();
+</script>
 </body>
 </html>
 '''
