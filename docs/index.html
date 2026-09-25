@@ -26,6 +26,7 @@
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
 html{-webkit-text-size-adjust:100%}
+[hidden]{display:none!important}
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:var(--shade);color:var(--fg);font-family:var(--sans);font-weight:400;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
@@ -257,6 +258,32 @@ h1 em{font-style:normal;color:#7A5A10}
 .try input{height:52px;border-radius:999px;border:1px solid var(--rule);background:rgba(255,255,255,.8);padding:0 22px;
   font:400 16px/1 var(--sans);color:var(--fg);outline:none;transition:border-color .3s var(--ease)}
 .try input:focus{border-color:var(--fg)}
+.try .lbl{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-soft)}
+.fake{height:52px;border-radius:999px;border:1px solid var(--rule);background:rgba(255,255,255,.85);padding:0 18px 0 22px;cursor:text;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;font:400 16px/1 var(--sans);color:var(--fg-faint);text-align:left;width:100%}
+.fake.has{color:var(--fg)}
+.fake svg{width:18px;height:18px;flex:none;color:var(--fg-soft)}
+.fake:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+/* typing sheet: sits above the scroll scene so the keyboard and scrolling cannot move it */
+.sheet{position:fixed;inset:0;z-index:95;display:flex;justify-content:center;align-items:flex-start;
+  padding:max(72px, calc(env(safe-area-inset-top, 0px) + 56px)) 16px 24px;background:rgba(242,240,236,.86);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);overflow-y:auto}
+.sheet-card{width:min(440px,100%);background:#fbfaf7;border:1px solid var(--rule);border-radius:24px;padding:24px;display:grid;gap:10px;
+  box-shadow:0 30px 60px -30px rgba(20,14,4,.35)}
+.sheet-title{font-size:22px;font-weight:500;letter-spacing:-.02em;margin-bottom:6px}
+.sheet-card label,.mini-cap{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-soft)}
+.sheet-card input{height:54px;border-radius:14px;border:1px solid var(--fg);background:#fff;padding:0 18px;font:400 17px/1 var(--sans);color:var(--fg);outline:none;width:100%}
+.mini-cap{margin-top:10px}
+.mini{display:flex;gap:12px;align-items:center;border:1px solid var(--rule);border-radius:16px;padding:14px;background:#fff}
+.mini .av{width:42px;height:42px;font-size:16px}
+.mini-t{display:grid;gap:3px;min-width:0}
+.mini-t b{font-size:15px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mini-t span{font-size:12px;color:var(--fg-soft)}
+.mini-t i{display:flex;gap:3px}
+.mini-t i svg{width:16px;height:16px;fill:#E8A91B}
+.sheet-row{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+.sheet-row .ghost{height:48px;cursor:pointer;font-family:var(--sans)}
+.sheet-row .pill{height:48px;flex:1}
 .try .pill{height:48px;font-size:15px}
 .panel.split{align-items:flex-start;text-align:left;padding-left:clamp(24px,7vw,120px);padding-right:52%}
 .panel.split .eyebrow{justify-content:flex-start}
@@ -496,11 +523,11 @@ h1 em{font-style:normal;color:#7A5A10}
     <p class="eyebrow">Try it <span class="dot"></span> Live preview</p>
     <h1>See your name on <em>their screen.</em></h1>
     <p class="sub">Type your business name. This is what your customers see after one tap.</p>
-    <form class="try" id="tryForm" autocomplete="off">
-      <label for="bizName">Business name</label>
-      <input id="bizName" name="bizName" type="text" maxlength="32" placeholder="e.g. Chai Point Andheri" enterkeyhint="done">
+    <div class="try">
+      <span class="lbl">Business name</span>
+      <button type="button" class="fake" id="openTry"><span id="fakeText">Tap to type your business name</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button>
       <a class="pill" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener">Get cards for this business</a>
-    </form>
+    </div>
   </section>
   <section class="panel top" data-panel id="contact">
     <p class="eyebrow">Mridul Shingari <span class="dot"></span> Infinity</p>
@@ -514,6 +541,24 @@ h1 em{font-style:normal;color:#7A5A10}
     </div>
   </section>
 </main>
+
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <form class="sheet-card" id="tryForm" autocomplete="off">
+    <p class="sheet-title" id="sheetTitle">See your name on their screen</p>
+    <label for="bizName">Business name</label>
+    <input id="bizName" name="bizName" type="text" maxlength="32" placeholder="e.g. Chai Point Andheri" enterkeyhint="done" autocapitalize="words">
+    <p class="mini-cap">Your customers will see</p>
+    <div class="mini">
+      <div class="av">Y</div>
+      <div class="mini-t"><b class="bn">Your Business</b><span>How was your visit?</span>
+        <i><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></i></div>
+    </div>
+    <div class="sheet-row">
+      <button type="submit" class="ghost">Done</button>
+      <a class="pill" href="https://wa.me/917986404564?text=Hi%20Mridul%2C%20I%20want%20Infinity%20NFC%20cards%20for%20my%20business." target="_blank" rel="noopener">Get cards on WhatsApp</a>
+    </div>
+  </form>
+</div>
 
 <footer class="foot">Bindra Sateri Legacy, MIDC Central Road, Andheri East &nbsp;&middot;&nbsp; +91 79864 04564 &nbsp;&middot;&nbsp; searchinfinity@gmail.com</footer>
 
@@ -583,8 +628,9 @@ h1 em{font-style:normal;color:#7A5A10}
   var progress=0, sceneAt=0, ready=false, lastScr="", t0=performance.now();
 
   var bizInput=document.getElementById("bizName");
+  function isTyping(){var sh=document.getElementById("sheet");return !!sh&&!sh.hidden;}
   function readScroll(){
-    if(document.activeElement===bizInput)return; // the phone keyboard resizes the viewport; hold still while typing
+    if(isTyping())return; // the phone keyboard resizes the viewport; hold still while typing
     var max=document.documentElement.scrollHeight-window.innerHeight;
     progress=max>0?clamp(window.pageYOffset/max,0,1):0;
   }
@@ -678,7 +724,7 @@ h1 em{font-style:normal;color:#7A5A10}
   function paint(time){
     meter.style.transform="scaleX("+progress+")";
     bgmark.style.transform="translate(-50%,calc(-50% + "+((.5-sceneAt)*16).toFixed(2)+"vh)) rotate("+((sceneAt-.5)*6).toFixed(2)+"deg)";
-    var typing=document.activeElement===bizInput;
+    var typing=isTyping();
     for(var i=0;i<panels.length;i++){
       var c=CUES[i], el=panels[i];
       var enter=ramp(progress,c[0],c[1]), leave=ramp(progress,c[2],c[3]);
@@ -695,7 +741,7 @@ h1 em{font-style:normal;color:#7A5A10}
   // rAF loop, never cancelled. The scene eases toward the scroll position instead of
   // snapping to it, which turns a jumpy scrub into a smooth, weighted one.
   function frame(time){
-    var gap=(document.activeElement===bizInput?.91:progress)-sceneAt;
+    var gap=(isTyping()?.91:progress)-sceneAt;
     if(Math.abs(gap)>0.0004)sceneAt+=reduce?gap:gap*0.115;
     paint(time);
     requestAnimationFrame(frame);
@@ -731,8 +777,24 @@ h1 em{font-style:normal;color:#7A5A10}
     waLinks.forEach(function(a){a.href="https://wa.me/917986404564?text="+encodeURIComponent(msg);});
   }
   bizInput.addEventListener("input",applyName);
-  bizInput.addEventListener("blur",function(){readScroll();});
-  document.getElementById("tryForm").addEventListener("submit",function(e){e.preventDefault();bizInput.blur();});
+  var sheet=document.getElementById("sheet"), openTry=document.getElementById("openTry"), fakeText=document.getElementById("fakeText");
+  function openSheet(){
+    sheet.hidden=false;
+    document.documentElement.style.overflow="hidden";
+    bizInput.focus(); // inside the tap handler, so phones open the keyboard
+  }
+  function closeSheet(){
+    sheet.hidden=true;
+    document.documentElement.style.overflow="";
+    var v=bizInput.value.trim();
+    fakeText.textContent=v||"Tap to type your business name";
+    openTry.classList.toggle("has",!!v);
+    openTry.focus({preventScroll:true});
+  }
+  openTry.addEventListener("click",openSheet);
+  document.getElementById("tryForm").addEventListener("submit",function(e){e.preventDefault();closeSheet();});
+  sheet.addEventListener("click",function(e){if(e.target===sheet)closeSheet();});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!sheet.hidden)closeSheet();});
 
   // nav links jump to a point on the timeline
   [].forEach.call(document.querySelectorAll("[data-go]"),function(a){
