@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NFC Automation Tags – Infinity</title>
+<meta name="description" content="NFC tags that join Wi-Fi, save your contact, check staff in, start workflows and open your Instagram in one tap. Infinity, Mumbai.">
+<meta name="theme-color" content="#f2f0ec">
+<meta property="og:title" content="NFC Automation Tags – Infinity">
+<meta property="og:description" content="NFC tags that join Wi-Fi, save your contact, check staff in, start workflows and open your Instagram in one tap. Infinity, Mumbai.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://growwithinfinity.github.io/nfc-automation.html">
+<meta property="og:image" content="https://growwithinfinity.github.io/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://growwithinfinity.github.io/nfc-automation.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f2f0ec'/%3E%3Cpath d='M20 22c-6 0-10 4.5-10 10s4 10 10 10c8 0 16-20 24-20 6 0 10 4.5 10 10s-4 10-10 10c-8 0-16-20-24-20z' fill='none' stroke='%230d0c0b' stroke-width='5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Lora:wght@400&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+
+</head>
+<body>
+<div class="obj" id="obj">
+  <div class="o tag gold" data-o="wifi"><svg viewBox="0 0 24 24"><path d="M2 9a15 15 0 0 1 20 0M5.5 12.5a10 10 0 0 1 13 0M9 16a5 5 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="19.2" r="1.3" fill="currentColor"/></svg><em>TAP FOR WI-FI</em><div class="ripples"><i></i><i></i><i></i></div></div>
+  <div class="o tag cream" data-o="contact"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5 20a7 7 0 0 1 14 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><em>SAVE CONTACT</em><div class="ripples"><i></i><i></i><i></i></div></div>
+  <div class="o tag gold" data-o="check"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 3v4M16 3v4M8.5 13.5l2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><em>STAFF CHECK-IN</em><div class="ripples"><i></i><i></i><i></i></div></div>
+  <div class="o tag gold" data-o="flow"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><em>TAP TO START</em><div class="ripples"><i></i><i></i><i></i></div></div>
+  <div class="o tag ig" data-o="ig"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.8" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="16.8" cy="7.2" r="1" fill="currentColor"/></svg><em>TAP TO FOLLOW</em><div class="ripples"><i></i><i></i><i></i></div></div>
+  <div class="o phone" data-o="phone"><div class="bezel"><div class="screen" id="ps">
+    <div class="scr lock on" data-s="lock"><div class="sb" style="width:100%"><span>Jio</span><span>100%</span></div><div class="time">10:24</div><div class="date">Saturday, 3 October</div><div class="hint"><svg><use href="#nfc"/></svg>Hold near a tag</div></div>
+    <div class="scr" data-s="wifi"><div class="sb"><span>10:24</span><span>100%</span></div><div class="body"><div class="wifi"><svg viewBox="0 0 24 24"><path d="M2 9a15 15 0 0 1 20 0M5.5 12.5a10 10 0 0 1 13 0M9 16a5 5 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="19.2" r="1.3" fill="currentColor"/></svg><b>Join “YourBusiness-Guest”?</b><span>Shared by the tag on your table</span><div class="btn-s" id="wj" style="width:150px">Join</div></div></div></div>
+    <div class="scr" data-s="vc"><div class="sb"><span>10:24</span><span>100%</span></div><div class="body"><div class="vc"><div class="av">Y</div><b>Your Business</b><span>Café · Andheri East</span>
+      <div class="rows"><div><small>Phone</small>+91 90000 00000</div><div><small>WhatsApp</small>Chat with us</div><div><small>Website</small>yourbusiness.in</div></div><div class="btn-s" id="vs" style="width:100%">Save contact</div></div></div></div>
+    <div class="scr" data-s="check"><div class="sb"><span>9:58</span><span>100%</span></div><div class="ok"><i>✓</i><b>Checked in, 9:58 am</b><span>Front desk · Saturday<br>See you at closing!</span></div></div>
+    <div class="scr" data-s="flow"><div class="sb"><span>10:24</span><span>100%</span></div><div class="body"><b style="font:600 14px/1.2 var(--sans)">One tap started</b><span class="tiny">“Client visit” workflow</span>
+      <div class="steps-ok" id="fl"><div><i>✓</i>Visit logged in the sheet</div><div><i>✓</i>WhatsApp sent to the manager</div><div><i>✓</i>Feedback form opened</div><div><i>✓</i>Follow-up set for tomorrow</div></div></div></div>
+    <div class="scr" data-s="ig"><div class="sb"><span>10:24</span><span>100%</span></div><div class="url"><svg><use href="#lock"/></svg>instagram.com/yourbusiness</div>
+      <div class="body"><div class="ig-top"><div class="ring"><div>Y</div></div><div class="nums"><div><b>214</b>posts</div><div><b>8,421</b>followers</div><div><b>180</b>following</div></div></div><div class="btn-s done">Following</div><div class="grid9"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+  </div></div><div class="glare"></div></div>
+</div>
+
+<main class="panels">
+  <section class="panel" data-step id="intro" data-pos="left" data-label="Intro">
+    <p class="eyebrow">NFC automation tags</p>
+    <h1>One tap. <em>Something happens.</em></h1>
+    <p class="sub">NFC tags that connect, save, check in or start a task the moment a phone touches them.</p>
+    <div class="cta"><a class="pill" href="#contact">Plan my tags</a></div>
+  </section>
+  <section class="panel" data-step id="wifi" data-pos="right" data-label="Wi-Fi">
+    <p class="eyebrow">For guests</p>
+    <h1>Join the Wi-Fi <em>with a tap.</em></h1>
+    <p class="sub">Guests tap the tag on the table and join your Wi-Fi without spelling out a long password.</p>
+  </section>
+  <section class="panel" data-step id="contact-tag" data-pos="left" data-label="Save contact">
+    <p class="eyebrow">For customers</p>
+    <h1>Your contact, <em>saved in one tap.</em></h1>
+    <p class="sub">A tap adds your business to their phone with your number, WhatsApp and website. No visiting cards to lose.</p>
+  </section>
+  <section class="panel" data-step id="checkin" data-pos="right" data-label="Staff check-in">
+    <p class="eyebrow">For your team</p>
+    <h1>Staff check-in <em>at the door.</em></h1>
+    <p class="sub">Staff tap the tag when they arrive and leave. You see who came in and when, without a register.</p>
+  </section>
+  <section class="panel" data-step id="workflow" data-pos="left" data-label="Workflows">
+    <p class="eyebrow">For anything</p>
+    <h1>Start a whole <em>workflow.</em></h1>
+    <p class="sub">Log a visit, message your manager, open a form or update a sheet. One tap starts all of it.</p>
+  </section>
+  <section class="panel" data-step id="instagram" data-pos="right" data-label="Instagram">
+    <p class="eyebrow">For growth</p>
+    <h1>New followers, <em>the fun way.</em></h1>
+    <p class="sub">Tags that open your Instagram or YouTube turn every visit into a follower.</p>
+    <div class="cta"><a class="pill" href="social-tags.html">See Instagram &amp; YouTube tags</a></div>
+  </section>
+</main>
+
+<script>
+window.PAGE={
+  key:"nfcauto", service:"NFC automation tags",
+  scene:[
+    {phone:{x:.06,y:0,s:.92},wifi:{x:-.3,y:-.26,s:.62},contact:{x:.36,y:-.24,s:.58},check:{x:-.32,y:.28,s:.58},flow:{x:.36,y:.3,s:.62},ig:{x:-.02,y:.42,s:.4,o:0}},
+    {wifi:{x:-.22,y:.16,s:1.05},phone:{x:.18,y:-.02,s:.98}},
+    {contact:{x:-.22,y:.16,s:1.05},phone:{x:.18,y:-.02,s:.98}},
+    {check:{x:-.22,y:.16,s:1.05},phone:{x:.18,y:-.02,s:.98}},
+    {flow:{x:-.22,y:.16,s:1.05},phone:{x:.18,y:-.02,s:.98}},
+    {ig:{x:-.22,y:.16,s:1.05},phone:{x:.18,y:-.02,s:.98}},
+    {wifi:{x:-.3,y:-.2,s:.7},contact:{x:.3,y:-.2,s:.7},check:{x:-.3,y:.22,s:.7},flow:{x:.3,y:.22,s:.7}},
+    {wifi:{x:-.36,y:0,s:.6},contact:{x:-.12,y:.05,s:.6},check:{x:.12,y:0,s:.6},flow:{x:.36,y:.05,s:.6}}
+  ],
+  sceneM:[
+    {phone:{x:0,y:0,s:.8},wifi:{x:-.36,y:-.26,s:.5},contact:{x:.36,y:-.24,s:.46},check:{x:-.36,y:.28,s:.46},flow:{x:.36,y:.3,s:.5}},
+    {wifi:{x:-.26,y:.14,s:.78},phone:{x:.2,y:0,s:.82}},
+    {contact:{x:-.26,y:.14,s:.78},phone:{x:.2,y:0,s:.82}},
+    {check:{x:-.26,y:.14,s:.78},phone:{x:.2,y:0,s:.82}},
+    {flow:{x:-.26,y:.14,s:.78},phone:{x:.2,y:0,s:.82}},
+    {ig:{x:-.26,y:.14,s:.78},phone:{x:.2,y:0,s:.82}},
+    {wifi:{x:-.3,y:-.22,s:.55},contact:{x:.3,y:-.22,s:.55},check:{x:-.3,y:.22,s:.55},flow:{x:.3,y:.22,s:.55}},
+    {wifi:{x:-.36,y:0,s:.45},contact:{x:-.12,y:0,s:.45},check:{x:.12,y:0,s:.45},flow:{x:.36,y:0,s:.45}}
+  ],
+  tick:function(s){
+    var D=document,t=s.t,names=["lock","wifi","vc","check","flow","ig"],k=s.i;
+    if(s.u<.18&&k>0)k=0; // between tags the phone shows the lock screen for a moment
+    s.show(D.getElementById("ps"),names[Math.min(k,5)]||"lock");
+    ["wifi","contact","check","flow","ig"].forEach(function(n,j){D.querySelector("[data-o="+n+"]").classList.toggle("pulse",s.i===j+1&&s.u<.3);});
+    D.getElementById("wj").textContent=s.i===1&&s.u>.4?"Connected ✓":"Join"; D.getElementById("wj").classList.toggle("green",s.i===1&&s.u>.4);
+    D.getElementById("vs").textContent=s.i===2&&s.u>.4?"Saved ✓":"Save contact"; D.getElementById("vs").classList.toggle("green",s.i===2&&s.u>.4);
+    [].forEach.call(D.querySelectorAll("#fl > div"),function(d,j){d.classList.toggle("on",s.i===4&&s.u>.2+j*.08);});
+  }
+};
+</script>
+<script src="assets/engine.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Receipts through NFC – Infinity</title>
+<meta name="description" content="Customers tap at the counter and their bill opens on their phone. AI reads paper bills into clean digital records and keeps your numbers organised.">
+<meta name="theme-color" content="#f2f0ec">
+<meta property="og:title" content="AI Receipts through NFC – Infinity">
+<meta property="og:description" content="Customers tap at the counter and their bill opens on their phone. AI reads paper bills into clean digital records and keeps your numbers organised.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://growwithinfinity.github.io/ai-receipts.html">
+<meta property="og:image" content="https://growwithinfinity.github.io/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://growwithinfinity.github.io/ai-receipts.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f2f0ec'/%3E%3Cpath d='M20 22c-6 0-10 4.5-10 10s4 10 10 10c8 0 16-20 24-20 6 0 10 4.5 10 10s-4 10-10 10c-8 0-16-20-24-20z' fill='none' stroke='%230d0c0b' stroke-width='5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Lora:wght@400&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+
+</head>
+<body>
+<div class="obj" id="obj">
+  <div class="o receipt" data-o="paper"><b>YOUR BUSINESS</b><div class="r"><span>02 Oct 2026</span><span>7:42 pm</span></div><hr>
+    <div class="r"><span>Masala chai x2</span><span>120</span></div><div class="r"><span>Veg sandwich</span><span>180</span></div><div class="r"><span>Brownie</span><span>160</span></div><div class="r"><span>Cold coffee</span><span>140</span></div><hr>
+    <div class="r"><span>Subtotal</span><span>600</span></div><div class="r"><span>GST 5%</span><span>30</span></div><div class="r"><b style="margin:0;font-size:11px">TOTAL</b><b style="margin:0;font-size:11px">₹630</b></div><hr>
+    <div style="text-align:center">Thank you!</div><i class="scan" id="scan"></i></div>
+  <div class="o tag gold" data-o="tag"><svg viewBox="0 0 24 24"><use href="#nfc"/></svg><em>TAP FOR BILL</em><div class="ripples"><i></i><i></i><i></i></div></div>
+  <div class="o dash" data-o="dash"><span class="k">This week · Example</span><b style="display:block;margin-top:8px;font:500 26px/1 var(--sans);letter-spacing:-.03em">₹48,250</b><span class="tiny">Sales from 312 bills</span>
+    <div class="bars" id="bars"><i style="height:52%"></i><i style="height:64%"></i><i style="height:46%"></i><i style="height:71%"></i><i style="height:58%"></i><i class="g" style="height:96%"></i><i style="height:83%"></i></div>
+    <div class="lbl"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div><div class="ex">Example numbers, to show the report layout.</div></div>
+  <div class="o phone" data-o="phone"><div class="bezel"><div class="screen" id="ps">
+    <div class="scr lock on" data-s="lock"><div class="sb" style="width:100%"><span>Jio</span><span>100%</span></div><div class="time">7:43</div><div class="date">Friday, 2 October</div>
+      <div class="banner" id="bn"><div class="bi"><svg><use href="#nfc"/></svg></div><div><b>Your bill is ready</b><span>Open receipt from Your Business</span></div></div>
+      <div class="hint"><svg><use href="#nfc"/></svg>Hold near the counter tag</div></div>
+    <div class="scr" data-s="bill"><div class="sb"><span>7:43</span><span>100%</span></div>
+      <div class="body"><div class="row-x"><div class="av">Y</div><div><b>Your Business</b><small>Receipt #2231 · 7:42 pm</small></div></div>
+      <div class="dr"><div class="r"><span>Masala chai x2</span><span>₹120</span></div><div class="r"><span>Veg sandwich</span><span>₹180</span></div><div class="r"><span>Brownie</span><span>₹160</span></div><div class="r"><span>Cold coffee</span><span>₹140</span></div><hr><div class="r"><span>GST 5%</span><span>₹30</span></div><div class="r"><b>Total</b><b>₹630</b></div></div>
+      <div class="btn-s">Save PDF</div><div class="btn-s green">Share on WhatsApp</div></div></div>
+    <div class="scr" data-s="ai"><div class="sb"><span>10:24</span><span>100%</span></div>
+      <div class="body"><b style="font:600 14px/1.2 var(--sans)">Bill read by AI</b><span class="tiny">From a photo of a paper bill</span>
+      <div class="steps-ok" id="ai"><div><i>✓</i>Shop · Your Business</div><div><i>✓</i>Date · 02 Oct 2026</div><div><i>✓</i>4 items · ₹600</div><div><i>✓</i>GST · ₹30</div><div><i>✓</i>Total · ₹630, saved</div></div></div></div>
+  </div></div><div class="glare"></div></div>
+</div>
+
+<main class="panels">
+  <section class="panel" data-step id="intro" data-pos="left" data-label="Intro">
+    <p class="eyebrow">AI receipts through NFC</p>
+    <h1>Receipts without <em>the paper.</em></h1>
+    <p class="sub">Customers tap at the counter and their bill opens on their phone. AI keeps every bill organised for you.</p>
+    <div class="cta"><a class="pill" href="#contact">Set up AI receipts</a></div>
+  </section>
+  <section class="panel" data-step id="tap" data-pos="right" data-label="Tap">
+    <p class="eyebrow">For customers</p>
+    <h1>Tap to get <em>the bill.</em></h1>
+    <p class="sub">The customer holds their phone near the tag on the counter and their bill opens. No printer, no lost slips.</p>
+  </section>
+  <section class="panel" data-step id="keep" data-pos="left" data-label="On their phone">
+    <p class="eyebrow">For customers</p>
+    <h1>The bill stays <em>on their phone.</em></h1>
+    <p class="sub">They can save it as a PDF or share it on WhatsApp, which helps with returns, claims and expenses.</p>
+  </section>
+  <section class="panel" data-step id="read" data-pos="right" data-label="AI reads bills">
+    <p class="eyebrow">For you</p>
+    <h1>AI reads <em>your paper bills.</em></h1>
+    <p class="sub">Snap a photo of a supplier bill or a handwritten slip. AI turns it into a clean digital record you can search.</p>
+  </section>
+  <section class="panel" data-step id="numbers" data-pos="left" data-label="Your numbers">
+    <p class="eyebrow">For you</p>
+    <h1>See your numbers <em>clearly.</em></h1>
+    <p class="sub">Daily totals, busy days and top items, sorted for you. Tell us the report you want and we set it up.</p>
+  </section>
+</main>
+
+<script>
+window.PAGE={
+  key:"receipts", service:"AI receipts",
+  scene:[
+    {paper:{x:-.22,y:.02,s:1.05,rz:-6},phone:{x:.2,y:0,s:.95,rz:4},tag:{x:-.02,y:.34,s:.55}},
+    {tag:{x:0,y:.2,s:1.15},phone:{x:.04,y:-.12,s:.78,rx:24,rz:-10},paper:{x:-.34,y:.04,s:.6,rz:-8,o:.7}},
+    {phone:{x:.06,y:0,s:1.05},tag:{x:-.32,y:.32,s:.55}},
+    {paper:{x:-.2,y:0,s:1.15,rz:-4},phone:{x:.22,y:.02,s:.9}},
+    {dash:{x:0,y:0,s:1.25}},
+    {dash:{x:0,y:0,s:1.1}},
+    {paper:{x:-.18,y:0,s:.8,rz:-6},phone:{x:.18,y:0,s:.7}}
+  ],
+  sceneM:[
+    {paper:{x:-.24,y:.02,s:.8,rz:-6},phone:{x:.22,y:0,s:.75,rz:4}},
+    {tag:{x:0,y:.2,s:.85},phone:{x:.04,y:-.1,s:.68,rx:24,rz:-10}},
+    {phone:{x:0,y:0,s:.95}},
+    {paper:{x:-.24,y:0,s:.8,rz:-4},phone:{x:.24,y:.02,s:.72}},
+    {dash:{x:0,y:0,s:1}},
+    {dash:{x:0,y:0,s:.9}},
+    {paper:{x:-.22,y:0,s:.65},phone:{x:.22,y:0,s:.58}}
+  ],
+  tick:function(s){
+    var D=document,t=s.t,scr;
+    if(t<.8)scr="bill";else if(t<1.7)scr="lock";else if(t<2.8)scr="bill";else if(t<3.85)scr="ai";else scr="bill";
+    s.show(D.getElementById("ps"),scr);
+    D.getElementById("bn").classList.toggle("on",t>1.2&&t<1.75);
+    D.querySelector("[data-o=tag]").classList.toggle("pulse",t>1.0&&t<1.6);
+    var sc=D.getElementById("scan"), on=t>2.95&&t<3.5; sc.style.opacity=on?1:0; sc.style.top=(s.clamp((t-2.95)/.5,0,1)*100)+"%";
+    [].forEach.call(D.querySelectorAll("#ai > div"),function(d,j){d.classList.toggle("on",t>3.15+j*.07);});
+    [].forEach.call(D.querySelectorAll("#bars i"),function(b,j){b.style.transform="scaleY("+s.clamp((t-3.7-j*.04)/.3,.05,1)+")";});
+  }
+};
+</script>
+<script src="assets/engine.js"></script>
+</body>
+</html>

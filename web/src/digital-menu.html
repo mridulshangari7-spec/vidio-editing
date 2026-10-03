@@ -1,0 +1,89 @@
+<!--title: Digital Menus – Infinity-->
+<!--desc: Digital menus that open with a tap or scan. View-only, order on WhatsApp, or order and pay by UPI. Change prices anytime without reprinting.-->
+<div class="obj" id="obj">
+  <div class="o tent" data-o="tent"><div class="t2">TODAY’S MENU</div><div class="t1">Tap or scan<br>to see the menu</div><div class="qr" data-qr="23"></div><div class="nf"><svg><use href="#nfc"/></svg>TAP HERE</div><div class="ripples"><i></i><i></i><i></i></div></div>
+  <div class="o phone" data-o="phone"><div class="bezel"><div class="screen" id="ps">
+    <div class="scr on" data-s="view"><div class="sb"><span>10:24</span><span>100%</span></div><div class="url"><svg><use href="#lock"/></svg>yourbusiness.in/menu</div>
+      <div class="body"><div class="menu-cat"><span class="on">Popular</span><span>Drinks</span><span>Snacks</span><span>Desserts</span></div>
+      <div class="dish"><i></i><div><b>Masala chai</b><small>Ginger, cardamom</small></div><span class="p">₹60</span></div>
+      <div class="dish"><i></i><div><b>Paneer tikka sandwich</b><small>Grilled, mint chutney</small></div><span class="p">₹210</span></div>
+      <div class="dish"><i></i><div><b>Cold coffee</b><small>With ice cream</small></div><span class="p">₹140</span></div>
+      <div class="dish"><i></i><div><b>Chocolate brownie</b><small>Warm, with sauce</small></div><span class="p">₹160</span></div></div></div>
+    <div class="scr" data-s="order"><div class="sb"><span>10:24</span><span>100%</span></div><div class="url"><svg><use href="#lock"/></svg>yourbusiness.in/menu</div>
+      <div class="body"><div class="dish"><i></i><div><b>Masala chai</b><small>₹60</small></div><span class="add" id="a1">Add</span></div>
+      <div class="dish"><i></i><div><b>Paneer tikka sandwich</b><small>₹210</small></div><span class="add" id="a2">Add</span></div>
+      <div class="dish"><i></i><div><b>Cold coffee</b><small>₹140</small></div><span class="add">Add</span></div>
+      <div class="cart" id="cart"><span id="ci">0 items</span><span>Send order on WhatsApp</span></div></div></div>
+    <div class="scr" data-s="wao"><div class="wa-head"><div class="av">Y</div><div><b>Your Business</b><span>Business account</span></div></div>
+      <div class="chat"><div class="msg me on">New order<br>1 × Masala chai — ₹60<br>1 × Paneer tikka sandwich — ₹210<br><b>Total ₹270</b> · Table 4</div>
+      <div class="msg" id="wr">Got it! Your order is being prepared.<span class="auto">Your Business</span></div></div></div>
+    <div class="scr" data-s="pay"><div class="sb"><span>10:24</span><span>100%</span></div>
+      <div class="body" style="align-items:center;text-align:center"><span class="tiny">Paying Your Business · Table 4</span><div class="amt">₹ 270</div><div class="qrbox" data-qr="41"></div><span class="tiny">GPay · PhonePe · Paytm · any UPI app</span><div class="btn-s" style="margin-top:auto">Pay ₹270 by UPI</div></div></div>
+    <div class="scr" data-s="paid"><div class="sb"><span>10:24</span><span>100%</span></div><div class="ok"><i>✓</i><b>Paid ₹270</b><span>Your order is confirmed.<br>Table 4</span></div></div>
+  </div></div><div class="glare"></div></div>
+</div>
+
+<main class="panels">
+  <section class="panel" data-step id="intro" data-pos="left" data-label="Intro">
+    <p class="eyebrow">Digital menus</p>
+    <h1>Your menu, <em>on every phone.</em></h1>
+    <p class="sub">Customers tap the table tag or scan the code and your menu opens. Change prices anytime, with no reprinting.</p>
+    <div class="cta"><a class="pill" href="#contact">Get my digital menu</a></div>
+  </section>
+  <section class="panel" data-step id="view" data-pos="right" data-label="View">
+    <p class="eyebrow">Option one <span class="dot"></span> View</p>
+    <h1>Photos, prices <em>and categories.</em></h1>
+    <p class="sub">A clean menu that opens in a second. Mark items sold out or add today’s special whenever you want.</p>
+  </section>
+  <section class="panel" data-step id="whatsapp" data-pos="left" data-label="Order on WhatsApp">
+    <p class="eyebrow">Option two <span class="dot"></span> WhatsApp</p>
+    <h1>Orders straight <em>to your WhatsApp.</em></h1>
+    <p class="sub">Customers add items and send the whole order to your WhatsApp in one message, with the table number.</p>
+  </section>
+  <section class="panel" data-step id="pay" data-pos="right" data-label="Order and pay">
+    <p class="eyebrow">Option three <span class="dot"></span> Pay</p>
+    <h1>Order and pay <em>by UPI.</em></h1>
+    <p class="sub">Add UPI so customers can pay from the same page with any UPI app. No waiting for the bill.</p>
+  </section>
+  <section class="panel" data-step id="fit" data-pos="left" data-label="Pick yours">
+    <p class="eyebrow">Your setup</p>
+    <h1>Pick what <em>fits you.</em></h1>
+    <p class="sub">Cafés, restaurants, salons and shops. We set it up the way you work and update it when you need.</p>
+    <div class="chips"><span>View-only menu</span><span>Order on WhatsApp</span><span>Order and pay by UPI</span><span>NFC table tags</span><span>QR codes</span></div>
+  </section>
+</main>
+
+<script>
+window.PAGE={
+  key:"menu", service:"a digital menu",
+  scene:[
+    {tent:{x:-.2,y:.04,s:1.05,ry:16},phone:{x:.2,y:0,s:.95,rz:3}},
+    {phone:{x:.12,y:0,s:1.05},tent:{x:-.28,y:.12,s:.75,ry:16}},
+    {phone:{x:.04,y:0,s:1.05},tent:{x:-.34,y:.16,s:.6,ry:16}},
+    {phone:{x:.04,y:0,s:1.05},tent:{x:.34,y:.16,s:.6,ry:-16}},
+    {tent:{x:-.2,y:.04,s:1,ry:16},phone:{x:.2,y:0,s:.95,rz:3}},
+    {tent:{x:-.2,y:0,s:1},phone:{x:.2,y:0,s:1}},
+    {tent:{x:-.18,y:0,s:.8,ry:14},phone:{x:.18,y:0,s:.75}}
+  ],
+  sceneM:[
+    {tent:{x:-.22,y:.04,s:.8,ry:14},phone:{x:.2,y:0,s:.8}},
+    {phone:{x:.08,y:0,s:.95},tent:{x:-.32,y:.1,s:.55,ry:14}},
+    {phone:{x:0,y:0,s:.95}},
+    {phone:{x:0,y:0,s:.95}},
+    {tent:{x:-.22,y:.04,s:.8,ry:14},phone:{x:.2,y:0,s:.8}},
+    {tent:{x:-.2,y:0,s:.8},phone:{x:.2,y:0,s:.8}},
+    {tent:{x:-.2,y:0,s:.7,ry:14},phone:{x:.2,y:0,s:.68}}
+  ],
+  tick:function(s){
+    var D=document,t=s.t,scr;
+    if(t<1.85)scr="view";else if(t<2.4)scr="order";else if(t<2.85)scr="wao";else if(t<3.35)scr="pay";else if(t<3.85)scr="paid";else scr="view";
+    s.show(D.getElementById("ps"),scr);
+    var n=(t>2.05?1:0)+(t>2.2?1:0);
+    D.getElementById("a1").classList.toggle("on",t>2.05);D.getElementById("a2").classList.toggle("on",t>2.2);
+    D.getElementById("a1").textContent=t>2.05?"Added":"Add";D.getElementById("a2").textContent=t>2.2?"Added":"Add";
+    D.getElementById("ci").textContent=n+(n===1?" item":" items")+" · ₹"+(n>1?270:n?60:0);
+    D.getElementById("wr").classList.toggle("on",t>2.6);
+    D.querySelector("[data-o=tent]").classList.toggle("pulse",t<.75||(t>4&&t<4.7));
+  }
+};
+</script>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Business Automation – Infinity</title>
+<meta name="description" content="WhatsApp auto-replies, bookings and reminders, invoices and payment follow-ups, and every lead in one Google Sheet. Infinity builds the automations your business needs.">
+<meta name="theme-color" content="#f2f0ec">
+<meta property="og:title" content="Business Automation – Infinity">
+<meta property="og:description" content="WhatsApp auto-replies, bookings and reminders, invoices and payment follow-ups, and every lead in one Google Sheet. Infinity builds the automations your business needs.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://growwithinfinity.github.io/automation.html">
+<meta property="og:image" content="https://growwithinfinity.github.io/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://growwithinfinity.github.io/automation.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f2f0ec'/%3E%3Cpath d='M20 22c-6 0-10 4.5-10 10s4 10 10 10c8 0 16-20 24-20 6 0 10 4.5 10 10s-4 10-10 10c-8 0-16-20-24-20z' fill='none' stroke='%230d0c0b' stroke-width='5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Lora:wght@400&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+
+</head>
+<body>
+<div class="obj" id="obj">
+  <div class="o node" data-o="n1"><span class="i"><svg viewBox="0 0 24 24"><path d="M4 20l1.3-3.8A8 8 0 1 1 8 19z" fill="none" stroke="currentColor" stroke-width="2"/></svg></span><span class="k">When</span><b>A customer messages</b><small>WhatsApp, 11:42 pm</small></div>
+  <div class="o node" data-o="n2"><span class="i"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span><span class="k">Then</span><b>Reply with your menu</b><small>Sent in seconds</small></div>
+  <div class="o node" data-o="n3"><span class="i"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 10h16M10 4v16" fill="none" stroke="currentColor" stroke-width="2"/></svg></span><span class="k">And</span><b>Save the lead</b><small>New row in Google Sheets</small></div>
+  <div class="o sheet-ui" data-o="sheet"><div class="hd"><span>Leads</span><span style="font-weight:400;opacity:.85">Example</span></div>
+    <table><thead><tr><th>Name</th><th>From</th><th>Wants</th><th>Time</th></tr></thead><tbody id="rows">
+      <tr><td>Rahul S.</td><td>WhatsApp</td><td>Table for 4</td><td>7:42 pm</td></tr>
+      <tr><td>Neha K.</td><td>Instagram</td><td>Price list</td><td>8:05 pm</td></tr>
+      <tr><td>Website form</td><td>Website</td><td>Bulk order</td><td>8:31 pm</td></tr>
+      <tr><td>Amit P.</td><td>WhatsApp</td><td>Booking</td><td>9:10 pm</td></tr>
+      <tr><td>Sana M.</td><td>Instagram</td><td>Gift box</td><td>9:26 pm</td></tr>
+    </tbody></table></div>
+  <div class="o phone" data-o="phone"><div class="bezel"><div class="screen" id="ps">
+    <div class="scr on" data-s="wa"><div class="wa-head"><div class="av">Y</div><div><b>Your Business</b><span>Business account</span></div></div>
+      <div class="chat"><div class="msg me" id="m1">Hi, are you open tomorrow? What’s on the menu?</div>
+      <div class="msg" id="m2">Hi! We’re open 8 am to 11 pm. Here’s today’s menu: yourbusiness.in/menu<span class="auto">Automatic reply</span></div>
+      <div class="msg me" id="m3">Great, thanks!</div></div></div>
+    <div class="scr" data-s="book"><div class="sb"><span>10:24</span><span>100%</span></div>
+      <div class="body"><b style="font:600 15px/1.2 var(--sans)">Book a slot</b><span class="tiny">Your Business · Salon</span>
+      <div class="cal"><span>M</span><span>T</span><span>W</span><span class="on">T</span><span>F</span><span>S</span><span>S</span></div>
+      <div class="slots"><span>11:00</span><span>12:30</span><span class="on" id="slot">4:00 pm</span><span>5:30</span><span>7:00</span></div>
+      <div class="btn-s" id="bk">Confirm booking</div>
+      <div class="msg" id="rem" style="max-width:100%;background:#f4f2ec">Reminder: your 4:00 pm slot is tomorrow. Reply 1 to confirm.<span class="auto">Sent automatically</span></div></div></div>
+    <div class="scr" data-s="bill"><div class="sb"><span>10:24</span><span>100%</span></div>
+      <div class="body"><b style="font:600 15px/1.2 var(--sans)">Invoice #1042</b><span class="tiny">From Your Business</span>
+      <div class="dr"><div class="r"><span>Catering, 20 plates</span><span>₹6,000</span></div><div class="r"><span>Delivery</span><span>₹300</span></div><hr><div class="r"><b>Total</b><b>₹6,300</b></div></div>
+      <div class="btn-s blue">Pay ₹6,300 by UPI</div>
+      <div class="msg" id="pr" style="max-width:100%;background:#f4f2ec">Friendly reminder: invoice #1042 is due today.<span class="auto">Sent automatically</span></div></div></div>
+  </div></div><div class="glare"></div></div>
+</div>
+
+<main class="panels">
+  <section class="panel" data-step id="intro" data-pos="left" data-label="Intro">
+    <p class="eyebrow">Business automation</p>
+    <h1>Work that <em>runs itself.</em></h1>
+    <p class="sub">Replies, reminders, bills and follow-ups that happen on their own, set up around how your business already works.</p>
+    <div class="cta"><a class="pill" href="#contact">Automate my work</a></div>
+  </section>
+  <section class="panel" data-step id="replies" data-pos="right" data-label="Replies">
+    <p class="eyebrow">Replies</p>
+    <h1>Instant replies, <em>day or night.</em></h1>
+    <p class="sub">A customer messages at 11 pm. They get your timings, menu or price list straight away, and you see the chat in the morning.</p>
+  </section>
+  <section class="panel" data-step id="bookings" data-pos="left" data-label="Bookings">
+    <p class="eyebrow">Bookings</p>
+    <h1>Bookings that <em>remind themselves.</em></h1>
+    <p class="sub">Customers pick a slot and get a reminder automatically, so fewer people forget to turn up.</p>
+  </section>
+  <section class="panel" data-step id="bills" data-pos="right" data-label="Bills">
+    <p class="eyebrow">Billing</p>
+    <h1>Bills and payment <em>follow-ups.</em></h1>
+    <p class="sub">Invoices and UPI payment links go out on their own, with a polite reminder when a payment is due.</p>
+  </section>
+  <section class="panel" data-step id="leads" data-pos="left" data-label="Leads">
+    <p class="eyebrow">Leads</p>
+    <h1>Every enquiry <em>in one place.</em></h1>
+    <p class="sub">Messages from WhatsApp, Instagram and your website land in one Google Sheet or CRM, so nobody slips through.</p>
+  </section>
+  <section class="panel" data-step id="anything" data-pos="top" data-label="Anything else">
+    <p class="eyebrow">Your routine</p>
+    <h1>If you do it every day, <em>we can automate it.</em></h1>
+    <p class="sub">Tell us your routine. If it can be automated, we build it for you.</p>
+    <div class="chips"><span>WhatsApp replies</span><span>Instagram DMs</span><span>Google Sheets</span><span>Email</span><span>Bookings</span><span>Invoices</span><span>Review follow-ups</span><span>Staff alerts</span><span>Daily reports</span></div>
+  </section>
+</main>
+
+<script>
+window.PAGE={
+  key:"automation", service:"business automation",
+  scene:[
+    {n1:{x:-.26,y:-.28,s:1.1},n2:{x:.04,y:0,s:1.1},n3:{x:.3,y:.28,s:1.1}},
+    {phone:{x:.06,y:0,s:1},n1:{x:-.34,y:-.28,s:.7}},
+    {phone:{x:0,y:0,s:1}},
+    {phone:{x:.04,y:0,s:1}},
+    {sheet:{x:0,y:0,s:1.25},n3:{x:-.3,y:-.34,s:.7}},
+    {n1:{x:-.34,y:-.05,s:.9},n2:{x:0,y:.05,s:.9},n3:{x:.34,y:-.05,s:.9}},
+    {n1:{x:-.3,y:-.2,s:1},n2:{x:0,y:0,s:1},n3:{x:.3,y:.2,s:1}},
+    {n1:{x:-.34,y:-.05,s:.9},n2:{x:0,y:.05,s:.9},n3:{x:.34,y:-.05,s:.9}}
+  ],
+  sceneM:[
+    {n1:{x:-.18,y:-.32,s:.92},n2:{x:.02,y:0,s:.92},n3:{x:.18,y:.32,s:.92}},
+    {phone:{x:0,y:0,s:.9}},
+    {phone:{x:0,y:0,s:.9}},
+    {phone:{x:0,y:0,s:.9}},
+    {sheet:{x:0,y:0,s:1}},
+    {n1:{x:-.2,y:-.3,s:.8},n2:{x:0,y:0,s:.8},n3:{x:.2,y:.3,s:.8}},
+    {n1:{x:-.2,y:-.3,s:.8},n2:{x:0,y:0,s:.8},n3:{x:.2,y:.3,s:.8}},
+    {n1:{x:-.2,y:-.3,s:.8},n2:{x:0,y:0,s:.8},n3:{x:.2,y:.3,s:.8}}
+  ],
+  tick:function(s){
+    var D=document, scr=["wa","wa","book","bill","bill"], k=s.u>.82?s.i+1:s.i;
+    s.show(D.getElementById("ps"),scr[Math.min(k,4)]||"wa");
+    var t=s.t;
+    D.getElementById("m1").classList.toggle("on",t>.9);
+    D.getElementById("m2").classList.toggle("on",t>1.12);
+    D.getElementById("m3").classList.toggle("on",t>1.32);
+    D.getElementById("bk").textContent=t>2.3?"Booked ✓":"Confirm booking";
+    D.getElementById("bk").classList.toggle("green",t>2.3);
+    D.getElementById("rem").classList.toggle("on",t>2.42);
+    D.getElementById("pr").classList.toggle("on",t>3.35);
+    var rows=D.querySelectorAll("#rows tr");
+    for(var r=0;r<rows.length;r++){var vis=t>3.9+r*.1||t>4.9; if(rows[r].hidden===vis){rows[r].hidden=!vis; if(vis)rows[r].className="new";}}
+    var hot=Math.floor(performance.now()/900)%3;
+    ["n1","n2","n3"].forEach(function(n,j){D.querySelector("[data-o="+n+"]").classList.toggle("hot",(s.i===0||s.i>=5)&&j===hot);});
+  }
+};
+</script>
+<script src="assets/engine.js"></script>
+</body>
+</html>

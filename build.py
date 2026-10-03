@@ -1,4 +1,4 @@
-"""Builds docs/index.html (a complete, hostable page) from site/index.html."""
+"""Builds web/nfc-review-cards.html (a complete, hostable page) from site/index.html."""
 import os
 root=os.path.dirname(os.path.abspath(__file__))
 s=open(os.path.join(root,'site/index.html')).read()
@@ -13,12 +13,12 @@ out='''<!DOCTYPE html>
 <meta property="og:title" content="Infinity – NFC review cards">
 <meta property="og:description" content="Tap once. Get the review. Infinity NFC cards send customers straight to your Google review page. Andheri East, Mumbai.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://growwithinfinity.github.io/">
-<meta property="og:image" content="https://growwithinfinity.github.io/og.jpg">
+<meta property="og:url" content="https://growwithinfinity.github.io/nfc-review-cards.html">
+<meta property="og:image" content="https://growwithinfinity.github.io/og-nfc.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="canonical" href="https://growwithinfinity.github.io/">
+<link rel="canonical" href="https://growwithinfinity.github.io/nfc-review-cards.html">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"LocalBusiness","name":"Infinity","description":"NFC review cards that open your Google review page with one tap.",
  "url":"https://growwithinfinity.github.io/","telephone":["+91-79864-04564","+91-98771-68353","+91-98782-25225","+91-93243-87537"],"email":"searchinfinity@gmail.com",
@@ -46,6 +46,4 @@ out='''<!DOCTYPE html>
 </body>
 </html>
 '''
-os.makedirs(os.path.join(root,'docs'),exist_ok=True)
-open(os.path.join(root,'docs/index.html'),'w').write(out)
-open(os.path.join(root,'docs/.nojekyll'),'w').write('')
+open(os.path.join(root,'web/nfc-review-cards.html'),'w').write(out)
