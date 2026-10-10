@@ -60,8 +60,8 @@
    sent to another client's customers. */
 (function(){
   "use strict";
-  var SHEET_ID = "";              // Google Sheet ID (from its link); set once the sheet exists
-  var SHEET_TAB = "Cards";        // tab name inside the sheet
+  var SHEET_ID = "187FXpdjYSo07KQHyHzlV_dDx0vn3CSeSftE1duSZDQ0"; // the "Infinity NFC Cards" Google Sheet
+  var SHEET_TAB = "";             // tab name; empty means the first tab
   var WHATSAPP = "919815803736";  // where renewals go
 
   // Cards that work even before the sheet is connected (also used for testing).
@@ -121,7 +121,7 @@
   var q = "select * where upper(A) = '" + id.replace(/'/g, "") + "' limit 1";
   var s = document.createElement("script");
   s.src = "https://docs.google.com/spreadsheets/d/" + encodeURIComponent(SHEET_ID) +
-          "/gviz/tq?headers=1&sheet=" + encodeURIComponent(SHEET_TAB) +
+          "/gviz/tq?headers=1" + (SHEET_TAB ? "&sheet=" + encodeURIComponent(SHEET_TAB) : "") +
           "&tq=" + encodeURIComponent(q) + "&tqx=responseHandler:infinityCard";
   s.onerror = function(){ if (!done) show("offline"); };
   document.head.appendChild(s);
