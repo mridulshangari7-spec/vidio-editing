@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Elgin – Follow us on Instagram</title>
-<meta name="description" content="Follow Grain by Elgin, Elgin Café, Lord Elgin Bar and Elgin Hall on Instagram.">
+<meta name="description" content="Follow every Elgin venue on Instagram: Grain by Elgin, Grab and Go, Grain &amp; Pour, Elgin Café, Lord Elgin Bar, The Governor House, Elgin Hall and Pappadh.">
 <meta name="theme-color" content="#14201b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +40,7 @@
   footer a{color:inherit}
   @media (prefers-reduced-motion:no-preference){
     li{opacity:0;transform:translateY(10px);animation:in .55s cubic-bezier(.22,.61,.36,1) forwards}
-    li:nth-child(2){animation-delay:.07s} li:nth-child(3){animation-delay:.14s} li:nth-child(4){animation-delay:.21s}
+    li{animation-delay:calc(var(--i,0) * .06s)}
     @keyframes in{to{opacity:1;transform:none}}
   }
 </style>
@@ -55,21 +55,37 @@
   </header>
 
   <ul>
-    <li><a class="acct" href="https://www.instagram.com/grainbyelgin/" target="_blank" rel="noopener">
+    <li style="--i:0"><a class="acct" href="https://www.instagram.com/grainbyelgin/" target="_blank" rel="noopener">
       <span class="ig"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg></span>
       <span class="t"><b>Grain by Elgin</b><span>@grainbyelgin</span><small>Ranjit Avenue, Amritsar</small></span>
       <span class="go">Follow</span></a></li>
-    <li><a class="acct" href="https://www.instagram.com/elgin_cafe/" target="_blank" rel="noopener">
+    <li style="--i:1"><a class="acct" href="https://www.instagram.com/grabandgo_grain/" target="_blank" rel="noopener">
+      <span class="ig"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg></span>
+      <span class="t"><b>Grab and Go by Grain</b><span>@grabandgo_grain</span><small>Café · open daily till 5 AM</small></span>
+      <span class="go">Follow</span></a></li>
+    <li style="--i:2"><a class="acct" href="https://www.instagram.com/grainandpour/" target="_blank" rel="noopener">
+      <span class="ig"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg></span>
+      <span class="t"><b>Grain &amp; Pour by Elgin</b><span>@grainandpour</span><small>HLP Galleria, Mohali</small></span>
+      <span class="go">Follow</span></a></li>
+    <li style="--i:3"><a class="acct" href="https://www.instagram.com/elgin_cafe/" target="_blank" rel="noopener">
       <span class="ig"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg></span>
       <span class="t"><b>Elgin Café</b><span>@elgin_cafe</span><small>Amritsar</small></span>
       <span class="go">Follow</span></a></li>
-    <li><a class="acct" href="https://www.instagram.com/lordelginbar/" target="_blank" rel="noopener">
+    <li style="--i:4"><a class="acct" href="https://www.instagram.com/lordelginbar/" target="_blank" rel="noopener">
       <span class="ig"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg></span>
-      <span class="t"><b>Lord Elgin Bar</b><span>@lordelginbar</span><small>Cocktails &amp; tapas</small></span>
+      <span class="t"><b>Lord Elgin Bar</b><span>@lordelginbar</span><small>Cocktails &amp; tapas · reservations</small></span>
       <span class="go">Follow</span></a></li>
-    <li><a class="acct" href="https://www.instagram.com/elgin_hall/" target="_blank" rel="noopener">
+    <li style="--i:5"><a class="acct" href="https://www.instagram.com/thegovernorhouse.elgin/" target="_blank" rel="noopener">
+      <span class="ig"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg></span>
+      <span class="t"><b>The Governor House by Elgin</b><span>@thegovernorhouse.elgin</span><small>New</small></span>
+      <span class="go">Follow</span></a></li>
+    <li style="--i:6"><a class="acct" href="https://www.instagram.com/elgin_hall/" target="_blank" rel="noopener">
       <span class="ig"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg></span>
       <span class="t"><b>Elgin Hall</b><span>@elgin_hall</span><small>Dalhousie</small></span>
+      <span class="go">Follow</span></a></li>
+    <li style="--i:7"><a class="acct" href="https://www.instagram.com/pappadhbyelgin.ldh/" target="_blank" rel="noopener">
+      <span class="ig"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg></span>
+      <span class="t"><b>Pappadh by Elgin</b><span>@pappadhbyelgin.ldh</span><small>Indian delivery · Ludhiana</small></span>
       <span class="go">Follow</span></a></li>
   </ul>
 
