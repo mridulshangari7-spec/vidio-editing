@@ -5,55 +5,67 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Elgin – Follow us on Instagram</title>
 <meta name="description" content="Follow every Elgin venue on Instagram: The Governor House, Elgin Café, Lord Elgin Bar, Grain, Grab and Go, Pappadh, Elgin Hall and Grain &amp; Pour, plus the Elgin Hospitality website.">
-<meta name="theme-color" content="#14201b">
+<meta name="theme-color" content="#070707">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#14201b;--bg2:#1b2a24;--cream:#f3ead8;--soft:rgba(243,234,216,.66);--gold:#c9a45c;--line:rgba(243,234,216,.14)}
+  /* Monochrome, candle-lit look taken from The Governor House: black, ivory, arches, a lit sign. */
+  :root{--bg:#070707;--ink:#f2efe9;--soft:rgba(242,239,233,.62);--faint:rgba(242,239,233,.4);--line:rgba(242,239,233,.16);--glow:255,214,150}
   *{box-sizing:border-box}
   html,body{margin:0}
-  body{min-height:100vh;min-height:100svh;background:radial-gradient(120% 80% at 50% 0%,#24382f 0%,var(--bg) 60%);color:var(--cream);
+  body{min-height:100vh;min-height:100svh;color:var(--ink);background:var(--bg);
+    background-image:radial-gradient(60% 34% at 50% 0%,rgba(var(--glow),.10),transparent 70%),
+      radial-gradient(90% 40% at 50% 100%,rgba(var(--glow),.07),transparent 70%);
     font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;
     padding:max(36px,env(safe-area-inset-top)) 18px max(28px,env(safe-area-inset-bottom))}
   main{max-width:440px;margin:0 auto}
-  header{text-align:center;margin-bottom:28px}
-  .crest{width:64px;height:64px;margin:0 auto 14px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;
-    font:600 30px/1 "Cormorant Garamond",Georgia,serif;color:var(--gold)}
-  h1{margin:0;font:600 40px/1 "Cormorant Garamond",Georgia,serif;letter-spacing:.18em;padding-left:.18em}
-  .sub{margin:12px 0 0;color:var(--soft);font-size:14px;letter-spacing:.02em}
-  .rule{width:46px;height:1px;background:var(--gold);margin:18px auto 0}
-  ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
-  a.acct{display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:center;text-decoration:none;color:inherit;
-    background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:18px;padding:14px 14px 14px 14px;
+  header{text-align:center;margin-bottom:30px}
+  .arch{width:78px;height:96px;margin:0 auto 18px;border:1px solid rgba(242,239,233,.55);border-radius:39px 39px 4px 4px;
+    display:grid;place-items:center;position:relative;
+    background:radial-gradient(70% 55% at 50% 78%,rgba(var(--glow),.22),transparent 70%)}
+  .arch::before{content:"";position:absolute;inset:6px;border:1px solid var(--line);border-radius:33px 33px 2px 2px}
+  .arch span{font:500 34px/1 "Cormorant Garamond",Georgia,serif;margin-top:10px}
+  .sign{display:inline-block;padding:9px 20px 8px;border:1.5px solid var(--ink);border-radius:10px;
+    font:600 15px/1 Inter,system-ui,sans-serif;letter-spacing:.42em;padding-right:calc(20px - .42em);
+    box-shadow:0 0 18px rgba(255,255,255,.18),inset 0 0 10px rgba(255,255,255,.08);text-shadow:0 0 10px rgba(255,255,255,.45)}
+  h1{margin:16px 0 0;font:500 34px/1.05 "Cormorant Garamond",Georgia,serif;letter-spacing:.02em}
+  .sub{margin:8px 0 0;color:var(--soft);font-size:11.5px;letter-spacing:.32em;text-transform:uppercase}
+  .rule{width:46px;height:1px;background:var(--line);margin:20px auto 0}
+  ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+  a.acct{display:grid;grid-template-columns:48px 1fr auto;gap:14px;align-items:center;text-decoration:none;color:inherit;
+    background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.012));border:1px solid var(--line);border-radius:14px;padding:13px 13px 13px 13px;
     transition:transform .25s ease,border-color .25s ease,background .25s ease}
-  a.acct:hover,a.acct:focus-visible{transform:translateY(-2px);border-color:rgba(201,164,92,.6);background:rgba(255,255,255,.06)}
-  a.acct:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-  .ig{width:52px;height:52px;border-radius:15px;display:grid;place-items:center;
-    background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90%)}
-  .ig.web{background:var(--gold)}
-  .ig.web svg{color:var(--bg)}
-  li.site{margin-top:8px}
-  .ig svg{width:26px;height:26px;color:#fff}
+  a.acct:hover,a.acct:focus-visible{transform:translateY(-2px);border-color:rgba(242,239,233,.45);background:rgba(255,255,255,.06)}
+  a.acct:focus-visible{outline:1.5px solid var(--ink);outline-offset:3px}
+  .ig{width:48px;height:48px;border-radius:24px 24px 6px 6px;display:grid;place-items:center;
+    border:1px solid rgba(242,239,233,.4);background:radial-gradient(80% 60% at 50% 80%,rgba(var(--glow),.16),transparent 75%)}
+  li.site{margin-top:10px}
+  .ig svg{width:22px;height:22px;color:var(--ink)}
   .t b{display:block;font:600 21px/1.1 "Cormorant Garamond",Georgia,serif;letter-spacing:.01em}
-  .t span{display:block;margin-top:3px;font-size:13px;color:var(--gold)}
-  .t small{display:block;margin-top:2px;font-size:12px;color:var(--soft)}
-  .go{font-size:13px;font-weight:600;padding:9px 14px;border-radius:999px;background:var(--cream);color:var(--bg);white-space:nowrap}
-  footer{margin-top:30px;text-align:center;font-size:11.5px;color:rgba(243,234,216,.45);letter-spacing:.02em}
+  .t span{display:block;margin-top:3px;font-size:12.5px;color:var(--ink);opacity:.8}
+  .t small{display:block;margin-top:2px;font-size:12px;color:var(--faint)}
+  .go{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:9px 13px;border-radius:999px;
+    border:1px solid rgba(242,239,233,.55);white-space:nowrap;transition:background .25s,color .25s}
+  a.acct:hover .go,a.acct:focus-visible .go{background:var(--ink);color:var(--bg)}
+  footer{margin-top:32px;text-align:center;font-size:11px;color:rgba(242,239,233,.38);letter-spacing:.04em}
   footer a{color:inherit}
   @media (prefers-reduced-motion:no-preference){
     li{opacity:0;transform:translateY(10px);animation:in .55s cubic-bezier(.22,.61,.36,1) forwards}
     li{animation-delay:calc(var(--i,0) * .06s)}
     @keyframes in{to{opacity:1;transform:none}}
+    .sign{animation:flick 6s ease-in-out infinite}
+    @keyframes flick{0%,100%{opacity:1}48%{opacity:1}50%{opacity:.82}52%{opacity:1}}
   }
 </style>
 </head>
 <body>
 <main>
   <header>
-    <div class="crest">E</div>
-    <h1>ELGIN</h1>
-    <p class="sub">Follow us on Instagram</p>
+    <div class="arch"><span>E</span></div>
+    <div class="sign">ELGIN</div>
+    <h1>Follow us on Instagram</h1>
+    <p class="sub">The Elgin Hospitality</p>
     <div class="rule"></div>
   </header>
 
