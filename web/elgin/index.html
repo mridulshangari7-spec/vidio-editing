@@ -23,25 +23,18 @@
   .slide{position:absolute;inset:-2%;background:center/cover no-repeat;opacity:0;transition:opacity 1.8s ease;will-change:opacity,transform}
   .slide.on{opacity:1}
   .veil{position:absolute;inset:0;
-    background:radial-gradient(120% 70% at 50% 18%,transparent 0%,rgba(20,18,15,.35) 55%,rgba(20,18,15,.8) 100%),
-      linear-gradient(180deg,rgba(20,18,15,.25) 0%,rgba(20,18,15,.15) 30%,rgba(20,18,15,.72) 62%,rgba(20,18,15,.86) 100%)}
-  .hero{position:relative;height:100vh;height:100svh;max-height:760px;min-height:520px;display:flex;align-items:flex-end;justify-content:center}
-  .hero .copy{text-align:center;padding:0 18px 96px}
-  .room{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 0 18px;font:400 12px/1 "Cinzel Decorative",Georgia,serif;letter-spacing:.14em;color:var(--gold2);text-transform:uppercase}
-  .room b{width:22px;height:1px;background:var(--gold)}
+    background:linear-gradient(180deg,rgba(18,16,13,.55) 0%,rgba(18,16,13,.22) 22%,rgba(18,16,13,.22) 70%,rgba(18,16,13,.6) 100%)}
+  header.top{text-align:center;padding:max(34px,env(safe-area-inset-top)) 18px 22px}
+  .eyebrow{margin:0;font-size:10.5px;letter-spacing:.36em;text-transform:uppercase;color:var(--gold2);font-weight:500;padding-left:.36em;text-shadow:0 1px 8px rgba(0,0,0,.8)}
+  h1{margin:8px 0 0;font:400 46px/1 "Cinzel Decorative",Georgia,serif;letter-spacing:.08em;padding-left:.08em;text-shadow:0 2px 20px rgba(0,0,0,.85)}
+  .sub{margin:8px 0 0;font-size:14px;color:var(--ink);font-weight:400;letter-spacing:.06em;text-shadow:0 1px 10px rgba(0,0,0,.85)}
+  .room{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0 0;font:400 10.5px/1 "Cinzel Decorative",Georgia,serif;letter-spacing:.14em;color:var(--gold2);text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.9)}
+  .room b{width:18px;height:1px;background:var(--gold)}
   .room span{transition:opacity .6s ease}
-  .eyebrow{margin:0;font-size:11px;letter-spacing:.36em;text-transform:uppercase;color:var(--soft);font-weight:500;padding-left:.36em}
-  h1{margin:10px 0 0;font:400 58px/1 "Cinzel Decorative",Georgia,serif;letter-spacing:.08em;padding-left:.08em;text-shadow:0 2px 24px rgba(0,0,0,.7)}
-  .sub{margin:12px 0 0;font-size:15px;color:var(--ink);font-weight:300;letter-spacing:.06em;text-shadow:0 1px 10px rgba(0,0,0,.6)}
-  .dots{display:flex;justify-content:center;gap:7px;margin-top:22px}
-  .dots i{width:6px;height:6px;border-radius:50%;border:1px solid var(--gold);transition:background .4s,transform .4s}
-  .dots i.on{background:var(--gold2);transform:scale(1.25)}
-  .scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);width:26px;height:42px;border:1px solid rgba(217,189,126,.6);border-radius:14px}
-  .scroll span{position:absolute;left:50%;top:8px;width:2px;height:8px;margin-left:-1px;border-radius:2px;background:var(--gold2)}
-  main{max-width:460px;margin:0 auto;padding:6px 16px 0;scroll-margin-top:16px}
+  main{max-width:460px;margin:0 auto;padding:0 16px}
   ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
   a.acct{display:grid;grid-template-columns:54px 1fr auto;gap:12px;align-items:center;text-decoration:none;color:inherit;
-    background:rgba(30,27,22,.62);-webkit-backdrop-filter:blur(14px) saturate(1.1);backdrop-filter:blur(14px) saturate(1.1);border:1px solid var(--line);border-radius:4px;padding:16px 14px 16px 12px;
+    background:rgba(22,20,16,.58);-webkit-backdrop-filter:blur(10px) saturate(1.15);backdrop-filter:blur(10px) saturate(1.15);border:1px solid var(--line);border-radius:4px;padding:16px 14px 16px 12px;
     transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
   a.acct:hover,a.acct:focus-visible{transform:translateY(-2px);border-color:rgba(184,153,90,.6);box-shadow:0 10px 26px rgba(0,0,0,.35),0 0 30px rgba(217,170,90,.08)}
   a.acct:focus-visible{outline:1.5px solid var(--gold);outline-offset:3px}
@@ -55,7 +48,7 @@
     color:var(--gold2);white-space:nowrap;transition:background .25s,color .25s}
   a.acct:hover .go,a.acct:focus-visible .go{background:var(--gold);color:var(--bg)}
   li.site{margin-bottom:6px}
-  li.site a.acct{border-color:rgba(184,153,90,.6);background:radial-gradient(120% 140% at 0% 0%,rgba(217,170,90,.18),transparent 60%),rgba(36,32,26,.7)}
+  li.site a.acct{border-color:rgba(184,153,90,.6);background:radial-gradient(120% 140% at 0% 0%,rgba(217,170,90,.18),transparent 60%),rgba(30,27,22,.62)}
   li.site .num{-webkit-text-stroke-color:var(--gold2)}
   footer{margin-top:30px;padding:26px 18px max(24px,env(safe-area-inset-bottom));text-align:center;font-size:11px;letter-spacing:.05em;color:var(--soft);
     background:linear-gradient(180deg,rgba(20,18,15,0),rgba(20,18,15,.55) 45%,rgba(20,18,15,.3)),repeating-conic-gradient(#0e0d0b 0 25%,#6b6151 0 50%) 0 0/30px 30px}
@@ -63,17 +56,14 @@
   footer a{color:inherit}
   @media (prefers-reduced-motion:no-preference){
     li{opacity:0;transform:translateY(10px);animation:in .55s cubic-bezier(.22,.61,.36,1) forwards}
-    li{animation-delay:calc(.5s + var(--i,0) * .05s)}
+    li{animation-delay:calc(.25s + var(--i,0) * .05s)}
     @keyframes in{to{opacity:1;transform:none}}
-    .slide.on{animation:kb 8s ease-out forwards}
+    .slide.on{animation:kb 9s ease-out forwards}
     .slide.on:nth-child(2n){animation-name:kb2}
-    @keyframes kb{from{transform:scale(1.14) translate(1.5%,1%)}to{transform:scale(1.02) translate(0,0)}}
-    @keyframes kb2{from{transform:scale(1.02) translate(-1%,0)}to{transform:scale(1.14) translate(1%,-1.5%)}}
-    .hero .copy>*{opacity:0;transform:translateY(12px);animation:in .9s cubic-bezier(.22,.61,.36,1) forwards}
-    .hero .copy>:nth-child(2){animation-delay:.15s}.hero .copy>:nth-child(3){animation-delay:.3s}
-    .hero .copy>:nth-child(4){animation-delay:.45s}.hero .copy>:nth-child(5){animation-delay:.6s}
-    .scroll span{animation:sc 1.8s ease-in-out infinite}
-    @keyframes sc{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
+    @keyframes kb{from{transform:scale(1.1) translate(1%,.5%)}to{transform:scale(1.02) translate(0,0)}}
+    @keyframes kb2{from{transform:scale(1.02) translate(-.5%,0)}to{transform:scale(1.1) translate(.5%,-1%)}}
+    header.top>*{opacity:0;transform:translateY(10px);animation:in .8s cubic-bezier(.22,.61,.36,1) forwards}
+    header.top>:nth-child(2){animation-delay:.1s}header.top>:nth-child(3){animation-delay:.2s}header.top>:nth-child(4){animation-delay:.3s}
   }
 </style>
 </head>
@@ -88,17 +78,13 @@
   <div class="slide" data-room="The Archive Room" data-src="s7.webp"></div>
   <div class="veil"></div>
 </div>
-<header class="hero">
-  <div class="copy">
-    <p class="room"><b></b><span id="room">The Bar</span><b></b></p>
-    <p class="eyebrow">The Elgin Hospitality</p>
-    <h1>Elgin</h1>
-    <p class="sub">Follow us on Instagram</p>
-    <div class="dots" id="dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-  </div>
-  <a class="scroll" href="#list" aria-label="See all accounts"><span></span></a>
+<header class="top">
+  <p class="eyebrow">The Elgin Hospitality</p>
+  <h1>Elgin</h1>
+  <p class="sub">Follow us on Instagram</p>
+  <p class="room"><b></b><span id="room">The Bar</span><b></b></p>
 </header>
-<main id="list">
+<main>
   <ul>
     <li style="--i:0" class="site"><a class="acct" href="https://elginhospitality.com/" target="_blank" rel="noopener">
       <span class="num">01</span>
@@ -146,16 +132,15 @@
 <script>
 /* Room slideshow: load the rest after the first paint, then cross-fade every 6 s. */
 (function(){
-  var slides=[].slice.call(document.querySelectorAll(".slide")), dots=[].slice.call(document.querySelectorAll("#dots i")),
+  var slides=[].slice.call(document.querySelectorAll(".slide")),
       label=document.getElementById("room"), i=0;
-  dots[0].classList.add("on");
   window.addEventListener("load",function(){
     slides.forEach(function(s){ if(!s.style.backgroundImage) s.style.backgroundImage="url("+s.dataset.src+")"; });
     setInterval(function(){
       if(document.hidden) return;
-      slides[i].classList.remove("on"); dots[i].classList.remove("on");
+      slides[i].classList.remove("on");
       i=(i+1)%slides.length;
-      slides[i].classList.add("on"); dots[i].classList.add("on");
+      slides[i].classList.add("on");
       label.style.opacity=0;
       setTimeout(function(){ label.textContent=slides[i].dataset.room; label.style.opacity=1; },450);
     },6000);
