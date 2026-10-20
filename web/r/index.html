@@ -64,8 +64,10 @@
   var SHEET_TAB = "";             // tab name; empty means the first tab
   var WHATSAPP = "919815803736";  // where renewals go
 
-  // Cards that work even before the sheet is connected (also used for testing).
+  // Fallback cards, used only when the sheet has no row for the ID or can't be reached.
+  // A row in the sheet always wins, so setting a card to STOP there still pauses it.
   var LOCAL = {
+    "ELGIN":  {link:"https://growwithinfinity.github.io/elgin/", paid_until:"", status:"ACTIVE"},
     "DEMO":   {link:"https://www.google.com/", paid_until:"2099-12-31", status:"ACTIVE"},
     "DEMOX":  {link:"https://www.google.com/", paid_until:"2020-01-01", status:"ACTIVE"},
     "DEMOS":  {link:"https://www.google.com/", paid_until:"2099-12-31", status:"STOP"}
@@ -102,30 +104,32 @@
   }
 
   if (!id) { show("missing"); return; }
-  if (!SHEET_ID || LOCAL[id]) { decide(LOCAL[id]); return; }
+  if (!SHEET_ID) { decide(LOCAL[id]); return; }
+  function fallback(){ if (LOCAL[id]) decide(LOCAL[id]); else show("offline"); }
 
   // Ask the sheet for this one row. The response arrives as a script calling infinityCard().
   var done = false;
   window.infinityCard = function(resp){
+    if (done) return;
     done = true;
     try {
-      if (!resp || resp.status === "error" || !resp.table) { show("offline"); return; }
+      if (!resp || resp.status === "error" || !resp.table) { fallback(); return; }
       var cols = resp.table.cols.map(function(c){ return String(c.label || c.id || "").trim().toLowerCase().replace(/\s+/g,"_"); });
       var row = resp.table.rows[0];
-      if (!row) { show("missing"); return; }
+      if (!row) { decide(LOCAL[id]); return; }
       var card = {};
       cols.forEach(function(name, i){ var c = row.c[i]; card[name] = c ? (c.v != null ? c.v : c.f) : ""; });
       decide(card);
-    } catch (e) { show("offline"); }
+    } catch (e) { fallback(); }
   };
   var q = "select * where upper(A) = '" + id.replace(/'/g, "") + "' limit 1";
   var s = document.createElement("script");
   s.src = "https://docs.google.com/spreadsheets/d/" + encodeURIComponent(SHEET_ID) +
           "/gviz/tq?headers=1" + (SHEET_TAB ? "&sheet=" + encodeURIComponent(SHEET_TAB) : "") +
           "&tq=" + encodeURIComponent(q) + "&tqx=responseHandler:infinityCard";
-  s.onerror = function(){ if (!done) show("offline"); };
+  s.onerror = function(){ if (!done) { done = true; fallback(); } };
   document.head.appendChild(s);
-  setTimeout(function(){ if (!done) show("offline"); }, 8000);
+  setTimeout(function(){ if (!done) { done = true; fallback(); } }, 8000);
 })();
 </script>
 </body>

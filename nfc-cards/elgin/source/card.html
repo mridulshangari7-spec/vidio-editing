@@ -1,0 +1,93 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"CinzelD";src:url(font2.ttf);font-weight:400}
+@font-face{font-family:"CinzelD";src:url(font3.ttf);font-weight:700}
+@font-face{font-family:"Cinzel";src:url(font0.ttf);font-weight:400}
+@font-face{font-family:"Cinzel";src:url(font1.ttf);font-weight:500}
+@font-face{font-family:"DM";src:url(font4.ttf);font-weight:300}
+@font-face{font-family:"DM";src:url(font5.ttf);font-weight:400}
+@font-face{font-family:"DM";src:url(font6.ttf);font-weight:500}
+@font-face{font-family:"DM";src:url(font7.ttf);font-weight:600}
+/* 3.5 x 2 in card (88.9 x 50.8 mm) + 1/8 in bleed each side = 95.25 x 57.15 mm */
+@page{size:95.25mm 57.15mm;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#1c1a16}
+:root{--ink:#efe7d8;--soft:rgba(239,231,216,.72);--gold:#b8995a;--gold2:#d9bd7e;--bg:#1c1a16;--b:3.175mm}
+.page{width:95.25mm;height:57.15mm;position:relative;overflow:hidden;page-break-after:always;background:var(--bg);font-family:DM,sans-serif;color:var(--ink)}
+.page:last-child{page-break-after:auto}
+/* trim-safe frame: gold hairline 3.6 mm inside the cut */
+.frame{position:absolute;left:calc(var(--b) + 3.6mm);top:calc(var(--b) + 3.6mm);right:calc(var(--b) + 3.6mm);bottom:calc(var(--b) + 3.6mm);border:.18mm solid rgba(217,189,126,.75);pointer-events:none}
+.frame::after{content:"";position:absolute;inset:.7mm;border:.1mm solid rgba(217,189,126,.35)}
+/* ---------- FRONT ---------- */
+.front .photo{position:absolute;inset:0;background:url(front.jpg) 62% 50%/cover}
+.front .shade{position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(20,18,15,.96) 0%,rgba(20,18,15,.9) 30%,rgba(20,18,15,.55) 52%,rgba(20,18,15,.08) 78%,rgba(20,18,15,.25) 100%),
+  linear-gradient(180deg,rgba(20,18,15,.35) 0%,transparent 30%,transparent 70%,rgba(20,18,15,.55) 100%)}
+.front .copy{position:absolute;left:calc(var(--b) + 7.4mm);top:calc(var(--b) + 9.2mm)}
+.eyebrow{font-size:1.55mm;letter-spacing:.42em;color:var(--gold2);font-weight:500;text-transform:uppercase}
+.front h1{font:400 12.6mm/1 CinzelD,serif;letter-spacing:.04em;margin-top:2.6mm;color:var(--ink);text-shadow:0 0 2mm rgba(0,0,0,.6)}
+.rule{width:9mm;height:.2mm;background:var(--gold);margin:3.2mm 0 2.6mm}
+.front .follow{font-size:2.55mm;font-weight:300;letter-spacing:.03em}
+.front .places{margin-top:1.7mm;font-size:1.45mm;letter-spacing:.34em;color:var(--gold2);font-weight:500}
+.tap{position:absolute;right:calc(var(--b) + 6.6mm);top:calc(var(--b) + 6.6mm);display:flex;align-items:center;gap:1.3mm;
+  padding:1.1mm 2.1mm 1.1mm 1.6mm;border:.15mm solid rgba(217,189,126,.7);background:rgba(20,18,15,.55);border-radius:3mm}
+.tap svg{width:3.2mm;height:3.2mm;color:var(--gold2)}
+.tap span{font-size:1.5mm;letter-spacing:.3em;font-weight:600;color:var(--ink)}
+.caption{position:absolute;right:calc(var(--b) + 6.6mm);bottom:calc(var(--b) + 6.2mm);font:400 1.5mm/1 CinzelD,serif;letter-spacing:.14em;color:var(--gold2);display:flex;align-items:center;gap:1.2mm}
+.caption b{width:3mm;height:.12mm;background:var(--gold)}
+/* ---------- BACK ---------- */
+.back .photo{position:absolute;inset:0;background:url(back.jpg) 50% 55%/cover;opacity:.32;filter:blur(.35mm) saturate(1.1)}
+.back .shade{position:absolute;inset:0;background:radial-gradient(75% 90% at 30% 45%,rgba(20,18,15,.25),rgba(20,18,15,.92) 75%)}
+.check{position:absolute;left:0;right:0;bottom:0;height:calc(var(--b) + 2.6mm);
+  background:repeating-conic-gradient(#0e0d0b 0 25%,#5c5446 0 50%) 0 0/2.6mm 2.6mm;opacity:.55;
+  -webkit-mask:linear-gradient(180deg,transparent,#000 70%);mask:linear-gradient(180deg,transparent,#000 70%)}
+.qrbox{position:absolute;left:calc(var(--b) + 7.2mm);top:calc(var(--b) + 8.4mm);width:25mm;height:25mm;padding:2.1mm;
+  background:#f1e9da;border-radius:2.2mm;box-shadow:0 0 0 .25mm var(--gold),0 0 0 .9mm rgba(20,18,15,.9),0 0 0 1.05mm rgba(217,189,126,.5)}
+.qr{width:100%;height:100%;display:block}
+.qrcap{position:absolute;left:calc(var(--b) + 7.2mm);width:25mm;top:calc(var(--b) + 36.2mm);text-align:center;font-size:1.25mm;letter-spacing:.34em;color:var(--gold2);font-weight:500}
+.back .copy{position:absolute;left:calc(var(--b) + 40.5mm);right:calc(var(--b) + 6.4mm);top:calc(var(--b) + 7.2mm)}
+.back h2{font:400 3.2mm/1.15 CinzelD,serif;letter-spacing:.03em;color:var(--ink)}
+.back .rule{margin:1.8mm 0 1.8mm;width:7mm}
+.list{list-style:none;display:grid;grid-template-columns:auto 1fr;column-gap:1.4mm;row-gap:.36mm;font-size:1.55mm;line-height:1.15}
+.list i{font-style:normal;color:transparent;-webkit-text-stroke:.07mm var(--gold2);font-weight:400;font-size:1.75mm;letter-spacing:-.02em}
+.list span{color:var(--ink);font-weight:400;letter-spacing:.02em}
+.powered{position:absolute;right:calc(var(--b) + 6.4mm);left:calc(var(--b) + 40.5mm);bottom:calc(var(--b) + 5.5mm);display:flex;justify-content:space-between;align-items:flex-end;
+  border-top:.12mm solid rgba(217,189,126,.4);padding-top:1.4mm;font-size:1.25mm;color:var(--soft);letter-spacing:.05em}
+.powered b{display:block;font:500 2mm/1 Cinzel,serif;letter-spacing:.28em;color:var(--ink);margin-top:.5mm}
+.powered small{display:block;font-size:1.05mm;letter-spacing:.32em;color:var(--gold2);font-weight:500}
+.powered .ph{text-align:right;line-height:1.55}
+.n{display:block}.n em{font-style:normal;display:inline-block;margin-left:.55mm}
+</style></head><body>
+<section class="page front">
+  <div class="photo"></div><div class="shade"></div>
+  <div class="copy">
+    <p class="eyebrow">The Elgin Hospitality</p>
+    <h1>Elgin</h1>
+    <div class="rule"></div>
+    <p class="follow">Follow us on Instagram</p>
+    <p class="places">AMRITSAR · MOHALI · DALHOUSIE</p>
+  </div>
+  <div class="tap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="5" cy="12" r="1.6" fill="currentColor" stroke="none"/><path d="M9 8.5a5 5 0 0 1 0 7M12.5 6a8.5 8.5 0 0 1 0 12M16 3.5a12 12 0 0 1 0 17"/></svg><span>TAP OR SCAN</span></div>
+  <div class="frame"></div>
+</section>
+<section class="page back">
+  <div class="photo"></div><div class="shade"></div><div class="check"></div>
+  <div class="qrbox"><svg class="qr" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" class="segno"><path class="qrline" stroke="#1c1a16" d="M0 0.5h7m1 0h1m3 0h1m1 0h7m2 0h1m2 0h7m-33 1h1m5 0h1m2 0h1m8 0h1m3 0h1m3 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m4 0h1m1 0h1m5 0h5m2 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m2 0h3m2 0h1m1 0h1m2 0h1m4 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h1m3 0h1m1 0h5m1 0h1m1 0h3m1 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m1 0h1m1 0h4m4 0h1m1 0h2m2 0h1m1 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-24 1h1m1 0h1m7 0h6m-24 1h7m3 0h3m1 0h3m4 0h1m4 0h2m3 0h1m-33 1h1m1 0h1m1 0h1m2 0h1m2 0h1m6 0h1m1 0h2m1 0h2m2 0h2m1 0h2m1 0h1m-33 1h2m1 0h1m1 0h2m5 0h1m1 0h1m1 0h2m2 0h1m1 0h1m5 0h1m1 0h2m-32 1h1m1 0h1m1 0h1m8 0h2m3 0h1m2 0h3m2 0h1m1 0h3m1 0h1m-31 1h1m1 0h3m1 0h1m1 0h1m1 0h1m2 0h2m1 0h2m2 0h1m4 0h3m1 0h2m-32 1h1m1 0h1m1 0h1m3 0h2m1 0h1m1 0h2m1 0h2m1 0h2m1 0h1m2 0h1m2 0h4m-33 1h1m1 0h1m2 0h2m1 0h1m1 0h2m1 0h6m2 0h2m2 0h2m2 0h1m1 0h1m-32 1h2m3 0h1m2 0h1m1 0h3m1 0h1m3 0h1m1 0h2m1 0h1m1 0h2m2 0h2m-31 1h1m5 0h1m8 0h1m3 0h1m2 0h2m1 0h1m1 0h2m3 0h1m-33 1h3m1 0h2m3 0h2m1 0h1m2 0h3m1 0h2m2 0h1m2 0h2m1 0h2m1 0h1m-32 1h3m1 0h3m3 0h1m1 0h3m5 0h1m3 0h4m1 0h1m-30 1h1m2 0h2m1 0h2m5 0h1m1 0h1m2 0h5m2 0h6m-30 1h1m1 0h1m1 0h1m1 0h1m1 0h2m1 0h1m2 0h3m3 0h4m2 0h2m2 0h1m-33 1h3m1 0h1m2 0h4m2 0h1m1 0h1m4 0h1m2 0h2m1 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m4 0h2m4 0h1m2 0h2m3 0h1m1 0h1m1 0h3m-32 1h1m1 0h1m7 0h2m3 0h1m4 0h2m1 0h1m1 0h6m1 0h1m-33 1h1m2 0h2m1 0h2m3 0h1m1 0h1m3 0h2m3 0h8m1 0h2m-25 1h4m1 0h2m4 0h3m2 0h1m3 0h1m1 0h3m-33 1h7m1 0h1m2 0h1m1 0h1m1 0h2m1 0h1m2 0h4m1 0h1m1 0h1m1 0h2m-32 1h1m5 0h1m1 0h1m1 0h2m1 0h3m2 0h4m1 0h2m3 0h3m-31 1h1m1 0h3m1 0h1m1 0h1m1 0h1m2 0h1m1 0h3m1 0h1m4 0h6m1 0h1m-32 1h1m1 0h3m1 0h1m1 0h1m4 0h2m1 0h1m1 0h1m1 0h1m1 0h1m2 0h1m2 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m3 0h3m1 0h2m2 0h4m2 0h1m-31 1h1m5 0h1m1 0h1m4 0h2m1 0h1m3 0h3m3 0h1m1 0h3m-31 1h7m5 0h1m1 0h1m1 0h1m1 0h2m2 0h4m1 0h1m3 0h1"/></svg></div>
+  <p class="qrcap">SCAN OR TAP</p>
+  <div class="copy">
+    <h2>Follow us on Instagram</h2>
+    <div class="rule"></div>
+    <ul class="list">
+      <li style="display:contents"><i>01</i><span>The Governor House</span></li>
+      <li style="display:contents"><i>02</i><span>Elgin Café</span></li>
+      <li style="display:contents"><i>03</i><span>Lord Elgin Bar</span></li>
+      <li style="display:contents"><i>04</i><span>Grain by Elgin</span></li>
+      <li style="display:contents"><i>05</i><span>Grab and Go by Grain</span></li>
+      <li style="display:contents"><i>06</i><span>Pappadh by Elgin</span></li>
+      <li style="display:contents"><i>07</i><span>Elgin Hall, Dalhousie</span></li>
+      <li style="display:contents"><i>08</i><span>Grain &amp; Pour, Mohali</span></li>
+    </ul>
+  </div>
+  <div class="powered"><div><small>POWERED BY</small><b>INFINITY</b></div><div class="ph"><span class="n"><em>+91</em><em>79864</em><em>04564</em></span><span class="n"><em>+91</em><em>98771</em><em>68353</em></span></div></div>
+  <div class="frame"></div>
+</section>
+</body></html>
