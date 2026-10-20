@@ -6,14 +6,14 @@
 <title>Meats & Plants – Ramen, Sushi & Coffee in Kalyan</title>
 <meta name="description" content="Meats & Plants, Chikanghar, Kalyan: ramen, sushi, continental plates and coffee. Pick a side, meat or plants, and we build the bowl.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#13110f">
+<meta name="theme-color" content="#faf8f4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#13110f; --bg2:#1c1916; --ink:#f5ede0; --soft:rgba(245,237,224,.7); --faint:rgba(245,237,224,.45); --line:rgba(245,237,224,.12);
-    --red:#e3472f; --red2:#ff6a4d; --leaf:#7dbb63; --leaf2:#a9dd8b; --broth:#e7a24a; --cream:#f5ede0;
+    --bg:#faf8f4; --bg2:#f2eee7; --ink:#1d1c1a; --soft:rgba(29,28,26,.66); --faint:rgba(29,28,26,.42); --line:rgba(29,28,26,.1);
+    --red:#b9653f; --red2:#c97a55; --leaf:#5f7f4f; --leaf2:#7c9a68; --broth:#e7a24a; --cream:#f5ede0; --oak:#d8c3a2; --white:#fff;
     --accent:var(--red); --accent2:var(--red2);
   }
   html.plants{--accent:var(--leaf);--accent2:var(--leaf2)}
@@ -27,9 +27,9 @@
   .wrap{width:min(1180px,100% - 40px);margin:0 auto}
   .eyebrow{margin:0 0 14px;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);transition:color .5s}
   .btn{display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 22px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;
-    background:var(--accent);color:#14110e;transition:background .5s,transform .2s}
+    background:var(--ink);color:#fff;transition:background .5s,transform .2s}
   .btn:hover,.btn:focus-visible{transform:translateY(-2px)}
-  .btn.ghost{background:transparent;color:var(--ink);border:1px solid rgba(245,237,224,.35)}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid rgba(29,28,26,.25)}
   .btn svg{width:18px;height:18px}
   [data-rv]{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
   [data-rv].in{opacity:1;transform:none}
@@ -37,7 +37,7 @@
   /* ---------- nav ---------- */
   .nav{position:fixed;inset:0 0 auto;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:12px;
     padding:max(14px,env(safe-area-inset-top)) 20px 14px;transition:background .4s,backdrop-filter .4s}
-  .nav.solid{background:rgba(19,17,15,.78);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav.solid{background:rgba(250,248,244,.86);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
   .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 19px/1 "Fraunces",serif;letter-spacing:-.01em}
   .logo i{font-style:italic;color:var(--accent);transition:color .5s}
   .logo .m{width:30px;height:30px}
@@ -49,7 +49,12 @@
 
   /* ---------- hero ---------- */
   .hero{position:relative;min-height:100vh;min-height:100svh;display:grid;align-items:center;padding:110px 0 70px;overflow:hidden}
-  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 70% 45%,rgba(231,162,74,.16),transparent 70%),radial-gradient(40% 40% at 15% 85%,rgba(125,187,99,.10),transparent 70%)}
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(55% 55% at 72% 48%,#f1e9dc,transparent 70%)}
+  .arch{position:absolute;right:max(4vw,20px);top:90px;width:min(470px,44vw);height:calc(100% - 150px);border-radius:999px 999px 0 0;background:linear-gradient(180deg,#efe7da,#f6f1e9);border:1px solid var(--line)}
+  .hang{position:absolute;top:-96px;width:104px;pointer-events:none;transform-origin:50% 0;animation:sway 6s ease-in-out infinite}
+  .hang svg{width:100%;height:auto}
+  @keyframes sway{50%{transform:rotate(2.5deg)}}
+  @media (max-width:820px){.arch{left:50%;right:auto;transform:translateX(-50%);width:min(340px,84vw);top:84px;height:380px}.hang{display:none}}
   .hero .grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center}
   .hero h1{font-size:clamp(54px,9.4vw,138px);line-height:.88}
   .hero h1 .amp{display:inline-block;font-style:italic;color:var(--accent);transition:color .5s;transform-origin:50% 60%}
@@ -59,8 +64,8 @@
   .tags li{font-size:13px;font-weight:600;padding:8px 14px;border:1px solid var(--line);border-radius:999px;color:var(--soft)}
   .hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
   .hero-bowl{position:relative;width:min(520px,100%);margin:0 auto;aspect-ratio:1}
-  .hero-bowl svg.bowl{width:100%;height:100%;filter:drop-shadow(0 40px 60px rgba(0,0,0,.55))}
-  .steam path{fill:none;stroke:rgba(245,237,224,.5);stroke-width:5;stroke-linecap:round;stroke-dasharray:60 200;animation:steam 3.2s linear infinite}
+  .hero-bowl svg.bowl{width:100%;height:100%;filter:drop-shadow(0 30px 40px rgba(80,60,40,.18))}
+  .steam path{fill:none;stroke:rgba(29,28,26,.22);stroke-width:5;stroke-linecap:round;stroke-dasharray:60 200;animation:steam 3.2s linear infinite}
   .steam path:nth-child(2){animation-delay:-1.1s}.steam path:nth-child(3){animation-delay:-2.2s}
   @keyframes steam{from{stroke-dashoffset:260;opacity:0}20%{opacity:1}to{stroke-dashoffset:0;opacity:0}}
   .float{position:absolute;will-change:transform}
@@ -81,7 +86,7 @@
   .marquee{border-block:1px solid var(--line);overflow:hidden;padding:18px 0;background:var(--bg2)}
   .marquee .row{display:flex;gap:42px;width:max-content;align-items:center;will-change:transform}
   .marquee span{font:italic 700 clamp(26px,4vw,44px)/1 "Fraunces",serif;white-space:nowrap}
-  .marquee span.o{color:transparent;-webkit-text-stroke:1px rgba(245,237,224,.5);font-style:normal}
+  .marquee span.o{color:transparent;-webkit-text-stroke:1px rgba(29,28,26,.45);font-style:normal}
   .marquee svg{width:46px;height:46px;flex:none}
 
   /* ---------- pick a side ---------- */
@@ -91,7 +96,7 @@
   .switch{display:inline-grid;grid-template-columns:1fr 1fr;margin-top:34px;padding:6px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);position:relative}
   .switch button{all:unset;cursor:pointer;position:relative;z-index:1;padding:14px 26px;font-weight:700;font-size:16px;display:flex;align-items:center;gap:10px;justify-content:center;color:var(--soft);transition:color .4s}
   .switch button svg{width:22px;height:22px}
-  .switch button[aria-pressed="true"]{color:#14110e}
+  .switch button[aria-pressed="true"]{color:#fff}
   .switch .knob{position:absolute;top:6px;bottom:6px;left:6px;width:calc(50% - 6px);border-radius:999px;background:var(--accent);transition:transform .5s cubic-bezier(.6,.0,.2,1),background .5s}
   html.plants .switch .knob{transform:translateX(100%)}
   .switch button:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:999px}
@@ -125,18 +130,18 @@
   .menu .head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
   .menu h2{font-size:clamp(40px,6vw,76px);line-height:1}
   .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
-  .card{position:relative;background:var(--bg2);border:1px solid var(--line);border-radius:28px;padding:22px;overflow:hidden;transition:transform .4s,border-color .4s}
-  .card:hover{transform:translateY(-6px);border-color:rgba(245,237,224,.3)}
-  .card .art{aspect-ratio:4/3;border-radius:20px;display:grid;place-items:center;background:radial-gradient(70% 70% at 50% 60%,rgba(231,162,74,.22),transparent 70%),#221e1a;margin-bottom:18px}
+  .card{position:relative;background:#fff;border:1px solid var(--line);border-radius:28px;padding:22px;overflow:hidden;transition:transform .4s,border-color .4s}
+  .card:hover{transform:translateY(-6px);border-color:rgba(29,28,26,.22);box-shadow:0 24px 50px rgba(80,60,40,.10)}
+  .card .art{aspect-ratio:4/3;border-radius:20px;display:grid;place-items:center;background:radial-gradient(70% 70% at 50% 60%,#f3ead9,transparent 75%),#f6f2ec;margin-bottom:18px}
   .card .art svg{width:70%;height:70%;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
   .card:hover .art svg{transform:scale(1.08) rotate(-4deg)}
   .card .k{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);transition:color .5s}
   .card h3{font-size:26px;margin-top:8px}
   .card p{margin:8px 0 0;color:var(--soft);font-size:15px;line-height:1.55}
-  .card .badge{position:absolute;top:34px;right:34px;font-size:11px;font-weight:700;padding:6px 10px;border-radius:999px;background:rgba(19,17,15,.75);display:flex;gap:6px;align-items:center}
+  .card .badge{position:absolute;top:34px;right:34px;font-size:11px;font-weight:700;padding:6px 10px;border-radius:999px;background:#fff;border:1px solid var(--line);display:flex;gap:6px;align-items:center}
   .card .badge i{width:9px;height:9px;border-radius:2px;border:1.5px solid currentColor;display:grid;place-items:center}
   .card .badge i::after{content:"";width:3px;height:3px;border-radius:50%;background:currentColor}
-  .veg{color:var(--leaf2)} .nv{color:var(--red2)}
+  .veg{color:#3f8a3a} .nv{color:#b03a2e}
   html.plants .card[data-diet="meat"]{opacity:.35;filter:grayscale(.7)}
   html.meats .card[data-diet="plant"]{opacity:.35;filter:grayscale(.7)}
   .card{transition:transform .4s,border-color .4s,opacity .5s,filter .5s}
@@ -153,7 +158,7 @@
   @media (max-width:720px){.nums .grid{grid-template-columns:1fr;gap:6px}}
 
   /* ---------- visit ---------- */
-  .visit{padding:110px 0 70px;background:linear-gradient(180deg,var(--bg),#0e0c0b)}
+  .visit{padding:110px 0 70px;background:linear-gradient(180deg,var(--bg),var(--bg2))}
   .visit .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:stretch}
   .visit h2{font-size:clamp(42px,6vw,80px);line-height:.98}
   .visit .info{margin-top:28px;display:grid;gap:18px}
@@ -161,13 +166,13 @@
   .visit .info svg{width:22px;height:22px;color:var(--accent);transition:color .5s;margin-top:2px}
   .visit .info b{display:block;color:var(--ink);font-weight:600}
   .visit .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-  .mapcard{position:relative;border-radius:28px;overflow:hidden;border:1px solid var(--line);min-height:340px;background:#1a1714}
+  .mapcard{position:relative;border-radius:28px;overflow:hidden;border:1px solid var(--line);min-height:340px;background:#efe9df}
   .mapcard svg{position:absolute;inset:0;width:100%;height:100%}
   .pin-dot{position:absolute;left:52%;top:46%;transform:translate(-50%,-100%)}
-  .pin-dot svg{position:static;width:46px;height:58px;color:var(--accent);filter:drop-shadow(0 8px 14px rgba(0,0,0,.5));animation:bob 2s ease-in-out infinite}
-  .pin-dot::after{content:"";position:absolute;left:50%;bottom:-6px;width:40px;height:12px;margin-left:-20px;border-radius:50%;background:radial-gradient(rgba(0,0,0,.5),transparent 70%)}
+  .pin-dot svg{position:static;width:46px;height:58px;color:var(--accent);filter:drop-shadow(0 8px 14px rgba(80,60,40,.3));animation:bob 2s ease-in-out infinite}
+  .pin-dot::after{content:"";position:absolute;left:50%;bottom:-6px;width:40px;height:12px;margin-left:-20px;border-radius:50%;background:radial-gradient(rgba(80,60,40,.3),transparent 70%)}
   @keyframes bob{50%{transform:translateY(-8px)}}
-  .mapcard .lbl{position:absolute;left:18px;bottom:18px;right:18px;background:rgba(19,17,15,.85);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:18px;padding:14px 16px;font-size:14px;color:var(--soft)}
+  .mapcard .lbl{position:absolute;left:18px;bottom:18px;right:18px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:18px;padding:14px 16px;font-size:14px;color:var(--soft)}
   .mapcard .lbl b{display:block;color:var(--ink);font:700 18px/1.2 "Fraunces",serif;margin-bottom:2px}
   @media (max-width:860px){.visit .grid{grid-template-columns:1fr}}
 
@@ -189,15 +194,15 @@
   <defs>
     <symbol id="leaf" viewBox="0 0 64 64"><path d="M10 54C10 28 26 10 56 8c-2 30-20 46-46 46z" fill="#7dbb63"/><path d="M12 52C24 40 34 30 48 16" stroke="#3e6b31" stroke-width="3" fill="none" stroke-linecap="round"/></symbol>
     <symbol id="drum" viewBox="0 0 64 64"><path d="M40 10c10 0 16 8 14 18-2 9-12 14-20 12L18 54c-3 3-8 1-8-3 0-2 1-3 2-4l-2-2c-3-1-3-6 1-7 2 0 3 1 4 2l14-14c-2-8 3-18 13-18z" fill="#c8743c"/><path d="M40 14c7 0 11 6 10 12" stroke="#e7a24a" stroke-width="3" fill="none" stroke-linecap="round"/></symbol>
-    <symbol id="sushi" viewBox="0 0 64 64"><ellipse cx="32" cy="44" rx="24" ry="10" fill="#1e2a1f"/><rect x="8" y="22" width="48" height="22" fill="#1e2a1f"/><ellipse cx="32" cy="22" rx="24" ry="10" fill="#f5ede0"/><ellipse cx="32" cy="22" rx="17" ry="7" fill="#f8f3ea"/><ellipse cx="32" cy="22" rx="9" ry="4.2" fill="#ff7f5c"/><ellipse cx="29" cy="21" rx="3" ry="1.6" fill="#7dbb63"/></symbol>
+    <symbol id="sushi" viewBox="0 0 64 64"><ellipse cx="32" cy="44" rx="24" ry="10" fill="#1e2a1f"/><rect x="8" y="22" width="48" height="22" fill="#1e2a1f"/><ellipse cx="32" cy="22" rx="24" ry="10" fill="#fff" stroke="#e6dccc"/><ellipse cx="32" cy="22" rx="17" ry="7" fill="#f8f3ea"/><ellipse cx="32" cy="22" rx="9" ry="4.2" fill="#ff7f5c"/><ellipse cx="29" cy="21" rx="3" ry="1.6" fill="#7dbb63"/></symbol>
     <symbol id="chili" viewBox="0 0 64 64"><path d="M14 50c18 4 34-8 38-26 1-4 6-6 8-2-2 22-22 40-46 32-3-1-3-5 0-4z" fill="#e3472f"/><path d="M52 22c0-6 2-10 6-12" stroke="#7dbb63" stroke-width="4" fill="none" stroke-linecap="round"/></symbol>
-    <symbol id="cup" viewBox="0 0 64 64"><path d="M12 22h34v14a17 17 0 0 1-34 0z" fill="#f5ede0"/><path d="M46 26h4a7 7 0 0 1 0 14h-6" stroke="#f5ede0" stroke-width="4" fill="none"/><ellipse cx="29" cy="22" rx="17" ry="5" fill="#8a5a35"/><path d="M24 22c3-3 7-3 10 0-3 2-7 2-10 0z" fill="#f5ede0"/><path d="M8 56h44" stroke="#f5ede0" stroke-width="4" stroke-linecap="round"/></symbol>
+    <symbol id="cup" viewBox="0 0 64 64"><path d="M12 22h34v14a17 17 0 0 1-34 0z" fill="#fff" stroke="#1d1c1a" stroke-width="2.5"/><path d="M46 26h4a7 7 0 0 1 0 14h-6" stroke="#1d1c1a" stroke-width="3" fill="none"/><ellipse cx="29" cy="22" rx="17" ry="5" fill="#8a5a35"/><path d="M24 22c3-3 7-3 10 0-3 2-7 2-10 0z" fill="#f8efe0"/><path d="M8 56h44" stroke="#1d1c1a" stroke-width="3" stroke-linecap="round"/></symbol>
     <symbol id="egg" viewBox="0 0 64 64"><ellipse cx="32" cy="34" rx="22" ry="18" fill="#fbf4e6"/><circle cx="32" cy="34" r="10" fill="#f2a12c"/><circle cx="29" cy="31" r="3" fill="#ffc768"/></symbol>
   </defs>
 </svg>
 
 <header class="nav" id="nav">
-  <a class="logo" href="#top"><svg class="m" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-opacity=".3"/><path d="M9 24h22a11 11 0 0 1-22 0z" fill="var(--accent)" style="transition:fill .5s"/><path d="M14 18c0-4 3-4 3-8M20 18c0-4 3-4 3-8M26 18c0-4 3-4 3-8" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".7"/></svg>Meats <i>&amp;</i> Plants</a>
+  <a class="logo" href="#top"><svg class="m" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-opacity=".25"/><path d="M9 24h22a11 11 0 0 1-22 0z" fill="var(--accent)" style="transition:fill .5s"/><path d="M14 18c0-4 3-4 3-8M20 18c0-4 3-4 3-8M26 18c0-4 3-4 3-8" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".7"/></svg>Meats <i>&amp;</i> Plants</a>
   <nav class="links" aria-label="Sections"><a href="#bowl">The bowl</a><a href="#menu">Menu</a><a href="#visit">Visit</a></nav>
   <a class="btn" href="tel:+919833412539">Call to book</a>
 </header>
@@ -205,6 +210,10 @@
 <main id="top">
   <!-- ===== hero ===== -->
   <section class="hero">
+    <div class="arch" aria-hidden="true">
+      <div class="hang" style="left:12%"><svg viewBox="0 0 120 260"><path d="M60 0v120" stroke="#b9a487" stroke-width="2"/><path d="M30 120h60l-8 40H38z" fill="#fff" stroke="#d8c3a2" stroke-width="2"/><g fill="#5f7f4f"><path d="M40 160c-10 20-6 50 2 70 8-20 10-48-2-70z"/><path d="M60 160c-6 30 0 60 4 90 8-28 6-60-4-90z"/><path d="M80 160c8 18 10 46 0 66-8-18-8-46 0-66z"/></g><g fill="#7c9a68"><ellipse cx="34" cy="118" rx="14" ry="7" transform="rotate(-25 34 118)"/><ellipse cx="86" cy="118" rx="14" ry="7" transform="rotate(25 86 118)"/></g></svg></div>
+      <div class="hang" style="right:10%;animation-delay:-2.5s;top:-120px"><svg viewBox="0 0 120 260"><path d="M60 0v130" stroke="#b9a487" stroke-width="2"/><circle cx="60" cy="150" r="26" fill="#fff" stroke="#d8c3a2" stroke-width="2"/><g fill="#5f7f4f"><path d="M38 160c-12 24-8 56 0 80 10-24 10-56 0-80z"/><path d="M82 160c12 24 8 52-2 72-8-22-8-50 2-72z"/></g></svg></div>
+    </div>
     <div class="wrap grid">
       <div>
         <p class="eyebrow" data-rv>Chikanghar · Kalyan</p>
@@ -220,7 +229,7 @@
         <svg class="bowl" viewBox="0 0 400 400">
           <defs>
             <radialGradient id="hb" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="#f3b764"/><stop offset="1" stop-color="#c97a2c"/></radialGradient>
-            <linearGradient id="bw" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2b2622"/><stop offset="1" stop-color="#0f0d0b"/></linearGradient>
+            <linearGradient id="bw" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e8e1d6"/></linearGradient>
           </defs>
           <g class="steam"><path d="M150 150c-14-20 14-34 0-56s14-34 0-56"/><path d="M200 140c-14-20 14-34 0-56s14-34 0-56"/><path d="M250 150c-14-20 14-34 0-56s14-34 0-56"/></g>
           <ellipse cx="200" cy="200" rx="170" ry="76" fill="url(#hb)"/>
@@ -239,8 +248,8 @@
           <g fill="#7dbb63"><circle cx="190" cy="214" r="5"/><circle cx="206" cy="222" r="4"/><circle cx="176" cy="226" r="4"/><circle cx="222" cy="210" r="4"/></g>
           </g>
           <path d="M30 200c0 100 76 170 170 170s170-70 170-170z" fill="url(#bw)"/>
-          <path d="M30 200c0 100 76 170 170 170s170-70 170-170" fill="none" stroke="#e3472f" stroke-width="6" style="stroke:var(--accent);transition:stroke .5s"/>
-          <path d="M70 270c30 30 70 46 130 48" stroke="rgba(255,255,255,.08)" stroke-width="14" fill="none" stroke-linecap="round"/>
+          <path d="M30 200c0 100 76 170 170 170s170-70 170-170" fill="none" stroke-width="4" style="stroke:var(--accent);transition:stroke .5s"/>
+          <path d="M300 250c-14 40-44 70-90 84" stroke="rgba(120,100,80,.10)" stroke-width="16" fill="none" stroke-linecap="round"/>
           <g class="chop"><rect x="230" y="40" width="10" height="230" rx="5" transform="rotate(28 235 155)" fill="#d9b27a"/><rect x="256" y="40" width="10" height="230" rx="5" transform="rotate(34 261 155)" fill="#c99d63"/></g>
         </svg>
         <div class="float" data-depth="1.4" style="left:-6%;top:6%;width:22%"><svg><use href="#sushi"/></svg></div>
@@ -277,10 +286,10 @@
           <defs>
             <radialGradient id="b2" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="#f3b764"/><stop offset="1" stop-color="#c97a2c"/></radialGradient>
             <radialGradient id="b2v" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="#f5d08a"/><stop offset="1" stop-color="#cf9a45"/></radialGradient>
-            <linearGradient id="bw2" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2b2622"/><stop offset="1" stop-color="#0f0d0b"/></linearGradient>
+            <linearGradient id="bw2" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e8e1d6"/></linearGradient>
             <clipPath id="rim"><ellipse cx="200" cy="200" rx="170" ry="76"/></clipPath>
           </defs>
-          <ellipse cx="200" cy="200" rx="170" ry="76" fill="#0b0a09"/>
+          <ellipse cx="200" cy="200" rx="170" ry="76" fill="#efe8dc"/>
           <g clip-path="url(#rim)">
             <g class="layer" data-l="0"><ellipse id="broth" cx="200" cy="200" rx="170" ry="76" fill="url(#b2)"/></g>
             <g transform="translate(0 -34)">
@@ -303,8 +312,8 @@
             </g>
           </g>
           <path d="M30 200c0 100 76 170 170 170s170-70 170-170z" fill="url(#bw2)"/>
-          <path d="M30 200c0 100 76 170 170 170s170-70 170-170" fill="none" stroke-width="6" style="stroke:var(--accent);transition:stroke .5s"/>
-          <path d="M70 270c30 30 70 46 130 48" stroke="rgba(255,255,255,.08)" stroke-width="14" fill="none" stroke-linecap="round"/>
+          <path d="M30 200c0 100 76 170 170 170s170-70 170-170" fill="none" stroke-width="4" style="stroke:var(--accent);transition:stroke .5s"/>
+          <path d="M300 250c-14 40-44 70-90 84" stroke="rgba(120,100,80,.10)" stroke-width="16" fill="none" stroke-linecap="round"/>
           <g class="layer steam" data-l="6"><path d="M150 150c-14-20 14-34 0-56s14-34 0-56"/><path d="M200 140c-14-20 14-34 0-56s14-34 0-56"/><path d="M250 150c-14-20 14-34 0-56s14-34 0-56"/></g>
           <g class="layer" data-l="6" id="sticks"><rect x="230" y="20" width="10" height="250" rx="5" transform="rotate(28 235 145)" fill="#d9b27a"/><rect x="256" y="20" width="10" height="250" rx="5" transform="rotate(34 261 145)" fill="#c99d63"/></g>
         </svg>
@@ -390,13 +399,13 @@
       </div>
       <div class="mapcard" data-rv aria-hidden="true">
         <svg viewBox="0 0 400 360" preserveAspectRatio="xMidYMid slice">
-          <rect width="400" height="360" fill="#1a1714"/>
-          <g stroke="#2a2621" stroke-width="18" fill="none" stroke-linecap="round"><path d="M-20 120C80 110 160 150 240 140s120-40 200-30"/><path d="M200-20c10 90-10 170 20 250s0 120 10 160"/><path d="M-20 260c90-10 160 10 250-10s130 20 190 10"/></g>
-          <g stroke="#3a342c" stroke-width="4" fill="none" stroke-dasharray="10 12"><path d="M-20 120C80 110 160 150 240 140s120-40 200-30"/><path d="M200-20c10 90-10 170 20 250s0 120 10 160"/></g>
-          <g fill="#211d19"><rect x="30" y="150" width="70" height="80" rx="8"/><rect x="250" y="160" width="90" height="60" rx="8"/><rect x="110" y="20" width="70" height="70" rx="8"/><rect x="260" y="20" width="80" height="80" rx="8"/><rect x="40" y="290" width="120" height="60" rx="8"/></g>
-          <circle cx="60" cy="60" r="26" fill="#1f2a1d"/><circle cx="330" cy="300" r="34" fill="#1f2a1d"/>
+          <rect width="400" height="360" fill="#efe9df"/>
+          <g stroke="#fff" stroke-width="18" fill="none" stroke-linecap="round"><path d="M-20 120C80 110 160 150 240 140s120-40 200-30"/><path d="M200-20c10 90-10 170 20 250s0 120 10 160"/><path d="M-20 260c90-10 160 10 250-10s130 20 190 10"/></g>
+          <g stroke="#e2d9cb" stroke-width="4" fill="none" stroke-dasharray="10 12"><path d="M-20 120C80 110 160 150 240 140s120-40 200-30"/><path d="M200-20c10 90-10 170 20 250s0 120 10 160"/></g>
+          <g fill="#e6ddd0"><rect x="30" y="150" width="70" height="80" rx="8"/><rect x="250" y="160" width="90" height="60" rx="8"/><rect x="110" y="20" width="70" height="70" rx="8"/><rect x="260" y="20" width="80" height="80" rx="8"/><rect x="40" y="290" width="120" height="60" rx="8"/></g>
+          <circle cx="60" cy="60" r="26" fill="#d7e0cc"/><circle cx="330" cy="300" r="34" fill="#d7e0cc"/>
         </svg>
-        <div class="pin-dot"><svg viewBox="0 0 46 58"><path d="M23 0C10 0 0 10 0 23c0 17 23 35 23 35s23-18 23-35C46 10 36 0 23 0z" fill="currentColor"/><circle cx="23" cy="22" r="9" fill="#13110f"/></svg></div>
+        <div class="pin-dot"><svg viewBox="0 0 46 58"><path d="M23 0C10 0 0 10 0 23c0 17 23 35 23 35s23-18 23-35C46 10 36 0 23 0z" fill="currentColor"/><circle cx="23" cy="22" r="9" fill="#fff"/></svg></div>
         <div class="lbl"><b>Meats &amp; Plants</b>Chikanghar, Kalyan · tap “Get directions”</div>
       </div>
     </div>
