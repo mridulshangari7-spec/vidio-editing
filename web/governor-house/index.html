@@ -321,6 +321,7 @@
       var a=new Image(), d=new Image(), n=0, me=tex[i];
       function ok(){ if(++n<2||tex[i]!==me) return; me.c=upload(a); me.d=upload(d); me.w=a.naturalWidth; me.h=a.naturalHeight; me.ready=true; }
       a.onload=d.onload=ok; a.src=src; d.src=src.replace(".webp","-d.webp");
+      a.onerror=d.onerror=function(){ if(tex[i]===me) tex[i]=undefined; };  // retried on the next frame
     }
     // give GPU memory back for rooms the visitor is far from (phones have little of it)
     function free(i){ var t=tex[i]; if(!t) return; if(t.c) gl.deleteTexture(t.c); if(t.d) gl.deleteTexture(t.d); tex[i]=undefined; }
@@ -352,7 +353,7 @@
     if(GL) GL.load(i);
     else { var im=s.querySelector("img"); if(!im.getAttribute("src")) im.src=srcFor(i); }
   }
-  function tidy(i){ if(GL) for(var j=0;j<N;j++) if(Math.abs(j-i)>2 && GL.loaded(j)) GL.free(j); }
+  function tidy(i){ if(GL) for(var j=0;j<N;j++) if(Math.abs(j-i)>3 && GL.loaded(j)) GL.free(j); }
 
   // gentle drift (and the pointer, on desktop) keeps the camera alive between scrolls
   var px=0,py=0,mx=0,my=0;
@@ -365,7 +366,7 @@
     var w=W.innerWidth, h=H();
     var i=Math.min(Math.floor(y),N-1), t=i>=N-1?0:y-i;
     var zoom=reduce?.12:.5;
-    want(i); want(i+1); want(i+2);
+    want(i); want(i+1); want(i+2); want(i-1);
 
     var k=i<N-1?ease(sm(OPEN,1,t)):0, arch=null;
     if(k>0){
@@ -390,8 +391,12 @@
       GL.clear();
       var ly=clamp(foc[i][1]+(t-.5)*.26,0,1);
       var drewA=GL.draw(i,{z:1.03+(reduce?.08:.2)*e+.75*k, k:(reduce?.05:.4)*e+.75*k, p:.03, cx:dx, cy:dy, m:1-.6*k, bl:bl, ly:ly, arch:null});
-      if(!drewA && i>0) GL.draw(i-1,{z:1.03,k:0,p:.03,cx:dx,cy:dy,m:1,ly:foc[i-1][1],arch:null});
-      if(k>0) GL.draw(i+1,{z:.8+.23*sm(0,1,k), k:.3*(1-k), p:.03, cx:dx, cy:dy, m:.55+.45*k, bl:bl*(1-k), ly:clamp(foc[i+1][1]-.13,0,1), arch:k>=.999?null:arch});
+      if(!drewA){ // photo still loading (fast scroll / jump): show the nearest room that is ready, never black
+        for(var o=1;o<N&&!drewA;o++){
+          [i-o,i+o].forEach(function(j){ if(!drewA&&j>=0&&j<N&&GL.ready(j)) drewA=GL.draw(j,{z:1.03,k:0,p:.03,cx:dx,cy:dy,m:.8,ly:foc[j][1],arch:null}); });
+        }
+      }
+      if(k>0 && GL.ready(i+1)) GL.draw(i+1,{z:.8+.23*sm(0,1,k), k:.3*(1-k), p:.03, cx:dx, cy:dy, m:.55+.45*k, bl:bl*(1-k), ly:clamp(foc[i+1][1]-.13,0,1), arch:k>=.999?null:arch});
       scenes.forEach(function(sc){ sc.style.visibility="hidden"; });
       tidy(i);
     } else {
