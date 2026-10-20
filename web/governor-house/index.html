@@ -24,6 +24,8 @@
   .sc img{width:100%;height:100%;object-fit:cover;display:block;user-select:none;-webkit-user-drag:none}
   .sc.bw img{filter:grayscale(1) contrast(1.08) brightness(.82)}
   @media (max-aspect-ratio:1/1){.sc.bw img{filter:grayscale(1) contrast(1.05) brightness(.7) blur(1.2px)}}
+  .gl{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .has-gl .sc{display:none}
   .door{position:absolute;border:1px solid var(--gold2);border-bottom:0;pointer-events:none;opacity:0;
     box-shadow:0 0 30px rgba(220,193,131,.35),inset 0 0 30px rgba(220,193,131,.15)}
   .shade{position:absolute;inset:0;pointer-events:none;
@@ -232,7 +234,9 @@
 /* Scroll walkthrough.
    Each room owns a stretch of scroll. Within it the camera dollies toward the room's focal
    point (data-f, % of the frame); in the last part of the stretch the next room opens out of
-   that point through an arch-shaped doorway that grows until it fills the screen. */
+   that point through an arch-shaped doorway that grows until it fills the screen.
+   With WebGL the photos are drawn with their depth maps (img/*-d.webp), so near things move
+   faster than far ones as the camera moves; without it the same walk plays with plain CSS. */
 (function(){
   "use strict";
   var D=document, W=window;
@@ -243,10 +247,7 @@
   var OPEN=.56;              // where in a room's stretch the next doorway starts to open
   var foc=scenes.map(function(s){ var f=s.dataset.f.split(" "); return [f[0]/100,f[1]/100]; });
 
-  scenes.forEach(function(s,i){
-    var img=s.querySelector("img");
-    img.style.objectPosition=foc[i][0]*100+"% "+foc[i][1]*100+"%";
-  });
+  scenes.forEach(function(s,i){ s.querySelector("img").style.objectPosition=foc[i][0]*100+"% "+foc[i][1]*100+"%"; });
 
   // chapter rail
   txts.forEach(function(t,i){
@@ -258,62 +259,151 @@
   var dots=[].slice.call(rail.querySelectorAll("button"));
 
   function H(){ return W.innerHeight; }
-  function size(){ D.getElementById("track").style.height=((N-1)*STEP+1)*H()+"px"; }
-  function go(i){ W.scrollTo({top:Math.round(i*STEP*H()+(i?.32*STEP*H():0)),behavior:reduce?"auto":"smooth"}); }
+  function size(){ D.getElementById("track").style.height=((N-1)*STEP+1)*H()+"px"; if(GL) GL.resize(); }
+  function go(i){ W.scrollTo({top:Math.round(i*STEP*H()+(i&&i<N-1?.32*STEP*H():0)),behavior:reduce?"auto":"smooth"}); }
   [].forEach.call(D.querySelectorAll("[data-go]"),function(a){
     a.addEventListener("click",function(e){ e.preventDefault(); go(+a.dataset.go); });
   });
-
-  // load each room's photo a little before it is needed
-  function want(i){ var s=scenes[i]; if(!s) return; var im=s.querySelector("img"); if(im.dataset.src){ im.src=im.dataset.src; im.removeAttribute("data-src"); } }
 
   var ease=function(x){ return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2; };
   var clamp=function(x,a,b){ return Math.max(a,Math.min(b,x)); };
   var sm=function(a,b,x){ x=clamp((x-a)/(b-a),0,1); return x*x*(3-2*x); };
 
-  var cur=0, target=0, last=-1;
+  /* ---------------- WebGL depth renderer ---------------- */
+  var GL=(function(){
+    var cv=D.createElement("canvas"), gl;
+    try{ gl=cv.getContext("webgl",{alpha:false,antialias:false,premultipliedAlpha:false}); }catch(e){}
+    if(!gl) return null;
+    cv.className="gl"; scenes[0].parentNode.insertBefore(cv,door);
+    var vs="attribute vec2 p;varying vec2 v;void main(){v=vec2(p.x*.5+.5,.5-p.y*.5);gl_Position=vec4(p,0.,1.);}";
+    var fs=[
+      "precision highp float;varying vec2 v;",
+      "uniform sampler2D T,Dp;uniform vec2 R,I,F,C;uniform float Z,K,P,M,BW,A;uniform vec4 Ar;",
+      "vec2 cover(vec2 s){float ra=R.x/R.y,ri=I.x/I.y;vec2 sc=ra>ri?vec2(1.,ri/ra):vec2(ra/ri,1.);return (1.-sc)*F+s*sc;}",
+      "void main(){vec2 px=v*R;float a=1.;",
+      " if(Ar.z>0.){float r=Ar.z*.5;float ins=px.y<Ar.y+r?r-distance(px,vec2(Ar.x,Ar.y+r)):min(r-abs(px.x-Ar.x),Ar.w-px.y);a=smoothstep(-1.5,1.5,ins);if(a<=0.)discard;}",
+      " vec2 d=v-F,q=v;",
+      " for(int k=0;k<5;k++){float z=texture2D(Dp,cover(q)).r;q=F+d/(Z*(1.+K*z))+C*(z-.45)*P;}",
+      " vec3 c=texture2D(T,cover(q)).rgb;",
+      " if(BW>0.){float l=dot(c,vec3(.299,.587,.114));c=mix(c,vec3(l),BW);}",
+      " gl_FragColor=vec4(c*M,a*A);}"
+    ].join("\n");
+    function sh(t,src){ var s=gl.createShader(t); gl.shaderSource(s,src); gl.compileShader(s); if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)) throw gl.getShaderInfoLog(s); return s; }
+    var pr=gl.createProgram();
+    try{ gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs)); gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs)); gl.linkProgram(pr);
+      if(!gl.getProgramParameter(pr,gl.LINK_STATUS)) throw 0; }catch(e){ cv.remove(); return null; }
+    gl.useProgram(pr);
+    var b=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,b);
+    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+    var loc=gl.getAttribLocation(pr,"p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+    var U={}; ["T","Dp","R","I","F","C","Z","K","P","M","BW","A","Ar"].forEach(function(n){ U[n]=gl.getUniformLocation(pr,n); });
+    gl.uniform1i(U.T,0); gl.uniform1i(U.Dp,1);
+    gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+
+    var tex=[], bad=false;
+    function upload(im){
+      var t=gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D,t);
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);
+      try{ gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,im); }catch(e){ bad=true; }
+      gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+      return t;
+    }
+    function load(i){
+      if(tex[i]) return; tex[i]={};
+      var im=scenes[i].querySelector("img"), src=im.dataset.src||im.getAttribute("src");
+      var a=new Image(), d=new Image(), n=0;
+      function ok(){ if(++n<2) return; tex[i].c=upload(a); tex[i].d=upload(d); tex[i].w=a.naturalWidth; tex[i].h=a.naturalHeight; tex[i].ready=true; }
+      a.onload=d.onload=ok; a.src=src; d.src=src.replace(".webp","-d.webp");
+    }
+    function resize(){
+      var r=Math.min(W.devicePixelRatio||1,2);
+      cv.width=Math.round(W.innerWidth*r); cv.height=Math.round(W.innerHeight*r);
+      gl.viewport(0,0,cv.width,cv.height);
+    }
+    function draw(i,o){
+      var t=tex[i]; if(!t||!t.ready) return false;
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D,t.c);
+      gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D,t.d);
+      var r=cv.width/W.innerWidth;
+      gl.uniform2f(U.R,cv.width,cv.height); gl.uniform2f(U.I,t.w,t.h); gl.uniform2f(U.F,foc[i][0],foc[i][1]);
+      gl.uniform2f(U.C,o.cx,o.cy); gl.uniform1f(U.Z,o.z); gl.uniform1f(U.K,o.k); gl.uniform1f(U.P,o.p);
+      gl.uniform1f(U.M,o.m); gl.uniform1f(U.BW,scenes[i].classList.contains("bw")?1:0); gl.uniform1f(U.A,1);
+      var ar=o.arch; gl.uniform4f(U.Ar,ar?ar[0]*r:0,ar?ar[1]*r:0,ar?ar[2]*r:-1,ar?ar[3]*r:0);
+      gl.drawArrays(gl.TRIANGLES,0,3); return true;
+    }
+    resize();
+    return {load:load,resize:resize,draw:draw,clear:function(){ gl.clearColor(0,0,0,1); gl.clear(gl.COLOR_BUFFER_BIT); },
+      ready:function(i){ return tex[i]&&tex[i].ready; },bad:function(){ return bad; },el:cv};
+  })();
+  if(GL) D.documentElement.classList.add("has-gl");
+
+  // load each room's photo a little before it is needed
+  function want(i){
+    var s=scenes[i]; if(!s) return;
+    if(GL) GL.load(i);
+    else { var im=s.querySelector("img"); if(im.dataset.src){ im.src=im.dataset.src; im.removeAttribute("data-src"); } }
+  }
+
+  // gentle drift (and the pointer, on desktop) keeps the camera alive between scrolls
+  var px=0,py=0,mx=0,my=0;
+  W.addEventListener("pointermove",function(e){ if(e.pointerType==="mouse"){ px=(e.clientX/W.innerWidth-.5)*2; py=(e.clientY/W.innerHeight-.5)*2; } },{passive:true});
+
+  var cur=0, target=0, last=-1, t0=performance.now();
   function read(){ target=W.scrollY/(STEP*H()); }
 
-  function render(y){
+  function render(y,now){
     var w=W.innerWidth, h=H();
     var i=Math.min(Math.floor(y),N-1), t=i>=N-1?0:y-i;
     var zoom=reduce?.12:.5;
-    want(i+1); want(i+2);
+    want(i); want(i+1); want(i+2);
 
-    // the doorway into the next room
-    var k=i<N-1?ease(sm(OPEN,1,t)):0;
-    scenes.forEach(function(s,j){
-      var st=s.style;
-      if(j===i){
-        var z=1.04+zoom*ease(t);
-        st.visibility="visible"; st.zIndex=1; st.clipPath="none";
-        st.transformOrigin=foc[j][0]*100+"% "+foc[j][1]*100+"%";
-        st.transform="scale("+z.toFixed(4)+")";
-        st.filter=k>0?"brightness("+(1-.45*k).toFixed(3)+")":"none";
-      } else if(j===i+1 && k>0){
-        var fx=foc[i][0]*w, fy=foc[i][1]*h,
-            cx=fx+(w/2-fx)*k, cy=fy+(h/2-fy)*k,
-            aw=Math.min(w,h)*.12+(Math.max(w,h)*2.1)*Math.pow(k,1.7), ah=aw*1.55,
-            top=cy-ah*.55, left=cx-aw/2, right=w-(cx+aw/2), bottom=h-(cy+ah*.45);
-        st.visibility="visible"; st.zIndex=2; st.filter="none";
-        st.clipPath=k>=.999?"none":"inset("+top.toFixed(1)+"px "+right.toFixed(1)+"px "+bottom.toFixed(1)+"px "+left.toFixed(1)+"px round "+(aw/2).toFixed(1)+"px "+(aw/2).toFixed(1)+"px 0 0)";
-        st.transformOrigin="50% 50%";
-        st.transform="scale("+(1.32-.28*k).toFixed(4)+")";
-        var ds=door.style;
-        ds.left=left+"px"; ds.top=top+"px"; ds.width=aw+"px"; ds.height=ah+"px";
-        ds.borderRadius=(aw/2)+"px "+(aw/2)+"px 0 0";
-        ds.opacity=(sm(0,.12,k)*(1-sm(.35,.8,k))).toFixed(3);
-      } else { st.visibility="hidden"; }
-    });
-    if(k<=0) door.style.opacity=0;
+    var k=i<N-1?ease(sm(OPEN,1,t)):0, arch=null;
+    if(k>0){
+      var fx=foc[i][0]*w, fy=foc[i][1]*h,
+          cx=fx+(w/2-fx)*k, cy=fy+(h/2-fy)*k,
+          aw=Math.min(w,h)*.12+(Math.max(w,h)*2.1)*Math.pow(k,1.7), ah=aw*1.55;
+      arch=[cx,cy-ah*.55,aw,cy+ah*.45];
+      var ds=door.style;
+      ds.left=(cx-aw/2)+"px"; ds.top=arch[1]+"px"; ds.width=aw+"px"; ds.height=ah+"px";
+      ds.borderRadius=(aw/2)+"px "+(aw/2)+"px 0 0";
+      ds.opacity=(sm(0,.12,k)*(1-sm(.35,.8,k))).toFixed(3);
+    } else door.style.opacity=0;
+
+    if(GL && !GL.bad()){
+      var s=(now-t0)/1000; mx+=(px-mx)*.05; my+=(py-my)*.05;
+      var dx=reduce?0:Math.sin(s*.31)*.6+mx, dy=reduce?0:Math.cos(s*.23)*.4+my;
+      var et=ease(t);
+      GL.clear();
+      var drewA=GL.draw(i,{z:1.05+zoom*et+.55*k, k:(reduce?.05:.32)*et+.4*k, p:.028, cx:dx, cy:dy, m:1-.5*k, arch:null});
+      if(!drewA && i>0) GL.draw(i-1,{z:1.05,k:0,p:.028,cx:dx,cy:dy,m:1,arch:null});
+      if(k>0) GL.draw(i+1,{z:.72+.33*sm(0,.5,k), k:.22*(1-k), p:.028, cx:dx, cy:dy, m:1, arch:k>=.999?null:arch});
+      scenes.forEach(function(sc){ sc.style.visibility="hidden"; });
+    } else {
+      scenes.forEach(function(sc,j){
+        var st=sc.style;
+        if(j===i){
+          var z=1.04+zoom*ease(t);
+          st.visibility="visible"; st.zIndex=1; st.clipPath="none";
+          st.transformOrigin=foc[j][0]*100+"% "+foc[j][1]*100+"%";
+          st.transform="scale("+z.toFixed(4)+")";
+          st.filter=k>0?"brightness("+(1-.45*k).toFixed(3)+")":"none";
+        } else if(j===i+1 && k>0){
+          var top=arch[1], left=arch[0]-arch[2]/2, right=w-(arch[0]+arch[2]/2), bottom=h-arch[3];
+          st.visibility="visible"; st.zIndex=2; st.filter="none";
+          st.clipPath=k>=.999?"none":"inset("+top.toFixed(1)+"px "+right.toFixed(1)+"px "+bottom.toFixed(1)+"px "+left.toFixed(1)+"px round "+(arch[2]/2).toFixed(1)+"px "+(arch[2]/2).toFixed(1)+"px 0 0)";
+          st.transformOrigin="50% 50%";
+          st.transform="scale("+(1.32-.28*k).toFixed(4)+")";
+        } else st.visibility="hidden";
+      });
+    }
 
     // copy for each room: in after you arrive, out before the next doorway
     txts.forEach(function(el,j){
       var a=0, dy=0;
       if(j===i){
-        var lt=t;
-        a=(j===0||j===N-1?1:sm(.06,.2,lt))*(j===N-1?1:1-sm(OPEN-.12,OPEN+.02,lt));
-        dy=(1-a)*(lt<.3?18:-18);
+        a=(j===0||j===N-1?1:sm(.06,.2,t))*(j===N-1?1:1-sm(OPEN-.12,OPEN+.02,t));
+        dy=(1-a)*(t<.3?18:-18);
       } else if(j===i+1 && j===N-1){ a=sm(.86,1,t); }
       el.style.opacity=a.toFixed(3);
       el.style.visibility=a>.01?"visible":"hidden";
@@ -327,10 +417,10 @@
     bar.style.transform="scaleX("+clamp(y/(N-1),0,1).toFixed(4)+")";
   }
 
-  function tick(){
-    cur+= (target-cur)*(reduce?1:.12);
+  function tick(now){
+    cur+=(target-cur)*(reduce?1:.12);
     if(Math.abs(target-cur)<.0004) cur=target;
-    render(cur);
+    render(cur,now);
     W.requestAnimationFrame(tick);
   }
 
@@ -345,11 +435,14 @@
   W.requestAnimationFrame(tick);
 
   // hide the lit-sign loader once the first two rooms are ready
-  var first=[scenes[0],scenes[1]].map(function(s){ return s.querySelector("img"); }), ready=0;
   function done(){ D.getElementById("loader").classList.add("done"); }
-  first.forEach(function(im){ if(im.complete) ready++; else im.addEventListener("load",function(){ if(++ready===2) setTimeout(done,500); }); });
-  if(ready===2) setTimeout(done,700);
-  setTimeout(done,4000);
+  if(GL){ GL.load(0); GL.load(1); (function wait(){ if(GL.ready(0)&&GL.ready(1)) setTimeout(done,400); else setTimeout(wait,100); })(); }
+  else {
+    var first=[scenes[0],scenes[1]].map(function(s){ return s.querySelector("img"); }), ready=0;
+    first.forEach(function(im){ if(im.complete) ready++; else im.addEventListener("load",function(){ if(++ready===2) setTimeout(done,500); }); });
+    if(ready===2) setTimeout(done,700);
+  }
+  setTimeout(done,5000);
 })();
 </script>
 </body>
