@@ -64,16 +64,20 @@ Council Chamber, Governors Parlour, Archive Room; plus the bar and candlelit eve
 Facts: 1863 colonial circuit house, restored over two years (Renesa Architecture), Modern Indian,
 4.5★ Google (215 reviews), ₹2,000+.
 
-**What the owner wants next**
-1. Use the **original full-quality photos** in `C:\Users\mridu\Downloads\elgin` – the current
-   entrance and 5 room images were cropped from small screenshots and look pixelated.
-   Copy them into `web/governor-house/originals/` (unchanged) and use them.
-2. Transitions must feel like **really walking** from one place to another, not zooming into
-   photos. Best route: a steady phone walk-through video (entrance → hall → bar → rooms),
-   scrubbed by scroll. Without video: rebuild as a polished photo tour with natural camera
-   moves using only full-quality originals; regenerate depth maps if keeping parallax.
-3. Test on phone and laptop sizes, then deploy to growwithinfinity.github.io/governor-house/.
-
+**Status (rebuilt from the original photos)**
+- Originals (unchanged) are in `web/governor-house/originals/`. Note they are only 800x1100 (landscape 1220x900,
+  candles 1200x1500), so they are small; any zoom will look soft. Ask for the photographer's full-size files for a
+  crisper result and re-run the same pipeline.
+- `img/*.webp` = originals upscaled 2x (Lanczos + light sharpen); `img/*-d.webp` = Depth Anything small depth maps.
+  Portrait (`-p`) and landscape (`-l`) variants are picked by screen orientation. Pipeline: sharp + @huggingface/transformers
+  (`Xenova/depth-anything-small-hf`) in node.
+- Scene order: threshold (candle arch, title), Bar, Drawing Room (drawing.jpg), Reading Room, Assembly Hall,
+  Council Chamber (council.jpg), Governors Parlour (parlour.jpg), Archive Room, private dining table + Reserve.
+- Walking feel: depth-parallax dolly at steady speed, footstep bob/sway only while scrolling, radial motion blur and
+  light dip through each arch doorway. No video exists; a steady phone walk-through video scrubbed by scroll would be
+  the next upgrade.
+- Tested at laptop (1024x640 emulation) and phone (375x812). Deployed to growwithinfinity.github.io/governor-house/
+  (index.html + img/ only; originals/ stays in this repo).
 ## Pending / later
 - Main website contact details may need updating to the Amritsar address / 98158 03736
   (owner said "later").

@@ -22,8 +22,6 @@
   .stage{position:fixed;inset:0;overflow:hidden;background:#000}
   .sc{position:absolute;inset:0;visibility:hidden;will-change:transform,clip-path}
   .sc img{width:100%;height:100%;object-fit:cover;display:block;user-select:none;-webkit-user-drag:none}
-  .sc.bw img{filter:grayscale(1) contrast(1.08) brightness(.82)}
-  @media (max-aspect-ratio:1/1){.sc.bw img{filter:grayscale(1) contrast(1.05) brightness(.7) blur(1.2px)}}
   .gl{position:absolute;inset:0;width:100%;height:100%;display:block}
   .has-gl .sc{display:none}
   .door{position:absolute;border:1px solid var(--gold2);border-bottom:0;pointer-events:none;opacity:0;
@@ -125,15 +123,16 @@
 </div>
 
 <div class="stage" aria-hidden="true">
-  <div class="sc bw" data-f="51 60"><img src="img/entrance.webp" alt=""></div>
-  <div class="sc" data-f="55 42"><img src="img/bar.webp" alt=""></div>
-  <div class="sc" data-f="42 40"><img data-src="img/drawing.webp" alt=""></div>
-  <div class="sc" data-f="47 38"><img data-src="img/reading.webp" alt=""></div>
-  <div class="sc" data-f="51 40"><img data-src="img/assembly.webp" alt=""></div>
-  <div class="sc" data-f="50 32"><img data-src="img/council.webp" alt=""></div>
-  <div class="sc" data-f="50 42"><img data-src="img/parlour.webp" alt=""></div>
-  <div class="sc" data-f="62 40"><img data-src="img/archive.webp" alt=""></div>
-  <div class="sc" data-f="50 50"><img data-src="img/candles.webp" alt=""></div>
+  <!-- data-p / data-l: portrait and landscape versions (all made from the original photos in originals/) -->
+  <div class="sc" data-f="50 50" data-p="threshold-p" data-l="threshold-l"><img alt=""></div>
+  <div class="sc" data-f="45 46" data-p="bar-p" data-l="bar-p"><img alt=""></div>
+  <div class="sc" data-f="48 55" data-p="drawing-p" data-l="drawing-p"><img alt=""></div>
+  <div class="sc" data-f="45 50" data-p="reading-p" data-l="reading-p"><img alt=""></div>
+  <div class="sc" data-f="52 52" data-p="assembly-p" data-l="assembly-p"><img alt=""></div>
+  <div class="sc" data-f="50 55" data-p="council-p" data-l="council-p"><img alt=""></div>
+  <div class="sc" data-f="42 48" data-p="parlour-p" data-l="parlour-p"><img alt=""></div>
+  <div class="sc" data-f="56 55" data-p="archive-p" data-l="archive-p"><img alt=""></div>
+  <div class="sc" data-f="50 58" data-p="table-l" data-l="table-l"><img alt=""></div>
   <div class="door" id="door"></div>
   <div class="shade"></div>
   <div class="grain"></div>
@@ -158,7 +157,7 @@
     <p class="eb">Where the evening begins</p>
     <h2>The Bar</h2>
     <div class="rule"></div>
-    <p class="d">Spirit-forward and amber-lit. A clock above the shelves, lamps glowing under the arch, and a seat at the counter for whoever arrives first.</p>
+    <p class="d">Spirit-forward and amber-lit. A clock above the shelves, lamps glowing under the arch, a carved hound keeping watch, and a table for whoever arrives first.</p>
   </section>
 
   <section class="txt" data-i="2" data-name="Drawing Room">
@@ -166,7 +165,7 @@
     <p class="eb">Room one</p>
     <h2>The Drawing Room</h2>
     <div class="rule"></div>
-    <p class="d">A grand piano, gilded mirrors and a chequered floor. The first room you encounter, and the one that sets the tone for everything that follows.</p>
+    <p class="d">Oxblood walls, an arched niche of blue-and-white porcelain and pleated floor lamps over a chequered floor. The first room you meet, and the one that sets the tone.</p>
   </section>
 
   <section class="txt" data-i="3" data-name="Reading Room">
@@ -174,7 +173,7 @@
     <p class="eb">Room two</p>
     <h2>The Reading Room</h2>
     <div class="rule"></div>
-    <p class="d">Soft lamps, arched alcoves, a chandelier and curated books lining the shelves. The most contemplative corner of the residence.</p>
+    <p class="d">Crystal chandeliers, a gilded mirror and shelves of curios, with daylight through the arched window. The most contemplative corner of the residence.</p>
   </section>
 
   <section class="txt" data-i="4" data-name="Assembly Hall">
@@ -190,7 +189,7 @@
     <p class="eb">Room four</p>
     <h2>The Council Chamber</h2>
     <div class="rule"></div>
-    <p class="d">Private, deliberate, formal. For occasions that call for a room with a sense of history, and the patience to linger.</p>
+    <p class="d">A gilt-framed portrait of statesmen above deep wood panelling, a fiddle-leaf fig and lamplight on striped chairs. Private, deliberate and formal, for occasions that deserve a sense of history.</p>
   </section>
 
   <section class="txt" data-i="6" data-name="Governors Parlour">
@@ -198,7 +197,7 @@
     <p class="eb">Room five</p>
     <h2>The Governors Parlour</h2>
     <div class="rule"></div>
-    <p class="d">Intimate, feminine and refined. Striped walls, gilt portraits and velvet chairs: the most personal room in the residence.</p>
+    <p class="d">Striped walls, gilt portraits and velvet chairs on a chequered marble floor. Intimate and refined: the most personal room in the residence.</p>
   </section>
 
   <section class="txt" data-i="7" data-name="Archive Room">
@@ -206,7 +205,7 @@
     <p class="eb">Room six</p>
     <h2>The Archive Room</h2>
     <div class="rule"></div>
-    <p class="d">Stacked with history, artefacts and the quiet hum of another century. Every object has been chosen; every candle is lit.</p>
+    <p class="d">A mirrored wall, tall lanterns and candelabra burning down the table. Every object has been chosen; every candle is lit.</p>
   </section>
 
   <section class="txt end" data-i="8" data-name="Reserve" id="reserve">
@@ -249,6 +248,10 @@
 
   scenes.forEach(function(s,i){ s.querySelector("img").style.objectPosition=foc[i][0]*100+"% "+foc[i][1]*100+"%"; });
 
+  // portrait screens get the portrait crop of each room, wide screens the landscape one when there is one
+  var portrait=W.innerHeight>W.innerWidth;
+  function srcFor(i){ var s=scenes[i]; return "img/"+(portrait?s.dataset.p:s.dataset.l)+".webp"; }
+
   // chapter rail
   txts.forEach(function(t,i){
     var li=D.createElement("li"), b=D.createElement("button");
@@ -278,14 +281,17 @@
     var vs="attribute vec2 p;varying vec2 v;void main(){v=vec2(p.x*.5+.5,.5-p.y*.5);gl_Position=vec4(p,0.,1.);}";
     var fs=[
       "precision highp float;varying vec2 v;",
-      "uniform sampler2D T,Dp;uniform vec2 R,I,F,C;uniform float Z,K,P,M,BW,A;uniform vec4 Ar;",
-      "vec2 cover(vec2 s){float ra=R.x/R.y,ri=I.x/I.y;vec2 sc=ra>ri?vec2(1.,ri/ra):vec2(ra/ri,1.);return (1.-sc)*F+s*sc;}",
+      "uniform sampler2D T,Dp;uniform vec2 R,I,F,L,C;uniform float Z,K,P,M,Bl,A;uniform vec4 Ar;",
+      // F = where the camera is heading on screen, L = which part of the photo sits in the frame
+      "vec2 cover(vec2 s){float ra=R.x/R.y,ri=I.x/I.y;vec2 sc=ra>ri?vec2(1.,ri/ra):vec2(ra/ri,1.);return (1.-sc)*L+s*sc;}",
       "void main(){vec2 px=v*R;float a=1.;",
       " if(Ar.z>0.){float r=Ar.z*.5;float ins=px.y<Ar.y+r?r-distance(px,vec2(Ar.x,Ar.y+r)):min(r-abs(px.x-Ar.x),Ar.w-px.y);a=smoothstep(-1.5,1.5,ins);if(a<=0.)discard;}",
       " vec2 d=v-F,q=v;",
+      // real dolly: things nearer the camera (bright in the depth map) travel outward faster than far ones
       " for(int k=0;k<5;k++){float z=texture2D(Dp,cover(q)).r;q=F+d/(Z*(1.+K*z))+C*(z-.45)*P;}",
-      " vec3 c=texture2D(T,cover(q)).rgb;",
-      " if(BW>0.){float l=dot(c,vec3(.299,.587,.114));c=mix(c,vec3(l),BW);}",
+      " vec3 c;",
+      " if(Bl>.002){c=vec3(0.);for(int s=0;s<4;s++){c+=texture2D(T,cover(F+(q-F)*(1.-Bl*float(s)/3.))).rgb;}c*=.25;}",
+      " else c=texture2D(T,cover(q)).rgb;",
       " gl_FragColor=vec4(c*M,a*A);}"
     ].join("\n");
     function sh(t,src){ var s=gl.createShader(t); gl.shaderSource(s,src); gl.compileShader(s); if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)) throw gl.getShaderInfoLog(s); return s; }
@@ -296,7 +302,7 @@
     var b=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,b);
     gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
     var loc=gl.getAttribLocation(pr,"p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
-    var U={}; ["T","Dp","R","I","F","C","Z","K","P","M","BW","A","Ar"].forEach(function(n){ U[n]=gl.getUniformLocation(pr,n); });
+    var U={}; ["T","Dp","R","I","F","L","C","Z","K","P","M","Bl","A","Ar"].forEach(function(n){ U[n]=gl.getUniformLocation(pr,n); });
     gl.uniform1i(U.T,0); gl.uniform1i(U.Dp,1);
     gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 
@@ -311,11 +317,14 @@
     }
     function load(i){
       if(tex[i]) return; tex[i]={};
-      var im=scenes[i].querySelector("img"), src=im.dataset.src||im.getAttribute("src");
-      var a=new Image(), d=new Image(), n=0;
-      function ok(){ if(++n<2) return; tex[i].c=upload(a); tex[i].d=upload(d); tex[i].w=a.naturalWidth; tex[i].h=a.naturalHeight; tex[i].ready=true; }
+      var src=srcFor(i);
+      var a=new Image(), d=new Image(), n=0, me=tex[i];
+      function ok(){ if(++n<2||tex[i]!==me) return; me.c=upload(a); me.d=upload(d); me.w=a.naturalWidth; me.h=a.naturalHeight; me.ready=true; }
       a.onload=d.onload=ok; a.src=src; d.src=src.replace(".webp","-d.webp");
+      a.onerror=d.onerror=function(){ if(tex[i]===me) tex[i]=undefined; };  // retried on the next frame
     }
+    // give GPU memory back for rooms the visitor is far from (phones have little of it)
+    function free(i){ var t=tex[i]; if(!t) return; if(t.c) gl.deleteTexture(t.c); if(t.d) gl.deleteTexture(t.d); tex[i]=undefined; }
     function resize(){
       var r=Math.min(W.devicePixelRatio||1,2);
       cv.width=Math.round(W.innerWidth*r); cv.height=Math.round(W.innerHeight*r);
@@ -327,14 +336,14 @@
       gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D,t.d);
       var r=cv.width/W.innerWidth;
       gl.uniform2f(U.R,cv.width,cv.height); gl.uniform2f(U.I,t.w,t.h); gl.uniform2f(U.F,foc[i][0],foc[i][1]);
-      gl.uniform2f(U.C,o.cx,o.cy); gl.uniform1f(U.Z,o.z); gl.uniform1f(U.K,o.k); gl.uniform1f(U.P,o.p);
-      gl.uniform1f(U.M,o.m); gl.uniform1f(U.BW,scenes[i].classList.contains("bw")?1:0); gl.uniform1f(U.A,1);
+      gl.uniform2f(U.L,foc[i][0],o.ly); gl.uniform2f(U.C,o.cx,o.cy); gl.uniform1f(U.Z,o.z); gl.uniform1f(U.K,o.k); gl.uniform1f(U.P,o.p);
+      gl.uniform1f(U.M,o.m); gl.uniform1f(U.Bl,o.bl||0); gl.uniform1f(U.A,1);
       var ar=o.arch; gl.uniform4f(U.Ar,ar?ar[0]*r:0,ar?ar[1]*r:0,ar?ar[2]*r:-1,ar?ar[3]*r:0);
       gl.drawArrays(gl.TRIANGLES,0,3); return true;
     }
     resize();
-    return {load:load,resize:resize,draw:draw,clear:function(){ gl.clearColor(0,0,0,1); gl.clear(gl.COLOR_BUFFER_BIT); },
-      ready:function(i){ return tex[i]&&tex[i].ready; },bad:function(){ return bad; },el:cv};
+    return {load:load,free:free,resize:resize,draw:draw,clear:function(){ gl.clearColor(0,0,0,1); gl.clear(gl.COLOR_BUFFER_BIT); },
+      ready:function(i){ return tex[i]&&tex[i].ready; },loaded:function(i){ return !!tex[i]; },bad:function(){ return bad; },el:cv};
   })();
   if(GL) D.documentElement.classList.add("has-gl");
 
@@ -342,8 +351,9 @@
   function want(i){
     var s=scenes[i]; if(!s) return;
     if(GL) GL.load(i);
-    else { var im=s.querySelector("img"); if(im.dataset.src){ im.src=im.dataset.src; im.removeAttribute("data-src"); } }
+    else { var im=s.querySelector("img"); if(!im.getAttribute("src")) im.src=srcFor(i); }
   }
+  function tidy(i){ if(GL) for(var j=0;j<N;j++) if(Math.abs(j-i)>3 && GL.loaded(j)) GL.free(j); }
 
   // gentle drift (and the pointer, on desktop) keeps the camera alive between scrolls
   var px=0,py=0,mx=0,my=0;
@@ -356,7 +366,7 @@
     var w=W.innerWidth, h=H();
     var i=Math.min(Math.floor(y),N-1), t=i>=N-1?0:y-i;
     var zoom=reduce?.12:.5;
-    want(i); want(i+1); want(i+2);
+    want(i); want(i+1); want(i+2); want(i-1);
 
     var k=i<N-1?ease(sm(OPEN,1,t)):0, arch=null;
     if(k>0){
@@ -371,14 +381,24 @@
     } else door.style.opacity=0;
 
     if(GL && !GL.bad()){
+      // Walking: steady forward speed through the room, a footstep bob and sway that only exists
+      // while the visitor is actually moving, and depth-based parallax so near things stream past.
       var s=(now-t0)/1000; mx+=(px-mx)*.05; my+=(py-my)*.05;
-      var dx=reduce?0:Math.sin(s*.31)*.6+mx, dy=reduce?0:Math.cos(s*.23)*.4+my;
-      var et=ease(t);
+      var ph=y*N*7.5, sp=reduce?0:spd;
+      var dx=(reduce?0:Math.sin(s*.31)*.5+mx)+Math.sin(ph*.5)*.9*sp, dy=(reduce?0:Math.cos(s*.23)*.35+my)+Math.abs(Math.sin(ph))*1.1*sp;
+      var e=t*.7+sm(0,1,t)*.3;
+      var bl=reduce?0:Math.min(.07,.012*sp+.05*k);
       GL.clear();
-      var drewA=GL.draw(i,{z:1.05+zoom*et+.55*k, k:(reduce?.05:.32)*et+.4*k, p:.028, cx:dx, cy:dy, m:1-.5*k, arch:null});
-      if(!drewA && i>0) GL.draw(i-1,{z:1.05,k:0,p:.028,cx:dx,cy:dy,m:1,arch:null});
-      if(k>0) GL.draw(i+1,{z:.72+.33*sm(0,.5,k), k:.22*(1-k), p:.028, cx:dx, cy:dy, m:1, arch:k>=.999?null:arch});
+      var ly=clamp(foc[i][1]+(t-.5)*.26,0,1);
+      var drewA=GL.draw(i,{z:1.03+(reduce?.08:.2)*e+.75*k, k:(reduce?.05:.4)*e+.75*k, p:.03, cx:dx, cy:dy, m:1-.6*k, bl:bl, ly:ly, arch:null});
+      if(!drewA){ // photo still loading (fast scroll / jump): show the nearest room that is ready, never black
+        for(var o=1;o<N&&!drewA;o++){
+          [i-o,i+o].forEach(function(j){ if(!drewA&&j>=0&&j<N&&GL.ready(j)) drewA=GL.draw(j,{z:1.03,k:0,p:.03,cx:dx,cy:dy,m:.8,ly:foc[j][1],arch:null}); });
+        }
+      }
+      if(k>0 && GL.ready(i+1)) GL.draw(i+1,{z:.8+.23*sm(0,1,k), k:.3*(1-k), p:.03, cx:dx, cy:dy, m:.55+.45*k, bl:bl*(1-k), ly:clamp(foc[i+1][1]-.13,0,1), arch:k>=.999?null:arch});
       scenes.forEach(function(sc){ sc.style.visibility="hidden"; });
+      tidy(i);
     } else {
       scenes.forEach(function(sc,j){
         var st=sc.style;
@@ -417,7 +437,9 @@
     bar.style.transform="scaleX("+clamp(y/(N-1),0,1).toFixed(4)+")";
   }
 
+  var spd=0;
   function tick(now){
+    spd+=(Math.min(1,Math.abs(target-cur)*9)-spd)*.08;
     cur+=(target-cur)*(reduce?1:.12);
     if(Math.abs(target-cur)<.0004) cur=target;
     render(cur,now);
@@ -426,7 +448,11 @@
 
   size(); read(); cur=target;
   W.addEventListener("scroll",read,{passive:true});
-  W.addEventListener("resize",function(){ size(); read(); });
+  W.addEventListener("resize",function(){
+    var p=W.innerHeight>W.innerWidth;
+    if(p!==portrait){ portrait=p; if(GL) for(var j=0;j<N;j++) GL.free(j); else scenes.forEach(function(s,j){ var im=s.querySelector("img"); if(im.getAttribute("src")) im.src=srcFor(j); }); }
+    size(); read();
+  });
   W.addEventListener("keydown",function(e){
     var i=Math.round(target);
     if(e.key==="ArrowDown"||e.key==="PageDown"){ e.preventDefault(); go(Math.min(i+1,N-1)); }
