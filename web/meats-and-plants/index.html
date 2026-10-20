@@ -3,221 +3,404 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Meats &amp; Plants – Walk In · Hiranandani Estate, Thane</title>
-<meta name="description" content="Walk into Meats & Plants, a Chef Soham café at Rosa Manhattan, Hiranandani Estate, Thane West: through the door, past the thank-you banner, up to the counter and down to your iced coffee.">
+<title>Meats &amp; Plants – Ramen, Sushi &amp; Coffee · Thane &amp; Kalyan</title>
+<meta name="description" content="Meats & Plants, a Chef Soham eatery: ramen, sushi, multi-cuisine plates and coffee. Walk into our Hiranandani Estate café in Thane, see the menu and find both outlets, Thane and Kalyan.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0f0e0c">
+<link rel="icon" href="img/mark-green.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  /* Palette from the café itself: pale concrete, white plaster, walnut stools, warm light under the counter. */
-  :root{--bg:#0f0e0c;--ink:#f6f3ee;--soft:rgba(246,243,238,.76);--faint:rgba(246,243,238,.5);--glow:#f2d28c;--glow2:#f8e2b0;--line:rgba(246,243,238,.18)}
+  /* Colours from the cafés and the logo: logo green, white plaster, peach arch wall, walnut, warm counter light. */
+  :root{
+    --night:#0f0e0c;--ink:#f6f3ee;--soft:rgba(246,243,238,.78);--faint:rgba(246,243,238,.5);--glow:#f2d28c;--glow2:#f8e2b0;--line:rgba(246,243,238,.18);
+    --paper:#f7f4ee;--paper2:#efe9df;--text:#1c1b19;--muted:rgba(28,27,25,.64);--rule:rgba(28,27,25,.12);--green:#5f8a5a;--green2:#4b7247;--peach:#ecd3ba;--walnut:#6b4a33;
+  }
   *{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--ink)}
+  html,body{margin:0;background:var(--night);color:var(--ink)}
   body{font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   a{color:inherit}
+  img{display:block;max-width:100%}
+  .serif{font-family:"Shippori Mincho",Georgia,serif}
 
-  /* ---------- the stage ---------- */
+  /* ================= WALK-IN ================= */
   .stage{position:fixed;inset:0;overflow:hidden;background:#000}
-  .sc{position:absolute;inset:0;visibility:hidden;will-change:transform,clip-path}
-  .sc img{width:100%;height:100%;object-fit:cover;display:block;user-select:none;-webkit-user-drag:none}
+  .sc{position:absolute;inset:0;visibility:hidden}
+  .sc img{width:100%;height:100%;object-fit:cover}
   .gl{position:absolute;inset:0;width:100%;height:100%;display:block}
   .has-gl .sc{display:none}
-  /* the glass door you walk through: a tall, slightly rounded rectangle with the counter's warm light on its edge */
   .door{position:absolute;border:1px solid var(--glow2);pointer-events:none;opacity:0;border-radius:10px;
     box-shadow:0 0 34px rgba(242,210,140,.45),inset 0 0 34px rgba(242,210,140,.18)}
   .shade{position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(120% 90% at 50% 45%,transparent 40%,rgba(8,7,6,.5) 100%),
+    background:radial-gradient(120% 90% at 50% 45%,transparent 40%,rgba(8,7,6,.48) 100%),
       linear-gradient(180deg,rgba(8,7,6,.5) 0%,transparent 20%,transparent 58%,rgba(8,7,6,.66) 100%),
-      linear-gradient(90deg,rgba(8,7,6,.42) 0%,transparent 46%)}
-  .grain{position:absolute;inset:-50%;opacity:.08;mix-blend-mode:overlay;pointer-events:none;
+      linear-gradient(90deg,rgba(8,7,6,.4) 0%,transparent 46%)}
+  .grain{position:absolute;inset:-50%;opacity:.07;mix-blend-mode:overlay;pointer-events:none;
     background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-  /* ---------- chrome ---------- */
-  .top{position:fixed;left:0;right:0;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;
-    padding:max(16px,env(safe-area-inset-top)) 20px 14px;pointer-events:none}
-  .top>*{pointer-events:auto}
+  .top{position:fixed;left:0;right:0;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:14px;
+    padding:max(14px,env(safe-area-inset-top)) 20px 12px;transition:background .4s,color .4s,box-shadow .4s}
+  .top.light{background:rgba(247,244,238,.9);color:var(--text);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--rule)}
   .brand{text-decoration:none;display:flex;align-items:center;gap:10px}
-  .brand .ens{width:30px;height:30px;color:var(--glow2)}
-  .brand b{display:block;font:600 16px/1 "Shippori Mincho",serif;letter-spacing:.04em}
-  .brand small{display:block;margin-top:5px;font:500 9px/1 "DM Sans",sans-serif;letter-spacing:.32em;color:var(--glow2);text-transform:uppercase}
-  .visit{font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;padding:11px 16px;border-radius:999px;
-    border:1px solid rgba(248,226,176,.7);color:var(--glow2);background:rgba(15,14,12,.35);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:background .3s,color .3s}
-  .visit:hover,.visit:focus-visible{background:var(--glow2);color:var(--bg)}
-  .bar{position:fixed;left:0;top:0;height:2px;width:100%;transform-origin:0 0;transform:scaleX(0);background:linear-gradient(90deg,#d9b56a,var(--glow2));z-index:21}
+  .brand img{width:30px;height:auto}
+  .brand .w{display:block}.brand .g{display:none}
+  .top.light .brand .w{display:none}.top.light .brand .g{display:block}
+  .brand b{display:block;font:600 16px/1 "Shippori Mincho",serif;letter-spacing:.03em}
+  .brand small{display:block;margin-top:5px;font:500 9px/1 "DM Sans",sans-serif;letter-spacing:.3em;text-transform:uppercase;opacity:.75}
+  .links{display:flex;gap:24px;font-size:13.5px;font-weight:500}
+  .links a{text-decoration:none;opacity:.8}.links a:hover{opacity:1}
+  .pill{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:11px 16px;border-radius:999px;
+    border:1px solid currentColor;transition:background .3s,color .3s}
+  .top:not(.light) .pill{color:var(--glow2);background:rgba(15,14,12,.35);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  .top.light .pill{background:var(--green);border-color:var(--green);color:#fff}
+  @media (max-width:820px){.links{display:none}}
+  .bar{position:fixed;left:0;top:0;height:2px;width:100%;transform-origin:0 0;transform:scaleX(0);background:linear-gradient(90deg,#d9b56a,var(--glow2));z-index:41}
 
-  .rail{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:20;list-style:none;margin:0;padding:0;display:grid;gap:13px}
+  .rail{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:20;list-style:none;margin:0;padding:0;display:grid;gap:13px;transition:opacity .4s}
   .rail button{all:unset;cursor:pointer;display:flex;align-items:center;justify-content:flex-end;gap:10px;font:500 10px/1 "DM Sans",sans-serif;letter-spacing:.2em;color:var(--faint);text-transform:uppercase}
   .rail button span{opacity:0;transform:translateX(6px);transition:opacity .3s,transform .3s;white-space:nowrap;text-shadow:0 1px 8px #000}
   .rail button i{width:8px;height:8px;border-radius:50%;border:1px solid var(--glow);transition:background .3s,transform .3s}
-  .rail button.on{color:var(--ink)}
-  .rail button.on i{background:var(--glow2);transform:scale(1.25)}
+  .rail button.on{color:var(--ink)}.rail button.on i{background:var(--glow2);transform:scale(1.25)}
   .rail button.on span,.rail button:hover span,.rail button:focus-visible span{opacity:1;transform:none}
-  .rail button:focus-visible i{outline:1px solid var(--glow2);outline-offset:3px}
 
-  /* ---------- copy over each stop ---------- */
   .txt{position:fixed;z-index:10;left:clamp(20px,6vw,90px);bottom:clamp(64px,12vh,120px);width:min(480px,calc(100vw - 40px));
     opacity:0;visibility:hidden;pointer-events:none;will-change:opacity,transform}
-  .txt .num{font:300 60px/1 "DM Sans",sans-serif;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px var(--glow2);margin:0 0 10px}
+  .txt .num{font:300 58px/1 "DM Sans",sans-serif;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px var(--glow2);margin:0 0 10px}
   .txt .eb{margin:0;font-size:11px;font-weight:500;letter-spacing:.34em;text-transform:uppercase;color:var(--glow2);text-shadow:0 1px 10px rgba(0,0,0,.9)}
   .txt .jp{margin:0 0 8px;font:600 15px/1.2 "Shippori Mincho",serif;letter-spacing:.3em;color:var(--glow2);text-shadow:0 1px 10px rgba(0,0,0,.9)}
-  .txt h2{margin:10px 0 0;font:600 clamp(32px,4.4vw,54px)/1.08 "Shippori Mincho",Georgia,serif;letter-spacing:.01em;text-shadow:0 2px 24px rgba(0,0,0,.85)}
+  .txt h2{margin:10px 0 0;font:600 clamp(32px,4.4vw,54px)/1.08 "Shippori Mincho",Georgia,serif;text-shadow:0 2px 24px rgba(0,0,0,.85)}
   .txt .rule{width:44px;height:1px;background:var(--glow);margin:18px 0 16px}
-  .txt p.d{margin:0;font-size:16px;line-height:1.65;font-weight:300;color:var(--ink);text-shadow:0 1px 14px rgba(0,0,0,.95)}
-
-  .txt.hero{left:0;right:0;width:auto;bottom:auto;top:71%;transform:translateY(-50%);text-align:center;padding:0 20px}
-  .txt.hero .jp{font-size:13px;letter-spacing:.5em;margin-bottom:14px}
-  .txt.hero h1{margin:0;font:700 clamp(50px,9vw,120px)/.95 "Shippori Mincho",Georgia,serif;letter-spacing:-.01em;text-shadow:0 2px 30px rgba(0,0,0,.9)}
+  .txt p.d{margin:0;font-size:16px;line-height:1.65;font-weight:300;text-shadow:0 1px 14px rgba(0,0,0,.95)}
+  .txt.hero{left:0;right:0;width:auto;bottom:auto;top:73%;transform:translateY(-50%);text-align:center;padding:0 20px}
+  .txt.hero .mk{width:52px;margin:0 auto 14px;filter:drop-shadow(0 4px 18px rgba(0,0,0,.6))}
+  .txt.hero h1{margin:0;font:700 clamp(50px,9vw,118px)/.95 "Shippori Mincho",Georgia,serif;text-shadow:0 2px 30px rgba(0,0,0,.9)}
   .txt.hero h1 i{font-style:normal;color:var(--glow2)}
-  .txt.hero p.d{max-width:430px;margin:18px auto 0;color:var(--soft)}
-  .hint{margin:34px auto 0;width:26px;height:42px;border:1px solid rgba(248,226,176,.7);border-radius:14px;position:relative}
+  .txt.hero p.d{max-width:440px;margin:16px auto 0;color:var(--soft)}
+  .hint{margin:30px auto 0;width:26px;height:42px;border:1px solid rgba(248,226,176,.7);border-radius:14px;position:relative}
   .hint::after{content:"";position:absolute;left:50%;top:8px;width:2px;height:8px;margin-left:-1px;border-radius:2px;background:var(--glow2);animation:hint 1.8s ease-in-out infinite}
   @keyframes hint{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
   .hint-t{margin-top:10px;font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--faint)}
-
-  .txt.end{left:0;right:0;width:auto;bottom:auto;top:50%;transform:translateY(-50%);text-align:center;padding:0 20px}
-  .txt.end h2{font-size:clamp(34px,5.4vw,64px)}
-  .txt.end::before{content:"";position:absolute;left:50%;top:50%;width:min(1000px,160vw);height:160%;transform:translate(-50%,-50%);z-index:-1;
-    background:radial-gradient(closest-side,rgba(10,9,8,.88),rgba(10,9,8,.62) 60%,transparent)}
-  .txt.end .rule{margin:18px auto 16px}
-  .txt.end p.d{max-width:460px;margin:0 auto}
-  .facts{display:flex;justify-content:center;flex-wrap:wrap;gap:12px 30px;margin:24px 0 0;padding:0;list-style:none}
-  .facts li{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--glow2)}
-  .facts b{display:block;margin-bottom:7px;font:600 24px/1 "Shippori Mincho",serif;letter-spacing:.02em;color:var(--ink);text-transform:none}
-  .addr{margin:22px auto 0;max-width:420px;font-size:14px;line-height:1.6;color:var(--soft)}
-  .ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:26px}
-  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:999px;text-decoration:none;font-size:11.5px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
-    border:1px solid rgba(248,226,176,.8);color:var(--glow2);background:rgba(15,14,12,.45);transition:background .3s,color .3s}
-  .btn.solid{background:var(--glow2);color:var(--bg)}
-  .btn:hover,.btn:focus-visible{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-  .credit{margin-top:26px;font-size:10.5px;letter-spacing:.12em;color:var(--faint)}
-
   .track{position:relative;z-index:1;pointer-events:none}
 
-  /* ---------- loader: the lit sign ---------- */
-  .loader{position:fixed;inset:0;z-index:50;background:#000;display:grid;place-items:center;text-align:center;transition:opacity 1s ease,visibility 1s}
+  .loader{position:fixed;inset:0;z-index:60;background:#0b0a09;display:grid;place-items:center;text-align:center;transition:opacity 1s ease,visibility 1s}
   .loader.done{opacity:0;visibility:hidden}
-  .loader .lit{font:700 clamp(34px,7vw,64px)/1 "Shippori Mincho",serif;color:#fff;text-shadow:0 0 18px rgba(255,236,200,.85),0 0 42px rgba(242,210,140,.5);animation:flick 2.4s ease-in-out infinite}
-  .loader p{margin:16px 0 0;font:600 12px/1 "Shippori Mincho",serif;letter-spacing:.5em;color:var(--glow2)}
+  .loader img{width:96px;margin:0 auto 22px;animation:breathe 2.4s ease-in-out infinite}
+  .loader .lit{font:700 clamp(30px,6vw,52px)/1 "Shippori Mincho",serif;color:#fff;text-shadow:0 0 18px rgba(255,236,200,.85),0 0 42px rgba(242,210,140,.5);animation:flick 2.4s ease-in-out infinite}
+  .loader p{margin:14px 0 0;font:600 12px/1 "Shippori Mincho",serif;letter-spacing:.5em;color:var(--glow2)}
   @keyframes flick{0%,100%{opacity:1}46%{opacity:1}48%{opacity:.55}50%{opacity:1}53%{opacity:.7}55%{opacity:1}}
+  @keyframes breathe{50%{transform:scale(1.05);opacity:.85}}
+
+  /* ================= THE CAFÉ SITE ================= */
+  .page{position:relative;z-index:30;background:var(--paper);color:var(--text);box-shadow:0 -30px 60px rgba(0,0,0,.35)}
+  .wrap{width:min(1180px,100% - 40px);margin:0 auto}
+  .k{margin:0 0 14px;font-size:11.5px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--green)}
+  .h{margin:0;font:600 clamp(38px,5.6vw,72px)/1.04 "Shippori Mincho",Georgia,serif;letter-spacing:-.005em}
+  .h em{font-style:normal;color:var(--green)}
+  .lead{margin:20px 0 0;max-width:560px;font-size:18px;line-height:1.7;color:var(--muted)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 24px;border-radius:999px;text-decoration:none;font-weight:600;font-size:14px;
+    background:var(--green);color:#fff;transition:background .3s,transform .2s}
+  .btn:hover,.btn:focus-visible{background:var(--green2);transform:translateY(-2px)}
+  .btn.ghost{background:transparent;color:var(--text);border:1px solid rgba(28,27,25,.25)}
+  .btn.ghost:hover{background:var(--text);color:#fff}
+  [data-rv]{opacity:0;transform:translateY(28px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+  [data-rv].in{opacity:1;transform:none}
+
+  /* about */
+  .about{padding:120px 0 90px}
+  .about .grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .about .logo{width:min(260px,60%);margin-bottom:34px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 0;padding:0;list-style:none}
+  .tags li{font-size:13px;font-weight:500;padding:9px 15px;border-radius:999px;background:#fff;border:1px solid var(--rule)}
+  .stack{position:relative;aspect-ratio:4/5}
+  .stack figure{position:absolute;margin:0;overflow:hidden;border-radius:26px;box-shadow:0 30px 60px rgba(60,45,30,.18)}
+  .stack figure img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);will-change:transform}
+  .stack .a{left:0;top:0;width:72%;height:78%}
+  .stack .b{right:0;bottom:0;width:52%;height:52%;border:8px solid var(--paper)}
+  .stamp{position:absolute;left:-14px;bottom:8%;width:120px;height:120px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;text-align:center;
+    font:600 13px/1.25 "Shippori Mincho",serif;box-shadow:0 14px 30px rgba(60,90,55,.35);animation:spin 24s linear infinite}
+  .stamp span{display:block;font:500 9px/1.4 "DM Sans",sans-serif;letter-spacing:.2em;text-transform:uppercase;opacity:.85}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media (max-width:880px){.about .grid{grid-template-columns:1fr;gap:40px}.stack{max-width:520px}}
+
+  /* signature band */
+  .band{position:relative;min-height:88vh;display:grid;align-items:end;color:#fff;overflow:hidden}
+  .band img.bg{position:absolute;inset:-8% 0;width:100%;height:116%;object-fit:cover;will-change:transform}
+  .band::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,9,8,.1) 30%,rgba(10,9,8,.78))}
+  .band .wrap{position:relative;z-index:1;padding:0 0 80px}
+  .band .k{color:var(--glow2)}
+  .band .h{max-width:760px}
+  .band .lead{color:rgba(255,255,255,.82)}
+
+  /* menu */
+  .menu{padding:120px 0}
+  .menu .head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+  .tabs{display:flex;gap:4px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-top:40px;padding:6px;background:#fff;border:1px solid var(--rule);border-radius:999px;width:max-content;max-width:100%}
+  .tabs button{all:unset;cursor:pointer;white-space:nowrap;padding:11px 16px;border-radius:999px;font-weight:600;font-size:14px;color:var(--muted);transition:background .3s,color .3s}
+  .tabs button[aria-selected="true"]{background:var(--text);color:#fff}
+  .tabs button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .mgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:50px;margin-top:40px;align-items:start}
+  .mlist{list-style:none;margin:0;padding:0}
+  .mlist li{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:22px 0;border-bottom:1px solid var(--rule);opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
+  .mlist.show li{opacity:1;transform:none}
+  .mlist li:nth-child(2){transition-delay:.06s}.mlist li:nth-child(3){transition-delay:.12s}.mlist li:nth-child(4){transition-delay:.18s}
+  .mlist b{display:block;font:600 22px/1.25 "Shippori Mincho",serif}
+  .mlist p{margin:6px 0 0;color:var(--muted);font-size:15px;line-height:1.55}
+  .dot{width:16px;height:16px;border:1.5px solid currentColor;border-radius:3px;display:grid;place-items:center;margin-top:6px}
+  .dot::after{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .dot.v{color:#3f8a3a}.dot.n{color:#a83a2c}
+  .mphoto{position:sticky;top:96px;border-radius:26px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 30px 60px rgba(60,45,30,.18)}
+  .mphoto img{width:100%;height:100%;object-fit:cover;transition:opacity .5s,transform 1.2s}
+  .mphoto img.swap{opacity:0;transform:scale(1.04)}
+  .mnote{margin-top:22px;font-size:14px;color:var(--muted)}
+  @media (max-width:880px){.mgrid{grid-template-columns:1fr}.mphoto{position:relative;top:0;aspect-ratio:4/3;order:-1}}
+
+  /* gallery */
+  .gallery{padding:20px 0 120px;overflow:hidden}
+  .strip{display:flex;gap:16px;padding:40px 20px 10px;width:max-content;will-change:transform}
+  .strip figure{margin:0;width:clamp(240px,26vw,360px);flex:none}
+  .strip figure:nth-child(even){margin-top:56px}
+  .strip .ph{border-radius:22px;overflow:hidden;aspect-ratio:3/4;box-shadow:0 20px 44px rgba(60,45,30,.16)}
+  .strip img{width:100%;height:100%;object-fit:cover;transition:transform 1s}
+  .strip figure:hover img{transform:scale(1.05)}
+  .strip figcaption{margin-top:12px;font-size:13px;color:var(--muted)}
+  .strip figcaption b{color:var(--text);font-weight:600}
+
+  /* locations */
+  .loc{padding:110px 0;background:var(--paper2)}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:46px}
+  .card{background:#fff;border-radius:28px;overflow:hidden;border:1px solid var(--rule);display:flex;flex-direction:column}
+  .card .ph{aspect-ratio:16/10;overflow:hidden}
+  .card .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s}
+  .card:hover .ph img{transform:scale(1.05)}
+  .card .body{padding:26px 26px 28px;display:flex;flex-direction:column;gap:14px;flex:1}
+  .card h3{margin:0;font:600 30px/1.1 "Shippori Mincho",serif}
+  .card .badge{align-self:flex-start;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:7px 12px;border-radius:999px;background:var(--peach);color:var(--walnut)}
+  .card .row{display:grid;grid-template-columns:22px 1fr;gap:12px;font-size:15px;line-height:1.5;color:var(--muted)}
+  .card .row svg{width:20px;height:20px;color:var(--green);margin-top:1px}
+  .card .row b{color:var(--text);font-weight:600}
+  .card .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:8px}
+  @media (max-width:880px){.cards{grid-template-columns:1fr}}
+
+  footer{background:#141311;color:rgba(246,243,238,.7);padding:70px 0 max(40px,env(safe-area-inset-bottom))}
+  footer .wrap{display:grid;grid-template-columns:auto 1fr auto;gap:30px;align-items:center}
+  footer img{width:64px}
+  footer b{display:block;font:600 22px/1.2 "Shippori Mincho",serif;color:#fff}
+  footer small{display:block;margin-top:6px;font-size:13px}
+  footer .credit{font-size:12px;opacity:.6;text-align:right}
+  @media (max-width:720px){footer .wrap{grid-template-columns:1fr;text-align:center;justify-items:center}footer .credit{text-align:center}}
 
   @media (max-width:700px){
-    .rail{right:10px;gap:11px}
-    .rail button span{display:none}
+    .rail{right:10px;gap:11px}.rail button span{display:none}
     .txt{left:16px;width:calc(100vw - 32px);bottom:max(30px,env(safe-area-inset-bottom))}
     .txt.up{bottom:auto;top:max(84px,calc(env(safe-area-inset-top) + 70px))}
-    .txt .num{font-size:46px;margin-bottom:6px}
-    .txt p.d{font-size:15px}
-    .txt:not(.hero):not(.end){padding:20px 18px 22px;border-radius:18px;background:linear-gradient(180deg,rgba(15,14,12,.2),rgba(15,14,12,.58));
+    .txt .num{font-size:44px;margin-bottom:6px}.txt p.d{font-size:15px}
+    .txt:not(.hero){padding:20px 18px 22px;border-radius:18px;background:linear-gradient(180deg,rgba(15,14,12,.2),rgba(15,14,12,.58));
       border:1px solid var(--line);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
     .top{padding-left:16px;padding-right:16px}
+    .about,.menu{padding:84px 0}.loc{padding:84px 0}
+    .lead{font-size:16px}
   }
-  @media (prefers-reduced-motion:reduce){.hint::after,.loader .lit{animation:none}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}[data-rv]{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 
 <div class="loader" id="loader" aria-hidden="true">
-  <div><div class="lit">मीट्स अँड प्लांट्स</div><p>ミーツ・アンド・プランツ</p></div>
+  <div><img src="img/mark-white.png" alt=""><div class="lit">मीट्स अँड प्लांट्स</div><p>ミーツ・アンド・プランツ</p></div>
 </div>
 
-<div class="stage" aria-hidden="true">
-  <!-- both photos are AI-upscaled from the café's Google listing; *-d.webp are their depth maps -->
-  <div class="sc" data-src="img/entrance.webp"><img alt=""></div>
-  <div class="sc" data-src="img/inside.webp"><img alt=""></div>
+<div class="stage" id="stage" aria-hidden="true">
+  <!-- AI-upscaled photos (Real-ESRGAN) with AI depth maps (*-d.webp) -->
+  <div class="sc" data-src="img/t-entrance.webp"><img alt=""></div>
+  <div class="sc" data-src="img/t-inside.webp"><img alt=""></div>
+  <div class="sc" data-src="img/t-chefs.webp"><img alt=""></div>
+  <div class="sc" data-src="img/t-above.webp"><img alt=""></div>
+  <div class="sc" data-src="img/k-sushi.webp"><img alt=""></div>
   <div class="door" id="door"></div>
   <div class="shade"></div>
   <div class="grain"></div>
 </div>
 
-<header class="top">
-  <a class="brand" href="#" data-go="0"><svg class="ens" viewBox="0 0 40 40" aria-hidden="true"><path d="M33 13A15 15 0 1 0 34 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><span><b>Meats &amp; Plants</b><small>Hiranandani · Thane</small></span></a>
-  <a class="visit" href="#visit" data-go="4">Visit</a>
+<header class="top" id="top">
+  <a class="brand" href="#" data-go="0"><img class="w" src="img/mark-white.png" alt=""><img class="g" src="img/mark-green.png" alt=""><span><b>Meats &amp; Plants</b><small>A Chef Soham eatery</small></span></a>
+  <nav class="links" aria-label="Sections"><a href="#about">About</a><a href="#menu">Menu</a><a href="#gallery">Gallery</a><a href="#visit">Visit</a></nav>
+  <a class="pill" href="#visit">Find us</a>
 </header>
 <div class="bar" id="bar"></div>
-<nav aria-label="Walk"><ul class="rail" id="rail"></ul></nav>
+<nav aria-label="Walk-in stops"><ul class="rail" id="rail"></ul></nav>
 
-<main>
-  <section class="txt hero" data-name="Outside">
-    <p class="jp">ミーツ・アンド・プランツ</p>
-    <h1>Meats <i>&amp;</i> Plants</h1>
-    <p class="d">A Chef Soham café under Rosa Manhattan, Hiranandani Estate. The sign is lit, the door is glass. Come in.</p>
-    <div class="hint"></div><div class="hint-t">Scroll to walk in</div>
-  </section>
-
-  <section class="txt" data-name="Thank you">
-    <p class="num">01</p>
-    <p class="jp">ありがとうございます</p>
-    <h2>Thank you for coming in.</h2>
-    <div class="rule"></div>
-    <p class="d">That is what the banner over the counter says, before anyone does. Pale concrete, white plaster and a staircase rising into quiet light.</p>
-  </section>
-
-  <section class="txt" data-name="The counter">
-    <p class="num">02</p>
-    <p class="eb">The counter</p>
-    <h2>Pull up a stool.</h2>
-    <div class="rule"></div>
-    <p class="d">A textured white counter glowing from underneath, walnut stools in a row, and the kitchen right there. Watch your order come together.</p>
-  </section>
-
-  <section class="txt up" data-name="Your table">
-    <p class="num">03</p>
-    <p class="eb">Your table</p>
-    <h2>The iced coffee everyone photographs.</h2>
-    <div class="rule"></div>
-    <p class="d">Cold, creamy and served in fluted glass with a biscuit on top. Order it first; take the picture second.</p>
-  </section>
-
-  <section class="txt end" data-name="Visit" id="visit">
-    <p class="jp">またね</p>
-    <h2>See you soon.</h2>
-    <div class="rule"></div>
-    <p class="d">Coffee in the afternoon, dinner at night, open till midnight.</p>
-    <ul class="facts">
-      <li><b>4.9 ★</b>Google</li>
-      <li><b>₹400–600</b>Per person</li>
-      <li><b>12 AM</b>Closes</li>
-    </ul>
-    <p class="addr">Shop No. 21, Rosa Manhattan, Hiranandani Estate, Thane West, Thane 400615</p>
-    <div class="ctas">
-      <a class="btn solid" href="https://www.google.com/maps/search/?api=1&query=Meats+and+Plants+Rosa+Manhattan+Hiranandani+Estate+Thane" target="_blank" rel="noopener">Get directions</a>
-      <a class="btn" href="https://www.google.com/search?q=Meats+and+Plants+Thane+reviews" target="_blank" rel="noopener">Read reviews</a>
-    </div>
-    <p class="credit">Concept walkthrough by Infinity Technologies</p>
-  </section>
-</main>
+<!-- copy for the walk-in -->
+<section class="txt hero" data-name="Outside">
+  <img class="mk" src="img/mark-white.png" alt="">
+  <h1>Meats <i>&amp;</i> Plants</h1>
+  <p class="d">Ramen, sushi and coffee from Chef Soham. The sign is lit and the door is glass. Come in.</p>
+  <div class="hint"></div><div class="hint-t">Scroll to walk in</div>
+</section>
+<section class="txt" data-name="Thank you">
+  <p class="num">01</p><p class="jp">ありがとうございます</p>
+  <h2>Thank you for coming in.</h2><div class="rule"></div>
+  <p class="d">That is what the banner over the counter says, before anyone does. Pale concrete, white plaster and warm light under the counter.</p>
+</section>
+<section class="txt" data-name="The kitchen">
+  <p class="num">02</p><p class="jp">こんにちは</p>
+  <h2>Say hello to the kitchen.</h2><div class="rule"></div>
+  <p class="d">An open counter with the chefs right there. Pull up a stool and watch your bowl come together.</p>
+</section>
+<section class="txt up" data-name="Find a seat">
+  <p class="num">03</p><p class="eb">From the stairs</p>
+  <h2>Find your corner.</h2><div class="rule"></div>
+  <p class="d">Two floors of warm wood and soft light. Window seats for the view, quiet tables for the long conversations.</p>
+</section>
+<section class="txt" data-name="Your order">
+  <p class="num">04</p><p class="eb">Your order</p>
+  <h2>Made to share. Or not.</h2><div class="rule"></div>
+  <p class="d">Crispy sushi rolls, steaming ramen and an iced coffee everyone photographs. Scroll on for the menu.</p>
+</section>
 
 <div class="track" id="track"></div>
 
+<!-- ================= the café site ================= -->
+<div class="page" id="page">
+  <section class="about" id="about">
+    <div class="wrap grid">
+      <div>
+        <img class="logo" src="img/logo-green.png" alt="Meats and Plants" data-rv>
+        <p class="k" data-rv>Our story</p>
+        <h2 class="h" data-rv>One table for <em>meat lovers</em> and <em>plant lovers</em>.</h2>
+        <p class="lead" data-rv>Meats &amp; Plants is a Chef Soham eatery. Japanese-inspired ramen and sushi sit next to multi-cuisine plates and good coffee, so whoever you bring, everyone finds their thing.</p>
+        <ul class="tags" data-rv><li>Ramen</li><li>Sushi</li><li>Multi-cuisine</li><li>Coffee</li><li>Veg &amp; non-veg</li></ul>
+      </div>
+      <div class="stack" data-rv>
+        <figure class="a"><img data-par=".06" src="img/k-skylight.webp" alt="Sunlit dining room under a glass roof, with a blossom tree" loading="lazy"></figure>
+        <figure class="b"><img data-par="-.05" src="img/t-chefs.webp" alt="Three chefs behind the counter under the Japanese banner" loading="lazy"></figure>
+        <div class="stamp"><div>Chef<br>Soham<span>Since day one</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <img class="bg" data-par=".12" src="img/k-sushi.webp" alt="A crispy sushi roll on a black slate with soy sauce" loading="lazy">
+    <div class="wrap">
+      <p class="k" data-rv>Signature</p>
+      <h2 class="h" data-rv>Crispy on top. Soft in the middle.</h2>
+      <p class="lead" data-rv>Our crunchy sushi rolls come dressed with tempura crumbs and a drizzle of mayo, with soy on the side. The plate that disappears first.</p>
+    </div>
+  </section>
+
+  <section class="menu" id="menu">
+    <div class="wrap">
+      <div class="head">
+        <div><p class="k" data-rv>The menu</p><h2 class="h" data-rv>What to <em>order</em></h2></div>
+        <a class="btn ghost" data-rv href="#visit">Come taste it</a>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Menu sections" data-rv>
+        <button role="tab" aria-selected="true" data-tab="ramen">Ramen</button>
+        <button role="tab" aria-selected="false" data-tab="sushi">Sushi</button>
+        <button role="tab" aria-selected="false" data-tab="plates">Plates</button>
+        <button role="tab" aria-selected="false" data-tab="coffee">Coffee</button>
+      </div>
+      <div class="mgrid">
+        <div>
+          <ul class="mlist show" data-list="ramen">
+            <li><i class="dot n"></i><div><b>Japanese Chicken Ramen</b><p>Slow-simmered broth, springy noodles, tender chicken, soft egg and nori.</p></div></li>
+            <li><i class="dot v"></i><div><b>Veg Ramen Bowl</b><p>Miso-vegetable broth with tofu, mushrooms and greens. Just as comforting.</p></div></li>
+          </ul>
+          <ul class="mlist" data-list="sushi" hidden>
+            <li><i class="dot v"></i><div><b>Crispy Tempura Roll</b><p>Topped with tempura crumbs and a mayo drizzle, served with soy.</p></div></li>
+            <li><i class="dot v"></i><div><b>Cucumber Maki</b><p>Fresh, crunchy cucumber rolled in seasoned rice and nori.</p></div></li>
+          </ul>
+          <ul class="mlist" data-list="plates" hidden>
+            <li><i class="dot v"></i><div><b>Spaghetti Aglio e Olio</b><p>Garlic, olive oil and chilli flakes, tossed through spaghetti.</p></div></li>
+            <li><i class="dot n"></i><div><b>Multi-cuisine specials</b><p>Chinese, continental and comfort plates that change with the season. Ask what is cooking today.</p></div></li>
+          </ul>
+          <ul class="mlist" data-list="coffee" hidden>
+            <li><i class="dot v"></i><div><b>Signature Iced Coffee</b><p>Cold and creamy in fluted glass, with a biscuit on top.</p></div></li>
+            <li><i class="dot v"></i><div><b>Café Frappé</b><p>Frothy, strong and cold. Goes with everything.</p></div></li>
+            <li><i class="dot v"></i><div><b>Latte</b><p>Smooth espresso and steamed milk, for slow afternoons.</p></div></li>
+          </ul>
+          <p class="mnote">Prices and the full menu are at the counter. <span class="dot v" style="display:inline-grid;vertical-align:-3px;margin:0 4px 0 0"></span>Veg <span class="dot n" style="display:inline-grid;vertical-align:-3px;margin:0 4px 0 10px"></span>Non-veg</p>
+        </div>
+        <div class="mphoto"><img id="mimg" src="img/t-inside.webp" alt="" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery" id="gallery">
+    <div class="wrap"><p class="k" data-rv>Inside</p><h2 class="h" data-rv>Light, wood and <em>a little pink</em>.</h2></div>
+    <div class="strip" id="strip">
+      <figure><div class="ph"><img src="img/t-above.webp" alt="Seating seen from the staircase" loading="lazy"></div><figcaption><b>Thane</b> · from the stairs</figcaption></figure>
+      <figure><div class="ph"><img src="img/k-blossom.webp" alt="A blossom tree by the glass doors" loading="lazy"></div><figcaption><b>Kalyan</b> · the blossom tree</figcaption></figure>
+      <figure><div class="ph"><img src="img/t-inside.webp" alt="The counter and an iced coffee" loading="lazy"></div><figcaption><b>Thane</b> · the counter</figcaption></figure>
+      <figure><div class="ph"><img src="img/k-arch.webp" alt="Tables along the peach arch wall" loading="lazy"></div><figcaption><b>Kalyan</b> · the arch wall</figcaption></figure>
+      <figure><div class="ph"><img src="img/t-chefs.webp" alt="Chefs at the counter" loading="lazy"></div><figcaption><b>Thane</b> · the kitchen</figcaption></figure>
+      <figure><div class="ph"><img src="img/k-skylight.webp" alt="Dining room under the skylight" loading="lazy"></div><figcaption><b>Kalyan</b> · under the skylight</figcaption></figure>
+      <figure><div class="ph"><img src="img/k-sushi.webp" alt="Sushi on the table" loading="lazy"></div><figcaption><b>On the table</b> · crispy roll</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="loc" id="visit">
+    <div class="wrap">
+      <p class="k" data-rv>Visit us</p>
+      <h2 class="h" data-rv>Two cafés, <em>one menu</em>.</h2>
+      <div class="cards">
+        <article class="card" data-rv>
+          <div class="ph"><img src="img/t-entrance.webp" alt="The lit Meats & Plants sign in Thane" loading="lazy" style="object-position:50% 42%"></div>
+          <div class="body">
+            <span class="badge">Thane</span>
+            <h3>Hiranandani Estate</h3>
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span><b>Shop No. 21, Rosa Manhattan</b><br>Hiranandani Estate, Thane West 400615</span></div>
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><b>Open till 12 AM</b> · ₹400–600 per person</span></div>
+            <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg><span><b>4.9</b> on Google · 27 reviews</span></div>
+            <div class="cta"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Meats+and+Plants+Rosa+Manhattan+Hiranandani+Estate+Thane" target="_blank" rel="noopener">Get directions</a></div>
+          </div>
+        </article>
+        <article class="card" data-rv>
+          <div class="ph"><img src="img/k-front.webp" alt="The Meats & Plants storefront in Kalyan" loading="lazy" style="object-position:50% 30%"></div>
+          <div class="body">
+            <span class="badge">Kalyan</span>
+            <h3>Chikan Ghar</h3>
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span><b>Shop No. 6, Chikan Ghar Road</b><br>Opposite Sandeep Hotel, Kalyan West</span></div>
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><b>Afternoon till 11 PM</b> · about ₹900 for two</span></div>
+            <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg><span><b>4.5</b> on Zomato · 329 ratings</span></div>
+            <div class="cta"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Meats+%26+Plants+Chikanghar+Kalyan" target="_blank" rel="noopener">Get directions</a><a class="btn ghost" href="tel:+919833412539">Call</a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <img src="img/mark-white.png" alt="">
+      <div><b>Meats &amp; Plants</b><small>A Chef Soham eatery · Thane &amp; Kalyan</small></div>
+      <div class="credit">Demo website by Infinity Technologies</div>
+    </div>
+  </footer>
+</div>
+
 <script>
-/* Walk-in.
-   Five stops (Outside, Thank you, The counter, Your table, Visit) share two photos.
-   Stop 0 is the street: the camera dollies toward the glass door, which opens as a lit doorway into
-   the café. From stop 1 on the camera never cuts: it glides around the one interior photo (keyframes
-   below), and the depth map makes near things (glasses, the coffee) move faster than the far wall.
-   Without WebGL the same path plays with CSS transforms. */
+/* ---------- Walk-in ----------
+   Five stops on the Thane café's own photos. Stop 0 (street) opens into the café through a lit glass
+   door; after that each photo dissolves into the next as the camera keeps moving forward. Every photo
+   has a depth map, so near things (glasses, chairs, the sushi) move faster than the far walls. */
 (function(){
   "use strict";
   var D=document, W=window;
   var scenes=[].slice.call(D.querySelectorAll(".sc")), txts=[].slice.call(D.querySelectorAll(".txt")),
       door=D.getElementById("door"), bar=D.getElementById("bar"), rail=D.getElementById("rail"),
-      N=txts.length, reduce=W.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var STEP=1.75;           // viewport heights of scroll per stop
-  var OPEN=.5;             // where on the street the door starts to open
-  var DOORF=[.5,.82];      // the glass door in the street photo (fraction of the frame)
+      stage=D.getElementById("stage"), page=D.getElementById("page"), top=D.getElementById("top"),
+      N=scenes.length, reduce=W.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var STEP=1.7, OPEN=.52, DOORF=[.5,.82];
+  // per stop: photo point framed at the start and end of the stop [x,y], zoom start/end, and where the camera heads
+  var SHOT=[
+    {a:[.5,.42],b:[.5,.6], z:[1.03,1.2], f:[.5,.72]},
+    {a:[.5,.08],b:[.53,.4],z:[1.04,1.16],f:[.52,.3]},
+    {a:[.5,.44],b:[.5,.5], z:[1.03,1.12],f:[.5,.48]},
+    {a:[.5,.45],b:[.5,.62],z:[1.03,1.18],f:[.48,.7]},
+    {a:[.5,.62],b:[.55,.7],z:[1.04,1.12],f:[.62,.74]}
+  ];
 
-  // camera inside: [stop position, photo point to frame x, y, zoom]
-  var CAM=[[1,.5,.25,1.04],[1.45,.5,.06,1.08],[2,.52,.42,1.12],[2.5,.55,.56,1.22],[3,.68,.72,1.25],[3.5,.76,.8,1.3],[4,.74,.76,1.24]];
-  function cam(y){
-    if(y<=CAM[0][0]) return CAM[0].slice(1);
-    for(var i=0;i<CAM.length-1;i++) if(y<=CAM[i+1][0]){ var t=(y-CAM[i][0])/(CAM[i+1][0]-CAM[i][0]); t=t*t*(3-2*t);
-      return [CAM[i][1]+(CAM[i+1][1]-CAM[i][1])*t,CAM[i][2]+(CAM[i+1][2]-CAM[i][2])*t,CAM[i][3]+(CAM[i+1][3]-CAM[i][3])*t]; }
-    return CAM[CAM.length-1].slice(1);
-  }
-
-  // rail
   txts.forEach(function(t,i){
     var li=D.createElement("li"), b=D.createElement("button");
     b.type="button"; b.innerHTML="<span>"+t.dataset.name+"</span><i></i>"; b.setAttribute("aria-label",t.dataset.name);
@@ -227,28 +410,27 @@
   var dots=[].slice.call(rail.querySelectorAll("button"));
 
   function H(){ return W.innerHeight; }
-  function size(){ D.getElementById("track").style.height=((N-1)*STEP+1)*H()+"px"; if(GL) GL.resize(); }
+  function walkLen(){ return (N-1)*STEP*H(); }
+  function size(){ D.getElementById("track").style.height=(walkLen()+H())+"px"; if(GL) GL.resize(); }
   function go(i){ W.scrollTo({top:Math.round(i*STEP*H()+(i&&i<N-1?.3*STEP*H():0)),behavior:reduce?"auto":"smooth"}); }
-  [].forEach.call(D.querySelectorAll("[data-go]"),function(a){ a.addEventListener("click",function(e){ e.preventDefault(); go(+a.dataset.go); }); });
+  D.querySelectorAll("[data-go]").forEach(function(a){ a.addEventListener("click",function(e){ e.preventDefault(); go(+a.dataset.go); }); });
 
   var ease=function(x){ return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2; };
   var clamp=function(x,a,b){ return Math.max(a,Math.min(b,x)); };
   var sm=function(a,b,x){ x=clamp((x-a)/(b-a),0,1); return x*x*(3-2*x); };
+  var mix=function(a,b,t){ return a+(b-a)*t; };
 
-  /* ---------------- WebGL depth renderer ---------------- */
   var GL=(function(){
     var cv=D.createElement("canvas"), gl;
     try{ gl=cv.getContext("webgl",{alpha:false,antialias:false,premultipliedAlpha:false}); }catch(e){}
     if(!gl) return null;
-    cv.className="gl"; scenes[0].parentNode.insertBefore(cv,door);
+    cv.className="gl"; stage.insertBefore(cv,door);
     var vs="attribute vec2 p;varying vec2 v;void main(){v=vec2(p.x*.5+.5,.5-p.y*.5);gl_Position=vec4(p,0.,1.);}";
     var fs=[
       "precision highp float;varying vec2 v;",
       "uniform sampler2D T,Dp;uniform vec2 R,I,F,L,C;uniform float Z,K,P,M,Bl,A,Rr;uniform vec4 Ar;",
-      // L = which point of the photo sits in the frame (like object-position), F = where the camera dollies toward
       "vec2 cover(vec2 s){float ra=R.x/R.y,ri=I.x/I.y;vec2 sc=ra>ri?vec2(1.,ri/ra):vec2(ra/ri,1.);return (1.-sc)*L+s*sc;}",
       "void main(){vec2 px=v*R;float a=1.;",
-      // doorway mask: a rounded rectangle (Ar = centre x, top, width, bottom; Rr = corner radius)
       " if(Ar.z>0.){vec2 c=vec2(Ar.x,(Ar.y+Ar.w)*.5),h=vec2(Ar.z*.5,(Ar.w-Ar.y)*.5);vec2 q=abs(px-c)-h+Rr;float dd=length(max(q,0.))+min(max(q.x,q.y),0.)-Rr;a=smoothstep(1.5,-1.5,dd);if(a<=0.)discard;}",
       " vec2 d=v-F,q=v;",
       " for(int k=0;k<5;k++){float z=texture2D(Dp,cover(q)).r;q=F+d/(Z*(1.+K*z))+C*(z-.45)*P;}",
@@ -277,7 +459,7 @@
       return t;
     }
     function load(i){
-      if(tex[i]) return; var me=tex[i]={}, src=scenes[i].dataset.src, a=new Image(), d=new Image(), n=0;
+      if(tex[i]||!scenes[i]) return; var me=tex[i]={}, src=scenes[i].dataset.src, a=new Image(), d=new Image(), n=0;
       function ok(){ if(++n<2||tex[i]!==me) return; me.c=upload(a); me.d=upload(d); me.w=a.naturalWidth; me.h=a.naturalHeight; me.ready=true; }
       a.onload=d.onload=ok; a.onerror=d.onerror=function(){ if(tex[i]===me) tex[i]=undefined; };
       a.src=src; d.src=src.replace(".webp","-d.webp");
@@ -288,9 +470,9 @@
       gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D,t.c);
       gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D,t.d);
       var r=cv.width/W.innerWidth;
-      gl.uniform2f(U.R,cv.width,cv.height); gl.uniform2f(U.I,t.w,t.h); gl.uniform2f(U.F,o.fx,o.fy); gl.uniform2f(U.L,o.lx,o.ly);
-      gl.uniform2f(U.C,o.cx,o.cy); gl.uniform1f(U.Z,o.z); gl.uniform1f(U.K,o.k); gl.uniform1f(U.P,o.p);
-      gl.uniform1f(U.M,o.m); gl.uniform1f(U.Bl,o.bl||0); gl.uniform1f(U.A,1); gl.uniform1f(U.Rr,10*r);
+      gl.uniform2f(U.R,cv.width,cv.height); gl.uniform2f(U.I,t.w,t.h); gl.uniform2f(U.F,o.f[0],o.f[1]); gl.uniform2f(U.L,o.l[0],o.l[1]);
+      gl.uniform2f(U.C,o.cx,o.cy); gl.uniform1f(U.Z,o.z); gl.uniform1f(U.K,o.k); gl.uniform1f(U.P,.03);
+      gl.uniform1f(U.M,o.m); gl.uniform1f(U.Bl,o.bl||0); gl.uniform1f(U.A,o.a==null?1:o.a); gl.uniform1f(U.Rr,10*r);
       var ar=o.arch; gl.uniform4f(U.Ar,ar?ar[0]*r:0,ar?ar[1]*r:0,ar?ar[2]*r:-1,ar?ar[3]*r:0);
       gl.drawArrays(gl.TRIANGLES,0,3); return true;
     }
@@ -299,19 +481,25 @@
       ready:function(i){ return tex[i]&&tex[i].ready; },bad:function(){ return bad; }};
   })();
   if(GL) D.documentElement.classList.add("has-gl");
-  if(GL){ GL.load(0); GL.load(1); } else scenes.forEach(function(s){ s.querySelector("img").src=s.dataset.src; });
+  function want(i){ if(!scenes[i]) return; if(GL) GL.load(i); else { var im=scenes[i].querySelector("img"); if(!im.getAttribute("src")) im.src=scenes[i].dataset.src; } }
 
   var px=0,py=0,mx=0,my=0;
   W.addEventListener("pointermove",function(e){ if(e.pointerType==="mouse"){ px=(e.clientX/W.innerWidth-.5)*2; py=(e.clientY/W.innerHeight-.5)*2; } },{passive:true});
+
+  // camera for stop i at local progress t (0..1)
+  function shot(i,t){
+    var s=SHOT[i], e=t*.65+sm(0,1,t)*.35;
+    return {l:[mix(s.a[0],s.b[0],e),mix(s.a[1],s.b[1],e)], z:mix(s.z[0],s.z[1],e), f:s.f};
+  }
 
   var cur=0, target=0, last=-1, t0=performance.now(), spd=0;
   function read(){ target=W.scrollY/(STEP*H()); }
 
   function render(y,now){
     var w=W.innerWidth, h=H();
-    var street=y<1, t=street?y:0;
-    var k=street?ease(sm(OPEN,1,t)):1, arch=null;
-    if(street && k>0){
+    var i=Math.min(Math.floor(y),N-1), t=i>=N-1?Math.min(1,(y-i)):y-i;
+    var k=i<N-1?ease(sm(OPEN,1,t)):0, arch=null;
+    if(i===0 && k>0){
       var fx=DOORF[0]*w, fy=DOORF[1]*h, cx=fx+(w/2-fx)*k, cy=fy+(h/2-fy)*k,
           aw=Math.min(w,h)*.16+(Math.max(w,h)*2.2)*Math.pow(k,1.7), ah=aw*1.7;
       arch=[cx,cy-ah*.5,aw,cy+ah*.5];
@@ -319,45 +507,44 @@
       ds.opacity=(sm(0,.12,k)*(1-sm(.4,.85,k))).toFixed(3);
     } else door.style.opacity=0;
 
-    var c=cam(Math.max(1,y));
-    var endDim=sm(3.6,4,y);
+    want(i); want(i+1); want(i+2);
+    var A=shot(i,i>=N-1?0:t), B=i<N-1?shot(i+1,0):null;
     if(GL && !GL.bad()){
       var s=(now-t0)/1000; mx+=(px-mx)*.05; my+=(py-my)*.05;
       var ph=y*30, sp=reduce?0:spd;
-      var dx=(reduce?0:Math.sin(s*.31)*.5+mx)+Math.sin(ph*.5)*.8*sp, dy=(reduce?0:Math.cos(s*.23)*.35+my)+Math.abs(Math.sin(ph))*1*sp;
-      var bl=reduce?0:Math.min(.06,.012*sp+.05*(street?k:0));
+      var dx=(reduce?0:Math.sin(s*.31)*.5+mx)+Math.sin(ph*.5)*.8*sp, dy=(reduce?0:Math.cos(s*.23)*.35+my)+Math.abs(Math.sin(ph))*sp;
+      var bl=reduce?0:Math.min(.06,.012*sp+.05*k);
       GL.clear();
-      var inZ=c[2]*(street?(.86+.14*sm(0,1,k)):1);
-      if(street){
-        var e=t*.7+sm(0,1,t)*.3;
-        GL.draw(0,{fx:DOORF[0],fy:DOORF[1]-.1,lx:.5,ly:.4+.2*e,z:1.03+(reduce?.06:.16)*e+.8*k,k:(reduce?.05:.35)*e+.7*k,p:.03,cx:dx,cy:dy,m:1-.6*k,bl:bl});
-        if(k>0) GL.draw(1,{fx:c[0],fy:c[1],lx:c[0],ly:c[1],z:inZ,k:.25*(1-k),p:.03,cx:dx,cy:dy,m:.55+.45*k,bl:bl*(1-k),arch:k>=.999?null:arch});
-      } else {
-        // inside: dolly with the camera's own zoom so near objects (glasses, the coffee) grow faster
-        GL.draw(1,{fx:c[0],fy:c[1],lx:c[0],ly:c[1],z:inZ,k:(reduce?.05:.42)*(c[2]-1),p:.032,cx:dx,cy:dy,m:1-.3*endDim,bl:bl});
+      var push=i===0?.8:.38;   // the door pulls you in further than a dissolve
+      var zA=A.z+push*k;
+      var ok=GL.draw(i,{l:A.l,f:A.f,z:zA,k:(reduce?.05:.45)*(zA-1),cx:dx,cy:dy,m:1-(i===0?.6:.5)*k,bl:i===0?bl:Math.min(.09,bl+.08*sm(.1,.6,k))});
+      if(!ok) for(var j=i-1;j>=0&&!ok;j--) ok=GL.draw(j,{l:shot(j,1).l,f:SHOT[j].f,z:shot(j,1).z,k:.1,cx:dx,cy:dy,m:.85});
+      if(B && k>0){
+        if(i===0) GL.draw(1,{l:B.l,f:B.f,z:B.z*(.86+.14*k),k:.25*(1-k),cx:dx,cy:dy,m:.55+.45*k,bl:bl*(1-k),arch:k>=.999?null:arch});
+        else GL.draw(i+1,{l:B.l,f:B.f,z:B.z*(1.16-.16*k),k:.3*(1-k),cx:dx,cy:dy,m:.75+.25*k,bl:bl*(1-k),a:sm(.2,.62,k)});
       }
       scenes.forEach(function(sc){ sc.style.visibility="hidden"; });
     } else {
-      var A=scenes[0].style, B=scenes[1].style;
-      A.visibility=street?"visible":"hidden"; A.transformOrigin=DOORF[0]*100+"% "+DOORF[1]*100+"%"; A.transform="scale("+(1.04+.5*ease(t)+.6*k).toFixed(4)+")";
-      B.visibility=!street||k>0?"visible":"hidden"; B.zIndex=2;
-      scenes[1].querySelector("img").style.objectPosition=c[0]*100+"% "+c[1]*100+"%";
-      B.transformOrigin=c[0]*100+"% "+c[1]*100+"%"; B.transform="scale("+c[2].toFixed(4)+")";
-      B.clipPath=street&&arch?"inset("+arch[1].toFixed(1)+"px "+(w-arch[0]-arch[2]/2).toFixed(1)+"px "+(h-arch[3]).toFixed(1)+"px "+(arch[0]-arch[2]/2).toFixed(1)+"px round 10px)":"none";
-      B.filter=endDim?"brightness("+(1-.3*endDim).toFixed(3)+")":"none";
+      scenes.forEach(function(sc,j){
+        var st=sc.style, im=sc.querySelector("img");
+        if(j===i){ st.visibility="visible"; st.opacity=1; st.zIndex=1; im.style.objectPosition=A.l[0]*100+"% "+A.l[1]*100+"%";
+          st.transformOrigin=A.f[0]*100+"% "+A.f[1]*100+"%"; st.transform="scale("+(A.z+.4*k).toFixed(4)+")"; st.clipPath="none"; }
+        else if(j===i+1&&k>0){ st.visibility="visible"; st.zIndex=2; im.style.objectPosition=B.l[0]*100+"% "+B.l[1]*100+"%";
+          st.transform="scale("+(B.z*(1.16-.16*k)).toFixed(4)+")"; st.opacity=i===0?1:sm(0,.85,k);
+          st.clipPath=i===0&&arch&&k<.999?"inset("+arch[1].toFixed(1)+"px "+(w-arch[0]-arch[2]/2).toFixed(1)+"px "+(h-arch[3]).toFixed(1)+"px "+(arch[0]-arch[2]/2).toFixed(1)+"px round 10px)":"none"; }
+        else st.visibility="hidden";
+      });
     }
 
-    // copy: each stop's card fades in after you arrive and out before you leave
-    var i=Math.min(Math.floor(y),N-1), lt=y-i;
+    var lt=y-i;
     txts.forEach(function(el,j){
       var a=0, dy=0;
-      if(j===i){ a=(j===0||j===N-1?1:sm(.08,.22,lt))*(j===N-1?1:1-sm(j===0?OPEN-.14:.66,j===0?OPEN:.8,lt)); dy=(1-a)*(lt<.4?18:-18); }
-      else if(j===i+1 && j===N-1){ a=sm(.86,1,lt); }
+      if(j===i){ a=(j===0||j===N-1?1:sm(.08,.22,lt))*(j===N-1?1-sm(.35,.7,lt):1-sm(j===0?OPEN-.14:OPEN-.1,j===0?OPEN:OPEN+.04,lt)); dy=(1-a)*(lt<.3&&j!==N-1?18:-18); }
+      else if(j===i+1 && j===N-1){ a=sm(.82,1,lt); dy=(1-a)*18; }
       el.style.opacity=a.toFixed(3); el.style.visibility=a>.01?"visible":"hidden"; el.style.pointerEvents=a>.6?"auto":"none";
-      var base=el.classList.contains("hero")||el.classList.contains("end")?"translateY(-50%) ":"";
-      el.style.transform=base+"translateY("+dy.toFixed(1)+"px)";
+      el.style.transform=(el.classList.contains("hero")?"translateY(-50%) ":"")+"translateY("+dy.toFixed(1)+"px)";
     });
-    var active=lt>.75?Math.min(i+1,N-1):i;
+    var active=lt>OPEN+.25?Math.min(i+1,N-1):i;
     if(active!==last){ dots.forEach(function(d,j){ d.classList.toggle("on",j===active); }); last=active; }
     bar.style.transform="scaleX("+clamp(y/(N-1),0,1).toFixed(4)+")";
   }
@@ -366,23 +553,57 @@
     spd+=(Math.min(1,Math.abs(target-cur)*9)-spd)*.08;
     cur+=(target-cur)*(reduce?1:.1);
     if(Math.abs(target-cur)<.0004) cur=target;
-    render(cur,now);
+    var onPage=W.scrollY>walkLen()+H()*.98;          // the café site has fully covered the walk
+    stage.style.visibility=onPage?"hidden":"visible";
+    if(!onPage) render(Math.min(cur,N-1+.999),now);
+    rail.style.opacity=W.scrollY>walkLen()+H()*.2?0:1;
+    bar.style.opacity=rail.style.opacity;
+    top.classList.toggle("light",W.scrollY>walkLen()+H()*.85);
     W.requestAnimationFrame(tick);
   }
   size(); read(); cur=target;
   W.addEventListener("scroll",read,{passive:true});
   W.addEventListener("resize",function(){ size(); read(); });
-  W.addEventListener("keydown",function(e){
-    var i=Math.round(target);
-    if(e.key==="ArrowDown"||e.key==="PageDown"){ e.preventDefault(); go(Math.min(i+1,N-1)); }
-    if(e.key==="ArrowUp"||e.key==="PageUp"){ e.preventDefault(); go(Math.max(i-1,0)); }
-  });
   W.requestAnimationFrame(tick);
 
   function done(){ D.getElementById("loader").classList.add("done"); }
-  if(GL){ (function wait(){ if(GL.ready(0)&&GL.ready(1)) setTimeout(done,500); else setTimeout(wait,100); })(); }
-  else setTimeout(done,900);
+  if(GL){ GL.load(0); GL.load(1); (function wait(){ if(GL.ready(0)&&GL.ready(1)) setTimeout(done,500); else setTimeout(wait,100); })(); }
+  else { want(0); want(1); setTimeout(done,900); }
   setTimeout(done,5000);
+})();
+
+/* ---------- The café site: reveals, parallax, menu tabs, drifting gallery ---------- */
+(function(){
+  "use strict";
+  var D=document, W=window, reduce=W.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }); },{threshold:.15,rootMargin:"0px 0px -6% 0px"});
+  D.querySelectorAll("[data-rv]").forEach(function(el,i){ el.style.transitionDelay=(i%4)*.08+"s"; io.observe(el); });
+
+  var photo={ramen:"img/t-inside.webp",sushi:"img/k-sushi.webp",plates:"img/k-arch.webp",coffee:"img/t-inside.webp"};
+  var pos={ramen:"50% 35%",sushi:"50% 70%",plates:"50% 50%",coffee:"80% 75%"};
+  var mimg=D.getElementById("mimg"); mimg.style.objectPosition=pos.ramen;
+  D.querySelectorAll(".tabs button").forEach(function(b){
+    b.addEventListener("click",function(){
+      var tab=b.dataset.tab;
+      D.querySelectorAll(".tabs button").forEach(function(x){ x.setAttribute("aria-selected",String(x===b)); });
+      D.querySelectorAll(".mlist").forEach(function(l){ var on=l.dataset.list===tab; l.hidden=!on; l.classList.remove("show"); if(on) requestAnimationFrame(function(){ requestAnimationFrame(function(){ l.classList.add("show"); }); }); });
+      mimg.classList.add("swap");
+      setTimeout(function(){ mimg.src=photo[tab]; mimg.style.objectPosition=pos[tab]; mimg.onload=function(){ mimg.classList.remove("swap"); }; if(mimg.complete) mimg.classList.remove("swap"); },300);
+    });
+  });
+
+  var pars=[].slice.call(D.querySelectorAll("[data-par]")), strip=D.getElementById("strip"), gal=D.getElementById("gallery"), sx=0, sv=0, ly=W.scrollY;
+  function frame(){
+    var vh=W.innerHeight;
+    if(!reduce) pars.forEach(function(im){ var r=im.getBoundingClientRect(); if(r.bottom<-200||r.top>vh+200) return; var c=(r.top+r.height/2-vh/2); im.style.transform="translateY("+(-c*+im.dataset.par).toFixed(1)+"px) scale(1.08)"; });
+    var r=gal.getBoundingClientRect();
+    if(r.top<vh&&r.bottom>0){
+      var max=strip.scrollWidth-W.innerWidth+40, p=Math.min(1,Math.max(0,(vh-r.top)/(r.height+vh)));
+      sx+=((-max*p)-sx)*.12; strip.style.transform="translateX("+sx.toFixed(1)+"px)";
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
 })();
 </script>
 </body>
