@@ -29,7 +29,6 @@
   .sc{position:absolute;inset:0;visibility:hidden}
   .sc img{width:100%;height:100%;object-fit:cover}
   .gl{position:absolute;inset:0;width:100%;height:100%;display:block}
-  .has-gl .sc{display:none}
   .door{position:absolute;border:1px solid var(--glow2);pointer-events:none;opacity:0;border-radius:10px;
     box-shadow:0 0 34px rgba(242,210,140,.45),inset 0 0 34px rgba(242,210,140,.18)}
   .shade{position:absolute;inset:0;pointer-events:none;
@@ -422,7 +421,7 @@
 
   var GL=(function(){
     var cv=D.createElement("canvas"), gl;
-    try{ gl=cv.getContext("webgl",{alpha:false,antialias:false,premultipliedAlpha:false}); }catch(e){}
+    try{ gl=cv.getContext("webgl",{alpha:true,antialias:false,premultipliedAlpha:false}); }catch(e){}
     if(!gl) return null;
     cv.className="gl"; stage.insertBefore(cv,door);
     var vs="attribute vec2 p;varying vec2 v;void main(){v=vec2(p.x*.5+.5,.5-p.y*.5);gl_Position=vec4(p,0.,1.);}";
@@ -477,11 +476,12 @@
       gl.drawArrays(gl.TRIANGLES,0,3); return true;
     }
     resize();
-    return {load:load,resize:resize,draw:draw,clear:function(){ gl.clearColor(0,0,0,1); gl.clear(gl.COLOR_BUFFER_BIT); },
+    cv.addEventListener("webglcontextlost",function(e){ bad=true; });
+    return {el:cv,load:load,resize:resize,draw:draw,clear:function(){ gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT); },
       ready:function(i){ return tex[i]&&tex[i].ready; },bad:function(){ return bad; }};
   })();
   if(GL) D.documentElement.classList.add("has-gl");
-  function want(i){ if(!scenes[i]) return; if(GL) GL.load(i); else { var im=scenes[i].querySelector("img"); if(!im.getAttribute("src")) im.src=scenes[i].dataset.src; } }
+  function want(i){ if(!scenes[i]) return; if(GL) GL.load(i); var im=scenes[i].querySelector("img"); if(!im.getAttribute("src")) im.src=scenes[i].dataset.src; }
 
   var px=0,py=0,mx=0,my=0;
   W.addEventListener("pointermove",function(e){ if(e.pointerType==="mouse"){ px=(e.clientX/W.innerWidth-.5)*2; py=(e.clientY/W.innerHeight-.5)*2; } },{passive:true});
@@ -509,7 +509,16 @@
 
     want(i); want(i+1); want(i+2);
     var A=shot(i,i>=N-1?0:t), B=i<N-1?shot(i+1,0):null;
-    if(GL && !GL.bad()){
+      scenes.forEach(function(sc,j){
+        var st=sc.style, im=sc.querySelector("img");
+        if(j===i){ st.visibility="visible"; st.opacity=1; st.zIndex=1; im.style.objectPosition=A.l[0]*100+"% "+A.l[1]*100+"%";
+          st.transformOrigin=A.f[0]*100+"% "+A.f[1]*100+"%"; st.transform="scale("+(A.z+.4*k).toFixed(4)+")"; st.clipPath="none"; }
+        else if(j===i+1&&k>0){ st.visibility="visible"; st.zIndex=2; im.style.objectPosition=B.l[0]*100+"% "+B.l[1]*100+"%";
+          st.transform="scale("+(B.z*(1.16-.16*k)).toFixed(4)+")"; st.opacity=i===0?1:sm(0,.85,k);
+          st.clipPath=i===0&&arch&&k<.999?"inset("+arch[1].toFixed(1)+"px "+(w-arch[0]-arch[2]/2).toFixed(1)+"px "+(h-arch[3]).toFixed(1)+"px "+(arch[0]-arch[2]/2).toFixed(1)+"px round 10px)":"none"; }
+        else st.visibility="hidden";
+      });
+    if(GL && !GL.bad() && GL.ready(i) && !(B && k>0 && !GL.ready(i+1))){
       var s=(now-t0)/1000; mx+=(px-mx)*.05; my+=(py-my)*.05;
       var ph=y*30, sp=reduce?0:spd;
       var dx=(reduce?0:Math.sin(s*.31)*.5+mx)+Math.sin(ph*.5)*.8*sp, dy=(reduce?0:Math.cos(s*.23)*.35+my)+Math.abs(Math.sin(ph))*sp;
@@ -523,18 +532,7 @@
         if(i===0) GL.draw(1,{l:B.l,f:B.f,z:B.z*(.86+.14*k),k:.25*(1-k),cx:dx,cy:dy,m:.55+.45*k,bl:bl*(1-k),arch:k>=.999?null:arch});
         else GL.draw(i+1,{l:B.l,f:B.f,z:B.z*(1.16-.16*k),k:.3*(1-k),cx:dx,cy:dy,m:.75+.25*k,bl:bl*(1-k),a:sm(.2,.62,k)});
       }
-      scenes.forEach(function(sc){ sc.style.visibility="hidden"; });
-    } else {
-      scenes.forEach(function(sc,j){
-        var st=sc.style, im=sc.querySelector("img");
-        if(j===i){ st.visibility="visible"; st.opacity=1; st.zIndex=1; im.style.objectPosition=A.l[0]*100+"% "+A.l[1]*100+"%";
-          st.transformOrigin=A.f[0]*100+"% "+A.f[1]*100+"%"; st.transform="scale("+(A.z+.4*k).toFixed(4)+")"; st.clipPath="none"; }
-        else if(j===i+1&&k>0){ st.visibility="visible"; st.zIndex=2; im.style.objectPosition=B.l[0]*100+"% "+B.l[1]*100+"%";
-          st.transform="scale("+(B.z*(1.16-.16*k)).toFixed(4)+")"; st.opacity=i===0?1:sm(0,.85,k);
-          st.clipPath=i===0&&arch&&k<.999?"inset("+arch[1].toFixed(1)+"px "+(w-arch[0]-arch[2]/2).toFixed(1)+"px "+(h-arch[3]).toFixed(1)+"px "+(arch[0]-arch[2]/2).toFixed(1)+"px round 10px)":"none"; }
-        else st.visibility="hidden";
-      });
-    }
+    } else if(GL) GL.clear();
 
     var lt=y-i;
     txts.forEach(function(el,j){
@@ -567,8 +565,9 @@
   W.requestAnimationFrame(tick);
 
   function done(){ D.getElementById("loader").classList.add("done"); }
-  if(GL){ GL.load(0); GL.load(1); (function wait(){ if(GL.ready(0)&&GL.ready(1)) setTimeout(done,500); else setTimeout(wait,100); })(); }
-  else { want(0); want(1); setTimeout(done,900); }
+  want(0); want(1);
+  var tw=Date.now();
+  (function wait(){ var im=scenes[0].querySelector("img"); if((GL&&GL.ready(0))||(im.complete&&im.naturalWidth)) setTimeout(done,500); else if(Date.now()-tw<6000) setTimeout(wait,100); else done(); })();
   setTimeout(done,5000);
 })();
 
