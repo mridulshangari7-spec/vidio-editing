@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Meats & Plants – Ramen, Sushi & Coffee in Kalyan</title>
-<meta name="description" content="Meats & Plants, Chikanghar, Kalyan: ramen, sushi, continental plates and coffee. Pick a side, meat or plants, and we build the bowl.">
+<title>Meats & Plants – Japanese Café, Hiranandani Estate, Thane</title>
+<meta name="description" content="Meats &amp; Plants, a Chef Soham café at Rosa Manhattan, Hiranandani Estate, Thane West. Walk in, take a seat at the counter, and order ramen, sushi and iced coffee.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#faf8f4">
+<meta name="theme-color" content="#f5f4f1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#faf8f4; --bg2:#f2eee7; --ink:#1d1c1a; --soft:rgba(29,28,26,.66); --faint:rgba(29,28,26,.42); --line:rgba(29,28,26,.1);
-    --red:#b9653f; --red2:#c97a55; --leaf:#5f7f4f; --leaf2:#7c9a68; --broth:#e7a24a; --cream:#f5ede0; --oak:#d8c3a2; --white:#fff;
+    --bg:#f5f4f1; --bg2:#eae8e3; --ink:#1a1918; --soft:rgba(26,25,24,.66); --faint:rgba(26,25,24,.42); --line:rgba(26,25,24,.1);
+    --red:#7a4b2e; --red2:#94603f; --glow:#f2d28c; --leaf:#5f7f4f; --leaf2:#7c9a68; --broth:#e7a24a; --cream:#f5ede0; --oak:#d8c3a2; --white:#fff;
     --accent:var(--red); --accent2:var(--red2);
   }
   html.plants{--accent:var(--leaf);--accent2:var(--leaf2)}
@@ -38,6 +38,7 @@
   .nav{position:fixed;inset:0 0 auto;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:12px;
     padding:max(14px,env(safe-area-inset-top)) 20px 14px;transition:background .4s,backdrop-filter .4s}
   .nav.solid{background:rgba(250,248,244,.86);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav:not(.solid){color:#fff}.nav:not(.solid) .links a{color:rgba(255,255,255,.8)}
   .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 19px/1 "Fraunces",serif;letter-spacing:-.01em}
   .logo i{font-style:italic;color:var(--accent);transition:color .5s}
   .logo .m{width:30px;height:30px}
@@ -81,6 +82,31 @@
     .hero-bowl{width:min(380px,92%);order:-1;margin-bottom:-10px}
     .hero p.lede{font-size:16px}
   }
+
+
+  /* ---------- walk-in ---------- */
+  .walk{position:relative;height:620vh}
+  .wpin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#0d0d0c}
+  .shot{position:absolute;inset:0;overflow:hidden}
+  .amb{position:absolute;inset:-60px;background:center/cover;filter:blur(38px) brightness(.55) saturate(1.1);transform:scale(1.1)}
+  .shot img{position:absolute;max-width:none;will-change:transform,filter;user-select:none}
+  .wshade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(10,10,9,.45),transparent 26%,transparent 48%,rgba(10,10,9,.78))}
+  .wt{position:absolute;left:0;right:0;bottom:max(46px,8vh);padding:0 22px;text-align:center;color:#fff;opacity:0;visibility:hidden;will-change:opacity,transform}
+  .wt h1{font-size:clamp(56px,10vw,140px);line-height:.9;text-shadow:0 4px 30px rgba(0,0,0,.6)}
+  .wt h1 i{color:var(--glow)}
+  .wt .wsub{margin:14px 0 0;font-size:15px;letter-spacing:.06em;color:rgba(255,255,255,.85)}
+  .jp{font-family:"Noto Serif JP",serif;letter-spacing:.3em;margin:0 0 14px;font-size:13px;color:var(--glow)}
+  .jp.big{display:block;font-size:clamp(20px,3vw,30px);letter-spacing:.12em;margin-bottom:10px}
+  .cue{margin:30px auto 0;display:flex;flex-direction:column;align-items:center;gap:10px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+  .cue i{width:1px;height:40px;background:linear-gradient(var(--glow),transparent);animation:cue 1.8s ease-in-out infinite}
+  .wt.side{left:clamp(20px,6vw,90px);right:auto;width:min(470px,calc(100% - 40px));text-align:left;padding:24px 24px 26px;
+    background:rgba(18,17,16,.42);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);border-radius:22px}
+  .wt.side .eyebrow{color:var(--glow)}
+  .wt.side h2{font-size:clamp(30px,4vw,48px);line-height:1.05;color:#fff}
+  .wt.side p:not(.eyebrow){margin:12px 0 0;color:rgba(255,255,255,.82);font-size:16px;line-height:1.6}
+  .wbar{position:absolute;left:0;right:0;top:0;height:2px;background:rgba(255,255,255,.12)}
+  .wbar i{display:block;height:100%;background:var(--glow);transform-origin:0 0;transform:scaleX(0)}
+  @media (max-width:820px){.wt.side{left:16px;right:16px;width:auto;bottom:max(24px,env(safe-area-inset-bottom))}.wt.side p:not(.eyebrow){font-size:15px}}
 
   /* ---------- marquee ---------- */
   .marquee{border-block:1px solid var(--line);overflow:hidden;padding:18px 0;background:var(--bg2)}
@@ -204,61 +230,40 @@
 <header class="nav" id="nav">
   <a class="logo" href="#top"><svg class="m" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-opacity=".25"/><path d="M9 24h22a11 11 0 0 1-22 0z" fill="var(--accent)" style="transition:fill .5s"/><path d="M14 18c0-4 3-4 3-8M20 18c0-4 3-4 3-8M26 18c0-4 3-4 3-8" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".7"/></svg>Meats <i>&amp;</i> Plants</a>
   <nav class="links" aria-label="Sections"><a href="#bowl">The bowl</a><a href="#menu">Menu</a><a href="#visit">Visit</a></nav>
-  <a class="btn" href="tel:+919833412539">Call to book</a>
+  <a class="btn" href="#visit">Visit us</a>
 </header>
 
 <main id="top">
   <!-- ===== hero ===== -->
-  <section class="hero">
-    <div class="arch" aria-hidden="true">
-      <div class="hang" style="left:12%"><svg viewBox="0 0 120 260"><path d="M60 0v120" stroke="#b9a487" stroke-width="2"/><path d="M30 120h60l-8 40H38z" fill="#fff" stroke="#d8c3a2" stroke-width="2"/><g fill="#5f7f4f"><path d="M40 160c-10 20-6 50 2 70 8-20 10-48-2-70z"/><path d="M60 160c-6 30 0 60 4 90 8-28 6-60-4-90z"/><path d="M80 160c8 18 10 46 0 66-8-18-8-46 0-66z"/></g><g fill="#7c9a68"><ellipse cx="34" cy="118" rx="14" ry="7" transform="rotate(-25 34 118)"/><ellipse cx="86" cy="118" rx="14" ry="7" transform="rotate(25 86 118)"/></g></svg></div>
-      <div class="hang" style="right:10%;animation-delay:-2.5s;top:-120px"><svg viewBox="0 0 120 260"><path d="M60 0v130" stroke="#b9a487" stroke-width="2"/><circle cx="60" cy="150" r="26" fill="#fff" stroke="#d8c3a2" stroke-width="2"/><g fill="#5f7f4f"><path d="M38 160c-12 24-8 56 0 80 10-24 10-56 0-80z"/><path d="M82 160c12 24 8 52-2 72-8-22-8-50 2-72z"/></g></svg></div>
-    </div>
-    <div class="wrap grid">
-      <div>
-        <p class="eyebrow" data-rv>Chikanghar · Kalyan</p>
-        <h1 data-rv><span>Meats</span><span><span class="amp" id="amp">&amp;</span> Plants</span></h1>
-        <p class="lede" data-rv>Slurp-worthy ramen, fresh sushi rolls, continental plates and good coffee. Team meat or team plants, everyone leaves full.</p>
-        <ul class="tags" data-rv><li>Ramen</li><li>Sushi</li><li>Continental</li><li>Chinese</li><li>Coffee</li></ul>
-        <div class="cta" data-rv>
-          <a class="btn" href="#menu">See the menu</a>
-          <a class="btn ghost" href="https://www.zomato.com/mumbai/meats-plants-kalyan-thane/order" target="_blank" rel="noopener">Order on Zomato</a>
-        </div>
+  <!-- ===== walk-in: one continuous camera move from the street to your table ===== -->
+  <section class="walk" id="walk">
+    <div class="wpin">
+      <div class="shot" id="shotA"><div class="amb" style="background-image:url(img/entrance.webp)"></div><img src="img/entrance.webp" alt="The lit Meats &amp; Plants sign above the glass entrance at night"></div>
+      <div class="shot" id="shotB"><div class="amb" style="background-image:url(img/inside.webp)"></div><img src="img/inside.webp" alt="Inside Meats &amp; Plants: the white counter under a Japanese thank-you banner, an iced coffee on the table"></div>
+      <div class="wshade"></div>
+      <div class="wt" data-a="0" data-b=".17">
+        <p class="jp">ミーツ・アンド・プランツ</p>
+        <h1>Meats <i>&amp;</i> Plants</h1>
+        <p class="wsub">A Chef Soham café · Hiranandani Estate, Thane</p>
+        <div class="cue"><i></i>Scroll to walk in</div>
       </div>
-      <div class="hero-bowl" id="heroBowl" aria-hidden="true">
-        <svg class="bowl" viewBox="0 0 400 400">
-          <defs>
-            <radialGradient id="hb" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="#f3b764"/><stop offset="1" stop-color="#c97a2c"/></radialGradient>
-            <linearGradient id="bw" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e8e1d6"/></linearGradient>
-          </defs>
-          <g class="steam"><path d="M150 150c-14-20 14-34 0-56s14-34 0-56"/><path d="M200 140c-14-20 14-34 0-56s14-34 0-56"/><path d="M250 150c-14-20 14-34 0-56s14-34 0-56"/></g>
-          <ellipse cx="200" cy="200" rx="170" ry="76" fill="url(#hb)"/>
-          <g transform="translate(0 -32)">
-          <g stroke="#f6d99a" stroke-width="5" fill="none" stroke-linecap="round" opacity=".95">
-            <path d="M90 206c20-14 40 14 60 0s40 14 60 0 40 14 60 0 30 10 44 2"/>
-            <path d="M80 194c20-14 40 14 60 0s40 14 60 0 40 14 60 0 40 12 58 0"/>
-            <path d="M104 218c20-12 40 12 60 0s40 12 60 0 40 12 60 0"/>
-          </g>
-          <use href="#egg" x="214" y="166" width="70" height="56"/>
-          <g id="heroTop">
-            <g class="meat-only"><ellipse cx="140" cy="190" rx="34" ry="16" fill="#b5653a"/><ellipse cx="140" cy="188" rx="26" ry="10" fill="#e9b28a"/><ellipse cx="140" cy="188" rx="12" ry="5" fill="#b5653a"/></g>
-            <g class="plant-only" style="display:none"><rect x="112" y="176" width="26" height="22" rx="4" fill="#f3e5c6"/><rect x="142" y="180" width="26" height="22" rx="4" fill="#f0dfbb"/><use href="#leaf" x="160" y="150" width="34" height="34"/></g>
-          </g>
-          <rect x="268" y="168" width="44" height="58" rx="4" fill="#1f2a20"/>
-          <g fill="#7dbb63"><circle cx="190" cy="214" r="5"/><circle cx="206" cy="222" r="4"/><circle cx="176" cy="226" r="4"/><circle cx="222" cy="210" r="4"/></g>
-          </g>
-          <path d="M30 200c0 100 76 170 170 170s170-70 170-170z" fill="url(#bw)"/>
-          <path d="M30 200c0 100 76 170 170 170s170-70 170-170" fill="none" stroke-width="4" style="stroke:var(--accent);transition:stroke .5s"/>
-          <path d="M300 250c-14 40-44 70-90 84" stroke="rgba(120,100,80,.10)" stroke-width="16" fill="none" stroke-linecap="round"/>
-          <g class="chop"><rect x="230" y="40" width="10" height="230" rx="5" transform="rotate(28 235 155)" fill="#d9b27a"/><rect x="256" y="40" width="10" height="230" rx="5" transform="rotate(34 261 155)" fill="#c99d63"/></g>
-        </svg>
-        <div class="float" data-depth="1.4" style="left:-6%;top:6%;width:22%"><svg><use href="#sushi"/></svg></div>
-        <div class="float" data-depth="-1.1" style="right:-4%;top:2%;width:16%"><svg><use href="#leaf"/></svg></div>
-        <div class="float" data-depth=".8" style="left:2%;bottom:6%;width:15%"><svg><use href="#chili"/></svg></div>
-        <div class="float" data-depth="-1.6" style="right:0;bottom:12%;width:19%"><svg><use href="#drum"/></svg></div>
+      <div class="wt side" data-a=".36" data-b=".5">
+        <p class="eyebrow">Step inside</p>
+        <h2><span class="jp big">ありがとうございます</span>Thank you for coming in.</h2>
+        <p>Pale concrete, warm light and a quiet kind of calm. The banner says it before anyone does.</p>
       </div>
+      <div class="wt side" data-a=".58" data-b=".72">
+        <p class="eyebrow">The counter</p>
+        <h2>Pull up a stool.</h2>
+        <p>An open counter, glowing from underneath. Watch your bowl come together while you wait.</p>
+      </div>
+      <div class="wt side" data-a=".8" data-b=".97">
+        <p class="eyebrow">Your table</p>
+        <h2>The iced coffee everyone photographs.</h2>
+        <p>Creamy, cold, served in fluted glass with a biscuit on top. Order it first.</p>
+      </div>
+      <div class="wbar"><i id="wbar"></i></div>
     </div>
-    <div class="scroll-cue" aria-hidden="true"><i></i>Scroll</div>
   </section>
 
   <!-- ===== marquee ===== -->
@@ -335,7 +340,7 @@
     <div class="wrap">
       <div class="head">
         <div><p class="eyebrow" data-rv>Guest favourites</p><h2 data-rv>What people <em>come back</em> for</h2></div>
-        <a class="btn ghost" data-rv href="https://www.zomato.com/mumbai/meats-plants-kalyan-thane/menu" target="_blank" rel="noopener">Full menu on Zomato</a>
+        <a class="btn ghost" data-rv href="#visit">Come taste it</a>
       </div>
       <div class="cards">
         <article class="card" data-diet="meat" data-rv>
@@ -375,9 +380,9 @@
   <!-- ===== numbers ===== -->
   <section class="nums">
     <div class="wrap grid">
-      <div class="num" data-rv><b><span data-count="4.5" data-dec="1">0</span><sup>★</sup></b><span>on Zomato, from 329 ratings</span></div>
-      <div class="num" data-rv><b><span data-count="4.8" data-dec="1">0</span><sup>★</sup></b><span>on Restaurant Guru, from 652 reviews</span></div>
-      <div class="num" data-rv><b><sup>₹</sup><span data-count="900" data-dec="0">0</span></b><span>average for two people</span></div>
+      <div class="num" data-rv><b><span data-count="4.9" data-dec="1">0</span><sup>★</sup></b><span>on Google, from 27 reviews</span></div>
+      <div class="num" data-rv><b><sup>₹</sup><span data-count="400" data-dec="0">0</span>–600</b><span>per person</span></div>
+      <div class="num" data-rv><b><span data-count="12" data-dec="0">0</span><sup>AM</sup></b><span>open every night till midnight</span></div>
     </div>
   </section>
 
@@ -385,16 +390,15 @@
   <section class="visit" id="visit">
     <div class="wrap grid">
       <div>
-        <p class="eyebrow" data-rv>Come hungry</p>
-        <h2 data-rv>Find us in <em>Chikanghar</em>, Kalyan</h2>
+        <p class="eyebrow" data-rv>Come hungry, stay late</p>
+        <h2 data-rv>Find us at <em>Hiranandani</em> Estate</h2>
         <div class="info" data-rv>
-          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span><b>Shop No. 6, Chikan Ghar Road</b>Opposite Sandeep Hotel, Kalyan West, Thane</span></div>
-          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><b>Open from the afternoon till 11 PM</b>Call ahead to check today’s timings</span></div>
-          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span><b>+91 98334 12539</b>Tables, takeaway and bulk orders</span></div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span><b>Shop No. 21, Rosa Manhattan</b>Hiranandani Estate, Thane West, Thane 400615</span></div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><b>Open today · closes 12 AM</b>Late coffee and dinner, every night</span></div>
         </div>
         <div class="cta" data-rv>
-          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Meats+%26+Plants+Chikanghar+Kalyan" target="_blank" rel="noopener">Get directions</a>
-          <a class="btn ghost" href="tel:+919833412539">Call now</a>
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Meats+and+Plants+Rosa+Manhattan+Hiranandani+Estate+Thane" target="_blank" rel="noopener">Get directions</a>
+          <a class="btn ghost" href="https://www.google.com/search?q=Meats+and+Plants+Thane+reviews" target="_blank" rel="noopener">Read reviews</a>
         </div>
       </div>
       <div class="mapcard" data-rv aria-hidden="true">
@@ -406,19 +410,16 @@
           <circle cx="60" cy="60" r="26" fill="#d7e0cc"/><circle cx="330" cy="300" r="34" fill="#d7e0cc"/>
         </svg>
         <div class="pin-dot"><svg viewBox="0 0 46 58"><path d="M23 0C10 0 0 10 0 23c0 17 23 35 23 35s23-18 23-35C46 10 36 0 23 0z" fill="currentColor"/><circle cx="23" cy="22" r="9" fill="#fff"/></svg></div>
-        <div class="lbl"><b>Meats &amp; Plants</b>Chikanghar, Kalyan · tap “Get directions”</div>
+        <div class="lbl"><b>Meats &amp; Plants</b>Rosa Manhattan, Hiranandani Estate · tap “Get directions”</div>
       </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap"><span>© Meats &amp; Plants, Kalyan</span><span>Demo website by Infinity Technologies</span></div>
+  <div class="wrap"><span>© Meats &amp; Plants, Thane · A Chef Soham product</span><span>Demo website by Infinity Technologies</span></div>
 </footer>
 
-<a class="fab" href="https://wa.me/919833412539?text=Hi%20Meats%20%26%20Plants!%20I%27d%20like%20to%20book%20a%20table." target="_blank" rel="noopener" aria-label="Message on WhatsApp">
-  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.7 15l-1.3 5 5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
-</a>
 
 <script>
 (function(){
@@ -459,14 +460,51 @@
   }
 
   /* marquee: words and little drawings, speed follows scrolling */
-  var mq=D.getElementById("mq"), words=["Ramen","Sushi","Coffee","Continental","Meats","Plants","Slurp","Kalyan"], icons=["drum","sushi","leaf","cup","chili","egg"], html="";
+  var mq=D.getElementById("mq"), words=["Ramen","Sushi","Coffee","Continental","Meats","Plants","Slurp","Thane"], icons=["drum","sushi","leaf","cup","chili","egg"], html="";
   for(var r=0;r<2;r++) words.forEach(function(w,i){ html+='<span class="'+(i%2?"o":"")+'">'+w+'</span><svg viewBox="0 0 64 64"><use href="#'+icons[i%icons.length]+'"/></svg>'; });
   mq.innerHTML=html;
   var mx=0, vel=0, lastY=W.scrollY;
 
   /* hero: floating ingredients drift with scroll and pointer */
-  var floats=[].slice.call(D.querySelectorAll(".float")), px=0, py=0, amp=D.getElementById("amp");
-  W.addEventListener("pointermove",function(e){ px=e.clientX/W.innerWidth-.5; py=e.clientY/W.innerHeight-.5; },{passive:true});
+  /* walk-in camera. Keyframes: progress → which photo, focus point (0..1 of the photo) and zoom.
+     The camera always moves, never cuts: through the glass door, then around the room. */
+  var walk=D.getElementById("walk"), shotA=D.getElementById("shotA"), shotB=D.getElementById("shotB"),
+      imA=shotA.querySelector("img"), imB=shotB.querySelector("img"), wts=[].slice.call(D.querySelectorAll(".wt")), wbar=D.getElementById("wbar");
+  // [progress, focus x, focus y, framing]; framing 0 = whole photo, 1 = fills the screen, >1 = closer
+  var KA=[[0,.5,.48,0],[.16,.5,.55,.55],[.3,.5,.86,2.6]];                                         // street → glass door
+  var KB=[[.24,.5,.4,.85],[.34,.5,.35,.72],[.48,.5,.3,.95],[.6,.55,.5,1.3],[.72,.56,.52,1.45],[.84,.78,.7,1.5],[1,.78,.72,1.6]]; // banner → counter → coffee
+  function key(K,p){
+    if(p<=K[0][0]) return K[0].slice(1); if(p>=K[K.length-1][0]) return K[K.length-1].slice(1);
+    for(var i=0;i<K.length-1;i++){ if(p<=K[i+1][0]){ var t=(p-K[i][0])/(K[i+1][0]-K[i][0]); t=t*t*(3-2*t);
+      return [K[i][1]+(K[i+1][1]-K[i][1])*t,K[i][2]+(K[i+1][2]-K[i][2])*t,K[i][3]+(K[i+1][3]-K[i][3])*t]; } }
+  }
+  function aim(img,c,extra){
+    var W0=W.innerWidth,H0=W.innerHeight,nw=img.naturalWidth||1,nh=img.naturalHeight||1,s0=Math.min(W0/nw,H0/nh),
+        iw=nw*s0,ih=nh*s0,L=(W0-iw)/2,T=(H0-ih)/2,R=Math.max(W0/iw,H0/ih),z=1+(R-1)*c[2],ox=L+c[0]*iw,oy=T+c[1]*ih;
+    // aim the focus at the centre; once the photo is bigger than the screen keep it covering the screen,
+    // while it is smaller keep it centred over its blurred backdrop
+    var tx=z*iw>=W0?clamp(W0/2-ox,W0-ox-z*(L+iw-ox),z*(ox-L)-ox):(W0-z*iw)/2-ox-z*(L-ox),
+        ty=z*ih>=H0?clamp(H0/2-oy,H0-oy-z*(T+ih-oy),z*(oy-T)-oy):(H0-z*ih)/2-oy-z*(T-oy);
+    img.style.width=iw+"px"; img.style.height=ih+"px"; img.style.left=L+"px"; img.style.top=T+"px";
+    img.style.transformOrigin=(ox-L)+"px "+(oy-T)+"px";
+    img.style.transform="translate("+tx.toFixed(1)+"px,"+ty.toFixed(1)+"px) scale("+z.toFixed(4)+")";
+    img.style.filter=extra||"none";
+    img.style.borderRadius=z*iw<W0-2||z*ih<H0-2?"14px":"0";
+    img.style.boxShadow=z*iw<W0-2||z*ih<H0-2?"0 30px 80px rgba(0,0,0,.5)":"none";
+  }
+  var sm2=function(a,b,x){ x=clamp((x-a)/(b-a),0,1); return x*x*(3-2*x); };
+  function walkFrame(){
+    var r=walk.getBoundingClientRect(), p=clamp(-r.top/(r.height-W.innerHeight),0,1);
+    if(r.bottom<0) return;
+    var through=sm2(.22,.32,p);                       // stepping through the door
+    aim(imA,key(KA,p),"blur("+(through*10).toFixed(1)+"px) brightness("+(1+through*.6).toFixed(2)+")");
+    shotA.style.opacity=(1-sm2(.25,.33,p)).toFixed(3);
+    aim(imB,key(KB,p),"blur("+((1-sm2(.24,.34,p))*8).toFixed(1)+"px)");
+    shotB.style.opacity=sm2(.23,.31,p).toFixed(3);
+    wts.forEach(function(el){ var a=+el.dataset.a,b=+el.dataset.b,o=a===0?1-sm2(b-.05,b,p):sm2(a,a+.04,p)*(1-sm2(b-.04,b,p));
+      el.style.opacity=o.toFixed(3); el.style.visibility=o>.01?"visible":"hidden"; el.style.transform="translateY("+((1-o)*16).toFixed(1)+"px)"; });
+    wbar.style.transform="scaleX("+p.toFixed(4)+")";
+  }
 
   /* build-the-bowl: six layers drop in as you scroll through the pinned section */
   var build=D.getElementById("bowl"), steps=[].slice.call(D.querySelectorAll(".step")), meters=[].slice.call(D.querySelectorAll("#meter b")),
@@ -489,15 +527,12 @@
 
   function frame(){
     var y=W.scrollY, h=W.innerHeight;
-    nav.classList.toggle("solid",y>h*.6);
+    nav.classList.toggle("solid",y>walk.offsetHeight-h*1.05);
     vel+=((y-lastY)-vel)*.1; lastY=y;
     mx-=(reduce?0:.6)+Math.abs(vel)*.35;
     var half=mq.scrollWidth/2; if(-mx>half) mx+=half;
     mq.style.transform="translateX("+mx.toFixed(1)+"px)";
-    if(y<h*1.2){
-      floats.forEach(function(f){ var d=+f.dataset.depth; f.style.transform="translate("+(px*24*d).toFixed(1)+"px,"+(py*24*d-y*.12*d).toFixed(1)+"px) rotate("+(y*.04*d).toFixed(1)+"deg)"; });
-      amp.style.transform="rotate("+(Math.sin(performance.now()/900)*6).toFixed(2)+"deg)";
-    }
+    walkFrame();
     bowl();
     requestAnimationFrame(frame);
   }
