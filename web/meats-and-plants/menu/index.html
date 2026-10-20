@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Menu – Meats &amp; Plants</title>
+<meta name="description" content="The Meats & Plants menu: ramen, sushi, plates and coffee. Search, filter veg only and jump between sections.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f7f4ee">
+<link rel="icon" href="../img/mark-green.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#f7f4ee;--paper2:#efe9df;--text:#1c1b19;--muted:rgba(28,27,25,.6);--rule:rgba(28,27,25,.1);--green:#5f8a5a;--green2:#4b7247;--peach:#ecd3ba;--walnut:#6b4a33;--veg:#3f8a3a;--nv:#a83a2c}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--text)}
+  body{font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .app{max-width:640px;margin:0 auto;min-height:100vh;background:var(--paper);padding-bottom:110px}
+  [hidden]{display:none!important}
+
+  /* header */
+  .head{padding:max(22px,env(safe-area-inset-top)) 20px 10px;text-align:center}
+  .head img{width:64px;margin:0 auto 10px}
+  .head h1{margin:0;font:700 28px/1.1 "Shippori Mincho",Georgia,serif}
+  .head p{margin:6px 0 0;font-size:13px;color:var(--muted)}
+  .outlets{display:inline-grid;grid-template-columns:1fr 1fr;margin-top:16px;padding:4px;border-radius:999px;background:#fff;border:1px solid var(--rule)}
+  .outlets button{all:unset;cursor:pointer;padding:9px 18px;border-radius:999px;font-size:13px;font-weight:600;color:var(--muted)}
+  .outlets button[aria-pressed="true"]{background:var(--text);color:#fff}
+  .outlets button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .info{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 14px;margin-top:12px;font-size:12.5px;color:var(--muted)}
+  .info b{color:var(--text)}
+
+  /* sticky tools: search, veg toggle, category tabs */
+  .tools{position:sticky;top:0;z-index:20;background:rgba(247,244,238,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);padding:10px 16px 0;border-bottom:1px solid var(--rule)}
+  .row1{display:flex;gap:10px;align-items:center}
+  .search{flex:1;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--rule);border-radius:14px;padding:0 12px;height:44px}
+  .search svg{width:18px;height:18px;color:var(--muted);flex:none}
+  .search input{all:unset;flex:1;font-size:15px;min-width:0}
+  .search input::placeholder{color:var(--muted)}
+  .vegonly{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;cursor:pointer;user-select:none;white-space:nowrap}
+  .vegonly input{position:absolute;opacity:0;pointer-events:none}
+  .vegonly .sw{width:40px;height:24px;border-radius:999px;background:#d8d2c8;position:relative;transition:background .25s}
+  .vegonly .sw::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .25s}
+  .vegonly input:checked+.sw{background:var(--veg)}
+  .vegonly input:checked+.sw::after{transform:translateX(16px)}
+  .vegonly input:focus-visible+.sw{outline:2px solid var(--green);outline-offset:2px}
+  .tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:10px 0 10px;margin:0 -16px;padding-left:16px;padding-right:16px}
+  .tabs::-webkit-scrollbar{display:none}
+  .tabs a{flex:none;text-decoration:none;font-size:13.5px;font-weight:600;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--rule);color:var(--muted);transition:background .25s,color .25s}
+  .tabs a.on{background:var(--green);border-color:var(--green);color:#fff}
+
+  /* sections and items */
+  .sec{padding:22px 16px 6px;scroll-margin-top:120px}
+  .sec h2{margin:0;font:700 24px/1.2 "Shippori Mincho",Georgia,serif;display:flex;align-items:baseline;gap:10px}
+  .sec h2 small{font:600 12px/1 "DM Sans",sans-serif;color:var(--muted)}
+  .sec .sub{margin:4px 0 0;font-size:13px;color:var(--muted)}
+  .item{display:grid;grid-template-columns:1fr auto;gap:14px;padding:16px 0;border-bottom:1px dashed var(--rule)}
+  .item:last-child{border-bottom:0}
+  .item .top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .mark{width:15px;height:15px;border:1.5px solid currentColor;border-radius:3px;display:inline-grid;place-items:center;flex:none}
+  .mark::after{content:"";width:5px;height:5px;border-radius:50%;background:currentColor}
+  .mark.v{color:var(--veg)}.mark.n{color:var(--nv)}
+  .tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--peach);color:var(--walnut)}
+  .tag.hot{background:#fde3dc;color:#a83a2c}
+  .item h3{margin:6px 0 0;font-size:17px;font-weight:600;line-height:1.3}
+  .item p{margin:4px 0 0;font-size:14px;line-height:1.5;color:var(--muted)}
+  .item .price{margin-top:8px;font-weight:700;font-size:15.5px}
+  .item .price.ask{font-weight:500;font-size:13px;color:var(--muted)}
+  .thumb{width:96px;height:96px;border-radius:16px;overflow:hidden;background:var(--paper2);align-self:start;box-shadow:0 8px 18px rgba(60,45,30,.12)}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .empty{padding:60px 20px;text-align:center;color:var(--muted)}
+
+  .legend{display:flex;justify-content:center;gap:16px;padding:26px 16px 0;font-size:12.5px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .foot{margin:22px 16px 0;padding:18px;border-radius:20px;background:#fff;border:1px solid var(--rule);text-align:center;font-size:13px;color:var(--muted);line-height:1.6}
+  .foot b{color:var(--text)}
+  .credit{text-align:center;font-size:11.5px;color:var(--muted);margin-top:18px;opacity:.75}
+
+  /* bottom bar */
+  .dock{position:fixed;left:50%;transform:translateX(-50%);bottom:max(14px,env(safe-area-inset-bottom));z-index:30;display:flex;gap:8px;width:min(608px,calc(100% - 24px))}
+  .dock a,.dock button{all:unset;cursor:pointer;flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:50px;border-radius:16px;font-weight:700;font-size:14px;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+  .dock .menu-btn{background:var(--text);color:#fff}
+  .dock .dir{background:var(--green);color:#fff}
+  .dock svg{width:18px;height:18px}
+  .dock a:focus-visible,.dock button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+
+  /* category sheet */
+  .sheet{position:fixed;inset:0;z-index:40;background:rgba(20,18,16,.45);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
+  .sheet.open{opacity:1;pointer-events:auto}
+  .sheet .panel{width:min(640px,100%);background:#fff;border-radius:24px 24px 0 0;padding:18px 18px max(22px,env(safe-area-inset-bottom));transform:translateY(30px);transition:transform .3s}
+  .sheet.open .panel{transform:none}
+  .sheet h3{margin:4px 0 10px;font:700 20px/1 "Shippori Mincho",serif}
+  .sheet a{display:flex;justify-content:space-between;padding:14px 4px;border-bottom:1px solid var(--rule);text-decoration:none;font-weight:600}
+  .sheet a span{color:var(--muted);font-weight:500}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="head">
+    <img src="../img/mark-green.png" alt="">
+    <h1>Meats &amp; Plants</h1>
+    <p>A Chef Soham eatery · Ramen · Sushi · Coffee</p>
+    <div class="outlets" role="group" aria-label="Outlet">
+      <button type="button" data-outlet="thane" aria-pressed="true">Thane</button>
+      <button type="button" data-outlet="kalyan" aria-pressed="false">Kalyan</button>
+    </div>
+    <div class="info" id="info"></div>
+  </header>
+
+  <div class="tools">
+    <div class="row1">
+      <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="Search the menu" aria-label="Search the menu"></label>
+      <label class="vegonly"><input type="checkbox" id="veg"><span class="sw"></span>Veg</label>
+    </div>
+    <nav class="tabs" id="tabs" aria-label="Menu sections"></nav>
+  </div>
+
+  <main id="list"></main>
+
+  <div class="legend"><span><i class="mark v"></i>Veg</span><span><i class="mark n"></i>Non-veg</span></div>
+  <div class="foot" id="foot"></div>
+  <p class="credit">Digital menu by Infinity Technologies</p>
+</div>
+
+<div class="dock">
+  <button class="menu-btn" type="button" id="openSheet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Menu</button>
+  <a class="dir" id="dir" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Directions</a>
+</div>
+
+<div class="sheet" id="sheet" aria-hidden="true"><div class="panel" role="dialog" aria-label="Jump to a section"><h3>Jump to</h3><div id="sheetList"></div></div></div>
+
+<script>
+/* ===== The menu. Edit here: add sections and items, fill in prices (numbers, in ₹).
+   veg: true/false · tag: "Bestseller" / "Chef's pick" / "Spicy" · img: optional photo path ===== */
+var MENU=[
+  {id:"ramen",name:"Ramen",sub:"Slow-simmered broths, springy noodles",items:[
+    {name:"Japanese Chicken Ramen",desc:"Rich broth, noodles, tender chicken, soft-boiled egg, nori and spring onion.",veg:false,price:null,tag:"Bestseller"},
+    {name:"Veg Ramen Bowl",desc:"Miso-vegetable broth with tofu, mushrooms and greens.",veg:true,price:null}
+  ]},
+  {id:"sushi",name:"Sushi",sub:"Rolled to order",items:[
+    {name:"Crispy Tempura Roll",desc:"Topped with tempura crumbs and a mayo drizzle, soy on the side.",veg:true,price:null,tag:"Chef's pick",img:"../img/k-sushi.webp"},
+    {name:"Prawn Sushi",desc:"Prawn rolled with seasoned rice and nori.",veg:false,price:null},
+    {name:"Cucumber Maki",desc:"Fresh, crunchy cucumber in seasoned rice and nori.",veg:true,price:null}
+  ]},
+  {id:"plates",name:"Plates",sub:"Continental & Chinese",items:[
+    {name:"Spaghetti Aglio e Olio",desc:"Garlic, olive oil and chilli flakes tossed through spaghetti.",veg:true,price:null}
+  ]},
+  {id:"coffee",name:"Coffee",sub:"Hot and iced, all day",items:[
+    {name:"Signature Iced Coffee",desc:"Cold and creamy in fluted glass, finished with a biscuit.",veg:true,price:null,tag:"Bestseller",img:"../img/t-inside.webp"},
+    {name:"Café Frappé",desc:"Frothy, strong and cold.",veg:true,price:null},
+    {name:"Latte",desc:"Smooth espresso and steamed milk.",veg:true,price:null}
+  ]}
+];
+var OUTLETS={
+  thane:{info:"<span><b>4.9 ★</b> Google</span><span>Open till <b>12 AM</b></span><span>₹400–600 per person</span>",
+    foot:"<b>Thane</b> · Shop 21, Rosa Manhattan, Hiranandani Estate, Thane West 400615",
+    map:"https://www.google.com/maps/search/?api=1&query=Meats+and+Plants+Rosa+Manhattan+Hiranandani+Estate+Thane"},
+  kalyan:{info:"<span><b>4.5 ★</b> Zomato</span><span>Till <b>11 PM</b></span><span>~₹900 for two</span>",
+    foot:"<b>Kalyan</b> · Shop 6, Chikan Ghar Road, opp. Sandeep Hotel, Kalyan West · <a href=\"tel:+919833412539\">+91 98334 12539</a>",
+    map:"https://www.google.com/maps/search/?api=1&query=Meats+%26+Plants+Chikanghar+Kalyan"}
+};
+
+(function(){
+  "use strict";
+  var D=document, list=D.getElementById("list"), tabs=D.getElementById("tabs"), q=D.getElementById("q"), veg=D.getElementById("veg");
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; }); }
+
+  function render(){
+    var term=q.value.trim().toLowerCase(), vOnly=veg.checked, html="", tabHtml="", sheet="", any=false;
+    MENU.forEach(function(sec){
+      var items=sec.items.filter(function(it){ return (!vOnly||it.veg) && (!term||(it.name+" "+(it.desc||"")).toLowerCase().indexOf(term)>-1); });
+      if(!items.length) return; any=true;
+      tabHtml+='<a href="#'+sec.id+'" data-sec="'+sec.id+'">'+esc(sec.name)+'</a>';
+      sheet+='<a href="#'+sec.id+'">'+esc(sec.name)+'<span>'+items.length+'</span></a>';
+      html+='<section class="sec" id="'+sec.id+'"><h2>'+esc(sec.name)+' <small>'+items.length+(items.length===1?' item':' items')+'</small></h2>'+(sec.sub?'<p class="sub">'+esc(sec.sub)+'</p>':'');
+      items.forEach(function(it){
+        html+='<article class="item"><div><div class="top"><i class="mark '+(it.veg?"v":"n")+'" aria-label="'+(it.veg?"Veg":"Non-veg")+'"></i>'+(it.tag?'<span class="tag'+(/spicy/i.test(it.tag)?" hot":"")+'">'+esc(it.tag)+'</span>':'')+'</div>'+
+          '<h3>'+esc(it.name)+'</h3>'+(it.desc?'<p>'+esc(it.desc)+'</p>':'')+
+          (it.price!=null?'<div class="price">₹'+esc(it.price)+'</div>':'<div class="price ask">Price at the counter</div>')+'</div>'+
+          (it.img?'<div class="thumb"><img src="'+esc(it.img)+'" alt="'+esc(it.name)+'" loading="lazy"></div>':'')+'</article>';
+      });
+      html+='</section>';
+    });
+    list.innerHTML=any?html:'<p class="empty">Nothing matches that. Try another word.</p>';
+    tabs.innerHTML=tabHtml; D.getElementById("sheetList").innerHTML=sheet;
+    spy();
+  }
+
+  // highlight the section you are reading
+  function spy(){
+    var secs=[].slice.call(D.querySelectorAll(".sec")), cur=secs[0]&&secs[0].id;
+    secs.forEach(function(s){ if(s.getBoundingClientRect().top<160) cur=s.id; });
+    [].forEach.call(tabs.querySelectorAll("a"),function(a){
+      var on=a.dataset.sec===cur; a.classList.toggle("on",on);
+      if(on && a.offsetLeft!==undefined){ var t=tabs; if(a.offsetLeft<t.scrollLeft||a.offsetLeft+a.offsetWidth>t.scrollLeft+t.clientWidth) t.scrollTo({left:a.offsetLeft-16,behavior:"smooth"}); }
+    });
+  }
+  window.addEventListener("scroll",spy,{passive:true});
+  q.addEventListener("input",render); veg.addEventListener("change",render);
+
+  function setOutlet(o){
+    D.querySelectorAll(".outlets button").forEach(function(b){ b.setAttribute("aria-pressed",String(b.dataset.outlet===o)); });
+    D.getElementById("info").innerHTML=OUTLETS[o].info; D.getElementById("foot").innerHTML=OUTLETS[o].foot; D.getElementById("dir").href=OUTLETS[o].map;
+    try{ history.replaceState(null,"","#"+o); }catch(e){}
+  }
+  D.querySelectorAll(".outlets button").forEach(function(b){ b.addEventListener("click",function(){ setOutlet(b.dataset.outlet); }); });
+  setOutlet(location.hash==="#kalyan"?"kalyan":"thane");
+
+  var sheetEl=D.getElementById("sheet");
+  function openSheet(o){ sheetEl.classList.toggle("open",o); sheetEl.setAttribute("aria-hidden",String(!o)); }
+  D.getElementById("openSheet").addEventListener("click",function(){ openSheet(true); });
+  sheetEl.addEventListener("click",function(e){ if(e.target===sheetEl||e.target.closest("a")) openSheet(false); });
+  D.addEventListener("keydown",function(e){ if(e.key==="Escape") openSheet(false); });
+
+  render();
+})();
+</script>
+</body>
+</html>
