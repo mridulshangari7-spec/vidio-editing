@@ -26,7 +26,9 @@
 <main>
   <svg class="mark" viewBox="0 0 120 50" aria-hidden="true"><path d="M60 25c-9-9-17-17-30-17C17 8 8 15.5 8 25s9 17 22 17c13 0 21-8 30-17zm0 0c9 9 17 17 30 17 13 0 22-7.5 22-17S103 8 90 8C77 8 69 16 60 25z" fill="none" stroke="currentColor" stroke-width="7"/></svg>
 
-  <section id="loading"><div class="spin"></div><p>Opening…</p></section>
+  <section id="loading"><div class="spin"></div><p>Opening…</p>
+    <a class="btn ghost" id="manual" href="#" hidden>Tap here if the page doesn’t open</a>
+    <noscript><p>Please turn on JavaScript, or ask the staff for the link.</p></noscript></section>
 
   <section id="paused" hidden>
     <h1>This card is paused</h1>
@@ -104,6 +106,8 @@
     if (status === "STOP" || status === "PAUSED" || !paid) { show("paused"); return; }
     var link = String(card.link).trim();
     if (!/^https?:\/\//i.test(link) && !/^upi:/i.test(link)) link = "https://" + link;
+    var m = $("manual"); m.href = link;
+    setTimeout(function(){ m.hidden = false; }, 2500);
     location.replace(link);
   }
 
@@ -133,7 +137,7 @@
           "&tq=" + encodeURIComponent(q) + "&tqx=responseHandler:infinityCard";
   s.onerror = function(){ if (!done) { done = true; fallback(); } };
   document.head.appendChild(s);
-  setTimeout(function(){ if (!done) { done = true; fallback(); } }, 8000);
+  setTimeout(function(){ if (!done) { done = true; fallback(); } }, LOCAL[id] ? 2500 : 8000);
 })();
 </script>
 </body>
