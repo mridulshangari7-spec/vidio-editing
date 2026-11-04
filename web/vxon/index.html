@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VXON – Men’s Fashion · Kalyan West</title>
+<meta name="description" content="VXON by Brando9, Kalyan West: premium and everyday fits for men. Jackets, henleys, linens, hoods and ethnics. Branded styles from ₹999.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#cfd3d8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0e0f11;--ink2:#2a2d31;--mute:#6b7076;--studio:#cfd3d8;--studio2:#aeb4ba;--floor:#bfc4c9;--y:#f3e600;--white:#f7f7f5;--line:rgba(14,15,17,.12)}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--studio);color:var(--ink)}
+  body{font-family:"Inter Tight",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit}
+  [hidden]{display:none!important}
+  .wrap{width:min(1180px,100% - 36px);margin:0 auto}
+
+  /* ---------- loader ---------- */
+  .loader{position:fixed;inset:0;z-index:80;background:var(--ink);display:grid;place-items:center;transition:opacity .8s ease,visibility .8s}
+  .loader.done{opacity:0;visibility:hidden}
+  .loader svg{width:110px;color:var(--white);animation:pulse 1.4s ease-in-out infinite}
+  .loader p{margin:18px 0 0;text-align:center;color:rgba(247,247,245,.55);font-size:11px;letter-spacing:.42em;font-weight:600}
+  @keyframes pulse{50%{opacity:.45;transform:scale(.96)}}
+
+  /* ---------- top bar ---------- */
+  .top{position:fixed;left:0;right:0;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:max(14px,env(safe-area-inset-top)) 18px 10px;pointer-events:none;transition:background .3s,box-shadow .3s}
+  .top.solid{background:rgba(247,247,245,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
+  .top>*{pointer-events:auto}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;letter-spacing:.28em;font-size:15px}
+  .logo svg{width:30px}
+  .logo small{display:block;font-size:8.5px;letter-spacing:.3em;font-weight:600;color:var(--mute);margin-top:3px}
+  .tlinks{display:flex;gap:14px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+  .tlinks a{text-decoration:none;color:var(--ink2)}
+  .bar{position:fixed;left:0;top:0;height:2px;width:100%;transform-origin:0 0;transform:scaleX(0);background:var(--ink);z-index:41}
+
+  /* ---------- the virtual store (pinned) ---------- */
+  .store{position:relative;height:520vh}
+  .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;perspective:1100px;
+    background:radial-gradient(120% 70% at 50% 30%,#e6e9ec 0%,var(--studio) 45%,#9ea4ab 100%)}
+  .floor{position:absolute;left:-20%;right:-20%;bottom:-8%;height:46%;transform:rotateX(68deg);transform-origin:50% 100%;
+    background:radial-gradient(60% 60% at 50% 30%,rgba(255,255,255,.55),transparent 70%),linear-gradient(#c7ccd1,#9aa0a7)}
+  .bgword{position:absolute;left:0;right:0;top:12vh;text-align:center;font:400 clamp(64px,15vw,210px)/.86 Anton,Impact,sans-serif;letter-spacing:-.01em;
+    color:rgba(14,15,17,.09);text-transform:lowercase;pointer-events:none;will-change:transform,opacity}
+  .cam{position:absolute;left:50%;top:50%;width:min(1180px,98vw);transform-style:preserve-3d;will-change:transform}
+  .rack{position:relative;height:min(62vh,560px);transform-style:preserve-3d}
+  .rail{position:absolute;left:3%;right:3%;top:0;height:9px;border-radius:5px;background:linear-gradient(#f4f5f6,#9ba1a8 60%,#6d737a);box-shadow:0 6px 14px rgba(0,0,0,.18)}
+  .post{position:absolute;top:0;bottom:-6%;width:8px;border-radius:4px;background:linear-gradient(90deg,#8d939a,#f1f2f3 45%,#8d939a)}
+  .post.l{left:3%}.post.r{right:3%}
+  .foot{position:absolute;bottom:-6%;width:70px;height:16px;border-radius:50%;background:radial-gradient(#7f858c,#5c6168);transform:translateX(-31px)}
+  .foot.l{left:3%}.foot.r{right:3%}
+  .shadow{position:absolute;left:6%;right:6%;bottom:-9%;height:40px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.28),transparent)}
+  .items{position:absolute;left:6%;right:6%;top:-6px;display:flex;justify-content:space-between;transform-style:preserve-3d}
+  .g{position:relative;width:calc(100% / 10);display:flex;justify-content:center;transform-style:preserve-3d;cursor:pointer;
+    transform-origin:50% 0;transition:transform .7s cubic-bezier(.2,.8,.2,1),filter .5s;animation:sway 5s ease-in-out infinite}
+  .g:nth-child(2n){animation-duration:6.2s;animation-delay:-1.3s}.g:nth-child(3n){animation-duration:5.6s;animation-delay:-2.6s}
+  @keyframes sway{50%{rotate:1.2deg}}
+  .g svg{width:180%;max-width:170px;height:auto;filter:drop-shadow(0 18px 18px rgba(0,0,0,.22));pointer-events:none}
+  .g.on{z-index:5;transform:translateZ(150px) translateY(4%) scale(1.22);animation:none}
+  .stage.focus .g:not(.on){filter:saturate(.75) brightness(.92)}
+  .g:focus-visible{outline:2px solid var(--ink);outline-offset:6px}
+  .tag{position:absolute;left:50%;bottom:calc(92px + env(safe-area-inset-bottom));transform:translate(-50%,10px);opacity:0;z-index:6;pointer-events:none;
+    transition:opacity .45s,transform .45s;text-align:center}
+  .tag.show{opacity:1;transform:translate(-50%,0)}
+  .tag b{display:inline-block;background:var(--y);color:var(--ink);font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:6px 10px}
+  .tag span{display:block;margin-top:6px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
+
+  .intro{position:absolute;left:0;right:0;bottom:calc(98px + env(safe-area-inset-bottom));text-align:center;padding:0 20px;will-change:opacity,transform}
+  .intro .k{display:inline-block;background:var(--ink);color:var(--white);font-size:10.5px;font-weight:700;letter-spacing:.3em;padding:6px 10px 6px 12px}
+  .intro h1{margin:12px 0 0;font:400 clamp(40px,7.6vw,96px)/.92 Anton,Impact,sans-serif;text-transform:uppercase;letter-spacing:.005em}
+  .intro p{margin:12px auto 0;max-width:420px;font-size:14.5px;line-height:1.55;color:var(--ink2)}
+  .hint{margin:16px auto 0;font-size:10px;font-weight:700;letter-spacing:.34em;color:var(--mute)}
+  .hint i{display:block;width:1px;height:34px;margin:8px auto 0;background:linear-gradient(var(--ink),transparent);animation:drip 1.8s ease-in-out infinite}
+  @keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+  .brandcard{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%) scale(.92);opacity:0;text-align:center;pointer-events:none;will-change:opacity,transform}
+  .brandcard .xl{width:min(300px,56vw);color:var(--ink)}
+  .brandcard .stick{position:absolute;right:-6%;top:12%;background:var(--y);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 9px;line-height:1.25;transform:rotate(6deg)}
+  .brandcard p{margin:10px 0 0;font-size:12px;font-weight:700;letter-spacing:.34em;text-transform:uppercase}
+
+  /* bottom pill nav, like a store directory */
+  .dock{position:fixed;left:50%;bottom:max(14px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:45;display:flex;gap:4px;padding:4px;background:var(--ink);border-radius:4px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+  .dock a{text-decoration:none;color:var(--white);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:10px 13px;border-radius:2px;white-space:nowrap}
+  .dock a.on{background:var(--y);color:var(--ink)}
+  .dock a.wa{background:#25d366;color:#05230f}
+
+  /* ---------- sections after the rack ---------- */
+  .sec{scroll-margin-top:64px;position:relative;z-index:2;background:var(--white);padding:100px 0}
+  .k2{display:inline-block;background:var(--ink);color:var(--white);font-size:10.5px;font-weight:700;letter-spacing:.3em;padding:6px 10px 6px 12px}
+  .h{margin:14px 0 0;font:400 clamp(44px,7vw,92px)/.9 Anton,Impact,sans-serif;text-transform:uppercase}
+  .h .y{background:var(--y);padding:0 .12em}
+  .lead{margin:16px 0 0;max-width:560px;font-size:17px;line-height:1.65;color:var(--ink2)}
+  [data-rv]{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  [data-rv].in{opacity:1;transform:none}
+
+  .cats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:44px}
+  .cat{position:relative;background:linear-gradient(#e9ebed,#d3d7db);border-radius:4px;aspect-ratio:3/4.3;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;justify-content:flex-end;padding:14px;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+  .cat:hover,.cat:focus-visible{transform:translateY(-6px)}
+  .cat svg{position:absolute;left:50%;top:6%;width:78%;transform:translateX(-50%);filter:drop-shadow(0 14px 14px rgba(0,0,0,.2));transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+  .cat:hover svg{transform:translateX(-50%) rotate(-3deg) scale(1.05)}
+  .cat b{position:relative;font:400 26px/1 Anton,Impact,sans-serif;text-transform:uppercase}
+  .cat span{position:relative;margin-top:6px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
+  @media (max-width:900px){.cats{grid-template-columns:repeat(2,1fr)}.cat:last-child{grid-column:span 2;aspect-ratio:auto;min-height:260px}}
+
+  .marq{position:relative;z-index:2;background:var(--y);overflow:hidden;padding:14px 0;border-block:2px solid var(--ink)}
+  .marq .row{display:flex;gap:34px;width:max-content;animation:mq 22s linear infinite}
+  .marq span{font:400 34px/1 Anton,Impact,sans-serif;text-transform:uppercase;white-space:nowrap;display:flex;align-items:center;gap:34px}
+  .marq span::after{content:"✕";font-family:"Inter Tight",sans-serif;font-size:22px;font-weight:800}
+  @keyframes mq{to{transform:translateX(-50%)}}
+
+  .dark{background:var(--ink);color:var(--white)}
+  .dark .k2{background:var(--y);color:var(--ink)}
+  .dark .lead{color:rgba(247,247,245,.75)}
+  .why{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+  .why div{border:1px solid rgba(247,247,245,.16);border-radius:4px;padding:24px}
+  .why b{display:block;font:400 44px/1 Anton,Impact,sans-serif}
+  .why span{display:block;margin-top:10px;font-size:14px;line-height:1.55;color:rgba(247,247,245,.72)}
+  @media (max-width:800px){.why{grid-template-columns:1fr}}
+
+  .visit .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;margin-top:40px;align-items:stretch}
+  .info{display:grid;gap:18px}
+  .info div{display:grid;grid-template-columns:26px 1fr;gap:12px;font-size:15.5px;line-height:1.5;color:var(--ink2)}
+  .info svg{width:20px;height:20px;margin-top:2px}
+  .info b{display:block;color:var(--ink)}
+  .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 22px;border-radius:3px;text-decoration:none;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:var(--white);transition:transform .2s}
+  .btn:hover,.btn:focus-visible{transform:translateY(-2px)}
+  .btn.y{background:var(--y);color:var(--ink)}
+  .btn.g2{background:#25d366;color:#05230f}
+  .btn.o{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+  .btn svg{width:18px;height:18px}
+  .storefront{position:relative;border-radius:4px;overflow:hidden;min-height:330px;background:linear-gradient(#24272b,#0e0f11);color:var(--white);display:grid;place-items:center;text-align:center;padding:30px}
+  .storefront .sign{border:2px solid var(--white);padding:16px 26px 14px;box-shadow:0 0 30px rgba(255,255,255,.25),inset 0 0 18px rgba(255,255,255,.12)}
+  .storefront .sign svg{width:84px;color:var(--white);filter:drop-shadow(0 0 8px rgba(255,255,255,.6))}
+  .storefront .sign b{display:block;margin-top:8px;font-weight:800;letter-spacing:.5em;padding-left:.5em;font-size:15px}
+  .storefront p{margin:18px 0 0;font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:rgba(247,247,245,.6)}
+  .stars{display:inline-flex;gap:3px;color:var(--y);font-size:18px;margin-top:12px}
+  @media (max-width:860px){.visit .grid{grid-template-columns:1fr}}
+
+  footer{position:relative;z-index:2;background:var(--ink);color:rgba(247,247,245,.6);padding:40px 0 calc(90px + env(safe-area-inset-bottom));font-size:12px}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center}
+  footer .logo{color:var(--white)}footer .logo small{color:rgba(247,247,245,.5)}
+
+  @media (max-width:700px){
+    .tlinks{display:none}
+    .rack{height:min(52vh,430px)}
+    .g svg{width:190%}
+    .intro{bottom:calc(84px + env(safe-area-inset-bottom))}
+    .intro p{font-size:13.5px}
+    .sec{padding:80px 0}
+    .lead{font-size:16px}
+    .dock a{padding:10px 10px;font-size:10px;letter-spacing:.1em}
+  }
+  @media (prefers-reduced-motion:reduce){.g,.marq .row,.hint i{animation:none!important}[data-rv]{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- VXON mark: an X drawn with a doubled stroke, like the shop's logo -->
+  <symbol id="vx" viewBox="0 0 100 100"><g fill="currentColor"><path d="M12 8h14l62 84H74z"/><path d="M4 14h8l58 78h-8z" opacity=".95"/><path d="M74 8h14L26 92H12z"/></g></symbol>
+</svg>
+
+<div class="loader" id="loader" aria-hidden="true"><div><svg><use href="#vx"/></svg><p>VXON · KALYAN WEST</p></div></div>
+
+<header class="top">
+  <a class="logo" href="#" id="home"><svg><use href="#vx"/></svg><span>VXON<small>MEN’S FASHION</small></span></a>
+  <nav class="tlinks" aria-label="Sections"><a href="#cats">Shop</a><a href="#why">About</a><a href="#visit">Visit</a></nav>
+</header>
+<div class="bar" id="bar"></div>
+
+<main>
+  <!-- the virtual store: scroll to walk up to the rack, then each piece swings forward -->
+  <section class="store" id="store" aria-label="VXON virtual rack">
+    <div class="stage" id="stage">
+      <div class="floor"></div>
+      <div class="bgword" id="bgword">men’s<br>clothing</div>
+      <div class="cam" id="cam">
+        <div class="rack">
+          <div class="shadow"></div>
+          <div class="post l"></div><div class="post r"></div><div class="foot l"></div><div class="foot r"></div>
+          <div class="rail"></div>
+          <div class="items" id="items"></div>
+        </div>
+      </div>
+      <div class="tag" id="tag"><b id="tagName"></b><span id="tagCat"></span></div>
+      <div class="intro" id="intro">
+        <span class="k">VXON · KALYAN WEST</span>
+        <h1>Not your<br>basic fit.</h1>
+        <p>Premium and everyday fits for men. Branded styles from ₹999.</p>
+        <div class="hint">SCROLL TO ENTER THE STORE<i></i></div>
+      </div>
+      <div class="brandcard" id="brandcard"><svg class="xl"><use href="#vx"/></svg><div class="stick">New drops<br>every week</div><p>VXON · by Brando9</p></div>
+    </div>
+  </section>
+
+  <div class="marq" aria-hidden="true"><div class="row"><span>Jackets</span><span>Henleys</span><span>Linens</span><span>Hoods &amp; sweats</span><span>Ethnics</span><span>From ₹999</span><span>Jackets</span><span>Henleys</span><span>Linens</span><span>Hoods &amp; sweats</span><span>Ethnics</span><span>From ₹999</span></div></div>
+
+  <section class="sec" id="cats">
+    <div class="wrap">
+      <span class="k2" data-rv>THE COLLECTION</span>
+      <h2 class="h" data-rv>Five racks.<br><span class="y">One vibe.</span></h2>
+      <p class="lead" data-rv>From boxy printed sweats to festive kurtas, every piece is picked for fit first. Tap a rack to ask about sizes and stock on WhatsApp.</p>
+      <div class="cats" id="catGrid"></div>
+    </div>
+  </section>
+
+  <section class="sec dark" id="why">
+    <div class="wrap">
+      <span class="k2" data-rv>WHY VXON</span>
+      <h2 class="h" data-rv>Premium look.<br>Everyday price.</h2>
+      <p class="lead" data-rv>A men’s store in Kalyan West for the fits you actually wear: clean basics, statement layers and festive picks, all under one roof.</p>
+      <div class="why">
+        <div data-rv><b>₹999</b><span>Branded styles start here. Premium fabrics without the premium markup.</span></div>
+        <div data-rv><b>4.5★</b><span>Rated by 49 shoppers on Google. Come try it on and see why.</span></div>
+        <div data-rv><b>Weekly</b><span>Fresh drops land every week. Follow @vxon_9 so you see them first.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec visit" id="visit">
+    <div class="wrap">
+      <span class="k2" data-rv>VISIT THE STORE</span>
+      <h2 class="h" data-rv>Come try it on.</h2>
+      <div class="grid">
+        <div>
+          <div class="info" data-rv>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span><b>Shop No. 8, Malhar Sankul, Agra Road</b>Near Mohindar Singh Kabal Singh High School, Tilak Nagar, Kalyan West</span></div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><b>Open today till 10:30 PM</b>Walk in any time, no appointment needed</span></div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span><b>+91 98192 25780</b>Call or WhatsApp for sizes and stock</span></div>
+          </div>
+          <div class="btns" data-rv>
+            <a class="btn g2" href="https://wa.me/919819225780?text=Hi%20VXON!%20I%20saw%20your%20website%20and%20want%20to%20know%20more." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.7 15l-1.3 5 5.1-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>WhatsApp</a>
+            <a class="btn y" href="https://www.google.com/maps/search/?api=1&query=VXON+By+Brando9+Kalyan+West" target="_blank" rel="noopener">Directions</a>
+            <a class="btn o" href="https://www.instagram.com/vxon_9/" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+        <div class="storefront" data-rv>
+          <div>
+            <div class="sign"><svg><use href="#vx"/></svg><b>VXON</b></div>
+            <div class="stars">★★★★★</div>
+            <p>4.5 on Google · 49 reviews</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#"><svg><use href="#vx"/></svg><span>VXON<small>BY BRANDO9 · KALYAN WEST</small></span></a>
+    <span>Demo website by Infinity Technologies</span>
+  </div>
+</footer>
+
+<nav class="dock" aria-label="Quick links">
+  <a href="#store" data-sec="store" class="on">Store</a>
+  <a href="#cats" data-sec="cats">Shop</a>
+  <a href="#visit" data-sec="visit">Visit</a>
+  <a class="wa" href="https://wa.me/919819225780" target="_blank" rel="noopener">WhatsApp</a>
+</nav>
+
+<script>
+(function(){
+  "use strict";
+  var D=document, W=window, reduce=W.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var clamp=function(x,a,b){ return Math.max(a,Math.min(b,x)); };
+  var sm=function(a,b,x){ x=clamp((x-a)/(b-a),0,1); return x*x*(3-2*x); };
+
+  /* ---------- garments, drawn as SVG so every piece is crisp at any size ---------- */
+  var uid=0;
+  function garment(o){
+    var id="g"+(uid++), c=o.c, c2=o.c2||shade(c,-18);
+    var long=o.t!=="tee", kurta=o.t==="kurta";
+    var bodyBottom=kurta?232:168;
+    var body= long
+      ? "M34 40 L54 30 Q70 40 86 30 L106 40 Q117 46 121 74 L127 "+(kurta?178:162)+" L112 "+(kurta?181:165)+" L106 86 L106 "+bodyBottom+" L34 "+bodyBottom+" L34 86 L28 "+(kurta?181:165)+" L13 "+(kurta?178:162)+" L19 74 Q23 46 34 40Z"
+      : "M34 40 L54 30 Q70 40 86 30 L106 40 L130 70 L113 84 L106 74 L106 168 L34 168 L34 74 L27 84 L10 70Z";
+    var fill="url(#"+id+"p)";
+    var pat="";
+    if(o.p==="stripe") pat='<pattern id="'+id+'p" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="'+c+'"/><rect width="10" height="4" fill="'+c2+'"/></pattern>';
+    else if(o.p==="check") pat='<pattern id="'+id+'p" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="'+c+'"/><rect width="16" height="6" fill="'+c2+'" opacity=".55"/><rect width="6" height="16" fill="'+c2+'" opacity=".55"/><rect x="11" width="1.4" height="16" fill="#fff" opacity=".35"/></pattern>';
+    else if(o.p==="denim") pat='<pattern id="'+id+'p" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><rect width="4" height="4" fill="'+c+'"/><rect width="1.4" height="4" fill="'+c2+'" opacity=".6"/></pattern>';
+    else if(o.p==="print") pat='<pattern id="'+id+'p" width="140" height="240" patternUnits="userSpaceOnUse"><rect width="140" height="240" fill="'+c+'"/><text x="70" y="102" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="22" fill="'+c2+'">'+(o.word||"VXON")+'</text><text x="70" y="120" text-anchor="middle" font-family="Inter Tight,sans-serif" font-weight="700" font-size="6" letter-spacing="2" fill="'+c2+'">INTERNATIONAL</text></pattern>';
+    else pat='<pattern id="'+id+'p" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="'+c+'"/></pattern>';
+    var det="", s='stroke="'+shade(c,-34)+'" stroke-width="1.6" fill="none"';
+    if(o.t==="shirt") det='<path d="M54 30 L64 50 L70 40 L76 50 L86 30" '+s+'/><path d="M70 42 V'+bodyBottom+'" '+s+'/>'+dots(70,[62,84,106,128,150],shade(c,-40))+'<path d="M88 72 h12 v12 h-12z" '+s+'/>';
+    if(o.t==="henley") det='<path d="M70 38 V82" '+s+'/>'+dots(70,[50,62,74],shade(c,-40));
+    if(o.t==="hood") det='<path d="M50 32 Q70 6 90 32 Q70 46 50 32Z" fill="'+c2+'"/><path d="M64 44 L62 66 M76 44 L78 66" '+s+'/><path d="M46 120 h48 l6 30 h-60z" fill="'+c2+'" opacity=".55"/>';
+    if(o.t==="jacket") det='<path d="M54 30 L46 52 L70 40 L94 52 L86 30" fill="'+c2+'"/><path d="M70 40 V'+bodyBottom+'" stroke="#d6d6d6" stroke-width="1.6"/><path d="M42 100 h18 M80 100 h18" '+s+'/>';
+    if(o.t==="kurta") det='<path d="M70 34 V96" '+s+'/>'+dots(70,[48,60,72,84],"#d9b66a")+'<path d="M34 196 h72" stroke="#d9b66a" stroke-width="3" opacity=".7"/>';
+    if(o.t==="tee") det='<path d="M54 30 Q70 46 86 30" '+s+'/>';
+    var h=kurta?250:186;
+    return '<svg viewBox="0 0 140 '+h+'" aria-hidden="true"><defs>'+pat+
+      '<linearGradient id="'+id+'s" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".22"/><stop offset=".35" stop-color="#fff" stop-opacity=".1"/><stop offset=".7" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".25"/></linearGradient></defs>'+
+      '<path d="M70 4 q6 0 6 6 q0 5 -6 7" stroke="#8b9097" stroke-width="2.4" fill="none"/><path d="M70 17 L40 32 H100Z" stroke="#9aa0a6" stroke-width="2.4" fill="none" stroke-linejoin="round"/>'+
+      '<path d="'+body+'" fill="'+fill+'"/>'+det+'<path d="'+body+'" fill="url(#'+id+'s)"/></svg>';
+  }
+  function dots(x,ys,col){ return ys.map(function(y){ return '<circle cx="'+x+'" cy="'+y+'" r="1.9" fill="'+col+'"/>'; }).join(""); }
+  function shade(hex,p){ var n=parseInt(hex.slice(1),16),r=n>>16,g=n>>8&255,b=n&255,f=function(v){ return clamp(Math.round(v+(p/100)*255),0,255); };
+    return "#"+((1<<24)+(f(r)<<16)+(f(g)<<8)+f(b)).toString(16).slice(1); }
+
+  var RACK=[
+    {n:"Boxy Printed Sweat",cat:"Hoods & sweats",t:"hood",c:"#d9c7a3",c2:"#3b3226",p:"print",word:"VXON"},
+    {n:"Linen Shirt · Sand",cat:"Linens",t:"shirt",c:"#e4dccb"},
+    {n:"Waffle Henley · Olive",cat:"Henleys",t:"henley",c:"#6f7449"},
+    {n:"Leather Jacket",cat:"Jackets",t:"jacket",c:"#2a1f1a",c2:"#16100d"},
+    {n:"Flannel Check Shirt",cat:"Shirts",t:"shirt",c:"#7b2b2b",c2:"#1f1f24",p:"check"},
+    {n:"Essential Hoodie · Grey",cat:"Hoods & sweats",t:"hood",c:"#9ea3a8"},
+    {n:"Denim Trucker Jacket",cat:"Jackets",t:"jacket",c:"#4d6a92",c2:"#2e4566",p:"denim"},
+    {n:"Linen Shirt · Sky",cat:"Linens",t:"shirt",c:"#bcd2e6",c2:"#a3bbd2",p:"stripe"},
+    {n:"Festive Kurta · Ivory",cat:"Ethnics",t:"kurta",c:"#efe6d2"},
+    {n:"Henley · Black",cat:"Henleys",t:"henley",c:"#1e1f22"}
+  ];
+  var items=D.getElementById("items");
+  RACK.forEach(function(o,i){
+    var d=D.createElement("div"); d.className="g"; d.tabIndex=0; d.setAttribute("role","button"); d.setAttribute("aria-label",o.n+", "+o.cat);
+    d.innerHTML=garment(o); d.addEventListener("click",function(){ pick(i,true); });
+    d.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); pick(i,true); } });
+    items.appendChild(d);
+  });
+  var gs=[].slice.call(items.children);
+
+  var CATS=[
+    {n:"Jackets",s:"Leather · denim · bomber",g:{t:"jacket",c:"#2a1f1a",c2:"#16100d"}},
+    {n:"Henleys",s:"Waffle knit · full sleeve",g:{t:"henley",c:"#6f7449"}},
+    {n:"Linens",s:"Breathable · relaxed",g:{t:"shirt",c:"#e4dccb"}},
+    {n:"Hoods & sweats",s:"Boxy · printed · basics",g:{t:"hood",c:"#d9c7a3",c2:"#3b3226",p:"print"}},
+    {n:"Ethnics",s:"Kurtas for every festive",g:{t:"kurta",c:"#efe6d2"}}
+  ];
+  D.getElementById("catGrid").innerHTML=CATS.map(function(c){
+    return '<a class="cat" data-rv target="_blank" rel="noopener" href="https://wa.me/919819225780?text='+encodeURIComponent("Hi VXON! I want to see your "+c.n+".")+'">'+garment(c.g)+'<b>'+c.n+'</b><span>'+c.s+'</span></a>';
+  }).join("");
+
+  /* ---------- scroll: walk up to the rack, then show each piece ---------- */
+  var store=D.getElementById("store"), stage=D.getElementById("stage"), cam=D.getElementById("cam"), bgword=D.getElementById("bgword"),
+      intro=D.getElementById("intro"), tag=D.getElementById("tag"), tagName=D.getElementById("tagName"), tagCat=D.getElementById("tagCat"),
+      brand=D.getElementById("brandcard"), bar=D.getElementById("bar"), cur=-1, manual=-1, target=0, now=0;
+  function pick(i,byUser){
+    if(byUser) manual=i;
+    if(i===cur) return; cur=i;
+    gs.forEach(function(g,j){ g.classList.toggle("on",j===i); });
+    stage.classList.toggle("focus",i>=0);
+    if(i>=0){ tagName.textContent=RACK[i].n; tagCat.textContent=RACK[i].cat+" · from ₹999"; tag.classList.add("show"); }
+    else tag.classList.remove("show");
+  }
+  function frame(){
+    var r=store.getBoundingClientRect(), len=r.height-W.innerHeight;
+    target=clamp(-r.top/len,0,1);
+    now+=(target-now)*(reduce?1:.1);
+    var p=now;
+    var mob=W.innerWidth<700, zoom=sm(0,.2,p), out=sm(.86,.98,p);
+    // camera: walk up to the rack, then dolly in and pan to whichever piece is on show
+    var idxRaw=(p-.22)/(.84-.22), fIdx=clamp(idxRaw*RACK.length-.5,0,RACK.length-1);
+    var focus=sm(.17,.26,p)*(1-sm(.8,.87,p));
+    var base=(mob?.55:.5)+(mob?.45:.48)*zoom, fs=mob?2.35:1.55;
+    var sc=(base+(fs-base)*focus)*(1-.2*out);
+    var h=cam.offsetHeight, cw=cam.offsetWidth, a0=gs[Math.floor(fIdx)], a1=gs[Math.ceil(fIdx)], fr=fIdx-Math.floor(fIdx);
+    var cx=function(el){ return items.offsetLeft+el.offsetLeft+el.offsetWidth/2-cw/2; };
+    var px=-(cx(a0)*(1-fr)+cx(a1)*fr)*sc*focus;
+    var py=(.2+(mob?.26:.14)*focus)*h*sc-(mob?2:4)*W.innerHeight/100*(1-zoom);
+    cam.style.transform="translate(-50%,-50%) translate("+px.toFixed(1)+"px,"+py.toFixed(1)+"px) scale("+sc.toFixed(4)+") rotateX("+(6-6*zoom).toFixed(2)+"deg)";
+    cam.style.opacity=(1-out).toFixed(3);
+    bgword.style.opacity=Math.max(0,1-.6*zoom-focus-out).toFixed(3);
+    bgword.style.transform="translateY("+(-6*zoom).toFixed(2)+"vh) scale("+(1+.08*zoom).toFixed(3)+")";
+    intro.style.opacity=(1-sm(.03,.12,p)).toFixed(3); intro.style.transform="translateY("+(-30*sm(.03,.12,p)).toFixed(1)+"px)";
+    intro.style.visibility=p>.13?"hidden":"visible";
+    brand.style.opacity=out.toFixed(3); brand.style.transform="translate(-50%,-50%) scale("+(.92+.08*out).toFixed(3)+")";
+    // each piece gets an equal slice of the scroll between the zoom and the brand card
+    var idx=p<.2||p>.86?-1:clamp(Math.round(fIdx),0,RACK.length-1);
+    if(manual>=0 && Math.abs(target-now)>.002) manual=-1;   // scrolling again hands control back to the scroll
+    pick(manual>=0?manual:idx,false);
+    D.querySelector('.top').classList.toggle('solid',r.bottom<W.innerHeight*.5);
+    bar.style.transform="scaleX("+clamp(W.scrollY/(D.documentElement.scrollHeight-W.innerHeight),0,1).toFixed(4)+")";
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  /* reveal + dock highlight */
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }); },{threshold:.12});
+  D.querySelectorAll("[data-rv]").forEach(function(el,i){ el.style.transitionDelay=(i%5)*.07+"s"; io.observe(el); });
+  var dock=[].slice.call(D.querySelectorAll(".dock a[data-sec]"));
+  var so=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) dock.forEach(function(a){ a.classList.toggle("on",a.dataset.sec===e.target.id); }); }); },{rootMargin:"-45% 0px -50% 0px"});
+  ["store","cats","visit"].forEach(function(id){ so.observe(D.getElementById(id)); });
+  D.getElementById("home").addEventListener("click",function(e){ e.preventDefault(); W.scrollTo({top:0,behavior:"smooth"}); });
+
+  function done(){ D.getElementById("loader").classList.add("done"); }
+  (D.fonts&&D.fonts.ready?D.fonts.ready:Promise.resolve()).then(function(){ setTimeout(done,500); });
+  setTimeout(done,2500);
+})();
+</script>
+</body>
+</html>
