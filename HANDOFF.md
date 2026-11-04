@@ -82,3 +82,11 @@ Facts: 1863 colonial circuit house, restored over two years (Renesa Architecture
 - Main website contact details may need updating to the Amritsar address / 98158 03736
   (owner said "later").
 - Live test of the `/r/` redirect with the sheet (INF001 active, INF002 expired, INF003 STOP).
+
+## VXON demo (/vxon/)
+- Men's streetwear store, Kalyan West (@vxon_9). Pitch demo modelled on motionsites "Loops Virtual Store".
+- `web/vxon/index.html`: three.js rack of 12 real cloth-simulated garment GLBs (`web/vxon/m/`, compressed with
+  gltf-transform: webp 1024 + meshopt) on black hangers, side-on; scroll focuses each piece, which turns to the front.
+- Models are CC BY 4.0 (Style3D CG, Naira, Obridje, funlab117 via Sketchfab, from github warunyoo1/app-fashion-store,
+  plus KakashiTheCopy-Ninja/Rack-three-js and dnishsyzwn/clothing-rack). Credits are in the page footer; keep them.
+- The black tee gets a VXON print painted onto its own texture (`vxonPrint`).
