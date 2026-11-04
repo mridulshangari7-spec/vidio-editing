@@ -54,11 +54,12 @@
   .foot.l{left:3%}.foot.r{right:3%}
   .shadow{position:absolute;left:6%;right:6%;bottom:-9%;height:40px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.28),transparent)}
   .items{position:absolute;left:6%;right:6%;top:-6px;display:flex;justify-content:space-between;transform-style:preserve-3d}
-  .g{position:relative;width:calc(100% / 10);display:flex;justify-content:center;transform-style:preserve-3d;cursor:pointer;
+  .g{position:relative;width:calc(100% / 6);display:flex;justify-content:center;transform-style:preserve-3d;cursor:pointer;
     transform-origin:50% 0;transition:transform .7s cubic-bezier(.2,.8,.2,1),filter .5s;animation:sway 5s ease-in-out infinite}
   .g:nth-child(2n){animation-duration:6.2s;animation-delay:-1.3s}.g:nth-child(3n){animation-duration:5.6s;animation-delay:-2.6s}
   @keyframes sway{50%{rotate:1.2deg}}
-  .g svg{width:180%;max-width:170px;height:auto;filter:drop-shadow(0 18px 18px rgba(0,0,0,.22));pointer-events:none}
+  .g .hg{position:absolute;top:-4px;left:50%;width:46%;max-width:90px;transform:translateX(-50%);z-index:2;pointer-events:none}
+  .g img{display:block;width:138%;max-width:none;height:auto;margin-top:7%;filter:drop-shadow(0 22px 20px rgba(0,0,0,.28)) drop-shadow(0 2px 2px rgba(0,0,0,.18));pointer-events:none;user-select:none}
   .g.on{z-index:5;transform:translateZ(150px) translateY(4%) scale(1.22);animation:none}
   .stage.focus .g:not(.on){filter:saturate(.75) brightness(.92)}
   .g:focus-visible{outline:2px solid var(--ink);outline-offset:6px}
@@ -99,8 +100,10 @@
   .cats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:44px}
   .cat{position:relative;background:linear-gradient(#e9ebed,#d3d7db);border-radius:4px;aspect-ratio:3/4.3;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;justify-content:flex-end;padding:14px;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
   .cat:hover,.cat:focus-visible{transform:translateY(-6px)}
-  .cat svg{position:absolute;left:50%;top:6%;width:78%;transform:translateX(-50%);filter:drop-shadow(0 14px 14px rgba(0,0,0,.2));transition:transform .6s cubic-bezier(.2,.8,.2,1)}
-  .cat:hover svg{transform:translateX(-50%) rotate(-3deg) scale(1.05)}
+  .cat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+  .cat:hover img{transform:scale(1.06)}
+  .cat::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(14,15,17,.82))}
+  .cat b,.cat span{z-index:1;color:var(--white)}
   .cat b{position:relative;font:400 26px/1 Anton,Impact,sans-serif;text-transform:uppercase}
   .cat span{position:relative;margin-top:6px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
   @media (max-width:900px){.cats{grid-template-columns:repeat(2,1fr)}.cat:last-child{grid-column:span 2;aspect-ratio:auto;min-height:260px}}
@@ -147,7 +150,7 @@
   @media (max-width:700px){
     .tlinks{display:none}
     .rack{height:min(52vh,430px)}
-    .g svg{width:190%}
+    .g img{width:160%}
     .intro{bottom:calc(84px + env(safe-area-inset-bottom))}
     .intro p{font-size:13.5px}
     .sec{padding:80px 0}
@@ -161,13 +164,15 @@
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <!-- VXON mark: an X drawn with a doubled stroke, like the shop's logo -->
-  <symbol id="vx" viewBox="0 0 100 100"><g fill="currentColor"><path d="M12 8h14l62 84H74z"/><path d="M4 14h8l58 78h-8z" opacity=".95"/><path d="M74 8h14L26 92H12z"/></g></symbol>
+  <!-- VXON mark, traced from the shop's own logo -->
+  <symbol id="vx" viewBox="0 0 100 117"><image href="img/x-black.png" width="100" height="117"/></symbol>
+  <symbol id="vxw" viewBox="0 0 100 117"><image href="img/x-white.png" width="100" height="117"/></symbol>
 </svg>
 
-<div class="loader" id="loader" aria-hidden="true"><div><svg><use href="#vx"/></svg><p>VXON · KALYAN WEST</p></div></div>
+<div class="loader" id="loader" aria-hidden="true"><div><svg viewBox="0 0 100 117"><use href="#vxw"/></svg><p>VXON · KALYAN WEST</p></div></div>
 
 <header class="top">
-  <a class="logo" href="#" id="home"><svg><use href="#vx"/></svg><span>VXON<small>MEN’S FASHION</small></span></a>
+  <a class="logo" href="#" id="home"><svg viewBox="0 0 100 117"><use href="#vx"/></svg><span>VXON<small>MEN’S FASHION</small></span></a>
   <nav class="tlinks" aria-label="Sections"><a href="#cats">Shop</a><a href="#why">About</a><a href="#visit">Visit</a></nav>
 </header>
 <div class="bar" id="bar"></div>
@@ -193,17 +198,17 @@
         <p>Premium and everyday fits for men. Branded styles from ₹999.</p>
         <div class="hint">SCROLL TO ENTER THE STORE<i></i></div>
       </div>
-      <div class="brandcard" id="brandcard"><svg class="xl"><use href="#vx"/></svg><div class="stick">New drops<br>every week</div><p>VXON · by Brando9</p></div>
+      <div class="brandcard" id="brandcard"><svg class="xl" viewBox="0 0 100 117"><use href="#vx"/></svg><div class="stick">New drops<br>every week</div><p>VXON · by Brando9</p></div>
     </div>
   </section>
 
-  <div class="marq" aria-hidden="true"><div class="row"><span>Jackets</span><span>Henleys</span><span>Linens</span><span>Hoods &amp; sweats</span><span>Ethnics</span><span>From ₹999</span><span>Jackets</span><span>Henleys</span><span>Linens</span><span>Hoods &amp; sweats</span><span>Ethnics</span><span>From ₹999</span></div></div>
+  <div class="marq" aria-hidden="true"><div class="row"><span>Jackets</span><span>Henleys</span><span>Printed shirts</span><span>Hoods &amp; sweats</span><span>Street tees</span><span>From ₹999</span><span>Jackets</span><span>Henleys</span><span>Printed shirts</span><span>Hoods &amp; sweats</span><span>Street tees</span><span>From ₹999</span></div></div>
 
   <section class="sec" id="cats">
     <div class="wrap">
       <span class="k2" data-rv>THE COLLECTION</span>
       <h2 class="h" data-rv>Five racks.<br><span class="y">One vibe.</span></h2>
-      <p class="lead" data-rv>From boxy printed sweats to festive kurtas, every piece is picked for fit first. Tap a rack to ask about sizes and stock on WhatsApp.</p>
+      <p class="lead" data-rv>From racing jackets to printed resort shirts, every piece is picked for fit first. Tap a rack to ask about sizes and stock on WhatsApp.</p>
       <div class="cats" id="catGrid"></div>
     </div>
   </section>
@@ -240,7 +245,7 @@
         </div>
         <div class="storefront" data-rv>
           <div>
-            <div class="sign"><svg><use href="#vx"/></svg><b>VXON</b></div>
+            <div class="sign"><svg viewBox="0 0 100 117"><use href="#vxw"/></svg><b>VXON</b></div>
             <div class="stars">★★★★★</div>
             <p>4.5 on Google · 49 reviews</p>
           </div>
@@ -252,7 +257,7 @@
 
 <footer>
   <div class="wrap">
-    <a class="logo" href="#"><svg><use href="#vx"/></svg><span>VXON<small>BY BRANDO9 · KALYAN WEST</small></span></a>
+    <a class="logo" href="#"><svg viewBox="0 0 100 117"><use href="#vxw"/></svg><span>VXON<small>BY BRANDO9 · KALYAN WEST</small></span></a>
     <span>Demo website by Infinity Technologies</span>
   </div>
 </footer>
@@ -271,69 +276,34 @@
   var clamp=function(x,a,b){ return Math.max(a,Math.min(b,x)); };
   var sm=function(a,b,x){ x=clamp((x-a)/(b-a),0,1); return x*x*(3-2*x); };
 
-  /* ---------- garments, drawn as SVG so every piece is crisp at any size ---------- */
-  var uid=0;
-  function garment(o){
-    var id="g"+(uid++), c=o.c, c2=o.c2||shade(c,-18);
-    var long=o.t!=="tee", kurta=o.t==="kurta";
-    var bodyBottom=kurta?232:168;
-    var body= long
-      ? "M34 40 L54 30 Q70 40 86 30 L106 40 Q117 46 121 74 L127 "+(kurta?178:162)+" L112 "+(kurta?181:165)+" L106 86 L106 "+bodyBottom+" L34 "+bodyBottom+" L34 86 L28 "+(kurta?181:165)+" L13 "+(kurta?178:162)+" L19 74 Q23 46 34 40Z"
-      : "M34 40 L54 30 Q70 40 86 30 L106 40 L130 70 L113 84 L106 74 L106 168 L34 168 L34 74 L27 84 L10 70Z";
-    var fill="url(#"+id+"p)";
-    var pat="";
-    if(o.p==="stripe") pat='<pattern id="'+id+'p" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="'+c+'"/><rect width="10" height="4" fill="'+c2+'"/></pattern>';
-    else if(o.p==="check") pat='<pattern id="'+id+'p" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="'+c+'"/><rect width="16" height="6" fill="'+c2+'" opacity=".55"/><rect width="6" height="16" fill="'+c2+'" opacity=".55"/><rect x="11" width="1.4" height="16" fill="#fff" opacity=".35"/></pattern>';
-    else if(o.p==="denim") pat='<pattern id="'+id+'p" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><rect width="4" height="4" fill="'+c+'"/><rect width="1.4" height="4" fill="'+c2+'" opacity=".6"/></pattern>';
-    else if(o.p==="print") pat='<pattern id="'+id+'p" width="140" height="240" patternUnits="userSpaceOnUse"><rect width="140" height="240" fill="'+c+'"/><text x="70" y="102" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="22" fill="'+c2+'">'+(o.word||"VXON")+'</text><text x="70" y="120" text-anchor="middle" font-family="Inter Tight,sans-serif" font-weight="700" font-size="6" letter-spacing="2" fill="'+c2+'">INTERNATIONAL</text></pattern>';
-    else pat='<pattern id="'+id+'p" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="'+c+'"/></pattern>';
-    var det="", s='stroke="'+shade(c,-34)+'" stroke-width="1.6" fill="none"';
-    if(o.t==="shirt") det='<path d="M54 30 L64 50 L70 40 L76 50 L86 30" '+s+'/><path d="M70 42 V'+bodyBottom+'" '+s+'/>'+dots(70,[62,84,106,128,150],shade(c,-40))+'<path d="M88 72 h12 v12 h-12z" '+s+'/>';
-    if(o.t==="henley") det='<path d="M70 38 V82" '+s+'/>'+dots(70,[50,62,74],shade(c,-40));
-    if(o.t==="hood") det='<path d="M50 32 Q70 6 90 32 Q70 46 50 32Z" fill="'+c2+'"/><path d="M64 44 L62 66 M76 44 L78 66" '+s+'/><path d="M46 120 h48 l6 30 h-60z" fill="'+c2+'" opacity=".55"/>';
-    if(o.t==="jacket") det='<path d="M54 30 L46 52 L70 40 L94 52 L86 30" fill="'+c2+'"/><path d="M70 40 V'+bodyBottom+'" stroke="#d6d6d6" stroke-width="1.6"/><path d="M42 100 h18 M80 100 h18" '+s+'/>';
-    if(o.t==="kurta") det='<path d="M70 34 V96" '+s+'/>'+dots(70,[48,60,72,84],"#d9b66a")+'<path d="M34 196 h72" stroke="#d9b66a" stroke-width="3" opacity=".7"/>';
-    if(o.t==="tee") det='<path d="M54 30 Q70 46 86 30" '+s+'/>';
-    var h=kurta?250:186;
-    return '<svg viewBox="0 0 140 '+h+'" aria-hidden="true"><defs>'+pat+
-      '<linearGradient id="'+id+'s" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".22"/><stop offset=".35" stop-color="#fff" stop-opacity=".1"/><stop offset=".7" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".25"/></linearGradient></defs>'+
-      '<path d="M70 4 q6 0 6 6 q0 5 -6 7" stroke="#8b9097" stroke-width="2.4" fill="none"/><path d="M70 17 L40 32 H100Z" stroke="#9aa0a6" stroke-width="2.4" fill="none" stroke-linejoin="round"/>'+
-      '<path d="'+body+'" fill="'+fill+'"/>'+det+'<path d="'+body+'" fill="url(#'+id+'s)"/></svg>';
-  }
-  function dots(x,ys,col){ return ys.map(function(y){ return '<circle cx="'+x+'" cy="'+y+'" r="1.9" fill="'+col+'"/>'; }).join(""); }
-  function shade(hex,p){ var n=parseInt(hex.slice(1),16),r=n>>16,g=n>>8&255,b=n&255,f=function(v){ return clamp(Math.round(v+(p/100)*255),0,255); };
-    return "#"+((1<<24)+(f(r)<<16)+(f(g)<<8)+f(b)).toString(16).slice(1); }
-
+  // real pieces from VXON's own posts and stories, cut out and upscaled
   var RACK=[
-    {n:"Boxy Printed Sweat",cat:"Hoods & sweats",t:"hood",c:"#d9c7a3",c2:"#3b3226",p:"print",word:"VXON"},
-    {n:"Linen Shirt · Sand",cat:"Linens",t:"shirt",c:"#e4dccb"},
-    {n:"Waffle Henley · Olive",cat:"Henleys",t:"henley",c:"#6f7449"},
-    {n:"Leather Jacket",cat:"Jackets",t:"jacket",c:"#2a1f1a",c2:"#16100d"},
-    {n:"Flannel Check Shirt",cat:"Shirts",t:"shirt",c:"#7b2b2b",c2:"#1f1f24",p:"check"},
-    {n:"Essential Hoodie · Grey",cat:"Hoods & sweats",t:"hood",c:"#9ea3a8"},
-    {n:"Denim Trucker Jacket",cat:"Jackets",t:"jacket",c:"#4d6a92",c2:"#2e4566",p:"denim"},
-    {n:"Linen Shirt · Sky",cat:"Linens",t:"shirt",c:"#bcd2e6",c2:"#a3bbd2",p:"stripe"},
-    {n:"Festive Kurta · Ivory",cat:"Ethnics",t:"kurta",c:"#efe6d2"},
-    {n:"Henley · Black",cat:"Henleys",t:"henley",c:"#1e1f22"}
+    {n:"SA DAG Leather Jacket",cat:"Jackets · oversized",img:"sadag"},
+    {n:"Power Unit Sweatshirt",cat:"Hoods & sweats",img:"power"},
+    {n:"Dream Big Oversized Tee",cat:"Streetwear tees",img:"dream"},
+    {n:"Racing Leather Jacket",cat:"Jackets · F1 series",img:"ferrari"},
+    {n:"AMG Motorsport Sweatshirt",cat:"Hoods & sweats",img:"merc"},
+    {n:"Car Graphic Sweatshirt",cat:"Hoods & sweats",img:"navycar"}
   ];
+  var HANGER='<svg class="hg" viewBox="0 0 90 40" aria-hidden="true"><path d="M45 3q7 0 7 6.5q0 5.5-7 7.5" stroke="#c9ced3" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M45 17 L6 34 Q3 37 8 37 H82 Q87 37 84 34Z" fill="#f4f5f6" stroke="#b9bfc5" stroke-width="1.5" stroke-linejoin="round"/></svg>';
   var items=D.getElementById("items");
   RACK.forEach(function(o,i){
     var d=D.createElement("div"); d.className="g"; d.tabIndex=0; d.setAttribute("role","button"); d.setAttribute("aria-label",o.n+", "+o.cat);
-    d.innerHTML=garment(o); d.addEventListener("click",function(){ pick(i,true); });
+    d.innerHTML=HANGER+'<img src="img/'+o.img+'.webp" alt="'+o.n+'" loading="eager" decoding="async">'; d.addEventListener("click",function(){ pick(i,true); });
     d.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); pick(i,true); } });
     items.appendChild(d);
   });
   var gs=[].slice.call(items.children);
 
   var CATS=[
-    {n:"Jackets",s:"Leather · denim · bomber",g:{t:"jacket",c:"#2a1f1a",c2:"#16100d"}},
-    {n:"Henleys",s:"Waffle knit · full sleeve",g:{t:"henley",c:"#6f7449"}},
-    {n:"Linens",s:"Breathable · relaxed",g:{t:"shirt",c:"#e4dccb"}},
-    {n:"Hoods & sweats",s:"Boxy · printed · basics",g:{t:"hood",c:"#d9c7a3",c2:"#3b3226",p:"print"}},
-    {n:"Ethnics",s:"Kurtas for every festive",g:{t:"kurta",c:"#efe6d2"}}
+    {n:"Jackets",s:"Leather · racing · oversized",img:"t-ferrari"},
+    {n:"Henleys",s:"6 shades · 6 styles",img:"t-henley"},
+    {n:"Printed shirts",s:"Half sleeve · resort",img:"t-zara"},
+    {n:"Hoods & sweats",s:"Motorsport graphics",img:"t-hoods"},
+    {n:"Street tees",s:"Built for the streets",img:"t-street"}
   ];
   D.getElementById("catGrid").innerHTML=CATS.map(function(c){
-    return '<a class="cat" data-rv target="_blank" rel="noopener" href="https://wa.me/919819225780?text='+encodeURIComponent("Hi VXON! I want to see your "+c.n+".")+'">'+garment(c.g)+'<b>'+c.n+'</b><span>'+c.s+'</span></a>';
+    return '<a class="cat" data-rv target="_blank" rel="noopener" href="https://wa.me/919819225780?text='+encodeURIComponent("Hi VXON! I want to see your "+c.n+".")+'"><img src="img/'+c.img+'.webp" alt="'+c.n+' at VXON" loading="lazy"><b>'+c.n+'</b><span>'+c.s+'</span></a>';
   }).join("");
 
   /* ---------- scroll: walk up to the rack, then show each piece ---------- */
@@ -357,12 +327,12 @@
     // camera: walk up to the rack, then dolly in and pan to whichever piece is on show
     var idxRaw=(p-.22)/(.84-.22), fIdx=clamp(idxRaw*RACK.length-.5,0,RACK.length-1);
     var focus=sm(.17,.26,p)*(1-sm(.8,.87,p));
-    var base=(mob?.55:.5)+(mob?.45:.48)*zoom, fs=mob?2.35:1.55;
+    var base=(mob?.55:.5)+(mob?.45:.48)*zoom, fs=mob?1.6:1.08;
     var sc=(base+(fs-base)*focus)*(1-.2*out);
     var h=cam.offsetHeight, cw=cam.offsetWidth, a0=gs[Math.floor(fIdx)], a1=gs[Math.ceil(fIdx)], fr=fIdx-Math.floor(fIdx);
     var cx=function(el){ return items.offsetLeft+el.offsetLeft+el.offsetWidth/2-cw/2; };
     var px=-(cx(a0)*(1-fr)+cx(a1)*fr)*sc*focus;
-    var py=(.2+(mob?.26:.14)*focus)*h*sc-(mob?2:4)*W.innerHeight/100*(1-zoom);
+    var py=(.2+(mob?.1:.06)*focus)*h*sc-(mob?2:4)*W.innerHeight/100*(1-zoom);
     cam.style.transform="translate(-50%,-50%) translate("+px.toFixed(1)+"px,"+py.toFixed(1)+"px) scale("+sc.toFixed(4)+") rotateX("+(6-6*zoom).toFixed(2)+"deg)";
     cam.style.opacity=(1-out).toFixed(3);
     bgword.style.opacity=Math.max(0,1-.6*zoom-focus-out).toFixed(3);
