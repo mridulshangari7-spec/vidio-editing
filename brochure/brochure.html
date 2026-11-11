@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Infinity Technologies – Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  @page{size:540px 960px;margin:0}
+  :root{--ink:#0d0c0b;--soft:#55524d;--faint:#8b877f;--paper:#fbfaf7;--shade:#f2f0ec;--line:#e2ded5;--gold:#C9982E;--gold2:#e9c46a;--goldink:#7A5A10;--g:#1f8f4e;--blue:#1a73e8}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#ccc}
+  body{font-family:"Inter Tight",Inter,Helvetica,Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .pg{width:540px;height:960px;position:relative;overflow:hidden;background:var(--paper);page-break-after:always;break-after:page;padding:44px 38px 0}
+  .pg:last-child{page-break-after:auto}
+  .no{position:absolute;right:38px;top:46px;font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--faint)}
+  .brand{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--soft)}
+  .brand svg{width:34px;height:auto;color:var(--gold)}
+  .k{display:inline-block;margin-top:26px;font-size:11px;font-weight:800;letter-spacing:.22em;color:var(--goldink);background:#f6ead0;padding:6px 10px;border-radius:30px}
+  h1{font-size:44px;line-height:1.02;font-weight:800;letter-spacing:-.02em;margin-top:14px}
+  h2{font-size:36px;line-height:1.04;font-weight:800;letter-spacing:-.02em;margin-top:12px}
+  h2 em,h1 em{font-style:normal;color:var(--gold)}
+  .lead{margin-top:12px;font-size:16.5px;line-height:1.45;color:var(--soft);font-weight:500}
+  .foot{position:absolute;left:38px;right:38px;bottom:26px;display:flex;justify-content:space-between;font-size:10.5px;font-weight:600;color:var(--faint);letter-spacing:.06em}
+
+  /* flow diagram */
+  .flow{position:relative;margin-top:22px;height:438px}
+  .step{position:absolute;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .lbl{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--ink);background:#fff;border:1.5px solid var(--ink);border-radius:30px;padding:5px 11px;white-space:nowrap}
+  .arrow{position:absolute;color:var(--gold)}
+  .badge{position:absolute;display:flex;align-items:center;gap:6px;background:var(--ink);color:#fff;font-size:12px;font-weight:800;letter-spacing:.12em;padding:8px 12px;border-radius:30px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+  .badge svg{width:18px;height:18px}
+  .ripple{position:absolute;border:2px solid var(--gold);border-radius:50%;opacity:.55}
+
+  /* NFC card */
+  .card{width:200px;height:118px;border-radius:12px;position:relative;box-shadow:0 18px 30px -10px rgba(0,0,0,.45),0 2px 4px rgba(0,0,0,.2);color:#fff;padding:14px 15px;overflow:hidden}
+  .card .nf{position:absolute;right:12px;top:12px;width:22px;height:22px;opacity:.9}
+  .card .t{font-size:10px;font-weight:700;letter-spacing:.18em;opacity:.75}
+  .card .h{font-size:19px;font-weight:800;line-height:1.05;margin-top:6px}
+  .card .s{position:absolute;left:15px;bottom:12px;font-size:9px;font-weight:700;letter-spacing:.12em;opacity:.8}
+  .card .qr{position:absolute;right:12px;bottom:12px;width:40px;height:40px;background:#fff;border-radius:4px;padding:3px}
+  .card.black{background:linear-gradient(135deg,#1b1a18,#0b0a09)}
+  .card.gold{background:linear-gradient(135deg,#2a2114,#0f0c08)}
+  .card.ig{background:linear-gradient(135deg,#f9a03f 0%,#e1306c 45%,#833ab4 100%)}
+  .card.wa{background:linear-gradient(135deg,#25d366,#0f8a43)}
+  .stars{color:var(--gold2);font-size:15px;letter-spacing:2px;margin-top:5px}
+
+  /* phone */
+  .phone{width:176px;height:362px;border-radius:30px;background:#111;padding:8px;box-shadow:0 26px 40px -14px rgba(0,0,0,.5),inset 0 0 0 2px #333;position:relative}
+  .phone .scr{width:100%;height:100%;border-radius:23px;overflow:hidden;background:#fff;position:relative}
+  .phone .scr img{width:100%;display:block}
+  .phone .isl{position:absolute;left:50%;top:14px;transform:translateX(-50%);width:52px;height:14px;border-radius:10px;background:#111;z-index:3}
+  .phone.big{width:190px;height:390px}
+  .demo{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:4;background:rgba(13,12,11,.82);color:#fff;font-size:8.5px;font-weight:800;letter-spacing:.14em;padding:5px 9px;border-radius:20px;white-space:nowrap}
+
+  /* result strip */
+  .result{margin-top:18px;display:flex;align-items:center;gap:12px;background:var(--ink);color:#fff;border-radius:16px;padding:16px 18px}
+  .result .ic{flex:none;width:40px;height:40px;border-radius:50%;background:var(--gold);display:grid;place-items:center;color:var(--ink)}
+  .result .ic svg{width:22px;height:22px}
+  .result b{display:block;font-size:16px}
+  .result span{display:block;font-size:13px;opacity:.75;margin-top:2px;line-height:1.35}
+  .note{margin-top:12px;display:flex;align-items:center;gap:12px;border:1.5px dashed var(--gold);border-radius:16px;padding:13px 16px;background:#fffaf0}
+  .note .ic{flex:none;width:36px;height:36px;border-radius:10px;background:#f6ead0;display:grid;place-items:center;color:var(--goldink)}
+  .note .ic svg{width:20px;height:20px}
+  .note b{display:block;font-size:14.5px}
+  .note span{display:block;font-size:12.5px;color:var(--soft);margin-top:2px;line-height:1.35}
+
+  /* mock screens */
+  .mock{padding:40px 14px 14px;font-size:11px;height:100%}
+  .gr .hd{font-size:12px;color:#5f6368;font-weight:600}
+  .gr .bz{display:flex;align-items:center;gap:8px;margin-top:12px}
+  .gr .av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#c9982e,#7a5a10)}
+  .gr .bz b{font-size:13px}
+  .gr .bz span{display:block;font-size:10px;color:#5f6368}
+  .gr .st{margin-top:16px;display:flex;gap:4px;justify-content:center;color:#fbbc04;font-size:27px}
+  .gr .tx{margin-top:14px;border:1px solid #dadce0;border-radius:8px;height:92px;padding:8px;color:#80868b;font-size:10.5px;line-height:1.4}
+  .gr .ph{margin-top:10px;display:flex;align-items:center;gap:6px;color:var(--blue);font-weight:700;font-size:10.5px}
+  .gr .po{position:absolute;right:14px;bottom:18px;background:var(--blue);color:#fff;font-weight:700;padding:7px 16px;border-radius:20px;font-size:11px}
+  .ig .tp{display:flex;align-items:center;gap:12px;margin-top:6px}
+  .ig .av{width:56px;height:56px;border-radius:50%;padding:2.5px;background:linear-gradient(135deg,#f9a03f,#e1306c,#833ab4)}
+  .ig .av i{display:block;width:100%;height:100%;border-radius:50%;border:2.5px solid #fff;background:linear-gradient(135deg,#2a2114,#c9982e)}
+  .ig .ct{display:flex;gap:10px;text-align:center}
+  .ig .ct b{display:block;font-size:12px}
+  .ig .ct span{font-size:9px;color:#666}
+  .ig .nm{margin-top:9px;font-weight:700;font-size:11.5px}
+  .ig .bio{color:#555;font-size:10px;margin-top:2px;line-height:1.35}
+  .ig .fb{margin-top:10px;background:#0095f6;color:#fff;text-align:center;font-weight:700;border-radius:8px;padding:7px 0;font-size:11px}
+  .ig .grid{margin:12px -14px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+  .ig .grid i{aspect-ratio:1;display:block}
+  .wa .bar{position:absolute;left:0;right:0;top:0;height:74px;background:#075e54;color:#fff;display:flex;align-items:flex-end;gap:8px;padding:0 12px 10px}
+  .wa .bar i{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#c9982e,#7a5a10);display:block}
+  .wa .bar b{font-size:12px}
+  .wa .bar span{display:block;font-size:9px;opacity:.8}
+  .wa .body{position:absolute;inset:74px 0 0;background:#ece5dd;padding:12px}
+  .wa .msg{background:#dcf8c6;border-radius:8px;padding:7px 9px;font-size:10.5px;max-width:78%;margin-left:auto;box-shadow:0 1px 1px rgba(0,0,0,.12)}
+  .wa .in{background:#fff;margin-left:0;margin-top:8px}
+  .wa .pdf{display:flex;align-items:center;gap:6px;margin-top:4px;background:#f3f3f3;border-radius:6px;padding:6px}
+  .wa .pdf i{width:20px;height:24px;background:#e53935;border-radius:3px;display:block}
+
+  /* cover */
+  .cover{background:radial-gradient(90% 60% at 50% 38%,#2a2114 0%,#0d0c0b 70%);color:#fff;padding-top:60px}
+  .cover .logo{width:150px;color:var(--gold);display:block;margin:0 auto}
+  .cover .nm{text-align:center;margin-top:12px;font-size:13px;font-weight:700;letter-spacing:.34em;color:#d8d2c4}
+  .cover h1{text-align:center;font-size:52px;margin-top:40px}
+  .cover .lead{text-align:center;color:#bdb6a8;max-width:390px;margin:14px auto 0}
+  .tiles{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .tile{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px 10px 13px;text-align:center}
+  .tile .ic{width:44px;height:44px;margin:0 auto;border-radius:12px;background:var(--gold);color:var(--ink);display:grid;place-items:center}
+  .tile .ic svg{width:24px;height:24px}
+  .tile b{display:block;margin-top:9px;font-size:13px;line-height:1.2}
+  .cover .sw{position:absolute;left:0;right:0;bottom:34px;text-align:center;font-size:11px;font-weight:700;letter-spacing:.24em;color:var(--gold)}
+
+  /* how it works */
+  .two{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .way{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px 14px 16px;text-align:center;position:relative}
+  .way .pic{height:190px;position:relative}
+  .way b{display:block;font-size:22px;font-weight:800;margin-top:8px}
+  .way span{display:block;font-size:13px;color:var(--soft);margin-top:4px;line-height:1.35}
+  .then{margin-top:16px;text-align:center;color:var(--gold)}
+  .opens{margin-top:10px;background:var(--ink);color:#fff;border-radius:20px;padding:20px;display:flex;gap:16px;align-items:center}
+  .opens .ic{flex:none;width:58px;height:58px;border-radius:16px;background:var(--gold);display:grid;place-items:center;color:var(--ink)}
+  .opens .ic svg{width:32px;height:32px}
+  .opens b{font-size:20px}
+  .opens span{display:block;font-size:13.5px;opacity:.75;margin-top:4px;line-height:1.4}
+  .chips{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:30px;padding:7px 12px;font-size:12.5px;font-weight:700}
+  .chip svg{width:15px;height:15px;color:var(--g)}
+
+  /* websites */
+  .webs{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .web{background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px;position:relative}
+  .web .shot{height:236px;border-radius:12px;overflow:hidden;background:#eee;position:relative}
+  .web .shot img{width:100%;display:block}
+  .web .tg{position:absolute;left:8px;top:8px;background:var(--ink);color:#fff;font-size:9px;font-weight:800;letter-spacing:.14em;padding:4px 7px;border-radius:20px}
+  .web b{display:block;margin-top:10px;font-size:14.5px}
+  .web span{display:block;font-size:11.5px;color:var(--soft);margin-top:3px;line-height:1.35}
+  .mini{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .mi{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px 12px}
+  .mi .ic{flex:none;width:34px;height:34px;border-radius:10px;background:#f6ead0;color:var(--goldink);display:grid;place-items:center}
+  .mi .ic svg{width:19px;height:19px}
+  .mi b{font-size:13px;display:block}
+  .mi span{font-size:11px;color:var(--soft);display:block;line-height:1.3;margin-top:1px}
+
+  /* more services */
+  .svc{margin-top:22px;display:grid;gap:12px}
+  .sv{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 16px}
+  .sv .ic{flex:none;width:52px;height:52px;border-radius:14px;display:grid;place-items:center;color:#fff}
+  .sv .ic svg{width:27px;height:27px}
+  .sv b{display:block;font-size:16.5px}
+  .sv span{display:block;font-size:12.5px;color:var(--soft);margin-top:3px;line-height:1.38}
+  .sv .fl{margin-top:6px;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--goldink)}
+  .sv .fl svg{width:14px;height:14px}
+
+  /* pricing + contact */
+  .why{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .w{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px}
+  .w .ic{width:36px;height:36px;border-radius:10px;background:#f6ead0;color:var(--goldink);display:grid;place-items:center}
+  .w .ic svg{width:20px;height:20px}
+  .w b{display:block;margin-top:9px;font-size:14.5px}
+  .w span{display:block;font-size:12px;color:var(--soft);margin-top:3px;line-height:1.35}
+  .price{margin-top:16px;background:var(--ink);color:#fff;border-radius:20px;padding:20px 22px;position:relative;overflow:hidden}
+  .price .r{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+  .price .r:last-child{border:0}
+  .price .r span{font-size:14px;opacity:.8}
+  .price .r b{font-size:24px;font-weight:800}
+  .price .r b small{font-size:13px;font-weight:600;opacity:.7}
+  .free{display:inline-block;background:var(--gold);color:var(--ink);font-size:11px;font-weight:800;letter-spacing:.12em;padding:4px 8px;border-radius:20px;margin-left:6px;vertical-align:middle}
+  .contact{background:radial-gradient(90% 60% at 50% 30%,#2a2114 0%,#0d0c0b 70%);color:#fff;text-align:center;padding-top:70px}
+  .contact h2{font-size:44px;margin-top:30px}
+  .contact .lead{color:#bdb6a8;max-width:380px;margin:12px auto 0}
+  .big-wa{margin:34px auto 0;width:max-content;display:flex;align-items:center;gap:12px;background:#25d366;color:#05230f;border-radius:50px;padding:16px 26px;font-size:24px;font-weight:800}
+  .big-wa svg{width:30px;height:30px}
+  .cl{margin-top:30px;display:grid;gap:12px;justify-content:center}
+  .cl div{display:flex;align-items:center;gap:10px;font-size:15px;color:#e8e2d4}
+  .cl svg{width:18px;height:18px;color:var(--gold)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="nfc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8.5 16.5a6 6 0 0 0 0-9"/><path d="M12 19a10 10 0 0 0 0-14"/><path d="M15.5 21.5a14 14 0 0 0 0-19"/><path d="M5 14a2.5 2.5 0 0 0 0-4"/></g></symbol>
+    <symbol id="star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></symbol>
+    <symbol id="cam" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></g></symbol>
+    <symbol id="ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></g></symbol>
+    <symbol id="globe" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></g></symbol>
+    <symbol id="menu" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></g></symbol>
+    <symbol id="link" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></g></symbol>
+    <symbol id="pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></g></symbol>
+    <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.2 21.8l4.9-1.3A9.8 9.8 0 1 0 12 2.2zm0 1.8a8 8 0 1 1-4.2 14.8l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 0 1 12 4zm-3.2 4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.2 5 4.4 2.5 1 3 .8 3.5.7.6 0 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4l-.5-.3-1.8-.9c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-2c-.2-.5-.4-.4-.6-.4z"/></symbol>
+    <symbol id="check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M4 17l6-6 4 4 6-7M14 8h6v6"/></symbol>
+    <symbol id="edit" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13 7l4 4"/></g></symbol>
+    <symbol id="rupee" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 4h12M6 9h12M9 4c6 0 6 9 0 9H6l8 7"/></symbol>
+    <symbol id="bot" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01M9 16h6"/></g></symbol>
+    <symbol id="post" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M4 15l4.5-4 4 3.5L15 12l5 4"/><circle cx="15.5" cy="7.5" r="1.5"/></g></symbol>
+    <symbol id="store" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 9l1.5-5h13L20 9M4 9h16v11H4zM9 20v-6h6v6"/></g></symbol>
+    <symbol id="phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+    <symbol id="mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></g></symbol>
+    <symbol id="arrowR" viewBox="0 0 60 24"><path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M3 12h50M44 4l9 8-9 8"/></symbol>
+    <symbol id="arrowD" viewBox="0 0 24 40"><path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M12 3v32M5 27l7 8 7-8"/></symbol>
+    <symbol id="qr" viewBox="0 0 21 21"><path fill="#111" d="M0 0h7v7H0zM1 1v5h5V1zM2 2h3v3H2zM14 0h7v7h-7zM15 1v5h5V1zM16 2h3v3h-3zM0 14h7v7H0zM1 15v5h5v-5zM2 16h3v3H2zM8 0h1v2H8zM10 1h2v1h-2zM9 3h2v2H9zM12 3h1v3h-1zM8 6h1v2H8zM10 7h3v1h-3zM0 8h2v1H0zM3 8h3v1H3zM7 9h2v2H7zM10 9h1v3h-1zM12 9h3v1h-3zM16 8h2v2h-2zM19 8h2v1h-2zM1 10h2v2H1zM4 10h2v1H4zM13 11h2v2h-2zM17 11h4v1h-4zM8 12h2v2H8zM16 13h2v2h-2zM19 13h2v3h-2zM8 15h3v1H8zM12 14h3v2h-3zM9 17h2v2H9zM12 17h1v4h-1zM14 17h3v1h-3zM18 17h1v2h-1zM8 19h1v2H8zM14 19h2v2h-2zM17 20h4v1h-4z"/></symbol>
+  </defs>
+</svg>
+
+<!-- 1. COVER -->
+<section class="pg cover">
+  <svg class="logo" viewBox="-6 -6 252 93.5"><use href="#inf"/></svg>
+  <div class="nm">INFINITY TECHNOLOGIES</div>
+  <h1>Tap. Scan.<br><em>Grow.</em></h1>
+  <p class="lead">Smart cards, websites and digital menus that bring your business more reviews, more followers and more customers.</p>
+  <div class="tiles">
+    <div class="tile"><div class="ic"><svg><use href="#star"/></svg></div><b>Google Review Cards</b></div>
+    <div class="tile"><div class="ic"><svg><use href="#ig"/></svg></div><b>Instagram Cards</b></div>
+    <div class="tile"><div class="ic"><svg><use href="#link"/></svg></div><b>All-in-One Web Page Cards</b></div>
+    <div class="tile"><div class="ic"><svg><use href="#menu"/></svg></div><b>Digital Menus</b></div>
+    <div class="tile"><div class="ic"><svg><use href="#globe"/></svg></div><b>Animated Websites</b></div>
+    <div class="tile"><div class="ic"><svg><use href="#pin"/></svg></div><b>Google Listing Setup</b></div>
+  </div>
+  <div class="sw">SCROLL DOWN TO SEE HOW EACH ONE WORKS ↓</div>
+</section>
+
+<!-- 2. HOW IT WORKS -->
+<section class="pg">
+  <div class="brand"><svg viewBox="-6 -6 252 93.5"><use href="#inf"/></svg>INFINITY</div><div class="no">HOW IT WORKS</div>
+  <span class="k">2 EASY WAYS</span>
+  <h2>Every card works <em>2 ways.</em></h2>
+  <p class="lead">No app. No typing. Works on every phone.</p>
+  <div class="two">
+    <div class="way">
+      <div class="pic">
+        <div class="card black" style="position:absolute;left:4px;top:96px;width:150px;height:88px;transform:rotate(-6deg)"><svg class="nf"><use href="#nfc"/></svg><div class="t">TAP HERE</div></div>
+        <div class="phone" style="position:absolute;left:50px;top:0;width:88px;height:150px;border-radius:18px;padding:5px;transform:rotate(12deg)"><div class="scr" style="border-radius:13px;background:linear-gradient(#f2f0ec,#fff)"></div></div>
+        <div class="ripple" style="left:66px;top:104px;width:40px;height:40px"></div><div class="ripple" style="left:56px;top:94px;width:60px;height:60px;opacity:.3"></div>
+      </div>
+      <b>1. TAP</b><span>Touch the phone on the card. The page opens by itself.</span>
+    </div>
+    <div class="way">
+      <div class="pic">
+        <div class="card black" style="position:absolute;left:4px;top:96px;width:150px;height:88px;transform:rotate(-6deg)"><div class="t">OR SCAN</div><div class="qr" style="width:48px;height:48px"><svg viewBox="0 0 21 21"><use href="#qr"/></svg></div></div>
+        <div class="phone" style="position:absolute;left:28px;top:-6px;width:88px;height:150px;border-radius:18px;padding:5px;transform:rotate(-4deg)"><div class="scr" style="border-radius:13px;background:#222;display:grid;place-items:center"><svg style="width:34px;height:34px;color:#fff"><use href="#cam"/></svg></div></div>
+      </div>
+      <b>2. SCAN</b><span>Open the phone camera and point it at the QR code.</span>
+    </div>
+  </div>
+  <div class="then"><svg style="width:24px;height:40px"><use href="#arrowD"/></svg></div>
+  <div class="opens"><div class="ic"><svg><use href="#check"/></svg></div><div><b>Your page opens instantly</b><span>Google reviews, Instagram, website, menu: whatever you choose.</span></div></div>
+  <div class="chips">
+    <div class="chip"><svg><use href="#check"/></svg>iPhone &amp; Android</div>
+    <div class="chip"><svg><use href="#check"/></svg>No app needed</div>
+    <div class="chip"><svg><use href="#check"/></svg>Link can be changed anytime</div>
+    <div class="chip"><svg><use href="#check"/></svg>No reprinting</div>
+  </div>
+  <div class="foot"><span>INFINITY TECHNOLOGIES</span><span>02</span></div>
+</section>
+
+<!-- 3. GOOGLE REVIEW CARD -->
+<section class="pg">
+  <div class="brand"><svg viewBox="-6 -6 252 93.5"><use href="#inf"/></svg>INFINITY</div><div class="no">SERVICE 01</div>
+  <span class="k">GOOGLE REVIEW CARD</span>
+  <h2>Tap the card.<br>Get a <em>5★ review.</em></h2>
+  <p class="lead">Keep it on the counter or table. Happy customer taps, gives stars, done in 10 seconds.</p>
+  <div class="flow">
+    <div class="step" style="left:0;top:110px">
+      <div class="card gold" style="transform:rotate(-5deg)"><svg class="nf"><use href="#nfc"/></svg><div class="t">YOUR BUSINESS</div><div class="h">Loved it?<br>Review us</div><div class="stars">★★★★★</div><div class="qr"><svg viewBox="0 0 21 21"><use href="#qr"/></svg></div></div>
+      <span class="lbl" style="margin-top:14px">REVIEW CARD</span>
+    </div>
+    <div class="badge" style="left:150px;top:62px"><svg><use href="#nfc"/></svg>TAP</div>
+    <div class="arrow" style="left:210px;top:186px"><svg style="width:60px;height:24px"><use href="#arrowR"/></svg></div>
+    <div class="step" style="right:0;top:0">
+      <div class="phone big"><div class="isl"></div><div class="scr"><div class="mock gr">
+        <div class="hd">Google</div>
+        <div class="bz"><div class="av"></div><div><b>Your Business</b><span>Posting publicly</span></div></div>
+        <div class="st">★★★★★</div>
+        <div class="tx">Share details of your own experience at this place…</div>
+        <div class="ph">＋ Add photos</div>
+        <div class="po">Post</div>
+      </div></div></div>
+      <span class="lbl">REVIEW PAGE OPENS</span>
+    </div>
+  </div>
+  <div class="result"><div class="ic"><svg><use href="#up"/></svg></div><div><b>More 5★ reviews = more customers</b><span>People choose the shop with more good reviews on Google.</span></div></div>
+  <div class="note"><div class="ic"><svg><use href="#pin"/></svg></div><div><b>Not on Google yet?</b><span>We create and set up your Google Business listing for you: name, photos, timings, location.</span></div></div>
+  <div class="foot"><span>INFINITY TECHNOLOGIES</span><span>03</span></div>
+</section>
+
+<!-- 4. INSTAGRAM CARD -->
+<section class="pg">
+  <div class="brand"><svg viewBox="-6 -6 252 93.5"><use href="#inf"/></svg>INFINITY</div><div class="no">SERVICE 02</div>
+  <span class="k">INSTAGRAM CARD</span>
+  <h2>Tap the card.<br>Get a <em>new follower.</em></h2>
+  <p class="lead">No searching for your page. One tap opens your Instagram with the Follow button ready.</p>
+  <div class="flow">
+    <div class="step" style="left:0;top:110px">
+      <div class="card ig" style="transform:rotate(-5deg)"><svg class="nf"><use href="#nfc"/></svg><div class="t">FOLLOW US</div><div class="h">@yourbusiness</div><svg style="position:absolute;left:15px;bottom:12px;width:26px;height:26px"><use href="#ig"/></svg><div class="qr"><svg viewBox="0 0 21 21"><use href="#qr"/></svg></div></div>
+      <span class="lbl" style="margin-top:14px">INSTAGRAM CARD</span>
+    </div>
+    <div class="badge" style="left:150px;top:62px"><svg><use href="#nfc"/></svg>TAP</div>
+    <div class="arrow" style="left:210px;top:186px"><svg style="width:60px;height:24px"><use href="#arrowR"/></svg></div>
+    <div class="step" style="right:0;top:0">
+      <div class="phone big"><div class="isl"></div><div class="scr"><div class="mock ig">
+        <div style="font-weight:800;font-size:13px">yourbusiness</div>
+        <div class="tp"><div class="av"><i></i></div><div class="ct"><div><b>248</b><span>posts</span></div><div><b>12.4K</b><span>followers</span></div><div><b>180</b><span>following</span></div></div></div>
+        <div class="nm">Your Business</div><div class="bio">Café · Amritsar<br>Fresh food, good vibes ✨</div>
+        <div class="fb">Follow</div>
+        <div class="grid"><i style="background:linear-gradient(135deg,#c9982e,#6b4b12)"></i><i style="background:linear-gradient(135deg,#e7d7b8,#b08a52)"></i><i style="background:linear-gradient(135deg,#3b2a20,#8a5a3c)"></i><i style="background:linear-gradient(135deg,#d6c3a0,#7c6a4c)"></i><i style="background:linear-gradient(135deg,#2a2f36,#6f7780)"></i><i style="background:linear-gradient(135deg,#f0b37e,#c45f2a)"></i><i style="background:linear-gradient(135deg,#9bb59a,#4d6b4c)"></i><i style="background:linear-gradient(135deg,#1b1a18,#4a463f)"></i><i style="background:linear-gradient(135deg,#e8c9a9,#a1663f)"></i></div>
+      </div></div></div>
+      <span class="lbl">YOUR INSTAGRAM OPENS</span>
+    </div>
+  </div>
+  <div class="result"><div class="ic"><svg><use href="#up"/></svg></div><div><b>More followers = free promotion</b><span>Every new follower sees your new posts, offers and launches.</span></div></div>
+  <div class="note"><div class="ic"><svg><use href="#post"/></svg></div><div><b>Works for YouTube, Facebook &amp; more</b><span>Any page you want people to follow, we put on the card.</span></div></div>
+  <div class="foot"><span>INFINITY TECHNOLOGIES</span><span>04</span></div>
+</section>
+
+<!-- 5. ALL-IN-ONE WEB PAGE CARD -->
+<section class="pg">
+  <div class="brand"><svg viewBox="-6 -6 252 93.5"><use href="#inf"/></svg>INFINITY</div><div class="no">SERVICE 03</div>
+  <span class="k">ALL-IN-ONE WEB PAGE CARD</span>
+  <h2>One tap.<br><em>Everything</em> about you.</h2>
+  <p class="lead">Have many outlets or many pages? One card opens a beautiful page with all your links in your own style.</p>
+  <div class="flow">
+    <div class="step" style="left:0;top:110px">
+      <div class="card black" style="transform:rotate(-5deg)"><svg class="nf"><use href="#nfc"/></svg><div class="t">YOUR BRAND</div><div class="h">Tap for<br>everything</div><div class="s">INSTA · WEB · MENU · MAP</div><div class="qr"><svg viewBox="0 0 21 21"><use href="#qr"/></svg></div></div>
+      <span class="lbl" style="margin-top:14px">WEB PAGE CARD</span>
+    </div>
+    <div class="badge" style="left:150px;top:62px"><svg><use href="#nfc"/></svg>TAP</div>
+    <div class="arrow" style="left:210px;top:186px"><svg style="width:60px;height:24px"><use href="#arrowR"/></svg></div>
+    <div class="step" style="right:0;top:0">
+      <div class="phone big"><div class="isl"></div><div class="scr"><img src="img/elgin.jpg" alt=""></div><div class="demo">REAL EXAMPLE</div></div>
+      <span class="lbl">YOUR PAGE OPENS</span>
+    </div>
+  </div>
+  <div class="chips" style="margin-top:12px">
+    <div class="chip"><svg><use href="#ig"/></svg>All Instagram pages</div>
+    <div class="chip"><svg><use href="#globe"/></svg>Website</div>
+    <div class="chip"><svg><use href="#menu"/></svg>Menu</div>
+    <div class="chip"><svg><use href="#pin"/></svg>Location</div>
+    <div class="chip"><svg><use href="#wa"/></svg>WhatsApp</div>
+    <div class="chip"><svg><use href="#star"/></svg>Reviews</div>
+  </div>
+  <div class="result"><div class="ic"><svg><use href="#edit"/></svg></div><div><b>Change anything, anytime</b><span>New outlet or new page? We update it. The card stays the same.</span></div></div>
+  <div class="foot"><span>INFINITY TECHNOLOGIES</span><span>05</span></div>
+</section>
+
+<!-- 6. DIGITAL MENU -->
+<section class="pg">
+  <div class="brand"><svg viewBox="-6 -6 252 93.5"><use href="#inf"/></svg>INFINITY</div><div class="no">SERVICE 04</div>
+  <span class="k">DIGITAL MENU</span>
+  <h2>Scan the table.<br>See the <em>menu.</em></h2>
+  <p class="lead">For cafés &amp; restaurants. Your full menu on the customer's phone. Clean, fast, with photos.</p>
+  <div class="flow">
+    <div class="step" style="left:6px;top:96px">
+      <div style="width:150px;height:190px;position:relative">
+        <div style="position:absolute;left:20px;top:0;width:110px;height:150px;border-radius:12px;background:linear-gradient(160deg,#1b1a18,#0b0a09);box-shadow:0 18px 26px -10px rgba(0,0,0,.45);padding:12px;text-align:center;color:#fff">
+          <div style="font-size:9px;font-weight:700;letter-spacing:.16em;opacity:.75">SCAN FOR MENU</div>
+          <div style="width:70px;height:70px;background:#fff;border-radius:6px;padding:5px;margin:10px auto 0"><svg viewBox="0 0 21 21" style="width:100%;height:100%"><use href="#qr"/></svg></div>
+          <svg style="width:20px;height:20px;margin-top:8px;color:var(--gold)"><use href="#nfc"/></svg>
+        </div>
+        <div style="position:absolute;left:45px;top:150px;width:60px;height:24px;background:linear-gradient(#2a2620,#14120f);border-radius:0 0 8px 8px"></div>
+        <div style="position:absolute;left:0;right:0;top:174px;height:10px;border-radius:50%;background:rgba(0,0,0,.12);filter:blur(3px)"></div>
+      </div>
+      <span class="lbl">TABLE STAND</span>
+    </div>
+    <div class="badge" style="left:142px;top:62px"><svg><use href="#cam"/></svg>SCAN / TAP</div>
+    <div class="arrow" style="left:210px;top:186px"><svg style="width:60px;height:24px"><use href="#arrowR"/></svg></div>
+    <div class="step" style="right:0;top:0">
+      <div class="phone big"><div class="isl"></div><div class="scr"><img src="img/menu.jpg" alt=""></div><div class="demo">SAMPLE DEMO</div></div>
+      <span class="lbl">MENU OPENS</span>
+    </div>
+  </div>
+  <div class="mini" style="margin-top:10px">
+    <div class="mi"><div class="ic"><svg><use href="#edit"/></svg></div><div><b>Change prices anytime</b><span>No reprinting menus</span></div></div>
+    <div class="mi"><div class="ic"><svg><use href="#menu"/></svg></div><div><b>Search &amp; veg filter</b><span>Find any dish fast</span></div></div>
+    <div class="mi"><div class="ic"><svg><use href="#post"/></svg></div><div><b>Dish photos</b><span>Food sells by looks</span></div></div>
+    <div class="mi"><div class="ic"><svg><use href="#store"/></svg></div><div><b>Many outlets</b><span>One menu for each branch</span></div></div>
+  </div>
+  <div class="foot"><span>INFINITY TECHNOLOGIES</span><span>06</span></div>
+</section>
+
+<!-- 7. WEBSITES -->
+<section class="pg">
+  <div class="brand"><svg viewBox="-6 -6 252 93.5"><use href="#inf"/></svg>INFINITY</div><div class="no">SERVICE 05</div>
+  <span class="k">ANIMATED WEBSITES</span>
+  <h2>Not a normal website.<br>A <em>wow</em> website.</h2>
+  <p class="lead">As the customer scrolls, your business comes alive, like walking into your shop.</p>
+  <div class="webs">
+    <div class="web"><div class="shot"><img src="img/vxon.jpg" alt=""><span class="tg">SAMPLE DEMO</span></div><b>3D Virtual Store</b><span>For clothing stores. Clothes hang on a 3D rack and turn to face you as you scroll.</span></div>
+    <div class="web"><div class="shot"><img src="img/mnp.jpg" alt=""><span class="tg">SAMPLE DEMO</span></div><b>Café &amp; Restaurant Site</b><span>Your photos, menu, outlets, timings and a "Find us" button.</span></div>
+  </div>
+  <div class="mini">
+    <div class="mi"><div class="ic"><svg><use href="#store"/></svg></div><div><b>Walkthrough sites</b><span>Hotels, venues, showrooms: walk room by room</span></div></div>
+    <div class="mi"><div class="ic"><svg><use href="#globe"/></svg></div><div><b>Business websites</b><span>Clean, fast sites for any business</span></div></div>
+    <div class="mi"><div class="ic"><svg><use href="#wa"/></svg></div><div><b>WhatsApp buttons</b><span>Orders &amp; bookings in one tap</span></div></div>
+    <div class="mi"><div class="ic"><svg><use href="#pin"/></svg></div><div><b>Maps &amp; Instagram</b><span>All connected, mobile-first</span></div></div>
+  </div>
+  <div class="foot"><span>INFINITY TECHNOLOGIES</span><span>07</span></div>
+</section>
+
+<!-- 8. MORE SERVICES -->
+<section class="pg">
+  <div class="brand"><svg viewBox="-6 -6 252 93.5"><use href="#inf"/></svg>INFINITY</div><div class="no">MORE</div>
+  <span class="k">MORE WAYS WE HELP</span>
+  <h2>Everything your<br>business <em>needs online.</em></h2>
+  <div class="svc">
+    <div class="sv"><div class="ic" style="background:#25d366"><svg><use href="#wa"/></svg></div><div><b>WhatsApp Card</b><span>Customer taps the card and your WhatsApp chat opens, ready to order or ask.</span><div class="fl"><svg><use href="#nfc"/></svg>Tap → WhatsApp chat opens</div></div></div>
+    <div class="sv"><div class="ic" style="background:#4285f4"><svg><use href="#pin"/></svg></div><div><b>Google Listing Setup</b><span>We put your business on Google Maps &amp; Search with photos, timings and phone number.</span><div class="fl"><svg><use href="#up"/></svg>People find you on Google</div></div></div>
+    <div class="sv"><div class="ic" style="background:#5f3dc4"><svg><use href="#rupee"/></svg></div><div><b>UPI Payment QR &amp; Stands</b><span>Neat, branded payment QR for your counter and tables.</span><div class="fl"><svg><use href="#cam"/></svg>Scan → pay instantly</div></div></div>
+    <div class="sv"><div class="ic" style="background:#e1306c"><svg><use href="#post"/></svg></div><div><b>Social Media Posts</b><span>Ready-made posts, stories and WhatsApp statuses for your offers.</span><div class="fl"><svg><use href="#up"/></svg>Look professional online</div></div></div>
+    <div class="sv"><div class="ic" style="background:var(--ink)"><svg><use href="#bot"/></svg></div><div><b>Automation</b><span>Auto-replies on WhatsApp, digital bills and follow-ups that run by themselves.</span><div class="fl"><svg><use href="#check"/></svg>Save time every day</div></div></div>
+  </div>
+  <div class="foot"><span>INFINITY TECHNOLOGIES</span><span>08</span></div>
+</section>
+
+<!-- 9. WHY + PRICING -->
+<section class="pg">
+  <div class="brand"><svg viewBox="-6 -6 252 93.5"><use href="#inf"/></svg>INFINITY</div><div class="no">PRICING</div>
+  <span class="k">SIMPLE PRICING</span>
+  <h2>Small price.<br><em>Big results.</em></h2>
+  <div class="why">
+    <div class="w"><div class="ic"><svg><use href="#edit"/></svg></div><b>Change link anytime</b><span>Same card, new page. No reprint.</span></div>
+    <div class="w"><div class="ic"><svg><use href="#phone"/></svg></div><b>Works on all phones</b><span>Tap on new phones, QR on old ones.</span></div>
+    <div class="w"><div class="ic"><svg><use href="#star"/></svg></div><b>Premium card</b><span>Strong PVC with sharp UV print.</span></div>
+    <div class="w"><div class="ic"><svg><use href="#check"/></svg></div><b>We set it all up</b><span>You just keep the card on the counter.</span></div>
+  </div>
+  <div class="price">
+    <div class="r"><span>NFC card (one time)</span><b>₹500</b></div>
+    <div class="r"><span>Subscription</span><b>₹99<small> / month</small></b></div>
+    <div class="r"><span>First month</span><b><span class="free" style="font-size:15px;padding:6px 12px;margin:0">FREE</span></b></div>
+    <div class="r"><span>Websites &amp; digital menus</span><b style="font-size:17px">Custom quote</b></div>
+  </div>
+  <div class="note"><div class="ic"><svg><use href="#store"/></svg></div><div><b>Have many outlets?</b><span>Ask us about special prices for 5 or more cards.</span></div></div>
+  <div class="foot"><span>INFINITY TECHNOLOGIES</span><span>09</span></div>
+</section>
+
+<!-- 10. CONTACT -->
+<section class="pg contact">
+  <svg class="logo" viewBox="-6 -6 252 93.5" style="width:130px;color:var(--gold);display:block;margin:0 auto"><use href="#inf"/></svg>
+  <h2>Let's grow your<br><em>business.</em></h2>
+  <p class="lead">Tell us your business type and what you need. We'll show you a free demo.</p>
+  <div class="big-wa"><svg><use href="#wa"/></svg>+91 79864 04564</div>
+  <div class="cl">
+    <div><svg><use href="#phone"/></svg>+91 93243 87537</div>
+    <div><svg><use href="#mail"/></svg>searchinfinity@gmail.com</div>
+    <div><svg><use href="#globe"/></svg>growwithinfinity.github.io</div>
+  </div>
+  <div class="sw" style="position:absolute;left:0;right:0;bottom:34px;text-align:center;font-size:11px;font-weight:700;letter-spacing:.24em;color:var(--gold)">INFINITY TECHNOLOGIES</div>
+</section>
+
+<script>
+  // logo path lives in img/inf.svg; inline it as a symbol so every <use href="#inf"> resolves
+  fetch("img/inf.svg").then(r=>r.text()).then(t=>{ const d=t.match(/ d="([^"]+)"/)[1];
+    const s=document.querySelector("defs"); s.insertAdjacentHTML("beforeend",`<symbol id="inf" viewBox="-6 -6 252 93.5"><path fill="currentColor" d="${d}"/></symbol>`);
+    document.querySelectorAll('use[href="#inf"]').forEach(u=>u.setAttribute("href","#inf")); document.body.dataset.ready=1; });
+</script>
+</body>
+</html>
