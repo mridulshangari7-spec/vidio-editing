@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rate your visit – Brew &amp; Bloom Café</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f7f3ec">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#1b1712;--soft:#6a6259;--faint:#a39a8f;--bg:#f7f3ec;--card:#fff;--line:#e8e1d6;--brand:#7a4b2a;--brand2:#c98a4b;--star:#f5b301;--wa:#25d366;--g:#1a73e8}
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  html,body{background:var(--bg)}
+  body{font-family:"Inter Tight",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100svh}
+  .app{width:min(460px,100%);margin:0 auto;padding:max(22px,env(safe-area-inset-top)) 18px calc(30px + env(safe-area-inset-bottom))}
+  .brand{display:flex;align-items:center;gap:12px}
+  .lg{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--brand2),var(--brand));display:grid;place-items:center;color:#fff;font-size:26px;box-shadow:0 8px 18px -8px rgba(122,75,42,.7)}
+  .brand b{display:block;font-size:18px}
+  .brand span{display:block;font-size:13px;color:var(--soft);margin-top:1px}
+  .scr{margin-top:22px;animation:in .35s ease}
+  @keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  h1{font-size:30px;line-height:1.08;letter-spacing:-.02em;font-weight:800}
+  .lead{margin-top:6px;font-size:15px;color:var(--soft)}
+  .stars{margin-top:22px;display:flex;justify-content:space-between;gap:6px}
+  .stars button{flex:1;aspect-ratio:1;border:0;background:var(--card);border-radius:16px;box-shadow:0 1px 0 var(--line),0 6px 16px -10px rgba(0,0,0,.25);cursor:pointer;display:grid;place-items:center;transition:transform .15s}
+  .stars button:active{transform:scale(.92)}
+  .stars svg{width:62%;height:62%;fill:#e6dfd3;transition:fill .15s,transform .2s}
+  .stars button.on svg{fill:var(--star);transform:scale(1.08)}
+  .mood{margin-top:12px;text-align:center;font-size:15px;font-weight:700;min-height:20px}
+  .box{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px}
+  .lbl{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--soft)}
+  .chips{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1.5px solid var(--line);background:var(--bg);border-radius:30px;padding:9px 13px;font:inherit;font-size:14.5px;font-weight:600;cursor:pointer;color:var(--ink)}
+  .chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+  textarea{margin-top:10px;width:100%;min-height:118px;border:1.5px solid var(--line);border-radius:14px;padding:12px;font:inherit;font-size:15.5px;line-height:1.45;resize:vertical;background:#fffdf9;color:var(--ink)}
+  textarea:focus{outline:2px solid var(--brand2);border-color:transparent}
+  .row{margin-top:8px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .new{border:0;background:none;color:var(--brand);font:inherit;font-size:13.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px}
+  .new svg{width:15px;height:15px}
+  .cnt{font-size:12px;color:var(--faint)}
+  .btn{margin-top:16px;width:100%;min-height:56px;border:0;border-radius:16px;font:inherit;font-size:16.5px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;text-decoration:none}
+  .btn svg{width:22px;height:22px}
+  .btn.g{background:var(--g);color:#fff}
+  .btn.w{background:var(--wa);color:#05230f}
+  .btn:disabled{opacity:.45}
+  .alt{margin-top:12px;text-align:center;font-size:13.5px;color:var(--soft)}
+  .alt a{color:var(--soft);font-weight:700}
+  .hint{margin-top:10px;font-size:13px;color:var(--soft);text-align:center;line-height:1.4}
+  .back{margin-top:14px;border:0;background:none;color:var(--soft);font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;display:block;margin-left:auto;margin-right:auto}
+  .done{text-align:center;padding-top:30px}
+  .done .big{font-size:64px}
+  .done h1{margin-top:10px}
+  .toast{position:fixed;left:50%;top:18px;transform:translate(-50%,-20px);opacity:0;background:var(--ink);color:#fff;font-size:14px;font-weight:700;padding:10px 16px;border-radius:30px;transition:all .3s;z-index:50;display:flex;align-items:center;gap:8px}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+  .toast svg{width:18px;height:18px;color:#7ee2a1}
+  /* demo-only: what the Google step looks like */
+  .sheet{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;justify-content:center}
+  .sheet .in{width:min(460px,100%);background:#fff;border-radius:22px 22px 0 0;padding:18px 18px calc(22px + env(safe-area-inset-bottom));animation:up .3s ease}
+  @keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+  .sheet .gh{display:flex;align-items:center;justify-content:space-between;font-size:14px;color:#5f6368;font-weight:600}
+  .sheet .gh b{color:#202124;font-size:16px}
+  .sheet .gst{margin-top:12px;display:flex;gap:6px;justify-content:center;font-size:32px;color:var(--star)}
+  .sheet .gta{margin-top:12px;border:1px solid #dadce0;border-radius:8px;min-height:90px;padding:10px;font-size:14px;color:#80868b;position:relative}
+  .sheet .paste{position:absolute;left:12px;top:-14px;background:#202124;color:#fff;font-size:12.5px;font-weight:700;padding:6px 10px;border-radius:8px;animation:pulse 1.4s infinite}
+  @keyframes pulse{50%{transform:scale(1.06)}}
+  .sheet .gpost{margin-top:12px;margin-left:auto;display:block;background:var(--g);color:#fff;border:0;border-radius:20px;padding:9px 20px;font:inherit;font-weight:700}
+  .sheet .demo{margin-top:14px;background:#fff7e6;border:1px dashed #e0b45c;border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.45;color:#5b4a2a}
+  .sheet .close{margin-top:12px;width:100%;min-height:46px;border:0;border-radius:12px;background:var(--ink);color:#fff;font:inherit;font-weight:800}
+  .badge{position:fixed;right:10px;bottom:10px;font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--faint)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="st" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></symbol>
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.2 21.8l4.9-1.3A9.8 9.8 0 1 0 12 2.2zm0 1.8a8 8 0 1 1-4.2 14.8l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 0 1 12 4zm-3.2 4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.2 5 4.4 2.5 1 3 .8 3.5.7.6 0 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4l-.5-.3-1.8-.9c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-2c-.2-.5-.4-.4-.6-.4z"/></symbol>
+  <symbol id="g" viewBox="0 0 24 24"><path fill="currentColor" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3zM12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22zM6.4 14a6 6 0 0 1 0-3.9V7.5H3.1a10 10 0 0 0 0 9zM12 6c1.5 0 2.8.5 3.8 1.5l2.9-2.9A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6 12 6z"/></symbol>
+  <symbol id="re" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6"/></symbol>
+  <symbol id="ok" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+</defs></svg>
+
+<main class="app">
+  <div class="brand"><div class="lg">☕</div><div><b id="bName"></b><span id="bArea"></span></div></div>
+
+  <!-- 1. stars -->
+  <section class="scr" id="s1">
+    <h1>How was your visit?</h1>
+    <p class="lead">Tap the stars. It takes 10 seconds.</p>
+    <div class="stars" id="stars"></div>
+    <div class="mood" id="mood"></div>
+  </section>
+
+  <!-- 2. one review form -->
+  <section class="scr" id="s2" hidden>
+    <div class="stars" id="stars2" style="margin-top:0"></div>
+    <div class="box">
+      <div class="lbl" id="chipLbl"></div>
+      <div class="chips" id="chips"></div>
+      <div class="lbl" style="margin-top:16px">YOUR REVIEW</div>
+      <textarea id="txt" placeholder="Tap what you liked above and we'll write it for you…"></textarea>
+      <div class="row"><button class="new" id="again" type="button"><svg><use href="#re"/></svg>Write it differently</button><span class="cnt" id="cnt"></span></div>
+    </div>
+    <button class="btn" id="post" type="button"></button>
+    <p class="hint" id="hint"></p>
+    <p class="alt" id="alt"></p>
+    <button class="back" id="back" type="button">← Change stars</button>
+  </section>
+
+  <!-- 3. thanks -->
+  <section class="scr done" id="s3" hidden>
+    <div class="big" id="tEmoji">🙏</div>
+    <h1 id="tHead">Thank you!</h1>
+    <p class="lead" id="tText"></p>
+  </section>
+</main>
+
+<div class="toast" id="toast"><svg><use href="#ok"/></svg><span id="toastT"></span></div>
+<div class="sheet" id="gsheet" hidden><div class="in">
+  <div class="gh"><b>Google</b><span>Posting publicly</span></div>
+  <div class="gst" id="gst"></div>
+  <div class="gta"><span class="paste">Long-press → Paste</span>Share details of your own experience at this place</div>
+  <button class="gpost" type="button">Post</button>
+  <div class="demo"><b>Demo:</b> on a real card, Google's own review page opens here. The customer's review is already copied, so they long-press the box, tap <b>Paste</b>, then <b>Post</b>.</div>
+  <button class="close" id="gclose" type="button">Done</button>
+</div></div>
+<div class="badge">DEMO · INFINITY</div>
+
+<script>
+/* ===== business settings ===== */
+const BIZ={
+  name:"Brew & Bloom Café", area:"Demo café · Amritsar",
+  whatsapp:"917986404564",       // owner's WhatsApp: low ratings go here
+  google:"",                     // the café's Google write-review link; empty = demo screen
+  goodFrom:4                     // 4★ and 5★ go to Google
+};
+const GOOD=[["☕","coffee","the coffee"],["🍕","food","the food"],["😊","staff","the staff"],["⚡","fast","the quick service"],["🛋️","vibe","the ambience"],["🍰","dessert","the desserts"],["💸","value","the value for money"],["🎶","music","the music"],["📸","photos","the photo-worthy décor"],["🧼","clean","how clean it was"]];
+const BAD=[["⏳","slow","Service was slow"],["🥶","cold","Food came cold"],["😐","staff","Staff wasn't helpful"],["💸","price","Too expensive"],["🧼","clean","Not clean"],["🍽️","order","Wrong order"],["🔊","noise","Too noisy"],["🪑","seat","No seating"]];
+/* ============================== */
+
+const $=id=>document.getElementById(id); let stars=0, picked=[];
+$("bName").textContent=BIZ.name; $("bArea").textContent=BIZ.area;
+const MOODS=["","Very bad 😞","Not good 😕","Okay 😐","Good 😊","Loved it! 🤩"];
+function drawStars(el,size){ el.innerHTML=[1,2,3,4,5].map(n=>`<button type="button" aria-label="${n} star"><svg><use href="#st"/></svg></button>`).join("");
+  el.querySelectorAll("button").forEach((b,i)=>b.addEventListener("click",()=>setStars(i+1))); }
+drawStars($("stars")); drawStars($("stars2"));
+function paint(){ ["stars","stars2"].forEach(id=>$(id).querySelectorAll("button").forEach((b,i)=>b.classList.toggle("on",i<stars))); $("mood").textContent=MOODS[stars]; }
+const good=()=>stars>=BIZ.goodFrom;
+function setStars(n){ const wasGood=stars&&good(); stars=n; paint(); if(stars&&good()!==wasGood) picked=[];
+  setTimeout(()=>{ $("s1").hidden=true; $("s2").hidden=false; build(); },$("s1").hidden?0:380); }
+
+function build(){
+  const list=good()?GOOD:BAD;
+  $("chipLbl").textContent=good()?"WHAT DID YOU LIKE?":"WHAT WENT WRONG?";
+  $("chips").innerHTML=list.map(([e,k,t])=>`<button class="chip${picked.includes(k)?" on":""}" data-k="${k}" type="button">${e} ${good()?t.replace(/^the |^how /,"").replace(/^./,c=>c.toUpperCase()):t}</button>`).join("");
+  $("chips").querySelectorAll(".chip").forEach(c=>c.addEventListener("click",()=>{ const k=c.dataset.k; picked=picked.includes(k)?picked.filter(x=>x!==k):[...picked,k]; c.classList.toggle("on"); write(); }));
+  $("txt").placeholder=good()?"Tap what you liked above and we'll write it for you…":"Tell the owner what went wrong. They will read it personally.";
+  const p=$("post");
+  if(good()){ p.className="btn g"; p.innerHTML=`<svg><use href="#g"/></svg>Post on Google`;
+    $("hint").textContent="Your review gets copied. On Google: long-press → Paste → Post.";
+    $("alt").innerHTML=`Want to tell the owner something privately? <a href="#" id="toWa">WhatsApp them</a>`; }
+  else { p.className="btn w"; p.innerHTML=`<svg><use href="#wa"/></svg>Send to the owner`;
+    $("hint").textContent="The owner reads every message and will make it right.";
+    $("alt").innerHTML=`Prefer to post publicly? <a href="#" id="toG">Post on Google instead</a>`; }
+  const a=$("toWa")||$("toG"); a.addEventListener("click",e=>{ e.preventDefault(); a.id==="toWa"?sendWa():sendGoogle(); });
+  write(); }
+
+/* review writer: a different wording every time, built only from what the customer picked */
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+function join(items){ return items.length<2?items[0]||"":items.slice(0,-1).join(", ")+" and "+items[items.length-1]; }
+function write(){
+  const t=$("txt"); if(!picked.length){ t.value=""; count(); return; }
+  if(good()){
+    const things=GOOD.filter(g=>picked.includes(g[1])).map(g=>g[2]);
+    const open=stars===5?pick(["Loved my visit to "+BIZ.name+"!","Such a lovely place!","Had a great time here.","Absolutely loved it!","Wonderful experience today."]):pick(["Nice place, had a good time.","Good experience overall.","Really enjoyed my visit.","Pleasant visit."]);
+    const mid=pick([`Really liked ${join(things)}.`,`${cap(join(things))} ${things.length>1?"were":"was"} great.`,`Special mention for ${join(things)}.`,`${cap(join(things))} stood out for me.`]);
+    const end=stars===5?pick(["Will definitely come back!","Highly recommended.","Must visit!","Can't wait to come again.",""]):pick(["Would visit again.","Worth a visit.",""]);
+    t.value=[open,mid,end].filter(Boolean).join(" ");
+  } else {
+    const issues=BAD.filter(b=>picked.includes(b[1])).map(b=>b[2]);
+    t.value=issues.join(". ")+".";
+  }
+  count(); }
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const count=()=>{ $("cnt").textContent=$("txt").value.length?`${$("txt").value.length} characters`:""; };
+$("txt").addEventListener("input",count);
+$("again").addEventListener("click",()=>{ if(!picked.length&&$("chips").firstChild){ const k=$("chips").firstChild.dataset.k; picked=[k]; $("chips").firstChild.classList.add("on"); } write(); });
+$("back").addEventListener("click",()=>{ $("s2").hidden=true; $("s1").hidden=false; });
+
+function toast(m){ $("toastT").textContent=m; $("toast").classList.add("on"); setTimeout(()=>$("toast").classList.remove("on"),1800); }
+async function copy(v){ try{ await navigator.clipboard.writeText(v); return true; }catch(e){ const ta=$("txt"); ta.select(); try{ return document.execCommand("copy"); }catch(_){ return false; } } }
+
+async function sendGoogle(){
+  const v=$("txt").value.trim(); if(v) await copy(v);
+  toast(v?"Review copied! Paste it on Google":"Opening Google…");
+  setTimeout(()=>{ if(BIZ.google) location.href=BIZ.google;
+    else { $("gst").innerHTML="★".repeat(stars)+"<span style='color:#dadce0'>"+"★".repeat(5-stars)+"</span>"; $("gsheet").hidden=false; } },650);
+}
+function sendWa(){
+  const v=$("txt").value.trim();
+  const msg=`${"⭐".repeat(stars)} (${stars}/5) feedback for ${BIZ.name}:\n${v||"(no details)"}`;
+  window.open(`https://wa.me/${BIZ.whatsapp}?text=${encodeURIComponent(msg)}`,"_blank");
+  thanks(false);
+}
+$("post").addEventListener("click",()=>good()?sendGoogle():sendWa());
+$("gclose").addEventListener("click",()=>{ $("gsheet").hidden=true; thanks(true); });
+function thanks(g){ $("s2").hidden=true; $("s3").hidden=false;
+  $("tEmoji").textContent=g?"🎉":"🙏"; $("tHead").textContent=g?"Thank you so much!":"Thanks for telling us";
+  $("tText").textContent=g?"Your review helps other people find us.":"The owner will get back to you soon on WhatsApp."; }
+</script>
+</body>
+</html>
