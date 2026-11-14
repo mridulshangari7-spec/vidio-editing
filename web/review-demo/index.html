@@ -137,6 +137,8 @@ const BIZ={
 const GOOD=[["☕","coffee","the coffee"],["🍕","food","the food"],["😊","staff","the staff"],["⚡","fast","the quick service"],["🛋️","vibe","the ambience"],["🍰","dessert","the desserts"],["💸","value","the value for money"],["🎶","music","the music"],["📸","photos","the photo-worthy décor"],["🧼","clean","how clean it was"]];
 const BAD=[["⏳","slow","Service was slow"],["🥶","cold","Food came cold"],["😐","staff","Staff wasn't helpful"],["💸","price","Too expensive"],["🧼","clean","Not clean"],["🍽️","order","Wrong order"],["🔊","noise","Too noisy"],["🪑","seat","No seating"]];
 /* ============================== */
+/* real-flow test: ?real opens Grain by Elgin's actual Google review page */
+if(new URLSearchParams(location.search).has("real")){ BIZ.name="Grain by Elgin"; BIZ.area="Live Google test · Amritsar"; BIZ.google="https://search.google.com/local/writereview?placeid=ChIJZ1DInKFlGTkRkBKDXG9Mh7E"; }
 
 const $=id=>document.getElementById(id); let stars=0, picked=[];
 $("bName").textContent=BIZ.name; $("bArea").textContent=BIZ.area;
