@@ -73,6 +73,13 @@
 <form id="f" novalidate>
   <section class="fs">
     <h2 class="lg"><i>1</i>Your business</h2>
+    <label>Is your business already on Google Maps?</label>
+    <div class="opts">
+      <label><input type="radio" name="exists" value="No" checked>No</label>
+      <label><input type="radio" name="exists" value="Yes, but I can't manage it">Yes, but I can't manage it</label>
+      <label><input type="radio" name="exists" value="Not sure">Not sure</label>
+    </div>
+    <label id="gLinkL" hidden>Google Maps link of your business <small>(if you have it)</small><input name="glink" placeholder="Paste the link from Google Maps"></label>
     <label>Business name <small>(exactly as on your board)</small><input name="name" required placeholder="e.g. Ram Samosa Wala"></label>
     <label>What do you sell? <small>(type of business)</small>
       <select name="category" required>
@@ -82,8 +89,27 @@
         <option>Grocery / Kirana</option><option>Medical / Chemist</option><option>Gym</option><option>Other</option>
       </select></label>
     <label>Other / more detail <small>(optional)</small><input name="catmore" placeholder="e.g. Samosa & chaat stall"></label>
+    <div class="two">
+      <label>Started in year <small>(optional)</small><input name="since" inputmode="numeric" placeholder="e.g. 2015"></label>
+      <label>Price per person <small>(approx)</small><select name="price"><option value="">Choose</option><option>Under ₹100</option><option>₹100–200</option><option>₹200–500</option><option>₹500–1,000</option><option>Over ₹1,000</option></select></label>
+    </div>
     <label>About your business <small>(1–2 lines)</small><textarea name="about" placeholder="e.g. Fresh hot samosas and chaat since 2015. Famous for aloo samosa and imli chutney."></textarea></label>
     <label>Top items / services <small>(with price if you want)</small><textarea name="items" placeholder="e.g. Samosa ₹15, Kachori ₹20, Chole bhature ₹60"></textarea></label>
+    <label>What do you offer? <small>(tick all)</small></label>
+    <div class="opts">
+      <label><input type="checkbox" name="svc" value="Sit and eat / in-store">Sit-in / In-store</label>
+      <label><input type="checkbox" name="svc" value="Takeaway">Takeaway</label>
+      <label><input type="checkbox" name="svc" value="Home delivery">Home delivery</label>
+      <label><input type="checkbox" name="svc" value="Swiggy/Zomato">Swiggy / Zomato</label>
+      <label><input type="checkbox" name="svc" value="Parking available">Parking</label>
+      <label><input type="checkbox" name="svc" value="Wheelchair friendly">Wheelchair friendly</label>
+    </div>
+    <label>Payments you take</label>
+    <div class="opts">
+      <label><input type="checkbox" name="pay" value="Cash" checked>Cash</label>
+      <label><input type="checkbox" name="pay" value="UPI" checked>UPI</label>
+      <label><input type="checkbox" name="pay" value="Card">Card</label>
+    </div>
   </section>
 
   <section class="fs">
@@ -96,6 +122,7 @@
     </div>
     <label>Gmail / email <small>(if you have one)</small><input name="email" type="email" autocomplete="email" placeholder="Leave empty, we'll make one for you"></label>
     <label>Number to show on Google <small>(customers will call this)</small><input name="public" inputmode="tel" placeholder="Same as mobile?"></label>
+    <label>Another number <small>(if the main one is busy, optional)</small><input name="alt" inputmode="tel"></label>
   </section>
 
   <section class="fs">
@@ -104,6 +131,7 @@
       <label><input type="radio" name="type" value="Customers come to my shop/cart" checked>Customers come to me</label>
       <label><input type="radio" name="type" value="I go to customers (delivery/service)">I go to customers</label>
     </div>
+    <label id="areaL" hidden>Areas you serve <small>(your home address will be hidden on Google)</small><input name="areas" placeholder="e.g. Ranjit Avenue, Lawrence Road, Majitha Road"></label>
     <button class="loc" type="button" id="locBtn"><svg><use href="#pin"/></svg><span id="locT">Stand at your shop/cart and tap here to share the exact location</span></button>
     <div class="ok" id="locOk" hidden></div>
     <label>Full address<textarea name="address" required placeholder="Shop/cart spot, street, area"></textarea></label>
@@ -117,6 +145,7 @@
     <h2 class="lg"><i>4</i>Timings</h2>
     <p class="help">When are you open? Tick "Closed" for holidays.</p>
     <div class="hours" id="hours"></div>
+    <label>Holidays / special timings <small>(optional)</small><input name="special" placeholder="e.g. Closed on Diwali, open till 11 PM on weekends"></label>
   </section>
 
   <section class="fs">
@@ -136,6 +165,17 @@
       <label><input type="checkbox" name="proof" value="Bill with address">Electricity/phone bill</label>
     </div>
     <label>Instagram / Facebook / website <small>(optional)</small><input name="social" placeholder="@yourshop"></label>
+    <label>Any offer to show on Google? <small>(optional)</small><input name="offer" placeholder="e.g. 10% off on first order"></label>
+  </section>
+
+  <section class="fs">
+    <h2 class="lg"><i>✓</i>Setup call</h2>
+    <p class="help">Setup takes about 15 minutes on call. Google may also need a 1–2 minute video recorded at your shop/cart.</p>
+    <div class="two">
+      <label>Best time to call<select name="calltime"><option>Morning (10–12)</option><option>Afternoon (12–4)</option><option>Evening (4–8)</option><option>Anytime</option></select></label>
+      <label>Language<select name="lang"><option>Hindi</option><option>Punjabi</option><option>English</option></select></label>
+    </div>
+    <label>Infinity executive / referred by <small>(optional)</small><input name="exec" placeholder="Name of the person who told you about us"></label>
   </section>
 
   <section class="fs">
@@ -169,6 +209,8 @@ $("hours").innerHTML=DAYS.map(d=>`<div class="hr"><span>${d}</span><input type="
 $("same").addEventListener("click",()=>{ DAYS.slice(1).forEach(d=>{ f["o_"+d].value=f.o_Mon.value; f["c_"+d].value=f.c_Mon.value; }); });
 
 let loc="";
+const tog=()=>{ $("gLinkL").hidden=f.querySelector("[name=exists]:checked").value==="No"; $("areaL").hidden=!f.querySelector("[name=type]:checked").value.startsWith("I go"); };
+f.querySelectorAll("[name=exists],[name=type]").forEach(r=>r.addEventListener("change",tog)); tog();
 $("locBtn").addEventListener("click",()=>{
   if(!navigator.geolocation){ $("locT").textContent="Location not available. Please type the address."; return; }
   $("locT").textContent="Getting location…";
@@ -182,22 +224,28 @@ f.addEventListener("submit",e=>{
   f.querySelectorAll("[required]").forEach(el=>{ const miss=el.type==="checkbox"?!el.checked:!el.value.trim(); el.classList.toggle("bad",miss); if(miss) bad.push(el); });
   if(bad.length){ $("err").hidden=false; $("err").textContent=bad.some(b=>b.name==="ok")&&bad.length===1?"Please tick the permission box.":"Please fill the boxes marked in red."; bad[0].scrollIntoView({behavior:"smooth",block:"center"}); return; }
   $("err").hidden=true;
-  const v=n=>(f[n]&&f[n].value||"").trim(), proofs=[...f.querySelectorAll("[name=proof]:checked")].map(x=>x.value);
+  const v=n=>(f[n]&&f[n].value||"").trim(), all=n=>[...f.querySelectorAll(`[name=${n}]:checked`)].map(x=>x.value), proofs=all("proof");
   const hours=DAYS.map(d=>`${d}: ${f["x_"+d].checked?"Closed":`${f["o_"+d].value}–${f["c_"+d].value}`}`).join("\n");
   const msg=`*NEW GOOGLE LISTING REQUEST*
 
+*Already on Google:* ${f.querySelector("[name=exists]:checked").value}${v("glink")?" – "+v("glink"):""}
 *Business:* ${v("name")}
 *Type:* ${v("category")}${v("catmore")?" – "+v("catmore"):""}
 *About:* ${v("about")||"-"}
 *Items:* ${v("items")||"-"}
+*Since:* ${v("since")||"-"}  *Price/person:* ${v("price")||"-"}
+*Offers:* ${all("svc").join(", ")||"-"}
+*Payments:* ${all("pay").join(", ")||"-"}
 
 *Owner:* ${v("owner")}
 *Mobile (OTP):* ${v("mobile")}
 *WhatsApp:* ${v("wa")||v("mobile")}
 *Email:* ${v("email")||"None – please create"}
 *Public number:* ${v("public")||v("mobile")}
+*Other number:* ${v("alt")||"-"}
 
 *Location type:* ${f.querySelector("[name=type]:checked").value}
+*Areas served:* ${v("areas")||"-"}
 *Address:* ${v("address")}
 *Landmark:* ${v("landmark")||"-"}
 *City/PIN:* ${v("city")}
@@ -205,10 +253,15 @@ f.addEventListener("submit",e=>{
 
 *Timings:*
 ${hours}
+*Special timings:* ${v("special")||"-"}
 
 *Board with name:* ${f.querySelector("[name=board]:checked").value}
 *Papers:* ${proofs.join(", ")||"none"}
 *Social:* ${v("social")||"-"}
+*Offer for Google:* ${v("offer")||"-"}
+
+*Call time:* ${v("calltime")}  *Language:* ${v("lang")}
+*Executive/referral:* ${v("exec")||"-"}
 
 ✅ Owner allowed Infinity Technologies to create the profile (owner stays the owner, Infinity added as manager).
 
