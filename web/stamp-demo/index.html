@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stamp card</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2b1a10">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#1b1712;--soft:#6a6259;--faint:#a39a8f;--bg:#f7f3ec;--line:#e8e1d6;--brand:#7a4b2a;--brand2:#c98a4b;--gold:#e9b44c;--wa:#25d366}
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  html,body{background:var(--bg)}
+  body{font-family:"Inter Tight",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100svh}
+  .app{width:min(460px,100%);margin:0 auto;padding:max(18px,env(safe-area-inset-top)) 16px calc(30px + env(safe-area-inset-bottom))}
+  .brand{display:flex;align-items:center;gap:12px}
+  .lg{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--brand2),var(--brand));display:grid;place-items:center;color:#fff;font-size:24px}
+  .brand b{display:block;font-size:17px}
+  .brand span{display:block;font-size:12.5px;color:var(--soft)}
+  .msg{margin-top:20px;text-align:center}
+  .msg .em{font-size:46px;animation:pop .5s ease}
+  @keyframes pop{0%{transform:scale(.3);opacity:0}70%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+  .msg h1{margin-top:6px;font-size:26px;line-height:1.1;font-weight:800;letter-spacing:-.02em}
+  .msg p{margin-top:6px;font-size:15px;color:var(--soft)}
+  .card{margin-top:18px;border-radius:22px;padding:18px;color:#fff;background:radial-gradient(120% 120% at 0% 0%,#5b371f 0%,#2b1a10 70%);box-shadow:0 22px 40px -20px rgba(43,26,16,.8);position:relative;overflow:hidden}
+  .card::after{content:"";position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;border:24px solid rgba(255,255,255,.05)}
+  .card .t{font-size:11px;font-weight:800;letter-spacing:.24em;color:var(--gold)}
+  .card .r{margin-top:4px;font-size:20px;font-weight:800}
+  .slots{margin-top:16px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  .slot{aspect-ratio:1;border-radius:50%;border:2px dashed rgba(255,255,255,.3);display:grid;place-items:center;font-size:22px;color:rgba(255,255,255,.35);font-weight:800;position:relative}
+  .slot.on{border:0;background:radial-gradient(circle at 35% 30%,#ffd98a,#d9952f);color:#3b230f;box-shadow:0 6px 14px -6px rgba(0,0,0,.6)}
+  .slot.on::before{content:"☕"}
+  .slot.on span{display:none}
+  .slot.new{animation:stamp .6s cubic-bezier(.2,1.6,.4,1)}
+  @keyframes stamp{0%{transform:scale(2.2) rotate(-20deg);opacity:0}100%{transform:none;opacity:1}}
+  .slot.gift{border-color:var(--gold);color:var(--gold)}
+  .card .f{margin-top:14px;display:flex;justify-content:space-between;font-size:12.5px;color:rgba(255,255,255,.7)}
+  .card .f b{color:#fff}
+  .box{margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px}
+  .btn{margin-top:10px;width:100%;min-height:54px;border:0;border-radius:15px;font:inherit;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;text-decoration:none;color:var(--ink);background:#fff;border:1.5px solid var(--line)}
+  .btn svg{width:21px;height:21px}
+  .btn.w{background:var(--wa);border-color:var(--wa);color:#05230f}
+  .btn.d{background:var(--ink);border-color:var(--ink);color:#fff}
+  .btn.gold{background:linear-gradient(135deg,#ffd98a,#d9952f);border:0;color:#3b230f}
+  input{width:100%;margin-top:8px;border:1.5px solid var(--line);border-radius:12px;padding:12px;font:inherit;font-size:16px;background:#fffdf9}
+  .lbl{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--soft)}
+  .small{margin-top:10px;text-align:center;font-size:12.5px;color:var(--faint);line-height:1.45}
+  .reward{margin-top:14px;border-radius:18px;padding:16px;background:#fff7e3;border:2px solid var(--gold);text-align:center}
+  .reward b{display:block;font-size:20px}
+  .reward p{margin-top:4px;font-size:14px;color:var(--soft)}
+  .demo{margin-top:22px;border:1.5px dashed #d8c7a8;border-radius:14px;padding:12px;background:#fffaf0}
+  .demo p{font-size:12.5px;color:#6b5a3a;line-height:1.45}
+  .demo button{margin-top:8px;border:0;background:#6b5a3a;color:#fff;font:inherit;font-size:13px;font-weight:700;padding:9px 12px;border-radius:10px;cursor:pointer}
+  .toast{position:fixed;left:50%;top:18px;transform:translate(-50%,-20px);opacity:0;background:var(--ink);color:#fff;font-size:14px;font-weight:700;padding:10px 16px;border-radius:30px;transition:all .3s;z-index:60;white-space:nowrap}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+  .conf{position:fixed;inset:0;pointer-events:none;z-index:55;overflow:hidden}
+  .conf i{position:absolute;top:-20px;width:8px;height:14px;border-radius:2px;animation:fall 2.4s ease-in forwards}
+  @keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.2 21.8l4.9-1.3A9.8 9.8 0 1 0 12 2.2zm0 1.8a8 8 0 1 1-4.2 14.8l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 0 1 12 4zm-3.2 4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.2 5 4.4 2.5 1 3 .8 3.5.7.6 0 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4l-.5-.3-1.8-.9c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-2c-.2-.5-.4-.4-.6-.4z"/></symbol>
+  <symbol id="ct" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="8" r="4"/><path d="M3 20c.8-3.5 3.6-5.5 7-5.5 1.6 0 3 .4 4.2 1.2M18 14v6M15 17h6"/></g></symbol>
+</defs></svg>
+
+<main class="app">
+  <div class="brand"><div class="lg">☕</div><div><b id="bName"></b><span>Stamp card</span></div></div>
+
+  <div class="msg"><div class="em" id="mEm">☕</div><h1 id="mH"></h1><p id="mP"></p></div>
+
+  <div class="card">
+    <div class="t">LOYALTY CARD</div>
+    <div class="r" id="rText"></div>
+    <div class="slots" id="slots"></div>
+    <div class="f"><span id="who">Your card</span><span>Rewards earned: <b id="won">0</b></span></div>
+  </div>
+
+  <div class="reward" id="reward" hidden>
+    <b>🎁 Your free reward is ready!</b>
+    <p>Show this screen at the counter.</p>
+    <div style="margin-top:10px"><div class="lbl">STAFF ONLY: ENTER PIN</div><input id="pin" inputmode="numeric" maxlength="4" placeholder="4-digit staff PIN"></div>
+    <button class="btn gold" id="redeem" type="button">Give reward</button>
+  </div>
+
+  <div class="box" id="join">
+    <div class="lbl">GET OFFERS &amp; REMINDERS</div>
+    <input id="nm" placeholder="Your name (optional)" autocomplete="given-name">
+    <a class="btn w" id="waBtn" target="_blank" rel="noopener"><svg><use href="#wa"/></svg>Get offers on WhatsApp</a>
+    <button class="btn" id="saveBtn" type="button"><svg><use href="#ct"/></svg>Save our number</button>
+    <p class="small">Save our number to see our daily specials on WhatsApp Status.</p>
+  </div>
+
+  <p class="small">Stamps are saved on this phone. 1 stamp per visit per day.</p>
+
+  <div class="demo" id="demo">
+    <p><b>Demo only:</b> in real use the customer gets 1 stamp each day they tap the card. Use this button to pretend it's the next day. The demo staff PIN is <b>1234</b>.</p>
+    <button type="button" id="nextDay">Pretend it's the next visit</button>
+  </div>
+</main>
+<div class="toast" id="toast"></div>
+<div class="conf" id="conf"></div>
+
+<script>
+/* ===== shop settings ===== */
+const SHOP={ id:"brewbloom", name:"Brew & Bloom Café", phone:"+917986404564", whatsapp:"917986404564",
+  goal:5, reward:"1 FREE coffee", pin:"1234" };
+/* ========================= */
+const $=id=>document.getElementById(id), K="stamp_"+SHOP.id;
+const today=()=>new Date().toISOString().slice(0,10);
+function load(){ try{ return JSON.parse(localStorage.getItem(K))||{n:0,last:"",won:0,name:""}; }catch(e){ return {n:0,last:"",won:0,name:""}; } }
+function save(){ try{ localStorage.setItem(K,JSON.stringify(S)); }catch(e){} }
+let S=load(); let fake=0;   // fake = demo day offset
+document.title=`Stamp card – ${SHOP.name}`; $("bName").textContent=SHOP.name; $("rText").textContent=`Collect ${SHOP.goal} stamps, get ${SHOP.reward}`;
+if(S.name) $("nm").value=S.name;
+
+function dayKey(){ const d=new Date(); d.setDate(d.getDate()+fake); return d.toISOString().slice(0,10); }
+function visit(){
+  const k=dayKey(); let added=false;
+  if(S.last!==k && S.n<SHOP.goal){ S.n++; S.last=k; added=true; save(); }
+  draw(added);
+}
+function draw(added){
+  $("slots").innerHTML=Array.from({length:SHOP.goal},(_,i)=>`<div class="slot${i<S.n?" on":""}${added&&i===S.n-1?" new":""}${i===SHOP.goal-1&&i>=S.n?" gift":""}"><span>${i===SHOP.goal-1?"🎁":i+1}</span></div>`).join("");
+  $("won").textContent=S.won; $("who").textContent=S.name?`${S.name}'s card`:"Your card";
+  const left=SHOP.goal-S.n, full=S.n>=SHOP.goal;
+  $("reward").hidden=!full;
+  if(full){ $("mEm").textContent="🎉"; $("mH").textContent="Card complete!"; $("mP").textContent=`Enjoy your ${SHOP.reward}.`; if(added) confetti(); }
+  else if(added){ $("mEm").textContent=S.n===1?"👋":"✅"; $("mH").textContent=S.n===1?"Welcome! First stamp added":`Stamp added! ${S.n} of ${SHOP.goal}`; $("mP").textContent=`Just ${left} more visit${left>1?"s":""} for ${SHOP.reward}.`; }
+  else { $("mEm").textContent="☕"; $("mH").textContent="Already stamped today"; $("mP").textContent=`Come back tomorrow! ${left} more for ${SHOP.reward}.`; }
+  // re-render to replay the animation
+  $("mEm").style.animation="none"; void $("mEm").offsetWidth; $("mEm").style.animation="";
+  updWa();
+}
+function updWa(){ const n=$("nm").value.trim();
+  $("waBtn").href=`https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(`Hi ${SHOP.name}! ${n?`I'm ${n}. `:""}I have ${S.n}/${SHOP.goal} stamps on my card. Please send me your offers 🙂`)}`; }
+$("nm").addEventListener("input",()=>{ S.name=$("nm").value.trim(); save(); updWa(); $("who").textContent=S.name?`${S.name}'s card`:"Your card"; });
+
+$("redeem").addEventListener("click",()=>{
+  if($("pin").value!==SHOP.pin){ toast("Wrong PIN"); $("pin").value=""; return; }
+  S.won++; S.n=0; save(); $("pin").value=""; toast("Reward given. New card started!"); $("mEm").textContent="🙏"; $("mH").textContent="Enjoy! See you again"; $("mP").textContent="Your new card has started."; draw(false);
+  $("mH").textContent="Enjoy! See you again"; });
+
+$("saveBtn").addEventListener("click",()=>{
+  const vcf=`BEGIN:VCARD\nVERSION:3.0\nFN:${SHOP.name}\nORG:${SHOP.name}\nTEL;TYPE=CELL:${SHOP.phone}\nNOTE:Save to see our daily specials on WhatsApp Status\nEND:VCARD\n`;
+  const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([vcf],{type:"text/vcard"})); a.download=SHOP.name.replace(/[^\w ]/g,"")+".vcf"; document.body.appendChild(a); a.click(); a.remove();
+  toast("Tap the file to save the contact"); });
+
+$("nextDay").addEventListener("click",()=>{ fake++; visit(); window.scrollTo({top:0,behavior:"smooth"}); });
+function toast(m){ $("toast").textContent=m; $("toast").classList.add("on"); setTimeout(()=>$("toast").classList.remove("on"),1800); }
+function confetti(){ const c=$("conf"), cols=["#e9b44c","#d9952f","#7a4b2a","#25d366","#e1306c"]; c.innerHTML=Array.from({length:60},()=>`<i style="left:${Math.random()*100}%;background:${cols[Math.random()*5|0]};animation-delay:${Math.random()*.6}s"></i>`).join(""); setTimeout(()=>c.innerHTML="",3200); }
+visit();
+</script>
+</body>
+</html>

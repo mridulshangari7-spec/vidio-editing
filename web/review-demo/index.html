@@ -89,6 +89,12 @@
   .gs .gst{margin-top:12px;display:flex;gap:6px;justify-content:center;font-size:32px;color:var(--star)}
   .gs .gta{margin-top:12px;border:1px solid #dadce0;border-radius:8px;min-height:90px;padding:10px;font-size:14px;color:#80868b}
   .gs .demo{margin-top:14px;background:#fff7e6;border:1px dashed #e0b45c;border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.45;color:#5b4a2a}
+  .extras{margin-top:22px;display:grid;gap:10px;text-align:left}
+  .xb{display:flex;align-items:center;gap:12px;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:13px 14px;text-decoration:none;color:var(--ink);font:inherit;cursor:pointer;width:100%;text-align:left}
+  .xb span{flex:none;width:40px;height:40px;border-radius:12px;background:var(--bg);display:grid;place-items:center;font-size:21px}
+  .xb b{display:block;font-size:15px}
+  .xb small{display:block;font-size:12.5px;color:var(--soft);margin-top:2px}
+  .xb.gift{border:2px solid var(--wa);background:#f1fdf5}
   .badge{position:fixed;right:10px;bottom:8px;font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--faint)}
 </style>
 </head>
@@ -130,6 +136,12 @@
     <div class="big" id="tEmoji">🙏</div>
     <h1 id="tHead">Thank you!</h1>
     <p class="lead" id="tText"></p>
+    <div class="extras" id="extras">
+      <a class="xb gift" id="xCoupon" target="_blank" rel="noopener"><span>🎁</span><div><b>Get 10% OFF next visit</b><small>Coupon comes on WhatsApp</small></div></a>
+      <a class="xb" id="xStamp" href="../stamp-demo/"><span>☕</span><div><b>Start your stamp card</b><small>5 visits = 1 free coffee</small></div></a>
+      <button class="xb" id="xSave" type="button"><span>📇</span><div><b>Save our number</b><small>See daily specials on Status</small></div></button>
+      <a class="xb" id="xChan" target="_blank" rel="noopener"><span>📢</span><div><b>Follow our WhatsApp Channel</b><small>Offers &amp; new items</small></div></a>
+    </div>
   </section>
 </main>
 
@@ -162,7 +174,9 @@ const BIZ={
   name:"Brew & Bloom Café", area:"Demo café · Amritsar",
   whatsapp:"917986404564",       // owner's WhatsApp: low ratings go here
   google:"",                     // the café's Google write-review link; empty = demo screen
-  goodFrom:4                     // 4★ and 5★ go to Google
+  goodFrom:4,                    // 4★ and 5★ go to Google
+  phone:"+917986404564",         // shown when the customer saves the shop's number
+  channel:""                     // WhatsApp Channel link; empty = demo message
 };
 /* chips: [emoji, key, English phrase, Hinglish phrase] */
 const GOOD=[["☕","coffee","the coffee","coffee"],["🍕","food","the food","khana"],["😊","staff","the staff","staff"],["⚡","fast","the quick service","fast service"],["🛋️","vibe","the ambience","ambience"],["🍰","dessert","the desserts","desserts"],["💸","value","the value for money","prices"],["🎶","music","the music","music"],["📸","decor","the décor","decor"],["🧼","clean","how clean it was","safai"]];
@@ -262,7 +276,15 @@ function sendWa(){
 }
 $("post").addEventListener("click",()=>good()?sendGoogle():sendWa());
 $("gclose").addEventListener("click",()=>{ $("gsheet").hidden=true; thanks(true); });
-function thanks(g){ $("s1").hidden=true; $("s3").hidden=false; const hi=lang==="hi";
+function extras(g){
+  const hi=lang==="hi";
+  $("xCoupon").href=`https://wa.me/${BIZ.whatsapp}?text=${encodeURIComponent(g?`Hi ${BIZ.name}! I just left you a review 😊 Please send my 10% OFF coupon for my next visit.`:`Hi ${BIZ.name}! Please send me a coupon for my next visit.`)}`;
+  $("xCoupon").querySelector("b").textContent=g?(hi?"Agli visit pe 10% OFF":"Get 10% OFF next visit"):(hi?"Agli baar ke liye coupon":"Get a coupon for next time");
+  $("xSave").onclick=()=>{ const vcf=`BEGIN:VCARD\nVERSION:3.0\nFN:${BIZ.name}\nORG:${BIZ.name}\nTEL;TYPE=CELL:${BIZ.phone}\nEND:VCARD\n`;
+    const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([vcf],{type:"text/vcard"})); a.download=BIZ.name.replace(/[^\w ]/g,"")+".vcf"; document.body.appendChild(a); a.click(); a.remove(); toast("Tap the file to save the contact"); };
+  if(BIZ.channel) $("xChan").href=BIZ.channel; else $("xChan").onclick=e=>{ e.preventDefault(); toast("Demo: opens the café's WhatsApp Channel"); };
+}
+function thanks(g){ extras(g); $("s1").hidden=true; $("s3").hidden=false; const hi=lang==="hi";
   $("tEmoji").textContent=g?"🎉":"🙏"; $("tHead").textContent=g?(hi?"Bahut shukriya!":"Thank you so much!"):(hi?"Batane ke liye shukriya":"Thanks for telling us");
   $("tText").textContent=g?(hi?"Aapka review doosron ki madad karega.":"Your review helps other people find us."):(hi?"Owner jaldi WhatsApp pe reply karenge.":"The owner will get back to you soon on WhatsApp."); }
 </script>
