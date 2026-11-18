@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Get your shop on Google – Infinity Technologies</title>
+<meta name="description" content="Fill this form and Infinity Technologies will put your business on Google Maps and Search.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0d0c0b">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0d0c0b;--soft:#5e5a54;--faint:#8b877f;--paper:#fbfaf7;--line:#e2ded5;--gold:#C9982E;--goldink:#7A5A10;--wa:#25d366;--err:#c0392b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  body{font-family:"Inter Tight",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
+  .top{background:radial-gradient(90% 90% at 50% 20%,#2a2114 0%,#0d0c0b 75%);color:#fff;padding:26px 18px 24px;text-align:center}
+  .top .nm{font-size:11px;font-weight:700;letter-spacing:.32em;color:var(--gold)}
+  .top h1{margin-top:10px;font-size:29px;line-height:1.08;font-weight:800;letter-spacing:-.02em}
+  .top p{margin-top:8px;font-size:14.5px;color:#cfc8ba;line-height:1.45}
+  .chips{margin-top:14px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+  .chips span{font-size:12px;font-weight:700;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:20px;padding:5px 10px}
+  form{width:min(560px,100% - 28px);margin:0 auto;padding:18px 0 40px}
+  .fs{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:14px}
+  .lg{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;margin-bottom:6px}
+  .lg i{font-style:normal;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;display:grid;place-items:center;flex:none}
+  .help{font-size:13px;color:var(--soft);line-height:1.4;margin-bottom:6px}
+  label{display:block;margin-top:12px;font-size:13.5px;font-weight:700}
+  label small{font-weight:500;color:var(--faint)}
+  input,select,textarea{margin-top:6px;width:100%;border:1.5px solid var(--line);border-radius:12px;padding:12px;font:inherit;font-size:16px;background:#fffdf9;color:var(--ink)}
+  textarea{min-height:80px;resize:vertical}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);border-color:transparent}
+  .bad{border-color:var(--err)!important}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .opts{margin-top:8px;display:flex;flex-wrap:wrap;gap:8px}
+  .opts label{margin:0;display:flex;align-items:center;gap:7px;border:1.5px solid var(--line);border-radius:30px;padding:9px 13px;font-size:14px;font-weight:600;cursor:pointer;background:var(--paper)}
+  .opts input{margin:0;width:auto;accent-color:var(--ink)}
+  .opts label:has(input:checked){background:var(--ink);color:#fff;border-color:var(--ink)}
+  .loc{margin-top:8px;display:flex;align-items:center;gap:8px;border:1.5px dashed var(--gold);background:#fffaf0;color:var(--goldink);border-radius:12px;padding:11px 12px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;width:100%}
+  .loc svg{width:18px;height:18px;flex:none}
+  .ok{color:#1e8e3e;font-size:13px;font-weight:700;margin-top:6px}
+  .hours{margin-top:8px;display:grid;gap:6px}
+  .hours{min-width:0}
+  .hr{display:grid;grid-template-columns:34px minmax(0,1fr) minmax(0,1fr) auto;gap:5px;align-items:center;font-size:13px;font-weight:700}
+  .hr input{margin:0;padding:8px 6px;font-size:14px;min-width:0;width:100%}
+  .hr label{margin:0;display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--soft)}
+  .hr label input{width:auto}
+  .photos{margin-top:8px;display:grid;gap:6px}
+  .photos div{display:flex;gap:8px;align-items:flex-start;font-size:14px;line-height:1.35}
+  .photos b{flex:none;width:22px;height:22px;border-radius:50%;background:#f6ead0;color:var(--goldink);font-size:12px;display:grid;place-items:center}
+  .consent{display:flex;gap:10px;align-items:flex-start;margin-top:10px;font-size:13.5px;font-weight:500;line-height:1.45}
+  .consent input{flex:none;width:20px;height:20px;margin-top:2px;accent-color:var(--ink)}
+  .note{margin-top:10px;background:#fffaf0;border:1.5px dashed var(--gold);border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.5;color:#4a3d22}
+  .send{margin-top:18px;width:100%;min-height:58px;border:0;border-radius:16px;background:var(--wa);color:#05230f;font:inherit;font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;box-shadow:0 12px 26px -12px rgba(37,211,102,.9)}
+  .send svg{width:24px;height:24px}
+  .err{margin-top:10px;color:var(--err);font-size:13.5px;font-weight:700;text-align:center}
+  .foot{text-align:center;font-size:12px;color:var(--faint);margin-top:18px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.2 21.8l4.9-1.3A9.8 9.8 0 1 0 12 2.2zm0 1.8a8 8 0 1 1-4.2 14.8l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 0 1 12 4zm-3.2 4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.2 5 4.4 2.5 1 3 .8 3.5.7.6 0 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4l-.5-.3-1.8-.9c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-2c-.2-.5-.4-.4-.6-.4z"/></symbol>
+  <symbol id="pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></g></symbol>
+</defs></svg>
+
+<header class="top">
+  <div class="nm">INFINITY TECHNOLOGIES</div>
+  <h1>Get your shop on Google</h1>
+  <p>Fill this form in 3 minutes. We create your Google listing so customers can find you, call you and give you reviews.</p>
+  <div class="chips"><span>📍 Google Maps</span><span>⭐ Reviews</span><span>📞 Calls</span><span>🕒 Timings</span></div>
+</header>
+
+<form id="f" novalidate>
+  <section class="fs">
+    <h2 class="lg"><i>1</i>Your business</h2>
+    <label>Business name <small>(exactly as on your board)</small><input name="name" required placeholder="e.g. Ram Samosa Wala"></label>
+    <label>What do you sell? <small>(type of business)</small>
+      <select name="category" required>
+        <option value="">Choose one</option>
+        <option>Food cart / Street food</option><option>Café</option><option>Restaurant</option><option>Sweet shop / Bakery</option>
+        <option>Tea / Juice stall</option><option>Clothing shop</option><option>Salon / Parlour</option><option>Mobile / Electronics shop</option>
+        <option>Grocery / Kirana</option><option>Medical / Chemist</option><option>Gym</option><option>Other</option>
+      </select></label>
+    <label>Other / more detail <small>(optional)</small><input name="catmore" placeholder="e.g. Samosa & chaat stall"></label>
+    <label>About your business <small>(1–2 lines)</small><textarea name="about" placeholder="e.g. Fresh hot samosas and chaat since 2015. Famous for aloo samosa and imli chutney."></textarea></label>
+    <label>Top items / services <small>(with price if you want)</small><textarea name="items" placeholder="e.g. Samosa ₹15, Kachori ₹20, Chole bhature ₹60"></textarea></label>
+  </section>
+
+  <section class="fs">
+    <h2 class="lg"><i>2</i>Owner details</h2>
+    <p class="help">Google sends an OTP to this number. We'll call you during setup and you tell us the code.</p>
+    <label>Owner name<input name="owner" required autocomplete="name"></label>
+    <div class="two">
+      <label>Mobile (for OTP)<input name="mobile" required inputmode="tel" autocomplete="tel" placeholder="98xxxxxxxx"></label>
+      <label>WhatsApp<input name="wa" inputmode="tel" placeholder="Same as mobile?"></label>
+    </div>
+    <label>Gmail / email <small>(if you have one)</small><input name="email" type="email" autocomplete="email" placeholder="Leave empty, we'll make one for you"></label>
+    <label>Number to show on Google <small>(customers will call this)</small><input name="public" inputmode="tel" placeholder="Same as mobile?"></label>
+  </section>
+
+  <section class="fs">
+    <h2 class="lg"><i>3</i>Where are you?</h2>
+    <div class="opts">
+      <label><input type="radio" name="type" value="Customers come to my shop/cart" checked>Customers come to me</label>
+      <label><input type="radio" name="type" value="I go to customers (delivery/service)">I go to customers</label>
+    </div>
+    <button class="loc" type="button" id="locBtn"><svg><use href="#pin"/></svg><span id="locT">Stand at your shop/cart and tap here to share the exact location</span></button>
+    <div class="ok" id="locOk" hidden></div>
+    <label>Full address<textarea name="address" required placeholder="Shop/cart spot, street, area"></textarea></label>
+    <div class="two">
+      <label>Landmark<input name="landmark" placeholder="e.g. Near Golden Gate"></label>
+      <label>City &amp; PIN<input name="city" required placeholder="Amritsar 143001"></label>
+    </div>
+  </section>
+
+  <section class="fs">
+    <h2 class="lg"><i>4</i>Timings</h2>
+    <p class="help">When are you open? Tick "Closed" for holidays.</p>
+    <div class="hours" id="hours"></div>
+  </section>
+
+  <section class="fs">
+    <h2 class="lg"><i>5</i>For Google verification</h2>
+    <p class="help">Google asks for a short video to check the business is real. These help it pass first time.</p>
+    <label>Is the business name written on a board/banner at the shop or cart?</label>
+    <div class="opts">
+      <label><input type="radio" name="board" value="Yes" checked>Yes</label>
+      <label><input type="radio" name="board" value="No, will make one">No, will make one</label>
+    </div>
+    <label>Any business paper? <small>(tick what you have, optional)</small></label>
+    <div class="opts">
+      <label><input type="checkbox" name="proof" value="GST">GST</label>
+      <label><input type="checkbox" name="proof" value="Udyam/MSME">Udyam / MSME</label>
+      <label><input type="checkbox" name="proof" value="FSSAI">FSSAI (food)</label>
+      <label><input type="checkbox" name="proof" value="Shop licence">Shop licence</label>
+      <label><input type="checkbox" name="proof" value="Bill with address">Electricity/phone bill</label>
+    </div>
+    <label>Instagram / Facebook / website <small>(optional)</small><input name="social" placeholder="@yourshop"></label>
+  </section>
+
+  <section class="fs">
+    <h2 class="lg"><i>6</i>Photos <small style="font-weight:600;color:var(--faint);font-size:12px">send on WhatsApp after this form</small></h2>
+    <div class="photos">
+      <div><b>1</b>Your board/banner with the name, clearly</div>
+      <div><b>2</b>Front of the shop or cart, from the road</div>
+      <div><b>3</b>Inside / counter / kitchen</div>
+      <div><b>4</b>3–5 photos of your best items</div>
+      <div><b>5</b>Logo, if you have one</div>
+    </div>
+  </section>
+
+  <section class="fs">
+    <h2 class="lg"><i>7</i>Your permission</h2>
+    <label class="consent"><input type="checkbox" name="ok" required>I allow Infinity Technologies to create and set up the Google Business Profile for my business. I will share OTPs on call during setup. The listing stays in my name and I am the owner. Infinity is added as a manager to look after it.</label>
+    <div class="note">🔒 We never ask for your bank details, UPI PIN or card details. Only share an OTP with us when we are on call with you for this setup.</div>
+  </section>
+
+  <button class="send" type="submit"><svg><use href="#wa"/></svg>Send to Infinity on WhatsApp</button>
+  <p class="err" id="err" hidden></p>
+  <p class="foot">Infinity Technologies · Amritsar · We'll call you within 24 hours</p>
+</form>
+
+<script>
+const INFINITY_WA="917986404564";   // where the form is sent
+const f=document.getElementById("f"), $=id=>document.getElementById(id);
+const DAYS=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+$("hours").innerHTML=DAYS.map(d=>`<div class="hr"><span>${d}</span><input type="time" name="o_${d}" value="10:00"><input type="time" name="c_${d}" value="21:00"><label><input type="checkbox" name="x_${d}">Closed</label></div>`).join("")
+  +`<button type="button" class="loc" id="same" style="margin-top:4px;justify-content:center">Copy Monday's timing to all days</button>`;
+$("same").addEventListener("click",()=>{ DAYS.slice(1).forEach(d=>{ f["o_"+d].value=f.o_Mon.value; f["c_"+d].value=f.c_Mon.value; }); });
+
+let loc="";
+$("locBtn").addEventListener("click",()=>{
+  if(!navigator.geolocation){ $("locT").textContent="Location not available. Please type the address."; return; }
+  $("locT").textContent="Getting location…";
+  navigator.geolocation.getCurrentPosition(p=>{ const {latitude:a,longitude:b,accuracy:c}=p.coords;
+      loc=`https://maps.google.com/?q=${a.toFixed(6)},${b.toFixed(6)}`; $("locOk").hidden=false; $("locOk").textContent=`✓ Location saved (accurate to about ${Math.round(c)} m)`; $("locT").textContent="Location saved. Tap again to update"; },
+    ()=>{ $("locT").textContent="Couldn't get location. Allow location, or type the address below."; },{enableHighAccuracy:true,timeout:15000});
+});
+
+f.addEventListener("submit",e=>{
+  e.preventDefault(); let bad=[];
+  f.querySelectorAll("[required]").forEach(el=>{ const miss=el.type==="checkbox"?!el.checked:!el.value.trim(); el.classList.toggle("bad",miss); if(miss) bad.push(el); });
+  if(bad.length){ $("err").hidden=false; $("err").textContent=bad.some(b=>b.name==="ok")&&bad.length===1?"Please tick the permission box.":"Please fill the boxes marked in red."; bad[0].scrollIntoView({behavior:"smooth",block:"center"}); return; }
+  $("err").hidden=true;
+  const v=n=>(f[n]&&f[n].value||"").trim(), proofs=[...f.querySelectorAll("[name=proof]:checked")].map(x=>x.value);
+  const hours=DAYS.map(d=>`${d}: ${f["x_"+d].checked?"Closed":`${f["o_"+d].value}–${f["c_"+d].value}`}`).join("\n");
+  const msg=`*NEW GOOGLE LISTING REQUEST*
+
+*Business:* ${v("name")}
+*Type:* ${v("category")}${v("catmore")?" – "+v("catmore"):""}
+*About:* ${v("about")||"-"}
+*Items:* ${v("items")||"-"}
+
+*Owner:* ${v("owner")}
+*Mobile (OTP):* ${v("mobile")}
+*WhatsApp:* ${v("wa")||v("mobile")}
+*Email:* ${v("email")||"None – please create"}
+*Public number:* ${v("public")||v("mobile")}
+
+*Location type:* ${f.querySelector("[name=type]:checked").value}
+*Address:* ${v("address")}
+*Landmark:* ${v("landmark")||"-"}
+*City/PIN:* ${v("city")}
+*Map pin:* ${loc||"not shared"}
+
+*Timings:*
+${hours}
+
+*Board with name:* ${f.querySelector("[name=board]:checked").value}
+*Papers:* ${proofs.join(", ")||"none"}
+*Social:* ${v("social")||"-"}
+
+✅ Owner allowed Infinity Technologies to create the profile (owner stays the owner, Infinity added as manager).
+
+I'll send the photos next.`;
+  location.href=`https://wa.me/${INFINITY_WA}?text=${encodeURIComponent(msg)}`;
+});
+</script>
+</body>
+</html>
