@@ -53,6 +53,9 @@
   .note{margin-top:10px;background:#fffaf0;border:1.5px dashed var(--gold);border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.5;color:#4a3d22}
   .send{margin-top:18px;width:100%;min-height:58px;border:0;border-radius:16px;background:var(--wa);color:#05230f;font:inherit;font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;box-shadow:0 12px 26px -12px rgba(37,211,102,.9)}
   .send svg{width:24px;height:24px}
+  .rq{color:var(--err);font-style:normal;font-weight:800;margin-left:3px}
+  .legend{margin-top:12px;font-size:12.5px;color:#cfc8ba}
+  .legend .rq{color:#ff8a7a}
   .err{margin-top:10px;color:var(--err);font-size:13.5px;font-weight:700;text-align:center}
   .foot{text-align:center;font-size:12px;color:var(--faint);margin-top:18px}
 </style>
@@ -67,13 +70,14 @@
   <div class="nm">INFINITY TECHNOLOGIES</div>
   <h1>Get your shop on Google</h1>
   <p>Fill this form in 3 minutes. We create your Google listing so customers can find you, call you and give you reviews.</p>
+  <p class="legend"><em class="rq">*</em> = must fill. Everything else is optional.</p>
   <div class="chips"><span>📍 Google Maps</span><span>⭐ Reviews</span><span>📞 Calls</span><span>🕒 Timings</span></div>
 </header>
 
 <form id="f" novalidate>
   <section class="fs">
     <h2 class="lg"><i>1</i>Your business</h2>
-    <label>Is your business already on Google Maps?</label>
+    <label>Is your business already on Google Maps?<em class="rq">*</em></label>
     <div class="opts">
       <label><input type="radio" name="exists" value="No" checked>No</label>
       <label><input type="radio" name="exists" value="Yes, but I can't manage it">Yes, but I can't manage it</label>
@@ -95,7 +99,7 @@
     </div>
     <label>About your business <small>(1–2 lines)</small><textarea name="about" placeholder="e.g. Fresh hot samosas and chaat since 2015. Famous for aloo samosa and imli chutney."></textarea></label>
     <label>Top items / services <small>(with price if you want)</small><textarea name="items" placeholder="e.g. Samosa ₹15, Kachori ₹20, Chole bhature ₹60"></textarea></label>
-    <label>What do you offer? <small>(tick all)</small></label>
+    <label>What do you offer? <small>(optional, tick all)</small></label>
     <div class="opts">
       <label><input type="checkbox" name="svc" value="Sit and eat / in-store">Sit-in / In-store</label>
       <label><input type="checkbox" name="svc" value="Takeaway">Takeaway</label>
@@ -104,7 +108,7 @@
       <label><input type="checkbox" name="svc" value="Parking available">Parking</label>
       <label><input type="checkbox" name="svc" value="Wheelchair friendly">Wheelchair friendly</label>
     </div>
-    <label>Payments you take</label>
+    <label>Payments you take <small>(optional)</small></label>
     <div class="opts">
       <label><input type="checkbox" name="pay" value="Cash" checked>Cash</label>
       <label><input type="checkbox" name="pay" value="UPI" checked>UPI</label>
@@ -126,7 +130,7 @@
   </section>
 
   <section class="fs">
-    <h2 class="lg"><i>3</i>Where are you?</h2>
+    <h2 class="lg"><i>3</i>Where are you?<em class="rq">*</em></h2>
     <div class="opts">
       <label><input type="radio" name="type" value="Customers come to my shop/cart" checked>Customers come to me</label>
       <label><input type="radio" name="type" value="I go to customers (delivery/service)">I go to customers</label>
@@ -142,7 +146,7 @@
   </section>
 
   <section class="fs">
-    <h2 class="lg"><i>4</i>Timings</h2>
+    <h2 class="lg"><i>4</i>Timings<em class="rq">*</em></h2>
     <p class="help">When are you open? Tick "Closed" for holidays.</p>
     <div class="hours" id="hours"></div>
     <label>Holidays / special timings <small>(optional)</small><input name="special" placeholder="e.g. Closed on Diwali, open till 11 PM on weekends"></label>
@@ -151,7 +155,7 @@
   <section class="fs">
     <h2 class="lg"><i>5</i>For Google verification</h2>
     <p class="help">Google asks for a short video to check the business is real. These help it pass first time.</p>
-    <label>Is the business name written on a board/banner at the shop or cart?</label>
+    <label>Is the business name written on a board/banner at the shop or cart?<em class="rq">*</em></label>
     <div class="opts">
       <label><input type="radio" name="board" value="Yes" checked>Yes</label>
       <label><input type="radio" name="board" value="No, will make one">No, will make one</label>
@@ -179,7 +183,7 @@
   </section>
 
   <section class="fs">
-    <h2 class="lg"><i>6</i>Photos <small style="font-weight:600;color:var(--faint);font-size:12px">send on WhatsApp after this form</small></h2>
+    <h2 class="lg"><i>6</i>Photos<em class="rq">*</em> <small style="font-weight:600;color:var(--faint);font-size:12px">send on WhatsApp after this form</small></h2>
     <div class="photos">
       <div><b>1</b>Your board/banner with the name, clearly</div>
       <div><b>2</b>Front of the shop or cart, from the road</div>
@@ -191,7 +195,7 @@
 
   <section class="fs">
     <h2 class="lg"><i>7</i>Your permission</h2>
-    <label class="consent"><input type="checkbox" name="ok" required>I allow Infinity Technologies to create and set up the Google Business Profile for my business. I will share OTPs on call during setup. The listing stays in my name and I am the owner. Infinity is added as a manager to look after it.</label>
+    <label class="consent"><input type="checkbox" name="ok" required><span>I allow Infinity Technologies to create and set up the Google Business Profile for my business. I will share OTPs on call during setup. The listing stays in my name and I am the owner. Infinity is added as a manager to look after it.<em class="rq">*</em></span></label>
     <div class="note">🔒 We never ask for your bank details, UPI PIN or card details. Only share an OTP with us when we are on call with you for this setup.</div>
   </section>
 
@@ -208,6 +212,12 @@ $("hours").innerHTML=DAYS.map(d=>`<div class="hr"><span>${d}</span><input type="
   +`<button type="button" class="loc" id="same" style="margin-top:4px;justify-content:center">Copy Monday's timing to all days</button>`;
 $("same").addEventListener("click",()=>{ DAYS.slice(1).forEach(d=>{ f["o_"+d].value=f.o_Mon.value; f["c_"+d].value=f.c_Mon.value; }); });
 
+/* mark every field: red * if required, (optional) if not */
+f.querySelectorAll("label").forEach(l=>{ const el=l.querySelector(":scope > input:not([type=radio]):not([type=checkbox]), :scope > select, :scope > textarea"); if(!el) return;
+  const first=[...l.childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(!first) return;
+  const sm=l.querySelector(":scope > small");
+  if(el.required||el.tagName==="SELECT"&&el.name!=="price"){ const m=document.createElement("em"); m.className="rq"; m.textContent="*"; first.after(m); }
+  else if(!/optional/i.test(l.textContent)){ if(sm) sm.textContent=sm.textContent.replace(/\)$/,", optional)"); else { const o=document.createElement("small"); o.textContent=" (optional)"; first.after(o); } } });
 let loc="";
 const tog=()=>{ $("gLinkL").hidden=f.querySelector("[name=exists]:checked").value==="No"; $("areaL").hidden=!f.querySelector("[name=type]:checked").value.startsWith("I go"); };
 f.querySelectorAll("[name=exists],[name=type]").forEach(r=>r.addEventListener("change",tog)); tog();
