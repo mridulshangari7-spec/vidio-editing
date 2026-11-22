@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Table QR codes</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#1b1712;--soft:#6a6259;--bg:#f7f3ec;--line:#e8e1d6;--brand:#7a4b2a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Inter Tight",system-ui,sans-serif;background:var(--bg);color:var(--ink);padding:20px 16px 40px}
+  .w{width:min(900px,100%);margin:0 auto}
+  h1{font-size:26px}
+  .lead{color:var(--soft);margin-top:6px;line-height:1.45}
+  .how{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px;line-height:1.6;font-size:14.5px}
+  .how a{color:var(--brand);font-weight:800}
+  .grid{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+  .tc{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;text-align:center;text-decoration:none;color:inherit;break-inside:avoid}
+  .tc .k{font-size:11px;font-weight:800;letter-spacing:.2em;color:var(--soft)}
+  .tc b{display:block;font-size:30px;margin-top:2px}
+  .tc .q{width:150px;height:150px;margin:10px auto 0}
+  .tc .q img{width:100%;height:100%;image-rendering:pixelated}
+  .tc .s{margin-top:8px;font-size:13px;font-weight:700}
+  .tc .o{margin-top:8px;display:inline-block;font-size:12.5px;font-weight:700;color:var(--brand)}
+  @media print{.how,.lead,.o{display:none}body{background:#fff}}
+</style>
+</head>
+<body><div class="w">
+  <h1>Brew &amp; Bloom Café · Table QR codes</h1>
+  <p class="lead">Print these and stick one on each table. Each QR has its own secret code, so the kitchen knows the table and can spot fake orders.</p>
+  <div class="how"><b>How to try the demo with 2 phones:</b><br>
+    1. On phone A, open the <a id="kLink" href="kitchen.html">kitchen screen</a> (PIN <b>1234</b>).<br>
+    2. On phone B, scan a table QR below (or tap a card) and order something.<br>
+    3. Watch the order arrive in the kitchen, then tap through Confirm → Preparing → Ready → Served and see phone B update live.</div>
+  <div class="grid" id="grid"></div>
+</div>
+<script src="shared.js"></script>
+<script src="keys.js"></script>
+<script src="qrcode.js"></script>
+<script>
+const base=location.href.replace(/tables\.html.*$/,""), loc=RT.local?"&local":"";
+if(RT.local) document.getElementById("kLink").href="kitchen.html?local";
+document.getElementById("grid").innerHTML=Object.entries(TABLE_KEYS).map(([t,k])=>{
+  const url=`${base}?t=${t}&k=${k}${loc}`, q=qrcode(0,"M"); q.addData(url); q.make();
+  return `<a class="tc" href="${url}"><div class="k">TABLE</div><b>${t}</b><div class="q">${q.createImgTag(5,0)}</div><div class="s">Scan to order 📱</div><span class="o">Open menu as table ${t} →</span></a>`; }).join("");
+</script>
+</body>
+</html>

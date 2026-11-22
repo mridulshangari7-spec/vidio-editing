@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kitchen screen</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#14110e">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#14110e;--panel:#1f1a16;--card:#2a231d;--line:#3a3129;--ink:#f6efe6;--soft:#b5a99b;--g:#2fbf6a;--y:#f5b301;--r:#ef5350;--b:#4f8df7}
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  body{font-family:"Inter Tight",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100svh}
+  button{font:inherit;color:inherit;cursor:pointer}
+  .lock{min-height:100svh;display:grid;place-items:center;text-align:center;padding:20px}
+  .lock h1{font-size:26px} .lock p{color:var(--soft);margin-top:6px}
+  .pin{margin-top:18px;display:flex;gap:8px;justify-content:center}
+  .pin input{width:200px;text-align:center;font:inherit;font-size:26px;letter-spacing:.4em;padding:12px;border-radius:14px;border:2px solid var(--line);background:var(--panel);color:var(--ink)}
+  .go{margin-top:14px;border:0;background:var(--g);color:#06210f;font-weight:800;font-size:17px;padding:14px 26px;border-radius:14px}
+  .err{color:var(--r);margin-top:10px;font-weight:700;min-height:20px}
+  header{position:sticky;top:0;z-index:10;background:rgba(20,17,14,.95);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:12px 16px}
+  .hr{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .hr h1{font-size:19px}
+  .live{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--g)}
+  .live i{width:8px;height:8px;border-radius:50%;background:var(--g);animation:bl 1.4s infinite}
+  @keyframes bl{50%{opacity:.3}}
+  .stats{margin-left:auto;display:flex;gap:14px;font-size:13px;color:var(--soft)}
+  .stats b{color:var(--ink);font-size:16px}
+  .tbl{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .tbl span{font-size:12px;font-weight:700;color:var(--soft);margin-right:4px}
+  .tbl button{border:1.5px solid var(--line);background:var(--panel);border-radius:10px;padding:6px 10px;font-weight:800;font-size:13.5px;min-width:46px}
+  .tbl button.op{background:#173a24;border-color:var(--g);color:#bff3d2}
+  .geo{margin-left:auto;border:1.5px dashed var(--line)!important;background:none!important;font-weight:600!important;font-size:12.5px!important;color:var(--soft)}
+  .calls{padding:10px 16px 0;display:flex;gap:8px;flex-wrap:wrap}
+  .call{display:flex;align-items:center;gap:10px;background:#3a2c0d;border:1.5px solid var(--y);border-radius:14px;padding:9px 12px;font-weight:700;animation:pop .3s}
+  .call button{border:0;background:var(--y);color:#2a1d00;border-radius:9px;padding:6px 10px;font-weight:800;font-size:13px}
+  @keyframes pop{from{transform:scale(.9);opacity:0}}
+  .board{display:grid;grid-template-columns:repeat(4,minmax(240px,1fr));gap:12px;padding:12px 16px 30px;overflow-x:auto}
+  .col{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:10px;min-height:60vh}
+  .col h2{display:flex;justify-content:space-between;align-items:center;font-size:14px;letter-spacing:.08em;padding:4px 4px 10px}
+  .col h2 b{background:var(--card);border-radius:20px;padding:2px 9px;font-size:13px}
+  .col.chk h2{color:var(--y)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px;animation:pop .3s}
+  .card.flag{border-color:var(--y);box-shadow:0 0 0 1px var(--y) inset}
+  .ch{display:flex;justify-content:space-between;align-items:center}
+  .ch .t{font-size:20px;font-weight:800}
+  .ch .tm{font-size:12px;color:var(--soft);text-align:right}
+  .its{margin-top:8px;font-size:15px;line-height:1.5}
+  .its b{display:inline-block;min-width:26px;color:var(--y)}
+  .nt{margin-top:6px;font-size:13px;color:#ffd98a;background:#3a2c0d;border-radius:8px;padding:5px 8px}
+  .fl{margin-top:8px;display:flex;flex-wrap:wrap;gap:5px}
+  .fl span{font-size:11.5px;font-weight:700;background:#4a1d1b;color:#ffb4ae;border-radius:20px;padding:3px 8px}
+  .fl span.ok{background:#173a24;color:#bff3d2}
+  .acts{margin-top:10px;display:flex;gap:6px}
+  .acts button{flex:1;border:0;border-radius:10px;padding:10px;font-weight:800;font-size:14px}
+  .a-ok{background:var(--g);color:#06210f} .a-no{background:#4a1d1b;color:#ffb4ae;flex:0 0 auto!important;padding:10px 14px!important}
+  .a-next{background:var(--b);color:#fff}
+  .empty{color:var(--soft);font-size:13px;text-align:center;padding:24px 6px}
+  .demo{text-align:center;font-size:11px;letter-spacing:.12em;color:#6f645a;padding-bottom:16px}
+  @media (max-width:700px){.board{grid-template-columns:repeat(4,82vw);scroll-snap-type:x mandatory}.col{scroll-snap-align:start}}
+</style>
+</head>
+<body>
+<div class="lock" id="lock"><div>
+  <div style="font-size:48px">👨‍🍳</div><h1>Kitchen screen</h1><p id="lName"></p>
+  <div class="pin"><input id="pin" inputmode="numeric" maxlength="4" placeholder="PIN" autocomplete="off"></div>
+  <button class="go" id="go" type="button">Start kitchen screen</button>
+  <div class="err" id="err"></div>
+  <p style="font-size:12.5px;margin-top:14px">Demo PIN: 1234. Keep this screen open in the kitchen.</p>
+</div></div>
+
+<div id="app" hidden>
+  <header>
+    <div class="hr"><h1 id="kName"></h1><div class="live"><i></i>LIVE</div>
+      <div class="stats"><div>Orders <b id="sN">0</b></div><div>Served <b id="sS">₹0</b></div></div></div>
+    <div class="tbl" id="tbl"></div>
+  </header>
+  <div class="calls" id="calls"></div>
+  <div class="board">
+    <section class="col chk"><h2>⚠️ CHECK <b id="n0">0</b></h2><div id="c0"></div></section>
+    <section class="col"><h2>🆕 NEW <b id="n1">0</b></h2><div id="c1"></div></section>
+    <section class="col"><h2>🔥 PREPARING <b id="n2">0</b></h2><div id="c2"></div></section>
+    <section class="col"><h2>✅ READY <b id="n3">0</b></h2><div id="c3"></div></section>
+  </div>
+  <p class="demo">DEMO BY INFINITY TECHNOLOGIES</p>
+</div>
+
+<script src="shared.js"></script>
+<script src="keys.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+$("lName").textContent=CAFE.name; $("kName").textContent=CAFE.name+" · Kitchen";
+let actx=null;
+function beep(n=2){ try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)(); for(let i=0;i<n;i++){ const o=actx.createOscillator(), g=actx.createGain(); o.frequency.value=i%2?1175:880; o.connect(g); g.connect(actx.destination);
+  const t=actx.currentTime+i*.22; g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.35,t+.02); g.gain.exponentialRampToValueAtTime(.0001,t+.2); o.start(t); o.stop(t+.21); } }catch(e){} }
+$("pin").addEventListener("keydown",e=>{ if(e.key==="Enter") $("go").click(); });
+$("go").addEventListener("click",()=>{ if($("pin").value!==CAFE.kitchenPin){ $("err").textContent="Wrong PIN"; return; } beep(1); $("lock").hidden=true; $("app").hidden=false; start(); });
+
+function start(){
+const load=(k,d)=>{ try{ return JSON.parse(localStorage.getItem(k))??d; }catch(e){ return d; } };
+const save=(k,v)=>{ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} };
+const T0=Date.now(), orders={}, st={}, tables={}, calls=[], byDev={};
+let home=load("home_"+CAFE.room,null);
+Object.keys(TABLE_KEYS).forEach(t=>tables[t]=false);
+
+/* café location: taken from this kitchen device */
+function setHome(){ if(!navigator.geolocation){ alert("Location not available on this device"); return; }
+  navigator.geolocation.getCurrentPosition(p=>{ home={lat:p.coords.latitude,lng:p.coords.longitude}; save("home_"+CAFE.room,home); drawTables(); draw(); },()=>alert("Please allow location to set the café location"),{enableHighAccuracy:true,timeout:15000}); }
+
+function drawTables(){
+  $("tbl").innerHTML=`<span>TABLES (tap to open/close):</span>`+Object.keys(tables).map(t=>`<button type="button" data-t="${t}" class="${tables[t]?"op":""}">T${t}</button>`).join("")
+    +`<button type="button" class="geo" id="geoBtn">📍 ${home?"Café location set":"Set café location"}</button>`;
+  $("tbl").querySelectorAll("[data-t]").forEach(b=>b.addEventListener("click",()=>RT.send("status",{type:"table",t:+b.dataset.t,open:!tables[b.dataset.t]})));
+  $("geoBtn").addEventListener("click",setHome);
+}
+
+function flags(o){
+  const f=[];
+  if(TABLE_KEYS[o.t]!==o.k) f.push("Wrong table QR (link typed or copied)");
+  if(!tables[o.t]) f.push(`Table ${o.t} not open yet`);
+  if(home&&o.pos){ const m=metres(home,o.pos); if(m>CAFE.farMetres) f.push(`📍 Ordered from ${m>=1000?(m/1000).toFixed(1)+" km":m+" m"} away`); }
+  else if(home&&!o.pos) f.push("Location not shared");
+  const recent=(byDev[o.dev]||[]).filter(ts=>o.ts-ts<5*60000&&ts<o.ts).length;
+  if(recent>=3) f.push("Many orders from one phone");
+  return f;
+}
+
+const STEP={pending:0,accepted:1,preparing:2,ready:3};
+const ago=ts=>{ const m=Math.round((Date.now()-ts)/60000); return m<1?"just now":m+" min ago"; };
+function card(o){
+  const s=st[o.id]||"pending", f=o.flags||[];
+  const items=o.items.map(([id,q])=>`<div><b>${q}×</b>${(CAFE.items[id]||{n:id}).n}</div>`).join("");
+  const acts=s==="pending"?`<button class="a-ok" data-a="accepted">✓ Confirm</button><button class="a-no" data-a="rejected">✕</button>`:
+    s==="accepted"?`<button class="a-next" data-a="preparing">Start preparing</button>`:
+    s==="preparing"?`<button class="a-ok" data-a="ready">Mark ready</button>`:`<button class="a-next" data-a="served">Served</button>`;
+  return `<div class="card${s==="pending"?" flag":""}" data-id="${o.id}"><div class="ch"><div class="t">Table ${o.t}</div><div class="tm">${new Date(o.ts).toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})}<br>${ago(o.ts)}</div></div>
+    <div class="its">${items}</div>${o.note?`<div class="nt">📝 ${o.note.replace(/</g,"&lt;")}</div>`:""}
+    ${s==="pending"?`<div class="fl">${f.map(x=>`<span>${x}</span>`).join("")}</div>`:""}
+    <div class="acts">${acts}</div></div>`;
+}
+function draw(){
+  const cols=[[],[],[],[]]; let n=0, served=0;
+  Object.values(orders).sort((a,b)=>a.ts-b.ts).forEach(o=>{ const s=st[o.id]||"pending"; n++;
+    if(s==="served") served+=o.total; if(s in STEP) cols[STEP[s]].push(o); });
+  cols.forEach((c,i)=>{ $("c"+i).innerHTML=c.map(card).join("")||`<div class="empty">${["Nothing to check 👍","No new orders","Nothing cooking","Nothing waiting"][i]}</div>`; $("n"+i).textContent=c.length; });
+  $("sN").textContent=n; $("sS").textContent=inr(served);
+  $("calls").innerHTML=calls.filter(c=>!c.done).map(c=>`<div class="call">${({waiter:"🙋 Table "+c.t+" needs a waiter",water:"💧 Table "+c.t+" wants water",bill:"🧾 Table "+c.t+" wants the bill · "+inr(c.total)})[c.what]}<button data-call="${c._id}">Done</button></div>`).join("");
+}
+document.addEventListener("click",e=>{
+  const a=e.target.closest("[data-a]"); if(a){ const id=a.closest("[data-id]").dataset.id, o=orders[id];
+    if(a.dataset.a==="accepted"&&!tables[o.t]) RT.send("status",{type:"table",t:o.t,open:true});
+    RT.send("status",{type:"status",id,s:a.dataset.a}); return; }
+  const c=e.target.closest("[data-call]"); if(c){ const x=calls.find(k=>k._id===c.dataset.call); if(x){ x.done=true; draw(); } }
+});
+
+RT.listen("status",o=>{
+  if(o.type==="status"){ st[o.id]=o.s; draw(); }
+  if(o.type==="table"){ tables[o.t]=o.open; drawTables(); draw(); }
+});
+RT.listen("orders",o=>{
+  if(o.type==="call"){ if(Date.now()-o.ts<30*60000){ calls.push(o); if(o.ts>T0-5000) beep(3); draw(); } return; }
+  if(o.type!=="order") return;
+  o.flags=flags(o); orders[o.id]=o; (byDev[o.dev]=byDev[o.dev]||[]).push(o.ts);
+  // clean orders from an open table go straight to NEW; anything suspicious waits in CHECK
+  if(!st[o.id]&&!o.flags.length&&o.ts>T0-60000) RT.send("status",{type:"status",id:o.id,s:"accepted"});
+  if(o.ts>T0-5000) beep(2);
+  draw();
+});
+drawTables(); draw(); setInterval(draw,30000);
+}
+</script>
+</body>
+</html>

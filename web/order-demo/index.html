@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Menu – order from your table</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f7f3ec">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#1b1712;--soft:#6a6259;--faint:#a39a8f;--bg:#f7f3ec;--card:#fff;--line:#e8e1d6;--brand:#7a4b2a;--brand2:#c98a4b;--g:#1e8e3e;--r:#c0392b;--y:#f5b301}
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  html,body{background:var(--bg)}
+  body{font-family:"Inter Tight",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;padding-bottom:110px}
+  button{font:inherit;color:inherit;cursor:pointer}
+  .top{position:sticky;top:0;z-index:20;background:rgba(247,243,236,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:max(12px,env(safe-area-inset-top)) 16px 0}
+  .hd{display:flex;align-items:center;gap:12px}
+  .lg{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--brand2),var(--brand));display:grid;place-items:center;font-size:21px;flex:none}
+  .hd b{display:block;font-size:16.5px}
+  .hd span{display:block;font-size:12.5px;color:var(--soft)}
+  .tb{margin-left:auto;background:var(--ink);color:#fff;border-radius:12px;padding:6px 11px;text-align:center;line-height:1.05}
+  .tb small{display:block;font-size:9.5px;font-weight:700;letter-spacing:.14em;opacity:.7}
+  .tb b{font-size:19px}
+  .cats{display:flex;gap:7px;overflow-x:auto;padding:12px 0 11px;scrollbar-width:none}
+  .cats::-webkit-scrollbar{display:none}
+  .cats button{flex:none;border:1.5px solid var(--line);background:#fff;border-radius:30px;padding:7px 13px;font-size:14px;font-weight:600}
+  .cats button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+  main{width:min(560px,100%);margin:0 auto;padding:0 16px}
+  .mine{margin-top:14px}
+  h2{font-size:20px;font-weight:800;margin:22px 0 10px;scroll-margin-top:130px}
+  .it{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:11px 12px;margin-bottom:9px}
+  .em{flex:none;width:52px;height:52px;border-radius:13px;background:var(--bg);display:grid;place-items:center;font-size:27px}
+  .it .t{flex:1;min-width:0}
+  .it b{display:flex;align-items:center;gap:6px;font-size:15.5px}
+  .vg{flex:none;width:13px;height:13px;border:1.5px solid var(--g);border-radius:2px;display:grid;place-items:center}
+  .vg i{display:block;width:6px;height:6px;border-radius:50%;background:var(--g)}
+  .vg.nv{border-color:var(--r)} .vg.nv i{background:var(--r)}
+  .it span{display:block;font-size:12.5px;color:var(--soft);margin-top:2px}
+  .it em{display:block;font-style:normal;font-weight:700;font-size:14.5px;margin-top:4px}
+  .add{flex:none;border:1.5px solid var(--brand);background:#fff;color:var(--brand);border-radius:10px;padding:7px 16px;font-weight:800;font-size:14px}
+  .step{flex:none;display:flex;align-items:center;background:var(--brand);color:#fff;border-radius:10px;overflow:hidden}
+  .step button{border:0;background:none;color:#fff;width:32px;height:34px;font-size:18px;font-weight:700}
+  .step b{min-width:20px;text-align:center;font-size:14.5px}
+  .bar{position:fixed;left:50%;bottom:max(12px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(528px,calc(100% - 24px));z-index:30;display:flex;gap:8px}
+  .bar button{min-height:56px;border:0;border-radius:16px;font-weight:800;font-size:15.5px}
+  .cartb{flex:1;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 18px;box-shadow:0 12px 28px rgba(0,0,0,.28)}
+  .cartb span{font-weight:600;opacity:.8;font-size:13.5px}
+  .helpb{flex:none;width:56px;background:#fff;border:1.5px solid var(--line)!important;font-size:22px;box-shadow:0 8px 20px rgba(0,0,0,.12)}
+  /* sheets */
+  .sh{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;justify-content:center}
+  .sh .in{width:min(560px,100%);max-height:88svh;overflow:auto;background:var(--bg);border-radius:22px 22px 0 0;padding:18px 16px calc(20px + env(safe-area-inset-bottom));animation:up .25s ease}
+  @keyframes up{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+  .sh h3{font-size:20px;font-weight:800;display:flex;justify-content:space-between;align-items:center}
+  .x{border:0;background:#fff;width:34px;height:34px;border-radius:50%;font-size:18px}
+  .ln{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-top:8px}
+  .ln b{font-size:14.5px}
+  .ln span{display:block;font-size:12.5px;color:var(--soft);margin-top:2px}
+  textarea{margin-top:12px;width:100%;min-height:62px;border:1.5px solid var(--line);border-radius:12px;padding:10px;font:inherit;font-size:15px;background:#fff;resize:vertical}
+  .tot{display:flex;justify-content:space-between;margin-top:12px;font-size:16px;font-weight:800}
+  .big{margin-top:14px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--brand);color:#fff;font-weight:800;font-size:16.5px;display:flex;align-items:center;justify-content:center;gap:8px}
+  .big:disabled{opacity:.5}
+  .note{margin-top:10px;font-size:12.5px;color:var(--soft);text-align:center;line-height:1.4}
+  .hb{display:grid;gap:10px;margin-top:14px}
+  .hb button{display:flex;align-items:center;gap:12px;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:14px;text-align:left}
+  .hb button span{font-size:24px}
+  .hb b{display:block;font-size:15.5px}
+  .hb small{display:block;font-size:12.5px;color:var(--soft)}
+  /* order tracker */
+  .ord{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:10px}
+  .ord .oh{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--soft);font-weight:600}
+  .ord .oi{margin-top:6px;font-size:14.5px;font-weight:600;line-height:1.45}
+  .trk{margin-top:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+  .trk div{text-align:center;font-size:11px;font-weight:700;color:var(--faint)}
+  .trk i{display:block;height:5px;border-radius:5px;background:var(--line);margin-bottom:6px;transition:background .4s}
+  .trk div.on{color:var(--ink)} .trk div.on i{background:var(--g)}
+  .trk div.cur i{animation:pl 1.2s infinite}
+  @keyframes pl{50%{opacity:.4}}
+  .msg{margin-top:10px;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .msg.wait{color:#9a6a00} .msg.bad{color:var(--r)}
+  .gate{text-align:center;padding:60px 20px}
+  .gate .e{font-size:54px}
+  .gate h1{margin-top:12px;font-size:24px}
+  .gate p{margin-top:8px;color:var(--soft);line-height:1.45}
+  .gate a{display:inline-block;margin-top:18px;background:var(--ink);color:#fff;text-decoration:none;font-weight:800;padding:13px 20px;border-radius:14px}
+  .toast{position:fixed;left:50%;top:16px;transform:translate(-50%,-20px);opacity:0;background:var(--ink);color:#fff;font-size:14px;font-weight:700;padding:10px 16px;border-radius:30px;transition:all .3s;z-index:60;max-width:90vw;text-align:center}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+  .closed{background:#fff8e6;border:1.5px dashed #e0b45c;border-radius:16px;padding:14px;margin-top:14px;text-align:center}
+  .closed a{display:inline-block;margin-top:10px;background:#1a73e8;color:#fff;text-decoration:none;font-weight:800;padding:11px 16px;border-radius:12px}
+  .demo{margin:26px 0 0;font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--faint);text-align:center}
+</style>
+</head>
+<body>
+<div id="gate" class="gate" hidden><div class="e">📷</div><h1>Scan the QR on your table</h1><p>This menu opens from the QR code on your table, so the kitchen knows where to bring your order.</p><a href="tables.html">Demo: open the table QR codes</a></div>
+
+<div id="app" hidden>
+  <header class="top">
+    <div class="hd"><div class="lg">☕</div><div><b id="cName"></b><span>Order from your table</span></div><div class="tb"><small>TABLE</small><b id="tNo"></b></div></div>
+    <nav class="cats" id="cats"></nav>
+  </header>
+  <main>
+    <div class="mine" id="mine"></div>
+    <div id="menu"></div>
+    <p class="demo">DEMO BY INFINITY TECHNOLOGIES</p>
+  </main>
+  <div class="bar"><button class="helpb" id="helpBtn" type="button" aria-label="Call waiter or ask for bill">🛎️</button><button class="cartb" id="cartBtn" type="button"><span id="cartCount">Your order is empty</span><b id="cartTot"></b></button></div>
+</div>
+
+<div class="sh" id="cartSh" hidden><div class="in">
+  <h3>Your order <button class="x" data-close>✕</button></h3>
+  <div id="lines"></div>
+  <textarea id="note" placeholder="Anything for the kitchen? e.g. less spicy, no onion"></textarea>
+  <div class="tot"><span>Total</span><span id="sTot"></span></div>
+  <button class="big" id="send" type="button">👨‍🍳 Send to kitchen</button>
+  <p class="note" id="sendNote">Pay at the end, or with UPI from your phone.</p>
+</div></div>
+
+<div class="sh" id="helpSh" hidden><div class="in">
+  <h3>Need something? <button class="x" data-close>✕</button></h3>
+  <div class="hb">
+    <button type="button" data-call="waiter"><span>🙋</span><div><b>Call a waiter</b><small>Someone will come to your table</small></div></button>
+    <button type="button" data-call="water"><span>💧</span><div><b>Water please</b><small>We'll bring it right away</small></div></button>
+    <button type="button" data-call="bill"><span>🧾</span><div><b>Ask for the bill</b><small id="billNote">Total so far</small></div></button>
+  </div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script src="shared.js"></script>
+<script>
+const $=id=>document.getElementById(id), qs=new URLSearchParams(location.search);
+const T=+qs.get("t"), K=qs.get("k")||"";
+const keep=s=>RT.local?(s.includes("?")?s+"&local":s+"?local"):s;
+if(!T){ $("gate").hidden=false; document.querySelector("#gate a").href=keep("tables.html"); }
+else boot();
+
+function boot(){
+$("app").hidden=false; $("cName").textContent=CAFE.name; $("tNo").textContent=T; document.title=`Table ${T} – ${CAFE.name}`;
+const MK=`mine_${CAFE.room}_${T}`, CK=`cart_${CAFE.room}_${T}`;
+const load=(k,d)=>{ try{ return JSON.parse(localStorage.getItem(k))??d; }catch(e){ return d; } };
+const save=(k,v)=>{ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} };
+let cart=load(CK,{}), mine=load(MK,[]), status={}, tableOpen=null, tableClosedAt=0;
+let dev=load("dev_"+CAFE.room,null); if(!dev){ dev=RT.rid(); save("dev_"+CAFE.room,dev); }
+
+/* menu */
+$("cats").innerHTML=CAFE.menu.map((c,i)=>`<button type="button" data-c="${i}"${i?"":' class="on"'}>${c.cat}</button>`).join("");
+$("menu").innerHTML=CAFE.menu.map((c,i)=>`<h2 id="c${i}">${c.cat}</h2>`+c.items.map(it=>`
+  <div class="it"><div class="em">${it.e}</div><div class="t"><b><span class="vg${it.v?"":" nv"}"><i></i></span>${it.n}</b><span>${it.d}</span><em>${inr(it.p)}</em></div><div data-q="${it.id}"></div></div>`).join("")).join("");
+$("cats").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; $("c"+b.dataset.c).scrollIntoView({behavior:"smooth"});
+  $("cats").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b)); });
+function qty(id,d){ cart[id]=Math.max(0,(cart[id]||0)+d); if(!cart[id]) delete cart[id]; save(CK,cart); drawQ(); }
+function drawQ(){
+  document.querySelectorAll("[data-q]").forEach(el=>{ const id=el.dataset.q, n=cart[id]||0;
+    el.innerHTML=n?`<div class="step"><button type="button" data-d="-1">−</button><b>${n}</b><button type="button" data-d="1">+</button></div>`:`<button class="add" type="button" data-d="1">ADD</button>`; });
+  const n=Object.values(cart).reduce((a,b)=>a+b,0), tot=Object.entries(cart).reduce((a,[id,q])=>a+CAFE.items[id].p*q,0);
+  $("cartCount").textContent=n?`${n} item${n>1?"s":""} · View order`:"Your order is empty"; $("cartTot").textContent=n?inr(tot):"";
+  $("sTot").textContent=inr(tot);
+  $("lines").innerHTML=Object.entries(cart).map(([id,q])=>{ const it=CAFE.items[id]; return `<div class="ln"><div><b>${it.e} ${it.n}</b><span>${inr(it.p)} × ${q}</span></div><div class="step" data-l="${id}"><button type="button" data-d="-1">−</button><b>${q}</b><button type="button" data-d="1">+</button></div></div>`; }).join("")||`<p class="note">Add something from the menu first.</p>`;
+  $("send").disabled=!n;
+}
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-d]"); if(!b) return; const host=b.closest("[data-q],[data-l]"); if(host) qty(host.dataset.q||host.dataset.l,+b.dataset.d); });
+drawQ();
+
+/* sheets */
+const open=id=>$(id).hidden=false, close=()=>document.querySelectorAll(".sh").forEach(s=>s.hidden=true);
+$("cartBtn").addEventListener("click",()=>open("cartSh"));
+$("helpBtn").addEventListener("click",()=>{ $("billNote").textContent=`Total so far: ${inr(billTotal())}`; open("helpSh"); });
+document.querySelectorAll(".sh").forEach(s=>s.addEventListener("click",e=>{ if(e.target===s||e.target.closest("[data-close]")) close(); }));
+function toast(m){ $("toast").textContent=m; $("toast").classList.add("on"); clearTimeout(toast.t); toast.t=setTimeout(()=>$("toast").classList.remove("on"),2200); }
+
+/* location (asked once, only when ordering) */
+let pos=null;
+function getPos(){ return new Promise(res=>{ if(pos||!navigator.geolocation) return res(pos);
+  navigator.geolocation.getCurrentPosition(p=>{ pos={lat:+p.coords.latitude.toFixed(5),lng:+p.coords.longitude.toFixed(5)}; res(pos); },()=>res(null),{timeout:6000,maximumAge:300000}); }); }
+
+/* send order */
+$("send").addEventListener("click",async()=>{
+  const last=load("last_"+CAFE.room,0), wait=CAFE.waitBetweenOrders-Math.floor((Date.now()-last)/1000);
+  if(wait>0){ toast(`Please wait ${wait}s before the next order`); return; }
+  $("send").disabled=true; $("send").textContent="Sending…";
+  const p=await getPos();
+  const o={type:"order",id:RT.rid(),t:T,k:K,dev,items:Object.entries(cart),note:$("note").value.trim(),total:Object.entries(cart).reduce((a,[id,q])=>a+CAFE.items[id].p*q,0),pos:p};
+  let ok=false; try{ ok=await RT.send("orders",o); }catch(e){}
+  $("send").textContent="👨‍🍳 Send to kitchen";
+  if(!ok){ $("send").disabled=false; toast("Couldn't send. Check your internet and try again."); return; }
+  save("last_"+CAFE.room,Date.now());
+  mine.unshift({id:o.id,items:o.items,total:o.total,ts:o.ts}); save(MK,mine); cart={}; save(CK,cart); $("note").value="";
+  close(); drawQ(); drawMine(); toast("Order sent to the kitchen 👨‍🍳"); scrollTo({top:0,behavior:"smooth"});
+});
+
+/* help calls */
+document.querySelectorAll("[data-call]").forEach(b=>b.addEventListener("click",async()=>{
+  const ok=await RT.send("orders",{type:"call",what:b.dataset.call,t:T,k:K,dev,total:billTotal()}).catch(()=>false);
+  close(); toast(ok?({waiter:"A waiter is on the way 🙋",water:"Water is coming 💧",bill:"Your bill is coming 🧾"})[b.dataset.call]:"Couldn't send. Try again.");
+}));
+function billTotal(){ return mine.filter(m=>status[m.id]!=="rejected").reduce((a,m)=>a+m.total,0); }
+
+/* live status */
+const STEPS=["accepted","preparing","ready","served"], LABEL={accepted:"Received",preparing:"Preparing",ready:"Ready",served:"Served"};
+function drawMine(){
+  const showClosed=tableOpen===false&&mine.length&&tableClosedAt>mine[0].ts;
+  $("mine").innerHTML=(showClosed?`<div class="closed"><b>Thanks for visiting! 🙏</b><div class="note">Enjoyed your time? A quick review helps us a lot.</div><a href="../review-demo/">⭐ Rate your visit</a></div>`:"")+
+  mine.slice(0,5).map(m=>{ const s=status[m.id]||"pending", idx=STEPS.indexOf(s);
+    const msg=s==="pending"?`<div class="msg wait">⏳ Waiting for the café to confirm…</div>`:s==="rejected"?`<div class="msg bad">✕ The café couldn't take this order. Please ask a waiter.</div>`:
+      s==="ready"?`<div class="msg">🍽️ Your food is ready, coming to your table!</div>`:"";
+    return `<div class="ord"><div class="oh"><span>Order · ${new Date(m.ts).toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})}</span><span>${inr(m.total)}</span></div>
+      <div class="oi">${m.items.map(([id,q])=>`${q} × ${CAFE.items[id].n}`).join(", ")}</div>
+      ${s==="rejected"?"":`<div class="trk">${STEPS.map((x,i)=>`<div class="${i<=idx?"on":""}${i===idx&&s!=="served"?" cur":""}"><i></i>${LABEL[x]}</div>`).join("")}</div>`}${msg}</div>`; }).join("");
+}
+RT.listen("status",o=>{
+  if(o.type==="status"&&mine.some(m=>m.id===o.id)){ const before=status[o.id]; status[o.id]=o.s; drawMine();
+    if(before!==o.s&&Date.now()-o.ts<60000) toast({accepted:"✅ Order received by the kitchen",preparing:"👨‍🍳 Your order is being prepared",ready:"🍽️ Ready! Coming to your table",served:"Enjoy your meal! 😋",rejected:"The café couldn't take this order"}[o.s]||""); }
+  if(o.type==="table"&&o.t===T){ tableOpen=o.open; if(!o.open) tableClosedAt=o.ts; drawMine(); }
+});
+drawMine();
+}
+</script>
+</body>
+</html>
