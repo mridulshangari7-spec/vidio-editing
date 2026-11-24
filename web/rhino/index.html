@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rhino's Gym · Amritsar</title>
+<meta name="description" content="Rhino's Gym, Ranjit Avenue, Amritsar. Order healthy food, get your workout and diet plan, review us, connect to Wi-Fi and more.">
+<meta name="theme-color" content="#172431">
+<style>
+  @font-face{font-family:S;src:url(Arvo-700.woff2);font-weight:700}
+  @font-face{font-family:P;src:url(Poppins-400.ttf);font-weight:400}
+  @font-face{font-family:P;src:url(Poppins-500.ttf);font-weight:500}
+  @font-face{font-family:P;src:url(Poppins-600.ttf);font-weight:600}
+  @font-face{font-family:P;src:url(Poppins-700.ttf);font-weight:700}
+  :root{--n:#233342;--n2:#172431;--t:#3f7a8a;--t2:#7fb0bf;--l:#eef2f4;--l2:#e3eaee;--ink:#172431;--soft:#5b6b78;--line:#d6dfe4;--y:#f2b84b;--wa:#25d366}
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  html,body{background:var(--l)}
+  body{font-family:P,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+  .w{width:min(520px,100%);margin:0 auto;padding:0 16px}
+  /* hero */
+  .hero{position:relative;overflow:hidden;color:#fff;background:linear-gradient(155deg,var(--n) 0%,var(--n2) 100%);padding:max(26px,env(safe-area-inset-top)) 0 74px;text-align:center}
+  .hero::before{content:"";position:absolute;left:-80px;top:-60px;width:300px;height:520px;background:linear-gradient(160deg,rgba(63,122,138,.5),rgba(63,122,138,.08));clip-path:polygon(0 0,100% 0,62% 100%,0 100%)}
+  .hero::after{content:"";position:absolute;right:-90px;top:-40px;width:260px;height:480px;background:rgba(227,234,238,.07);clip-path:polygon(40% 0,100% 0,100% 100%,0 100%)}
+  .hero .in{position:relative}
+  .logo{width:116px;height:116px;border-radius:50%;margin:8px auto 0;background:#fff;box-shadow:0 0 0 4px var(--t),0 14px 30px rgba(0,0,0,.4)}
+  .logo img{width:100%;height:100%;border-radius:50%;display:block}
+  .hero h1{margin-top:16px;font:700 30px/1.1 S,serif;letter-spacing:.01em}
+  .hero .tg{margin-top:6px;font-size:13px;font-weight:600;letter-spacing:.16em;color:var(--t2);text-transform:uppercase}
+  .meta{margin-top:14px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+  .meta span{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:30px;padding:6px 12px}
+  .meta b{color:var(--y)}
+  .meta i{width:8px;height:8px;border-radius:50%;background:#3ddc84;display:inline-block}
+  /* main card */
+  .main{margin-top:-52px;position:relative}
+  .order{display:flex;align-items:center;gap:14px;background:#fff;border-radius:22px;padding:12px 16px 12px 12px;box-shadow:0 14px 34px -14px rgba(23,36,49,.45)}
+  .order .ph{flex:none;width:86px;height:86px;border-radius:16px;overflow:hidden;background:var(--l2)}
+  .order .ph img{width:100%;height:100%;object-fit:cover;display:block}
+  .order b{display:block;font-size:19px;font-weight:700}
+  .order span{display:block;font-size:13px;color:var(--soft);margin-top:2px;line-height:1.35}
+  .order em{display:inline-block;margin-top:7px;font-style:normal;font-size:12px;font-weight:700;color:#fff;background:var(--t);padding:4px 10px;border-radius:20px}
+  .order .go{margin-left:auto;flex:none;width:40px;height:40px;border-radius:50%;background:var(--n);color:#fff;display:grid;place-items:center;font-size:20px}
+  .grid{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .t{display:flex;flex-direction:column;gap:10px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:15px;text-align:left;min-height:118px}
+  .t .ic{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:var(--l2);color:var(--n)}
+  .t .ic svg{width:22px;height:22px}
+  .t b{font-size:15.5px;font-weight:700;line-height:1.2}
+  .t span{font-size:12.5px;color:var(--soft);line-height:1.3;margin-top:-6px}
+  .t.hl{background:var(--n);border-color:var(--n);color:#fff} .t.hl .ic{background:rgba(255,255,255,.12);color:var(--y)} .t.hl span{color:#b9c8d2}
+  .t.wa .ic{background:#e3f8ea;color:#159947}
+  h2{margin:28px 0 12px;font:700 20px/1.2 S,serif;display:flex;align-items:center;gap:10px}
+  h2::before{content:"";width:22px;height:3px;border-radius:2px;background:var(--t)}
+  .rows{display:grid;gap:8px}
+  .r{display:flex;align-items:center;gap:13px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px;text-align:left;width:100%}
+  .r .ic{flex:none;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--l2);color:var(--n)}
+  .r .ic svg{width:20px;height:20px}
+  .r b{display:block;font-size:15px;font-weight:600}
+  .r span{display:block;font-size:12.5px;color:var(--soft)}
+  .r .ar{margin-left:auto;color:var(--soft);font-size:18px}
+  .soc{display:flex;flex-wrap:wrap;gap:10px}
+  .soc a{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:30px;padding:10px 15px 10px 11px;font-weight:600;font-size:14px}
+  .soc a i{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:#fff}
+  .soc a i svg{width:16px;height:16px}
+  .why{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .why>div{background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px}
+  .why b{display:block;font-size:15px;font-weight:700;margin-top:8px;line-height:1.25}
+  .why span{display:block;font-size:12.5px;color:var(--soft);margin-top:3px;line-height:1.35}
+  .why .e{font-size:24px}
+  .stat{margin-top:10px;display:flex;align-items:center;gap:14px;background:var(--n);color:#fff;border-radius:18px;padding:16px}
+  .stat .big{font:700 40px/1 S,serif;color:var(--y)}
+  .stat small{display:block;font-size:12.5px;color:#b9c8d2}
+  .foot{margin:30px 0 0;padding:22px 0 calc(28px + env(safe-area-inset-bottom));text-align:center;font-size:12px;color:var(--soft)}
+  .foot svg{width:30px;vertical-align:middle;margin:0 4px;color:var(--soft)}
+  /* sheets */
+  .sh{position:fixed;inset:0;z-index:40;background:rgba(10,18,26,.55);display:flex;align-items:flex-end;justify-content:center}
+  .sh .in{width:min(520px,100%);max-height:90svh;overflow:auto;background:var(--l);border-radius:24px 24px 0 0;padding:20px 18px calc(22px + env(safe-area-inset-bottom));animation:up .25s ease}
+  @keyframes up{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+  .sh h3{display:flex;justify-content:space-between;align-items:center;font:700 21px/1.2 S,serif}
+  .sh p.n{margin-top:6px;font-size:13.5px;color:var(--soft);line-height:1.45}
+  .x{width:34px;height:34px;border-radius:50%;background:#fff;font-size:17px}
+  label.f{display:block;margin-top:14px;font-size:13px;font-weight:600}
+  .f input,.f select,.f textarea{margin-top:6px;width:100%;border:1.5px solid var(--line);border-radius:12px;padding:12px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}
+  .f textarea{min-height:80px;resize:vertical}
+  .opt{margin-top:8px;display:flex;flex-wrap:wrap;gap:8px}
+  .opt button{border:1.5px solid var(--line);background:#fff;border-radius:30px;padding:9px 14px;font-size:14px;font-weight:600}
+  .opt button.on{background:var(--n);border-color:var(--n);color:#fff}
+  .btn{margin-top:18px;width:100%;min-height:54px;border-radius:15px;background:var(--n);color:#fff;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;gap:9px}
+  .btn.wa{background:var(--wa);color:#05230f}
+  .btn svg{width:21px;height:21px}
+  .wifi{margin-top:16px;display:grid;gap:10px}
+  .wifi div{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 14px}
+  .wifi span{font-size:12.5px;color:var(--soft)} .wifi b{font-size:17px}
+  .wifi button{background:var(--l2);border-radius:10px;padding:8px 12px;font-weight:700;font-size:13px}
+  .bmi{margin-top:16px;background:#fff;border-radius:16px;padding:16px;text-align:center}
+  .bmi .v{font:700 44px/1 S,serif} .bmi .c{margin-top:6px;font-weight:700} .bmi p{margin-top:6px;font-size:13px;color:var(--soft)}
+  .toast{position:fixed;left:50%;top:18px;transform:translate(-50%,-20px);opacity:0;background:var(--n);color:#fff;font-size:14px;font-weight:600;padding:10px 16px;border-radius:30px;transition:all .3s;z-index:60;white-space:nowrap}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></symbol>
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.2 21.8l4.9-1.3A9.8 9.8 0 1 0 12 2.2zm0 1.8a8 8 0 1 1-4.2 14.8l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 0 1 12 4zm-3.2 4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.2 5 4.4 2.5 1 3 .8 3.5.7.6 0 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4l-.5-.3-1.8-.9c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-2c-.2-.5-.4-.4-.6-.4z"/></symbol>
+  <symbol id="dumb" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></g></symbol>
+  <symbol id="leaf" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-14 15-14 0 10-6 15-14 15"/><path d="M5 19l7-7"/></g></symbol>
+  <symbol id="wifi" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M8.6 16a5 5 0 0 1 6.8 0"/><circle cx="12" cy="19" r="1" fill="currentColor"/></g></symbol>
+  <symbol id="pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></g></symbol>
+  <symbol id="rupee" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 4h12M6 9h12M9 4c6 0 6 9 0 9H6l8 7"/></symbol>
+  <symbol id="call" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="scale" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 9a5 5 0 0 1 8 0M12 9l1.5-2"/></g></symbol>
+  <symbol id="ticket" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 8a2 2 0 0 0 0 4v0a2 2 0 0 0 0 4v2h18v-2a2 2 0 0 1 0-4v0a2 2 0 0 1 0-4V6H3z"/><path d="M14 6v12" stroke-dasharray="2 2"/></g></symbol>
+  <symbol id="crown" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 18h18L19 7l-4.5 4L12 5l-2.5 6L5 7z"/></symbol>
+  <symbol id="share" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/></g></symbol>
+  <symbol id="clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+  <symbol id="chat" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></symbol>
+  <symbol id="ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/></g></symbol>
+  <symbol id="fb" viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v7h4v-7h3l1-4h-4V8.5c0-.3.2-.5.5-.5z"/></symbol>
+  <symbol id="snap" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3c3 0 5 2.2 5 5.2v2.3l1.6-.5c.6-.2 1.1.6.5 1l-2 1.2c.5 1.7 2 3 3.6 3.4.4.1.4.6 0 .8-.7.3-1.6.4-2.2.6l-.3 1-1.6-.1c-.9 0-1.6 1.6-4.6 1.6s-3.7-1.6-4.6-1.6l-1.6.1-.3-1c-.6-.2-1.5-.3-2.2-.6-.4-.2-.4-.7 0-.8C5 15.2 6.5 14 7 12.2l-2-1.2c-.6-.4-.1-1.2.5-1l1.5.5V8.2C7 5.2 9 3 12 3z"/></symbol>
+  <symbol id="yt" viewBox="0 0 24 24"><path fill="currentColor" d="M21.6 7.2c-.2-1-.9-1.7-1.9-1.9C17.9 5 12 5 12 5s-5.9 0-7.7.3c-1 .2-1.7.9-1.9 1.9C2 9 2 12 2 12s0 3 .4 4.8c.2 1 .9 1.7 1.9 1.9C6.1 19 12 19 12 19s5.9 0 7.7-.3c1-.2 1.7-.9 1.9-1.9.4-1.8.4-4.8.4-4.8s0-3-.4-4.8zM10 15V9l5.2 3z"/></symbol>
+  <symbol id="th" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16.5 11.5c-.4-2.8-2.2-4.2-4.6-4.2-2.8 0-4.6 2.1-4.6 4.9 0 3 1.9 5.3 5 5.3 2.6 0 4.6-1.6 4.6-3.8 0-1.8-1.4-3-3.5-3-1.9 0-3.1 1-3.1 2.3 0 1.2 1 2 2.3 2 2 0 3.1-1.7 3.1-4.4C15.7 6.3 13.9 4 11.4 4"/></symbol>
+  <symbol id="globe" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></g></symbol>
+  <symbol id="inf" viewBox="0 0 64 24"><path fill="none" stroke="currentColor" stroke-width="3" d="M32 12c-5-6-9-8-13-8a8 8 0 0 0 0 16c4 0 8-2 13-8zm0 0c5 6 9 8 13 8a8 8 0 0 0 0-16c-4 0-8 2-13 8z"/></symbol>
+</defs></svg>
+
+<header class="hero"><div class="in w">
+  <div class="logo"><img src="img/logo.png" alt="Rhino's Gym logo"></div>
+  <h1 id="gName"></h1>
+  <div class="tg" id="gTag"></div>
+  <div class="meta"><span><b>★ <span id="gRate" style="all:unset"></span></b> <span id="gRev" style="all:unset"></span> Google reviews</span><span><i></i><span id="gHours" style="all:unset"></span></span></div>
+</div></header>
+
+<main class="w main">
+  <a class="order" href="menu.html" id="orderLink">
+    <div class="ph"><img src="img/shakes.jpg" alt=""></div>
+    <div><b>Order Food &amp; Shakes</b><span>Nutrition Treat café · protein meals, shakes &amp; salads</span><em>Order from your phone</em></div>
+    <div class="go">→</div>
+  </a>
+
+  <div class="grid">
+    <a class="t hl" id="revLink" href="review.html"><div class="ic"><svg><use href="#star"/></svg></div><b>Review us on Google</b><span>Takes 10 seconds</span></a>
+    <button class="t" data-sheet="workSh"><div class="ic"><svg><use href="#dumb"/></svg></div><b>Get your workout plan</b><span>Made for your goal</span></button>
+    <button class="t" data-sheet="dietSh"><div class="ic"><svg><use href="#leaf"/></svg></div><b>Get your diet plan</b><span>Veg or non-veg</span></button>
+    <button class="t" data-sheet="wifiSh"><div class="ic"><svg><use href="#wifi"/></svg></div><b>Connect to Wi-Fi</b><span>Name &amp; password</span></button>
+    <button class="t wa" data-sheet="fbSh"><div class="ic"><svg><use href="#wa"/></svg></div><b>Private feedback</b><span>Straight to the owner on WhatsApp</span></button>
+    <a class="t" id="mapLink" target="_blank" rel="noopener"><div class="ic"><svg><use href="#pin"/></svg></div><b>Gym location</b><span>Directions on Maps</span></a>
+  </div>
+
+  <h2>More for members</h2>
+  <div class="rows">
+    <button class="r" data-sheet="paySh"><div class="ic"><svg><use href="#rupee"/></svg></div><div><b>Pay membership fees</b><span>UPI: GPay, PhonePe, Paytm</span></div><span class="ar">›</span></button>
+    <button class="r" data-sheet="trialSh"><div class="ic"><svg><use href="#ticket"/></svg></div><div><b>Book a free trial session</b><span>Bring a friend to try Rhino's</span></div><span class="ar">›</span></button>
+    <button class="r" data-sheet="planSh"><div class="ic"><svg><use href="#crown"/></svg></div><div><b>Membership &amp; personal training</b><span>Ask for plans and offers</span></div><span class="ar">›</span></button>
+    <button class="r" data-sheet="bmiSh"><div class="ic"><svg><use href="#scale"/></svg></div><div><b>Check your BMI</b><span>Quick body check</span></div><span class="ar">›</span></button>
+    <button class="r" id="shareBtn"><div class="ic"><svg><use href="#share"/></svg></div><div><b>Refer a friend</b><span>Share Rhino's with your gym buddy</span></div><span class="ar">›</span></button>
+    <a class="r" id="callLink"><div class="ic"><svg><use href="#call"/></svg></div><div><b>Call the gym</b><span id="callNo"></span></div><span class="ar">›</span></a>
+  </div>
+
+  <h2>Follow us</h2>
+  <div class="soc" id="soc"></div>
+
+  <h2>Why Rhino's is the best</h2>
+  <div class="why">
+    <div><div class="e">🏋️</div><b>Premium equipment</b><span>Strength, cardio &amp; functional zones</span></div>
+    <div><div class="e">🧑‍🏫</div><b>Expert coaching</b><span>Certified trainers on the floor</span></div>
+    <div><div class="e">💪</div><b>Personal training</b><span>1-on-1 plans for real results</span></div>
+    <div><div class="e">🥗</div><b>Nutrition café inside</b><span>Protein meals &amp; shakes after your workout</span></div>
+    <div><div class="e">🧘</div><b>Yoga &amp; dance sessions</b><span>More than just weights</span></div>
+    <div><div class="e">✨</div><b>Rhino 2.0</b><span>Freshly upgraded facility, unisex</span></div>
+  </div>
+  <div class="stat"><div class="big" id="gRate2"></div><div><b>Rated by our members on Google</b><small id="gRev2"></small></div></div>
+
+  <div class="foot">Smart card by <svg><use href="#inf"/></svg> Infinity Technologies</div>
+</main>
+
+<!-- sheets -->
+<div class="sh" id="workSh" hidden><div class="in">
+  <h3>Your workout plan <button class="x" data-close>✕</button></h3>
+  <p class="n">Tell us a little and our trainer will send your plan on WhatsApp.</p>
+  <label class="f">Your name<input id="wName" autocomplete="given-name"></label>
+  <label class="f">Your goal</label><div class="opt" data-group="wGoal"><button>Fat loss</button><button>Muscle gain</button><button>Strength</button><button>Stay fit</button></div>
+  <label class="f">Level</label><div class="opt" data-group="wLevel"><button>Beginner</button><button>Intermediate</button><button>Advanced</button></div>
+  <label class="f">Days per week</label><div class="opt" data-group="wDays"><button>3</button><button>4</button><button>5</button><button>6</button></div>
+  <button class="btn wa" id="workSend"><svg><use href="#wa"/></svg>Get my plan on WhatsApp</button>
+</div></div>
+
+<div class="sh" id="dietSh" hidden><div class="in">
+  <h3>Your diet plan <button class="x" data-close>✕</button></h3>
+  <p class="n">Our coach will send a simple diet plan on WhatsApp.</p>
+  <label class="f">Your name<input id="dName" autocomplete="given-name"></label>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><label class="f">Weight (kg)<input id="dWt" inputmode="numeric"></label><label class="f">Height (cm)<input id="dHt" inputmode="numeric"></label></div>
+  <label class="f">Your goal</label><div class="opt" data-group="dGoal"><button>Fat loss</button><button>Muscle gain</button><button>Maintain</button></div>
+  <label class="f">Food</label><div class="opt" data-group="dFood"><button>Veg</button><button>Non-veg</button><button>Eggetarian</button></div>
+  <button class="btn wa" id="dietSend"><svg><use href="#wa"/></svg>Get my diet plan on WhatsApp</button>
+</div></div>
+
+<div class="sh" id="wifiSh" hidden><div class="in">
+  <h3>Gym Wi-Fi <button class="x" data-close>✕</button></h3>
+  <p class="n">Copy the password, then open Wi-Fi settings and pick this network.</p>
+  <div class="wifi"><div><div><span>Network</span><br><b id="wSsid"></b></div></div><div><div><span>Password</span><br><b id="wPass"></b></div><button id="wCopy">Copy</button></div></div>
+</div></div>
+
+<div class="sh" id="fbSh" hidden><div class="in">
+  <h3>Private feedback <button class="x" data-close>✕</button></h3>
+  <p class="n">Something we can do better? The owner reads every message personally.</p>
+  <label class="f">Your message<textarea id="fbTxt" placeholder="e.g. The AC near the cardio area isn't working"></textarea></label>
+  <button class="btn wa" id="fbSend"><svg><use href="#wa"/></svg>Send to the owner</button>
+</div></div>
+
+<div class="sh" id="paySh" hidden><div class="in">
+  <h3>Pay membership fees <button class="x" data-close>✕</button></h3>
+  <p class="n">Pays Rhino's Gym directly with any UPI app. Send the screenshot at reception.</p>
+  <label class="f">Amount (₹)<input id="payAmt" inputmode="numeric" placeholder="e.g. 2500"></label>
+  <label class="f">Your name<input id="payName" autocomplete="name"></label>
+  <a class="btn" id="payGo"><svg><use href="#rupee"/></svg>Pay with UPI</a>
+  <p class="n" style="text-align:center;margin-top:10px">Payee: <b id="payee"></b></p>
+</div></div>
+
+<div class="sh" id="trialSh" hidden><div class="in">
+  <h3>Free trial session <button class="x" data-close>✕</button></h3>
+  <label class="f">Name<input id="tName" autocomplete="name"></label>
+  <label class="f">Preferred time</label><div class="opt" data-group="tTime"><button>Morning</button><button>Afternoon</button><button>Evening</button></div>
+  <button class="btn wa" id="trialSend"><svg><use href="#wa"/></svg>Book on WhatsApp</button>
+</div></div>
+
+<div class="sh" id="planSh" hidden><div class="in">
+  <h3>Membership &amp; PT <button class="x" data-close>✕</button></h3>
+  <label class="f">I'm interested in</label><div class="opt" data-group="pType"><button>Monthly</button><button>3 months</button><button>6 months</button><button>Yearly</button><button>Personal training</button><button>Couple plan</button></div>
+  <button class="btn wa" id="planSend"><svg><use href="#wa"/></svg>Ask for prices on WhatsApp</button>
+</div></div>
+
+<div class="sh" id="bmiSh" hidden><div class="in">
+  <h3>Check your BMI <button class="x" data-close>✕</button></h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><label class="f">Weight (kg)<input id="bWt" inputmode="decimal"></label><label class="f">Height (cm)<input id="bHt" inputmode="decimal"></label></div>
+  <div class="bmi" id="bmiOut" hidden><div class="v" id="bVal"></div><div class="c" id="bCat"></div><p>Want a plan for your goal? Tap "Get your workout plan".</p></div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+<script src="shared.js"></script>
+<script>
+const $=id=>document.getElementById(id), wa=t=>`https://wa.me/${GYM.whatsapp}?text=${encodeURIComponent(t)}`;
+$("gName").textContent=GYM.name; $("gTag").textContent=GYM.tagline; $("gRate").textContent=GYM.rating; $("gRev").textContent=GYM.reviews; $("gHours").textContent=GYM.hours;
+$("gRate2").textContent=GYM.rating+"★"; $("gRev2").textContent=`${GYM.reviews} Google reviews`;
+$("mapLink").href=GYM.maps; $("callLink").href="tel:"+GYM.phone; $("callNo").textContent=GYM.phone.replace(/^\+91/,"+91 ").replace(/(\d{5})(\d{5})$/,"$1 $2");
+$("wSsid").textContent=GYM.wifi.ssid; $("wPass").textContent=GYM.wifi.pass; $("payee").textContent=GYM.upi.pn;
+const SOC=[["instagram","Instagram","ig","linear-gradient(135deg,#f9a03f,#e1306c,#833ab4)"],["facebook","Facebook","fb","#1877f2"],["snapchat","Snapchat","snap","#f7d500"],["youtube","YouTube","yt","#ff0000"],["threads","Threads","th","#111"],["website","Website","globe","var(--t)"]];
+$("soc").innerHTML=SOC.filter(([k])=>GYM.social[k]).map(([k,n,i,c])=>`<a href="${GYM.social[k]}" target="_blank" rel="noopener"><i style="background:${c}"><svg><use href="#${i}"/></svg></i>${n}</a>`).join("");
+// keep ?local through links (demo testing)
+if(RT.local){ $("orderLink").href="menu.html?local"; }
+function toast(m){ $("toast").textContent=m; $("toast").classList.add("on"); setTimeout(()=>$("toast").classList.remove("on"),1800); }
+document.querySelectorAll("[data-sheet]").forEach(b=>b.addEventListener("click",()=>$(b.dataset.sheet).hidden=false));
+document.querySelectorAll(".sh").forEach(s=>s.addEventListener("click",e=>{ if(e.target===s||e.target.closest("[data-close]")) s.hidden=true; }));
+document.querySelectorAll(".opt").forEach(g=>g.addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; g.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b)); }));
+const pick=g=>{ const b=document.querySelector(`[data-group=${g}] .on`); return b?b.textContent:"-"; };
+const go=t=>{ window.open(wa(t),"_blank"); document.querySelectorAll(".sh").forEach(s=>s.hidden=true); };
+$("workSend").onclick=()=>go(`Hi Rhino's Gym! 💪 I'd like a workout plan.\nName: ${$("wName").value||"-"}\nGoal: ${pick("wGoal")}\nLevel: ${pick("wLevel")}\nDays/week: ${pick("wDays")}`);
+$("dietSend").onclick=()=>go(`Hi Rhino's Gym! 🥗 I'd like a diet plan.\nName: ${$("dName").value||"-"}\nWeight: ${$("dWt").value||"-"} kg, Height: ${$("dHt").value||"-"} cm\nGoal: ${pick("dGoal")}\nFood: ${pick("dFood")}`);
+$("fbSend").onclick=()=>{ const t=$("fbTxt").value.trim(); if(!t){ toast("Please write your message"); return; } go(`Private feedback for Rhino's Gym:\n${t}`); };
+$("trialSend").onclick=()=>go(`Hi Rhino's Gym! I'd like to book a free trial session.\nName: ${$("tName").value||"-"}\nPreferred time: ${pick("tTime")}`);
+$("planSend").onclick=()=>go(`Hi Rhino's Gym! Please share prices for: ${pick("pType")}`);
+$("wCopy").onclick=()=>{ navigator.clipboard&&navigator.clipboard.writeText(GYM.wifi.pass).then(()=>toast("Password copied")); };
+const updPay=()=>{ const a=+$("payAmt").value||0; $("payGo").href=upiLink(GYM.upi,a||"",`Rhino's Gym fees${$("payName").value?" - "+$("payName").value:""}`); };
+["payAmt","payName"].forEach(i=>$(i).addEventListener("input",updPay)); updPay();
+const bmi=()=>{ const w=+$("bWt").value, h=+$("bHt").value/100; if(!w||!h){ $("bmiOut").hidden=true; return; } const v=w/(h*h);
+  $("bVal").textContent=v.toFixed(1); $("bCat").textContent=v<18.5?"Underweight":v<25?"Healthy ✅":v<30?"Overweight":"Obese"; $("bmiOut").hidden=false; };
+["bWt","bHt"].forEach(i=>$(i).addEventListener("input",bmi));
+$("shareBtn").onclick=async()=>{ const d={title:GYM.name,text:`Train with me at ${GYM.name}, Ranjit Avenue, Amritsar 💪`,url:location.href.split("?")[0]};
+  if(navigator.share){ try{ await navigator.share(d); }catch(e){} } else { window.open(`https://wa.me/?text=${encodeURIComponent(d.text+" "+d.url)}`,"_blank"); } };
+</script>
+</body>
+</html>

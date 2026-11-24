@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rate Rhino's Gym</title>
+<meta name="theme-color" content="#172431">
+<style>
+  @font-face{font-family:S;src:url(Arvo-700.woff2);font-weight:700}
+  @font-face{font-family:P;src:url(Poppins-400.ttf);font-weight:400}
+  @font-face{font-family:P;src:url(Poppins-600.ttf);font-weight:600}
+  @font-face{font-family:P;src:url(Poppins-700.ttf);font-weight:700}
+  :root{--n:#233342;--n2:#172431;--t:#3f7a8a;--l:#eef2f4;--l2:#e3eaee;--ink:#172431;--soft:#5b6b78;--line:#d6dfe4;--y:#f2b84b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  html,body{background:var(--l)}
+  body{font-family:P,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100svh}
+  a{color:inherit}
+  .top{background:linear-gradient(155deg,var(--n),var(--n2));color:#fff;padding:max(18px,env(safe-area-inset-top)) 16px 18px}
+  .top .w{display:flex;align-items:center;gap:12px}
+  .top img{width:52px;height:52px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px var(--t)}
+  .top b{display:block;font:700 19px/1.1 S,serif} .top span{font-size:12.5px;color:#b9c8d2}
+  .top .bk{margin-left:auto;font-size:13px;font-weight:600;color:#b9c8d2;text-decoration:none}
+  .w{width:min(460px,100%);margin:0 auto}
+  .app{padding:0 18px calc(30px + env(safe-area-inset-bottom))}
+  .scr{margin-top:34px;animation:in .35s ease}
+  @keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  h1{font:700 28px/1.12 S,serif;text-align:center}
+  .lead{margin-top:8px;font-size:15px;color:var(--soft);text-align:center}
+  .stars{margin-top:24px;display:flex;gap:6px}
+  .stars button{flex:1;aspect-ratio:1;border:0;background:#fff;border-radius:16px;box-shadow:0 1px 0 var(--line),0 6px 16px -10px rgba(0,0,0,.3);cursor:pointer;display:grid;place-items:center;transition:transform .15s}
+  .stars button:active{transform:scale(.92)}
+  .stars svg{width:62%;height:62%;fill:#d6dfe4;transition:fill .15s,transform .2s}
+  .stars button.on svg{fill:var(--y);transform:scale(1.08)}
+  .mood{margin-top:14px;text-align:center;font-size:17px;font-weight:700;min-height:24px}
+  textarea{margin-top:16px;width:100%;min-height:110px;border:1.5px solid var(--line);border-radius:16px;padding:13px;font:inherit;font-size:16px;line-height:1.45;resize:vertical;background:#fff;color:var(--ink)}
+  textarea:focus{outline:2px solid var(--t);border-color:transparent}
+  .btn{margin-top:16px;width:100%;min-height:58px;border:0;border-radius:16px;font:inherit;font-size:17px;font-weight:700;cursor:pointer;background:var(--n);color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none}
+  .btn:disabled{opacity:.3;cursor:default}
+  .alt{margin-top:14px;text-align:center;font-size:13px;color:#8a99a5}
+  .done{text-align:center;padding-top:10px}
+  .done .big{font-size:60px}
+  .done h1{margin-top:8px}
+  .foot{margin-top:40px;text-align:center;font-size:11.5px;color:#8a99a5}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><symbol id="st" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></symbol></defs></svg>
+<div class="top"><div class="w"><img src="img/logo.png" alt=""><div><b>Rhino's Gym</b><span id="area"></span></div><a class="bk" href="./">← Home</a></div></div>
+
+<main class="app w">
+  <section class="scr" id="s1">
+    <h1>How was your workout?</h1>
+    <p class="lead">Tap the stars to rate Rhino's Gym.</p>
+    <div class="stars" id="stars"></div>
+    <div class="mood" id="mood"></div>
+    <textarea id="txt" placeholder="What can we do better?" hidden></textarea>
+    <button class="btn" id="send" type="button" disabled>Send</button>
+    <p class="alt" id="alt" hidden><a href="#" id="toG">Post on Google instead</a></p>
+  </section>
+
+  <section class="scr done" id="s3" hidden>
+    <div class="big" id="tEmoji">🙏</div>
+    <h1 id="tHead">Thank you!</h1>
+    <p class="lead" id="tText"></p>
+    <a class="btn" href="./">Back to Rhino's Gym</a>
+  </section>
+  <p class="foot">Smart card by Infinity Technologies</p>
+</main>
+
+<script src="shared.js"></script>
+<script>
+const $=id=>document.getElementById(id), LOW=2; let stars=0;
+$("area").textContent=GYM.area;
+const MOODS=["","Very bad 😞","Not good 😕","Okay 😐","Good 💪","Loved it! 🔥"];
+$("stars").innerHTML=[1,2,3,4,5].map(n=>`<button type="button" aria-label="${n} star"><svg><use href="#st"/></svg></button>`).join("");
+$("stars").querySelectorAll("button").forEach((b,i)=>b.addEventListener("click",()=>{
+  stars=i+1; $("stars").querySelectorAll("button").forEach((x,j)=>x.classList.toggle("on",j<stars));
+  $("mood").textContent=MOODS[stars]; const low=stars<=LOW;
+  $("txt").hidden=!low; $("alt").hidden=!low; $("send").disabled=false;
+  if(low) setTimeout(()=>$("txt").focus(),150);
+}));
+function thanks(g){ $("s1").hidden=true; $("s3").hidden=false;
+  $("tEmoji").textContent=g?"🎉":"🙏"; $("tHead").textContent=g?"Thank you, champ!":"Thanks for telling us";
+  $("tText").textContent=g?"Your review helps more people find Rhino's.":"The owner will personally look into it."; }
+function toGoogle(){ thanks(true); location.href=GYM.google; }
+function toOwner(){
+  const msg=`${"⭐".repeat(stars)} (${stars}/5) feedback for Rhino's Gym:\n${$("txt").value.trim()||"(no details)"}`;
+  window.open(`https://wa.me/${GYM.whatsapp}?text=${encodeURIComponent(msg)}`,"_blank"); thanks(false); }
+$("send").addEventListener("click",()=>stars<=LOW?toOwner():toGoogle());
+$("toG").addEventListener("click",e=>{ e.preventDefault(); toGoogle(); });
+</script>
+</body>
+</html>
