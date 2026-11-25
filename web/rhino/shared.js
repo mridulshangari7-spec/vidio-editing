@@ -6,6 +6,8 @@ window.GYM = {
   area: "D-Block, Ranjit Avenue, Amritsar",
   rating: "4.5", reviews: "209",
   hours: "Open daily · 6 AM – 11 PM",                 // confirm with the gym
+  openHour: 6, closeHour: 23,                         // used for the live "Open now" badge
+  photos: [],                                         // add gym photos here, e.g. ["img/gym1.jpg","img/gym2.jpg"]: they play as a moving background
   phone: "+917528818080", whatsapp: "917528818080",
   google: "https://search.google.com/local/writereview?placeid=ChIJLXd2lVNlGTkRjNjUSr21v54",
   maps: "https://www.google.com/maps/search/?api=1&query=Rhino%27s+Gym+Amritsar&query_place_id=ChIJLXd2lVNlGTkRjNjUSr21v54",
