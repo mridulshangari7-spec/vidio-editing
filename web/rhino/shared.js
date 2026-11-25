@@ -23,6 +23,63 @@ window.GYM = {
   }
 };
 
+
+/* ===== What shows on the page. The owner decides: set any of these to false to hide it. ===== */
+GYM.features = {
+  order: true,        // Nutrition Treat food ordering
+  review: true,       // Google review
+  plans: true,        // workout + diet plan request
+  wifi: true,
+  feedback: true,     // private feedback on WhatsApp
+  facilities: true,   // horizontal facilities showcase
+  toolkit: true,      // calorie tracker, timer, BMI, 1RM, water, streak
+  schedule: true,     // class timetable
+  crowd: true,        // "how busy is it now" meter
+  why: true,          // why Rhino's (stacking cards)
+  pricing: true,      // membership plans
+  trainers: true,     // coaches
+  members: true,      // fees, trial, refer, call
+  social: true
+};
+
+/* Facilities: remove any the gym doesn't have */
+GYM.facilities = [
+  ["strength","Strength Zone","Racks, benches, plates & dumbbells up to heavy weights"],
+  ["cardio","Cardio Deck","Treadmills, cycles, cross-trainers & rowers"],
+  ["functional","Functional & HIIT","Turf, kettlebells, battle ropes, sleds"],
+  ["machines","Premium Machines","Plate-loaded & selectorised machines for every muscle"],
+  ["yoga","Yoga & Dance Studio","Group sessions for flexibility, cardio & fun"],
+  ["pt","Personal Training","1-on-1 coaching with progress tracking"],
+  ["cafe","Nutrition Café","Protein meals & shakes by Nutrition Treat"],
+  ["locker","Lockers & Changing","Clean changing rooms and lockers"],
+  ["steam","Steam & Recovery","Relax your muscles after training"],
+  ["parking","Parking","Easy parking right outside"]
+];
+
+/* SAMPLE data for the demo: replace with the gym's real details (or switch the section off above) */
+GYM.sample = true;    // shows a small "sample" tag on pricing, classes & coaches until real data is added
+GYM.pricing = [
+  { name: "Basic", tag: "", m: 1500, q: 4000, y: 12000, perks: ["Full gym access","Locker","Wi-Fi"] },
+  { name: "Pro", tag: "Most popular", m: 2500, q: 6500, y: 20000, perks: ["Everything in Basic","Yoga & dance classes","Monthly body check","Diet plan"] },
+  { name: "Elite PT", tag: "", m: 6000, q: 16000, y: 55000, perks: ["Everything in Pro","Personal trainer","Weekly diet updates","Priority slots"] }
+];
+GYM.schedule = {   // day 0 = Sunday … 6 = Saturday: [start "HH:MM", end, class, coach]
+  1: [["07:00","08:00","Yoga","Coach Simran"],["18:00","19:00","HIIT Blast","Coach Arjun"],["19:30","20:30","Zumba","Coach Neha"]],
+  2: [["07:00","08:00","Mobility & Stretch","Coach Simran"],["18:00","19:00","Strength Basics","Coach Arjun"]],
+  3: [["07:00","08:00","Yoga","Coach Simran"],["18:00","19:00","HIIT Blast","Coach Arjun"],["19:30","20:30","Bhangra Fitness","Coach Neha"]],
+  4: [["07:00","08:00","Core & Abs","Coach Arjun"],["18:30","19:30","Zumba","Coach Neha"]],
+  5: [["07:00","08:00","Yoga","Coach Simran"],["18:00","19:00","Functional Circuit","Coach Arjun"]],
+  6: [["08:00","09:00","Weekend Bootcamp","Coach Arjun"],["18:00","19:00","Dance Party","Coach Neha"]],
+  0: [["08:00","09:00","Sunday Yoga","Coach Simran"]]
+};
+GYM.trainers = [
+  ["Coach Arjun","Head Coach · Strength & Fat loss","8 yrs"],
+  ["Coach Simran","Yoga & Mobility","6 yrs"],
+  ["Coach Neha","Zumba & Dance Fitness","5 yrs"],
+  ["Coach Rahul","Bodybuilding & Contest prep","10 yrs"]
+];
+GYM.crowd = [15,35,55,60,45,30,20,18,20,25,30,45,70,90,95,80,55,30]; // typical busy % for 6 AM … 11 PM (sample)
+
 /* Nutrition Treat café inside the gym */
 window.CAFE = {
   name: "Nutrition Treat",
