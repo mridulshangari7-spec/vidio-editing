@@ -96,10 +96,11 @@ if(HAS){ $$(".sh2 .eye").forEach(e=>G.from(e,{x:-30,opacity:0,duration:.8,ease:"
   else p.querySelectorAll(".mw").forEach(s=>s.style.opacity=1); })();
 
 /* ---------- marquees: speed + skew follow your scrolling ---------- */
-if(HAS){ const mqs=$$(".mq-t").map((el,i)=>G.to(el,{xPercent:-50,duration:i?26:20,ease:"none",repeat:-1,...(i?{xPercent:0,startAt:{xPercent:-50}}:{})}));
-  const skews=$$(".mq-t").map(el=>G.quickTo(el,"skewX",{duration:.4,ease:"power3"}));
-  let dir=1; const onV=v=>{ if(Math.abs(v)>.2) dir=v>0?1:-1; mqs.forEach(t=>G.to(t,{timeScale:dir*(1+Math.min(4,Math.abs(v)/6)),duration:.3,overwrite:true})); skews.forEach(s=>s(clamp(-v*.5,-12,12))); };
-  if(lenis) lenis.on("scroll",e=>onV(e.velocity)); else { let ly=scrollY; addEventListener("scroll",()=>{ onV(scrollY-ly); ly=scrollY; },{passive:true}); } }
+if(HAS){ const els=$$(".mq-t"), mqs=els.map((el,i)=>G.fromTo(el,{xPercent:i?-50:0},{xPercent:i?0:-50,duration:i?26:20,ease:"none",repeat:-1}));
+  let vel=0, cur=1, dir=1, sk=0;
+  if(lenis) lenis.on("scroll",e=>{ vel=e.velocity; }); else { let ly=scrollY; addEventListener("scroll",()=>{ vel=scrollY-ly; ly=scrollY; },{passive:true}); }
+  G.ticker.add(()=>{ if(Math.abs(vel)>.3) dir=vel>0?1:-1; const target=dir*(1+Math.min(4,Math.abs(vel)/6)); cur+=(target-cur)*.08; mqs.forEach(t=>t.timeScale(cur));
+    const ts=Math.max(-10,Math.min(10,-vel*.4)); if(Math.abs(ts-sk)>.05){ sk+=(ts-sk)*.15; els.forEach(el=>G.set(el,{skewX:sk})); } vel*=.9; }); }
 
 /* ---------- food slideshow ---------- */
 if($("fps")){ const FOOD=[["shakes","Protein Shake",150],["salad","Protein Salad",200],["sandwich","Paneer Tikka Sandwich",270],["kebab","Malai Chicken Tikka",320],["biryani","Chicken Biryani",310],["pizza","Whole Wheat Pizza",210],["soup","Veg Protein Soup",160]];
@@ -150,7 +151,7 @@ refreshToolCards();
 /* ---------- stacking cards ---------- */
 (function(){ const cards=$$("#stack .sc"); cards.forEach((c,i)=>c.style.setProperty("--i",i));
   if(!HAS) return; cards.forEach((c,i)=>{ if(i===cards.length-1) return;
-    G.to(c,{scale:.92,filter:"brightness(.7)",ease:"none",scrollTrigger:{trigger:cards[i+1],start:"top 55%",end:"top "+(90+(i+1)*14)+"px",scrub:true}}); });
+    G.to(c,{scale:.92,opacity:.55,ease:"none",scrollTrigger:{trigger:cards[i+1],start:"top 55%",end:"top "+(90+(i+1)*14)+"px",scrub:true}}); });
   cards.forEach(c=>G.from(c.querySelector(".em"),{scale:0,rotate:-40,duration:.8,ease:"back.out(2)",scrollTrigger:{trigger:c,start:"top 85%"}})); })();
 
 /* ---------- counters ---------- */
@@ -203,7 +204,7 @@ if(FINE&&HAS){ const cur=$("cur"), qx=G.quickTo(cur,"x",{duration:.35,ease:"powe
 
 /* ---------- finger spotlight + ripple ---------- */
 function spot(e){ const c=e.target.closest&&e.target.closest(".gc"); if(!c) return; const r=c.getBoundingClientRect(); c.style.setProperty("--mx",(e.clientX-r.left)+"px"); c.style.setProperty("--my",(e.clientY-r.top)+"px"); c.style.setProperty("--sp",1); }
-document.addEventListener("pointermove",spot,{passive:true}); document.addEventListener("pointerdown",spot,{passive:true});
+if(FINE){ document.addEventListener("pointermove",spot,{passive:true}); }
 document.addEventListener("pointerout",e=>{ const c=e.target.closest&&e.target.closest(".gc"); if(c&&!c.contains(e.relatedTarget)) c.style.setProperty("--sp",0); });
 document.addEventListener("pointerdown",e=>{ const el=e.target.closest&&e.target.closest(".rp"); if(!el||RM) return; const r=el.getBoundingClientRect(), s=Math.max(r.width,r.height);
   const d=document.createElement("span"); d.className="rpl"; d.style.cssText=`width:${s}px;height:${s}px;left:${e.clientX-r.left-s/2}px;top:${e.clientY-r.top-s/2}px`; el.appendChild(d); setTimeout(()=>d.remove(),700); buzz(); });

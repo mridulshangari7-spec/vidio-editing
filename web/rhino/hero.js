@@ -8,7 +8,7 @@ const DPR=Math.min(devicePixelRatio||1,1.75);
 /* ---------- stars (static, like a real night sky) ---------- */
 const sc=$("stars"), sx=sc.getContext("2d");
 function drawStars(){
-  const w=hero.clientWidth, h=hero.clientHeight; sc.width=w*DPR; sc.height=h*DPR; sx.setTransform(DPR,0,0,DPR,0,0); sx.clearRect(0,0,w,h);
+  const w=hero.clientWidth, h=hero.clientHeight; const D2=Math.min(DPR,1.5); sc.width=w*D2; sc.height=h*D2; sx.setTransform(D2,0,0,D2,0,0); sx.clearRect(0,0,w,h);
   let seed=7; const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
   const n=Math.round(w*h/2600);
   for(let i=0;i<n;i++){ const x=rnd()*w, y=rnd()*h, r=rnd(), size=r>.985?1.6:r>.9?1.05:.6, a=.25+rnd()*.7;
@@ -19,16 +19,16 @@ function drawStars(){
 
 /* ---------- planet rim: fragment shader ---------- */
 const rc=$("rim");
-let gl=null, prog=null, uRes, uT, uR, uC, t0=performance.now(), visible=true;
-try{ gl=rc.getContext("webgl",{premultipliedAlpha:true,alpha:true,antialias:false}); }catch(e){}
+let gl=null, prog=null, uRes, uS, uT, uR, uC, t0=performance.now(), visible=true;
+try{ gl=rc.getContext("webgl",{premultipliedAlpha:true,alpha:true,antialias:false,powerPreference:"low-power",preserveDrawingBuffer:false}); }catch(e){}
 const VS="attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
 const FS=`precision highp float;
-uniform vec2 res; uniform float t; uniform float R; uniform vec2 C;
+uniform vec2 res; uniform float t; uniform float R; uniform vec2 C; uniform float S;
 float h1(float n){return fract(sin(n)*43758.5453);}
 float h2(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 float n2(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
   return mix(mix(h2(i),h2(i+vec2(1,0)),f.x),mix(h2(i+vec2(0,1)),h2(i+vec2(1,1)),f.x),f.y);}
-float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*n2(p);p*=2.03;a*=.5;}return v;}
+float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<3;i++){v+=a*n2(p);p*=2.03;a*=.5;}return v;}
 void main(){
   vec2 px=vec2(gl_FragCoord.x, res.y-gl_FragCoord.y);
   float push=1.+.018*sin(t*.35);
@@ -39,23 +39,22 @@ void main(){
   float wide=exp(-pow(ang/1.15,2.));
   float pulse=.86+.14*sin(t*2.1)+.06*sin(t*5.3+1.);
   float plasma=fbm(vec2(ang*34.,t*.55))*1.6+fbm(vec2(ang*90.-t*.9,t*.3))*.6;
-  float sc=res.x/1400.;
-  float core=exp(-abs(d)/(2.2*max(sc,.6)))*(1.2+plasma*.6);
+  float core=exp(-abs(d)/(2.2*S))*(1.2+plasma*.6);
   float out_=step(0.,d);
-  float g1=exp(-max(d,0.)/(22.*max(sc,.6)))*.85*out_;
-  float g2=exp(-max(d,0.)/(110.*max(sc,.55)))*.42*out_;
-  float g3=exp(-max(d,0.)/(380.*max(sc,.5)))*.16*out_;
+  float g1=exp(-max(d,0.)/(22.*S))*.85*out_;
+  float g2=exp(-max(d,0.)/(110.*S))*.42*out_;
+  float g3=exp(-max(d,0.)/(380.*S))*.16*out_;
   /* light streaks racing outward */
   float sector=floor(ang*170.);
   float hs=h1(sector*1.7);
   float lane=smoothstep(.5,.0,abs(fract(ang*170.)-.5)*2.-.15);
-  float run=fract(d/(320.*max(sc,.5))-t*(.35+hs*.5)+hs*7.);
-  float streak=step(.9,hs)*lane*smoothstep(0.,.08,run)*smoothstep(.45,.08,run)*exp(-max(d,0.)/(520.*max(sc,.5)))*step(0.,d);
-  float rays=pow(fbm(vec2(ang*60.,t*.18)),7.)*exp(-max(d,0.)/(200.*max(sc,.5)))*step(0.,d)*2.2;
+  float run=fract(d/(320.*S)-t*(.35+hs*.5)+hs*7.);
+  float streak=step(.9,hs)*lane*smoothstep(0.,.08,run)*smoothstep(.45,.08,run)*exp(-max(d,0.)/(520.*S))*step(0.,d);
+  float rays=pow(fbm(vec2(ang*60.,t*.18))*1.15,7.)*exp(-max(d,0.)/(200.*S))*step(0.,d)*2.2;
   float outside=(core+g1+g2+g3)*pulse*(.35+.95*wide)*(.55+.9*spot)+(streak*1.4+rays)*wide;
   /* inside the planet: dark with a lit atmosphere band */
   float inside=0.;
-  if(d<0.){ float a=exp(d/(38.*max(sc,.6))); float b=exp(d/(220.*max(sc,.6))); float surf=fbm(vec2(ang*14.,d*.01+t*.05));
+  if(d<0.){ float a=exp(d/(38.*S)); float b=exp(d/(220.*S)); float surf=fbm(vec2(ang*14.,d*.01+t*.05));
     inside=(a*.75+b*.12*surf)*(.3+.9*wide)*pulse; }
   vec3 cCore=vec3(.86,.99,1.);
   vec3 cGlow=vec3(.14,.78,.95);
@@ -73,29 +72,32 @@ function build(){
   prog=gl.createProgram(); gl.attachShader(prog,sh(gl.VERTEX_SHADER,VS)); gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,FS)); gl.linkProgram(prog); gl.useProgram(prog);
   const b=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,b); gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
   const loc=gl.getAttribLocation(prog,"p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
-  uRes=gl.getUniformLocation(prog,"res"); uT=gl.getUniformLocation(prog,"t"); uR=gl.getUniformLocation(prog,"R"); uC=gl.getUniformLocation(prog,"C");
+  uRes=gl.getUniformLocation(prog,"res"); uS=gl.getUniformLocation(prog,"S"); uT=gl.getUniformLocation(prog,"t"); uR=gl.getUniformLocation(prog,"R"); uC=gl.getUniformLocation(prog,"C");
 }
 let geo={};
 function size(){
   drawStars();
-  const w=hero.clientWidth, h=Math.min(hero.clientHeight,innerHeight*1.05), mob=w<900||w<h;
-  rc.style.height=h+"px"; rc.width=w*DPR; rc.height=h*DPR;
-  // planet: huge circle above the screen; its lowest point sits above the headline
-  const R=(mob?w*1.35:w*.82), apex=mob?Math.min(h*.24,w*.56):h*.2;
-  geo={R:R*DPR,C:[w/2*DPR,(apex-R)*DPR]};
-  if(gl&&prog){ gl.viewport(0,0,rc.width,rc.height); gl.uniform2f(uRes,rc.width,rc.height); gl.uniform1f(uR,geo.R); gl.uniform2f(uC,geo.C[0],geo.C[1]); }
+  const w=hero.clientWidth, vh=innerHeight, mob=w<900||w<vh;
+  const R=(mob?w*1.35:w*.82), apex=mob?Math.min(vh*.24,w*.56):vh*.2;
+  const h=Math.min(hero.clientHeight,apex+vh*.62);          // only the part of the sky the glow reaches
+  const Q=mob?.5:.6;                                          // canvas pixels per CSS pixel
+  rc.style.height=h+"px"; rc.width=Math.round(w*Q); rc.height=Math.round(h*Q);
+  geo={R:R*Q,C:[w/2*Q,(apex-R)*Q]};
+  if(gl&&prog){ gl.viewport(0,0,rc.width,rc.height); gl.uniform2f(uRes,rc.width,rc.height); gl.uniform1f(uR,geo.R); gl.uniform2f(uC,geo.C[0],geo.C[1]); gl.uniform1f(uS,Q*Math.max(w/1400,.6)); }
   document.documentElement.style.setProperty("--apex",apex+"px");
   if(RM||!loopOn) frame(performance.now(),true);
 }
 let loopOn=false;
+let lastF=0, scrollT=0; addEventListener("scroll",()=>{ scrollT=performance.now(); },{passive:true});
 function frame(now,once){
   if(!once&&loopOn) requestAnimationFrame(frame);
   if(!gl||!prog||(!visible&&!once)||document.hidden) return;
+  if(!once&&(now-lastF<21||now-scrollT<140)) return; lastF=now;
   gl.uniform1f(uT,(now-t0)/1000); gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT); gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
 }
 if(gl){ try{ build(); gl.enable(gl.BLEND); gl.blendFunc(gl.ONE,gl.ONE_MINUS_SRC_ALPHA); document.documentElement.classList.add("rim-ok"); }catch(e){ console.warn(e); gl=null; } }
-new IntersectionObserver(es=>{ visible=es[0].isIntersecting; },{threshold:0}).observe(hero);
-addEventListener("resize",()=>{ clearTimeout(size.t); size.t=setTimeout(size,120); });
+new IntersectionObserver(es=>{ visible=es[0].isIntersecting; },{threshold:0}).observe(rc);
+let lastW=innerWidth; addEventListener("resize",()=>{ if(Math.abs(innerWidth-lastW)<2&&matchMedia("(pointer:coarse)").matches) return; lastW=innerWidth; clearTimeout(size.t); size.t=setTimeout(size,150); });
 size();
 if(gl&&!RM){ loopOn=true; requestAnimationFrame(frame); }
 
