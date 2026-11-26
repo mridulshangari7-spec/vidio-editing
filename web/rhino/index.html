@@ -42,7 +42,8 @@
   <symbol id="i-steam" viewBox="0 0 24 24"><path d="M8 4c-1.5 2 1.5 3 0 5M12 4c-1.5 2 1.5 3 0 5M16 4c-1.5 2 1.5 3 0 5M4 13h16v3a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5Z"/></symbol>
   <symbol id="i-car" viewBox="0 0 24 24"><path d="M5 16V11l2-5h10l2 5v5M3 16h18v3h-3M6 19H3M5 11h14"/><circle cx="7.5" cy="14" r=".6"/><circle cx="16.5" cy="14" r=".6"/></symbol>
   <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></symbol>
-  <symbol id="i-th" viewBox="0 0 24 24"><path d="M16 11c-1-3-3-4-5-4-3 0-5 2-5 5.5S8 19 12 19c3 0 5-2 5-4.5 0-3-4-3.5-6-2.5-1.5.8-1 3 1 3 3 0 3-4 2.5-6.5C14 5 12 4 11 4"/></symbol>
+  <symbol id="i-snap" viewBox="0 0 24 24"><path d="M12 3c3 0 5 2.2 5 5.2v2.3l1.6-.5c.6-.2 1 .6.4 1l-1.9 1.1c.6 1.9 2 3.2 3.6 3.6-.4.8-1.6 1.1-2.6 1.2-.3.6-.2 1.3-.7 1.3-.8 0-1.6-.4-2.6.1-.9.5-1.6 1.2-2.8 1.2s-1.9-.7-2.8-1.2c-1-.5-1.8-.1-2.6-.1-.5 0-.4-.7-.7-1.3-1-.1-2.2-.4-2.6-1.2 1.6-.4 3-1.7 3.6-3.6L4.4 11c-.6-.4-.2-1.2.4-1L7 10.5V8.2C7 5.2 9 3 12 3Z"/></symbol>
+  <symbol id="i-th"viewBox="0 0 24 24"><path d="M16 11c-1-3-3-4-5-4-3 0-5 2-5 5.5S8 19 12 19c3 0 5-2 5-4.5 0-3-4-3.5-6-2.5-1.5.8-1 3 1 3 3 0 3-4 2.5-6.5C14 5 12 4 11 4"/></symbol>
   <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
   <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
@@ -54,6 +55,8 @@
   <header class="nav">
     <a class="nav__logo" href="#hero"><img src="img/logo.png" alt="">Rhino's Gym</a>
     <div class="nav__actions">
+      <a class="soc-btn soc-ig" data-soc="instagram" target="_blank" rel="noopener" aria-label="Follow Rhino's Gym on Instagram" title="Follow on Instagram"><svg class="ic"><use href="#i-ig"/></svg><span>Instagram</span></a>
+      <a class="soc-btn soc-sc" data-soc="snapchat" target="_blank" rel="noopener" aria-label="Add Rhino's Gym on Snapchat" title="Add on Snapchat"><svg class="ic"><use href="#i-snap"/></svg><span>Snapchat</span></a>
       <button class="pill pill--menu" id="menuBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menu"><span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>More</button>
       <a class="pill pill--start" id="joinTop" href="#visit">Join Rhino's</a>
     </div>
@@ -83,7 +86,7 @@
   </div>
   <div class="menu__foot">
     <span id="mArea"></span>
-    <div class="row"><a class="pill pill--ghost" id="mCall">Call</a><a class="pill pill--start" id="mWa" target="_blank" rel="noopener">WhatsApp</a></div>
+    <div class="row"><a class="pill pill--ghost" data-soc="instagram" target="_blank" rel="noopener">Instagram</a><a class="pill pill--ghost" data-soc="snapchat" target="_blank" rel="noopener">Snapchat</a><a class="pill pill--ghost" id="mCall">Call</a><a class="pill pill--start" id="mWa" target="_blank" rel="noopener">WhatsApp</a></div>
   </div>
 </nav>
 

@@ -266,3 +266,15 @@ a.chip:hover{background:#fff}
   .rv,.rvs>*{opacity:1;translate:none;transition:none}
   .ft-big span{translate:none}
 }
+
+/* follow buttons in the top bar */
+.soc-btn{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px 0 10px;border-radius:999px;background:rgba(255,255,255,.7);box-shadow:0 0 0 1px var(--hair);color:var(--ink);font-size:15px;font-weight:500;letter-spacing:-.04em;white-space:nowrap;transition:transform .25s cubic-bezier(.2,.8,.2,1),background-color .2s,color .2s}
+.soc-btn svg{width:19px;height:19px}
+.soc-btn:hover{transform:translateY(-1px);color:#fff}
+.soc-ig:hover{background:linear-gradient(135deg,#f9a03f,#e1306c 55%,#833ab4)}
+.soc-sc:hover{background:#fffc00;color:#000}
+.soc-btn:active{transform:scale(.98)}
+.soc-btn:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
+@media (max-width:1099px){.soc-btn{width:36px;padding:0;justify-content:center}.soc-btn span{display:none}}
+@media (max-width:520px){.nav__actions{gap:8px}.nav__logo{gap:8px}}
+@media (max-width:370px){.nav__logo{font-size:0}.nav__logo img{font-size:16px}}

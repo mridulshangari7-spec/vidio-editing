@@ -19,6 +19,7 @@ set("gRate",GYM.rating); set("gRev",GYM.reviews); set("area",GYM.area); set("mAr
 set("wSsid",GYM.wifi.ssid); set("wPass",GYM.wifi.pass); set("payee",GYM.upi.pn); set("yr",new Date().getFullYear());
 $("gChip").href=GYM.google; $("mapLink").href=GYM.maps;
 $$("[data-review]").forEach(a=>a.href=GYM.google);   /* Review opens Google reviews directly */
+$$("[data-soc]").forEach(a=>{ const u=GYM.social[a.dataset.soc]; if(u) a.href=u; else a.remove(); });   /* follow buttons appear once a link is set */
 ["callLink","dCall","mCall","callBtn","callNo2"].forEach(i=>$(i)&&($(i).href="tel:"+GYM.phone));
 $("mWa").href=wa("Hi Rhino's Gym!");
 ["joinWa"].forEach(i=>$(i)&&($(i).href=wa("Hi Rhino's Gym! I want to join. Please share membership details.")));
@@ -81,7 +82,7 @@ $$(".rv,.rvs,.ft-big").forEach(el=>io.observe(el));
   el.innerHTML=GYM.facilities.map(([k,n,d],i)=>`<div class="fac-row"><span class="n">${String(i+1).padStart(2,"0")}</span><b>${esc(n)}</b><span>${esc(d)}</span><svg class="ic"><use href="#i-${IC[k]||"bolt"}"/></svg></div>`).join(""); })();
 
 /* ---------- social ---------- */
-(function(){ const el=$("soc"); if(!el) return; const S=[["instagram","Instagram","ig"],["facebook","Facebook","globe"],["snapchat","Snapchat","globe"],["youtube","YouTube","globe"],["threads","Threads","th"],["website","Website","globe"]];
+(function(){ const el=$("soc"); if(!el) return; const S=[["instagram","Instagram","ig"],["facebook","Facebook","globe"],["snapchat","Snapchat","snap"],["youtube","YouTube","globe"],["threads","Threads","th"],["website","Website","globe"]];
   el.innerHTML=S.filter(([k])=>GYM.social[k]).map(([k,n,i])=>`<a class="chip" href="${GYM.social[k]}" target="_blank" rel="noopener"><svg class="ic" style="width:16px;height:16px"><use href="#i-${i}"/></svg>${n}</a>`).join(""); })();
 
 /* ---------- toolkit (tools.js renders the panels) ---------- */
