@@ -23,14 +23,17 @@ $("mapLink").href=GYM.maps; ["callLink","dCall","mCall"].forEach(i=>$(i)&&($(i).
 $("callNo").textContent=GYM.phone.replace(/^\+91(\d{5})(\d{5})$/,"+91 $1 $2");
 $("wSsid").textContent=GYM.wifi.ssid; $("wPass").textContent=GYM.wifi.pass; $("payee").textContent=GYM.upi.pn;
 if(RT.local) ["orderLink","dOrder"].forEach(i=>$(i)&&($(i).href="menu.html?local"));
-if(FEAT.order===false) $("dOrder").remove();
+if(FEAT.order===false){ $("dOrder").remove(); $("hOrder")&&$("hOrder").remove(); }
+["tJoin","hJoin"].forEach(i=>$(i)&&($(i).href=wa("Hi Rhino's Gym! I want to join. Please share membership details.")));
+$("dsPro")&&($("dsPro").href=wa("Hi Rhino's Gym! I'm interested in Rhino Pro (personal trainer + diet plan)."));
+$("dsCall")&&($("dsCall").href="tel:"+GYM.phone);
 (function(){ const h=new Date().getHours(), open=h>=GYM.openHour&&h<GYM.closeHour, f=x=>x===0?"12 AM":x<12?x+" AM":x===12?"12 PM":(x-12)+" PM";
   $("oDot").classList.toggle("off",!open); $("oTxt").textContent=open?`Open now · till ${f(GYM.closeHour)}`:`Closed · opens ${f(GYM.openHour)}`; })();
-$("gName").innerHTML=GYM.name.split(" ").map(w=>`<span style="white-space:nowrap">${[...w].map(c=>`<span class="ch">${c}</span>`).join("")}</span>`).join(" ");
 
 /* ---------- smooth scroll ---------- */
 let lenis=null;
 if(HAS&&window.Lenis){ lenis=new Lenis({lerp:.11,smoothWheel:true}); lenis.on("scroll",ST.update); G.ticker.add(t=>lenis.raf(t*1000)); G.ticker.lagSmoothing(0); }
+window.goTo=t=>scrollTo(t);
 const scrollTo=t=>{ const el=typeof t==="string"?document.querySelector(t):t; if(!el) return; lenis?lenis.scrollTo(el,{offset:-70,duration:1.4}):el.scrollIntoView({behavior:"smooth"}); };
 
 /* ---------- preloader → hero intro ---------- */
@@ -38,11 +41,16 @@ const pre=$("pre"), dock=$("dock");
 function heroIn(){
   window.HERO_T0=performance.now();
   if(!HAS){ dock.style.transform="translate(-50%,0)"; return; }
-  G.from(".ttl .ch",{yPercent:120,rotateX:-90,opacity:0,duration:1,stagger:.045,ease:"back.out(1.6)",delay:.15});
-  G.from(["#tEye","#tMeta","#drag","#hint"],{y:24,opacity:0,duration:.9,stagger:.12,ease:"power3.out",delay:.45});
-  G.from(".top",{opacity:0,y:-20,duration:.9,ease:"power3.out",delay:.3,clearProps:"transform,opacity"});
-  G.fromTo(dock,{x:0,y:0,xPercent:-50,yPercent:160},{x:0,y:0,xPercent:-50,yPercent:0,duration:1,ease:"back.out(1.4)",delay:.9});
-  G.to("#drag",{opacity:0,delay:7,duration:.8});
+  G.from(".top",{opacity:0,y:-20,duration:.9,ease:"power3.out",clearProps:"transform,opacity"});
+  G.from("#rim",{opacity:0,duration:2,ease:"power2.out"});
+  G.from(".hl .ln>span",{yPercent:115,duration:1.15,stagger:.14,ease:"power4.out",delay:.15});
+  G.from(["#hEye","#hLede","#hCta"],{y:26,opacity:0,duration:.9,stagger:.12,ease:"power3.out",delay:.55});
+  G.from("#dashWrap",{y:180,opacity:0,duration:1.5,ease:"power3.out",delay:.75});
+  G.from(".ds-brand,.ds-i,.ds-pro",{x:-18,opacity:0,duration:.6,stagger:.04,ease:"power2.out",delay:1.25});
+  G.from(".ds-top,.ds-st,.ds-chart,.ds-cal",{y:28,opacity:0,duration:.8,stagger:.1,ease:"power3.out",delay:1.35});
+  G.fromTo(".ds-line",{strokeDasharray:1400,strokeDashoffset:1400},{strokeDashoffset:0,duration:2,ease:"power2.inOut",delay:1.6});
+  G.from(".ds-area",{opacity:0,duration:1.2,delay:2.2});
+  G.fromTo(dock,{x:0,y:0,xPercent:-50,yPercent:160},{x:0,y:0,xPercent:-50,yPercent:0,duration:1,ease:"back.out(1.4)",delay:1.8});
 }
 if(HAS){
   lenis&&lenis.stop();
@@ -64,7 +72,7 @@ if(HAS){
 const top=$("top"), menu=$("menu"); let lastY=0, menuOpen=false;
 function onScrollUI(){ const y=scrollY, H=document.documentElement.scrollHeight-innerHeight;
   $("prog").style.transform=`scaleX(${H>0?y/H:0})`;
-  top.classList.toggle("solid",y>innerHeight*.5); if(!menuOpen) top.classList.toggle("hide",y>lastY+4&&y>innerHeight); if(y<lastY-4) top.classList.remove("hide"); lastY=y; story(); }
+  top.classList.toggle("solid",y>innerHeight*.5); if(!menuOpen) top.classList.toggle("hide",y>lastY+4&&y>innerHeight); if(y<lastY-4) top.classList.remove("hide"); lastY=y; }
 function toggleMenu(open){ menuOpen=open; document.documentElement.classList.toggle("menu-open",open); top.classList.remove("hide");
   if(open){ menu.hidden=false; lenis&&lenis.stop();
     if(HAS){ G.fromTo(menu,{clipPath:"circle(0% at calc(100% - 38px) 34px)"},{clipPath:"circle(150% at calc(100% - 38px) 34px)",duration:.8,ease:"expo.inOut"}); G.from(".menu-in a",{y:50,opacity:0,stagger:.06,duration:.7,ease:"power3.out",delay:.25}); }
@@ -74,19 +82,7 @@ $("burger").onclick=()=>{ buzz(); toggleMenu(!menuOpen); };
 $$("[data-nav]").forEach(a=>a.addEventListener("click",e=>{ e.preventDefault(); toggleMenu(false); setTimeout(()=>scrollTo(a.getAttribute("href")),350); }));
 $$(".brand").forEach(a=>a.addEventListener("click",e=>{ e.preventDefault(); lenis?lenis.scrollTo(0,{duration:1.6}):scrollTo(0,0); }));
 
-/* ---------- 3D hero scroll story ---------- */
-const stage=$("stage"), ttl=$("ttl"), words=[$("w0"),$("w1"),$("w2")], endb=$("endb"), hint=$("hint");
-window.STAGE_P=0;
-function story(){
-  const r=stage.getBoundingClientRect(), p=clamp(-r.top/(stage.offsetHeight-innerHeight)); window.STAGE_P=p;
-  if(r.bottom<0) return;
-  const a=seg(p,.04,.2); ttl.style.opacity=1-a; ttl.style.transform=`translateY(${-a*60}px) scale(${1-a*.08})`;
-  hint.style.opacity=1-seg(p,0,.08);
-  [[.22,.3,.42],[.42,.5,.62],[.62,.7,.84]].forEach(([s,m,e],i)=>{ const inn=seg(p,s,m), out=seg(p,m+.06,e), w=words[i];
-    w.style.opacity=inn*(1-out); w.style.transform=`translateY(${(1-inn)*50-out*50}px) scale(${.85+inn*.15+out*.15})`; w.style.filter=`blur(${(1-inn)*10+out*10}px)`; });
-  const en=seg(p,.86,.98); endb.style.opacity=en; endb.style.transform=`translateY(${(1-en)*30}px)`;
-}
-addEventListener("scroll",onScrollUI,{passive:true}); addEventListener("resize",story); onScrollUI();
+addEventListener("scroll",onScrollUI,{passive:true}); onScrollUI();
 
 /* ---------- headings: word reveal ---------- */
 $$("[data-split]").forEach(h=>{ h.innerHTML=h.textContent.split(" ").map(w=>`<span class="wd"><span>${esc(w)}</span></span>`).join(" ");
@@ -129,6 +125,7 @@ if($("fps")){ const FOOD=[["shakes","Protein Shake",150],["salad","Protein Salad
 $$("[data-tool]").forEach(b=>b.addEventListener("click",()=>{ openTool(b.dataset.tool); try{ history.pushState({tool:1},""); }catch(e){} }));
 $("pBack").onclick=()=>{ if(history.state&&history.state.tool) history.back(); else closeTool(); };
 addEventListener("popstate",()=>{ if(!$("panel").hidden) closeTool(); });
+{ const rt=window.refreshToolCards; window.refreshToolCards=()=>{ rt(); window.refreshDash&&refreshDash(); }; }
 refreshToolCards();
 
 /* ---------- class timetable ---------- */
@@ -234,5 +231,7 @@ const bmi=()=>{ const w=+$("bWt").value, h=+$("bHt").value/100; if(!w||!h||h<1){
 $("shareBtn").onclick=async()=>{ const d={title:GYM.name,text:`Train with me at ${GYM.name}, Ranjit Avenue, Amritsar 💪`,url:location.href.split("?")[0]};
   if(navigator.share){ try{ await navigator.share(d); }catch(e){} } else window.open(`https://wa.me/?text=${encodeURIComponent(d.text+" "+d.url)}`,"_blank"); };
 
-if(HAS){ addEventListener("load",()=>ST.refresh()); document.fonts&&document.fonts.ready.then(()=>ST.refresh()); }
+if(HAS){ ["#home","#facilities","#toolkit","#classes","#pricing"].forEach(id=>{ const el=document.querySelector(id), a=document.querySelector(`.tnav a[href="${id}"]`); if(!el||!a) return;
+    ST.create({trigger:el,start:"top 45%",end:"bottom 45%",onToggle:t=>{ if(t.isActive){ $$(".tnav a").forEach(x=>x.classList.toggle("on",x===a)); } }}); });
+  addEventListener("load",()=>ST.refresh()); document.fonts&&document.fonts.ready.then(()=>ST.refresh()); }
 })();

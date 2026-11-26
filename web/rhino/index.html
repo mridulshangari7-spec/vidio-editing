@@ -7,8 +7,6 @@
 <meta name="description" content="Rhino's Gym, Ranjit Avenue, Amritsar. Order healthy food, track calories, get your workout and diet plan, class timetable, membership plans and more.">
 <meta name="theme-color" content="#0b1218">
 <script>document.documentElement.className="js"</script>
-<link rel="modulepreload" href="lib/three.module.min.js">
-<script type="importmap">{"imports":{"three":"./lib/three.module.min.js"}}</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -63,11 +61,13 @@
 <div class="cursor" id="cur"></div>
 
 <header class="top" id="top">
-  <a class="brand" href="#stage"><img src="img/logo.png" alt=""><span>RHINO'S</span></a>
-  <button class="burger" id="burger" aria-label="Menu"><i></i><i></i></button>
+  <a class="brand" href="#home"><img src="img/logo.png" alt=""><span>RHINO'S</span></a>
+  <nav class="tnav" aria-label="Sections"><a class="on" href="#home" data-nav>Home</a><a href="#facilities" data-nav data-f="facilities">Facilities</a><a href="#toolkit" data-nav data-f="toolkit">Toolkit</a><a href="#classes" data-nav data-f="schedule">Classes</a><a href="#pricing" data-nav data-f="pricing">Plans</a></nav>
+  <div class="tr"><a class="tjoin" id="tJoin" target="_blank" rel="noopener">Join Now</a><button class="burger" id="burger" aria-label="Menu"><i></i><i></i></button></div>
 </header>
 <nav class="menu" id="menu" aria-label="Menu" hidden>
   <div class="menu-in">
+    <a href="#home" data-nav><small>00</small>Home</a>
     <a href="#food" data-nav><small>01</small>Order food</a>
     <a href="#toolkit" data-nav data-f="toolkit"><small>02</small>Member toolkit</a>
     <a href="#facilities" data-nav data-f="facilities"><small>03</small>Facilities</a>
@@ -78,24 +78,57 @@
   <div class="menu-ft"><a id="mCall">Call the gym</a><a id="mWa" target="_blank" rel="noopener">WhatsApp</a></div>
 </nav>
 
-<section id="stage" aria-label="Rhino's Gym">
-  <div class="pin" id="stagePin">
-    <div class="fallback" aria-hidden="true"></div>
-    <canvas id="gl" aria-hidden="true"></canvas>
-    <div class="vig"></div>
-    <div class="ttl" id="ttl">
-      <div class="eyeb" id="tEye">Amritsar · Ranjit Avenue</div>
-      <h1 id="gName">Rhino's Gym</h1>
-      <div class="meta" id="tMeta"><span class="pill"><b>★ <span id="gRate"></span></b><span id="gRev"></span> reviews</span><span class="pill"><i class="dot" id="oDot"></i><span id="oTxt"></span></span></div>
+<section class="hero" id="home">
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <canvas id="rim" aria-hidden="true"></canvas>
+  <div class="rim-fb" aria-hidden="true"></div>
+  <div class="hero-in">
+    <div class="h-eye" id="hEye"><i class="dot" id="oDot"></i><span id="oTxt"></span><b>★ <span id="gRate"></span></b><span><span id="gRev"></span> reviews</span></div>
+    <h1 class="hl"><span class="ln"><span><em>Rhino's</em> Train Harder,</span></span><span class="ln"><span><span class="dk">Eat Clean, Grow Strong.</span><span class="mb">Grow Stronger.</span></span></span></h1>
+    <p class="lede" id="hLede">Amritsar's premium gym with a nutrition café inside. Order food, track calories, book classes and get your plan, all from this one tap.</p>
+    <div class="cta" id="hCta"><a class="btn-v rp" id="hJoin" target="_blank" rel="noopener">Join Rhino's</a><a class="btn-d rp" id="hOrder" href="menu.html">Order Food</a></div>
+  </div>
+
+  <div class="dash-wrap" id="dashWrap">
+    <div class="dash-glow" aria-hidden="true"></div>
+    <div class="dash" id="dash">
+      <aside class="ds-side">
+        <div class="ds-brand"><img src="img/logo.png" alt=""><b>Member Hub</b><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></g></svg></div>
+        <div class="ds-nav">
+          <button class="ds-i on" data-dsgo="home"><svg><use href="#i-scale"/></svg>Dashboard</button>
+          <a class="ds-i" id="dsOrder" href="menu.html" data-f="order"><svg><use href="#i-food"/></svg>Order food</a>
+          <button class="ds-i" data-tool="cal"><svg><use href="#i-fire"/></svg>Calories</button>
+          <button class="ds-i" data-tool="timer"><svg><use href="#i-timer"/></svg>Workout timer</button>
+          <button class="ds-i" data-dsgo="#classes" data-f="schedule"><svg><use href="#i-users"/></svg>Classes</button>
+          <i class="ds-sep"></i>
+          <button class="ds-i" data-tool="water"><svg><use href="#i-drop"/></svg>Water</button>
+          <button class="ds-i" data-tool="streak"><svg><use href="#i-bolt"/></svg>Streak</button>
+          <a class="ds-i" href="review.html" data-f="review"><svg><use href="#i-star"/></svg>Review us</a>
+        </div>
+        <div class="ds-pro"><b>Rhino Pro ⚡</b><span>Personal trainer + weekly diet plan</span><a id="dsPro" target="_blank" rel="noopener">Upgrade</a></div>
+      </aside>
+      <div class="ds-main">
+        <div class="ds-top">
+          <div class="ds-icons"><button data-sheet="wifiSh" aria-label="Wi-Fi"><svg><use href="#i-wifi"/></svg></button><button data-tool="streak" aria-label="Streak"><svg><use href="#i-fire"/></svg></button><a id="dsCall" aria-label="Call"><svg><use href="#i-call"/></svg></a></div>
+          <div class="ds-user"><span class="av">R</span><div><b id="dsHi">Hi, Champ</b><small id="dsDate"></small></div></div>
+        </div>
+        <div class="ds-grid">
+          <div class="ds-l">
+            <div class="ds-stats">
+              <button class="ds-st" data-tool="cal"><small>Calories today <i>🔥</i></small><b id="dsK">0</b><span><em id="dsKp" class="up">Set goal</em> <span id="dsKg">tap to start</span></span></button>
+              <button class="ds-st" data-tool="streak"><small>Gym streak <i>⚡</i></small><b id="dsS">0</b><span><em id="dsSp" class="up">days</em> <span id="dsSb">check in today</span></span></button>
+            </div>
+            <div class="ds-chart"><div class="ds-h"><b>Your week · calories</b><span id="dsTag"></span></div><svg id="dsChart" viewBox="0 0 600 200" preserveAspectRatio="none"></svg><div class="ds-x" id="dsX"></div></div>
+          </div>
+          <div class="ds-cal">
+            <div class="ds-h"><b id="dsMonth"></b><span class="ds-arr">‹ ›</span></div>
+            <div class="ds-days" id="dsDays"></div>
+            <div class="ds-sub">Today at Rhino's</div>
+            <div class="ds-rows" id="dsRows"></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="words" aria-hidden="true">
-      <div class="word f" id="w0"><i>01 · BUILD</i><span class="tx">STRENGTH</span></div>
-      <div class="word o" id="w1"><i>02 · GROW</i>MUSCLE</div>
-      <div class="word f" id="w2" style="font-size:clamp(30px,9.6vw,72px)"><i>03 · BECOME</i><span class="tx">TRANSFORMATION</span></div>
-    </div>
-    <div class="endb" id="endb"><h2>Ready to train?</h2><p>Scroll for everything Rhino's</p></div>
-    <div class="hint" id="hint"><i></i>SCROLL</div>
-    <div class="drag" id="drag">☝️ Spin or tap the coin</div>
   </div>
 </section>
 
@@ -277,7 +310,7 @@
 <script src="lib/ScrollTrigger.min.js"></script>
 <script src="lib/lenis.min.js"></script>
 <script src="tools.js"></script>
+<script src="hero.js"></script>
 <script src="app.js"></script>
-<script type="module" src="scene.js"></script>
 </body>
 </html>
