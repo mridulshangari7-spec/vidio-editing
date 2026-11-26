@@ -57,7 +57,7 @@ GYM.facilities = [
 ];
 
 /* SAMPLE data for the demo: replace with the gym's real details (or switch the section off above) */
-GYM.sample = true;    // shows a small "sample" tag on pricing, classes & coaches until real data is added
+GYM.sample = false;   // the new site does not show sample pricing, classes, coaches or crowd data
 GYM.pricing = [
   { name: "Basic", tag: "", m: 1500, q: 4000, y: 12000, perks: ["Full gym access","Locker","Wi-Fi"] },
   { name: "Pro", tag: "Most popular", m: 2500, q: 6500, y: 20000, perks: ["Everything in Basic","Yoga & dance classes","Monthly body check","Diet plan"] },
@@ -118,6 +118,18 @@ window.CAFE = {
 };
 CAFE.items = {};
 CAFE.menu.forEach((c, ci) => c.items = c.items.map((a, ii) => { const it = { id: `i${ci}_${ii}`, n: a[0], p: a[1], v: a[2], d: a[3] || "", cat: c.cat, img: c.img }; CAFE.items[it.id] = it; return it; }));
+/* Dishes with photos: they rotate on the café landing page and the gym site.
+   Photos are sample photos (Unsplash) until the café's own top-down photos are added in nt/. */
+CAFE.featured = [
+  { item: "Protein Salad with Olive Oil", name: "PROTEIN SALAD /<br>OLIVE OIL",  tag: "SALADS",  img: "nt/salad.webp",      bg: "#B5D3A0", ink: "#1F3A1C" },
+  { item: "Strawberry Shake",             name: "STRAWBERRY /<br>SHAKE",         tag: "SHAKES",  img: "nt/shake.webp",      bg: "#EFA9BD", ink: "#4A1F33" },
+  { item: "Chicken Soup",                 name: "CHICKEN /<br>SOUP",             tag: "SOUPS",   img: "nt/chsoup.webp",     bg: "#9FD3C7", ink: "#123A31" },
+  { item: "Chicken Egg Salad",            name: "CHICKEN /<br>EGG SALAD",        tag: "PROTEIN", img: "nt/eggsalad.webp",   bg: "#F5D4BA", ink: "#5A3216" },
+  { item: "Chilly Chicken (Fat Free)",    name: "CHILLY CHICKEN /<br>FAT FREE",  tag: "MEALS",   img: "nt/chicken.webp",    bg: "#EBD98A", ink: "#2D2F63" },
+  { item: "Green Salad",                  name: "GREEN /<br>SALAD",              tag: "SALADS",  img: "nt/greensalad.webp", bg: "#C9D7F0", ink: "#1B2A4A" },
+  { item: "Veg Protein Soup",             name: "VEG PROTEIN /<br>SOUP",         tag: "SOUPS",   img: "nt/soup.webp",       bg: "#A99BDB", ink: "#241A45" }
+].map(f => ({ ...f, it: Object.values(CAFE.items).find(i => i.n === f.item) })).filter(f => f.it);
+
 
 window.RT = (() => {
   const local = new URLSearchParams(location.search).has("local");

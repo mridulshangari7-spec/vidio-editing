@@ -4,49 +4,48 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Rate Rhino's Gym</title>
-<meta name="theme-color" content="#172431">
+<meta name="theme-color" content="#e3e4e9">
 <style>
-  @font-face{font-family:S;src:url(Arvo-700.woff2);font-weight:700}
-  @font-face{font-family:P;src:url(Poppins-400.ttf);font-weight:400}
-  @font-face{font-family:P;src:url(Poppins-600.ttf);font-weight:600}
-  @font-face{font-family:P;src:url(Poppins-700.ttf);font-weight:700}
-  :root{--n:#233342;--n2:#172431;--t:#3f7a8a;--l:#eef2f4;--l2:#e3eaee;--ink:#172431;--soft:#5b6b78;--line:#d6dfe4;--y:#f2b84b}
+  @font-face{font-family:Inter;src:url(site/inter-400.woff2) format("woff2");font-weight:400}
+  @font-face{font-family:Inter;src:url(site/inter-500.woff2) format("woff2");font-weight:500}
+  @font-face{font-family:Inter;src:url(site/inter-600.woff2) format("woff2");font-weight:600 700}
+  :root{--paper:#e3e4e9;--ink:#000;--soft:rgba(0,0,0,.5);--hair:rgba(0,0,0,.08);--teal:#1f6f86;--y:#f2a93b}
   *{box-sizing:border-box;margin:0;padding:0}
   [hidden]{display:none!important}
-  html,body{background:var(--l)}
-  body{font-family:P,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100svh}
-  a{color:inherit}
-  .top{background:linear-gradient(155deg,var(--n),var(--n2));color:#fff;padding:max(18px,env(safe-area-inset-top)) 16px 18px}
-  .top .w{display:flex;align-items:center;gap:12px}
-  .top img{width:52px;height:52px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px var(--t)}
-  .top b{display:block;font:700 19px/1.1 S,serif} .top span{font-size:12.5px;color:#b9c8d2}
-  .top .bk{margin-left:auto;font-size:13px;font-weight:600;color:#b9c8d2;text-decoration:none}
-  .w{width:min(460px,100%);margin:0 auto}
-  .app{padding:0 18px calc(30px + env(safe-area-inset-bottom))}
-  .scr{margin-top:34px;animation:in .35s ease}
-  @keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-  h1{font:700 28px/1.12 S,serif;text-align:center}
-  .lead{margin-top:8px;font-size:15px;color:var(--soft);text-align:center}
-  .stars{margin-top:24px;display:flex;gap:6px}
-  .stars button{flex:1;aspect-ratio:1;border:0;background:#fff;border-radius:16px;box-shadow:0 1px 0 var(--line),0 6px 16px -10px rgba(0,0,0,.3);cursor:pointer;display:grid;place-items:center;transition:transform .15s}
-  .stars button:active{transform:scale(.92)}
-  .stars svg{width:62%;height:62%;fill:#d6dfe4;transition:fill .15s,transform .2s}
-  .stars button.on svg{fill:var(--y);transform:scale(1.08)}
-  .mood{margin-top:14px;text-align:center;font-size:17px;font-weight:700;min-height:24px}
-  textarea{margin-top:16px;width:100%;min-height:110px;border:1.5px solid var(--line);border-radius:16px;padding:13px;font:inherit;font-size:16px;line-height:1.45;resize:vertical;background:#fff;color:var(--ink)}
-  textarea:focus{outline:2px solid var(--t);border-color:transparent}
-  .btn{margin-top:16px;width:100%;min-height:58px;border:0;border-radius:16px;font:inherit;font-size:17px;font-weight:700;cursor:pointer;background:var(--n);color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none}
-  .btn:disabled{opacity:.3;cursor:default}
-  .alt{margin-top:14px;text-align:center;font-size:13px;color:#8a99a5}
-  .done{text-align:center;padding-top:10px}
-  .done .big{font-size:60px}
-  .done h1{margin-top:8px}
-  .foot{margin-top:40px;text-align:center;font-size:11.5px;color:#8a99a5}
+  html,body{background:radial-gradient(120% 80% at 50% 0%,#eceef2,var(--paper) 55%,#d6d8df)}
+  body{font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100svh}
+  a{color:inherit;text-decoration:none}
+  .top{padding:max(18px,env(safe-area-inset-top)) 20px 0}
+  .top .w{display:flex;align-items:center;gap:10px}
+  .top img{width:36px;height:36px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px var(--hair)}
+  .top b{display:block;font-size:17px;font-weight:500;letter-spacing:-.04em} .top span{font-size:12.5px;color:var(--soft)}
+  .top .bk{margin-left:auto;height:36px;padding:0 16px;border-radius:999px;background:#000;color:#fff;display:inline-flex;align-items:center;font-size:14px;font-weight:500;letter-spacing:-.03em}
+  .w{width:min(480px,100%);margin:0 auto}
+  .app{padding:0 20px calc(30px + env(safe-area-inset-bottom))}
+  .scr{margin-top:12vh;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+  @keyframes in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  h1{font-size:clamp(40px,11vw,56px);font-weight:500;line-height:.98;letter-spacing:-.06em}
+  .lead{margin-top:12px;font-size:17px;color:var(--soft);letter-spacing:-.02em}
+  .stars{margin-top:34px;display:flex;gap:8px}
+  .stars button{flex:1;aspect-ratio:1;border:0;background:#fff;border-radius:20px;box-shadow:0 1px 0 rgba(0,0,0,.04),0 14px 30px -22px rgba(20,20,40,.45);cursor:pointer;display:grid;place-items:center;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+  .stars button:active{transform:scale(.9)}
+  .stars svg{width:58%;height:58%;fill:#e1e2e7;transition:fill .2s,transform .35s cubic-bezier(.3,1.6,.5,1)}
+  .stars button.on svg{fill:var(--y);transform:scale(1.1) rotate(-8deg)}
+  .mood{margin-top:18px;font-size:22px;font-weight:500;letter-spacing:-.04em;min-height:28px}
+  textarea{margin-top:18px;width:100%;min-height:120px;border:0;border-radius:20px;padding:15px;font:inherit;font-size:16px;line-height:1.45;resize:vertical;background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px var(--hair)}
+  textarea:focus{outline:2px solid var(--teal)}
+  .btn{margin-top:18px;width:100%;height:58px;border:0;border-radius:999px;font:inherit;font-size:16px;font-weight:500;letter-spacing:-.02em;cursor:pointer;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;transition:transform .2s,opacity .3s}
+  .btn:active{transform:scale(.98)} .btn:disabled{opacity:.25;cursor:default}
+  .alt{margin-top:14px;text-align:center;font-size:14px;color:var(--soft)} .alt a{text-decoration:underline;text-underline-offset:3px}
+  .done{text-align:left}
+  .done .big{font-size:64px}
+  .done h1{margin-top:14px}
+  .foot{margin-top:60px;text-align:center;font-size:12.5px;color:var(--soft)}
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute"><defs><symbol id="st" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></symbol></defs></svg>
-<div class="top"><div class="w"><img src="img/logo.png" alt=""><div><b>Rhino's Gym</b><span id="area"></span></div><a class="bk" href="./">← Home</a></div></div>
+<div class="top"><div class="w"><img src="img/logo.png" alt=""><div><b>Rhino's Gym</b><span id="area"></span></div><a class="bk" href="./">Home</a></div></div>
 
 <main class="app w">
   <section class="scr" id="s1">

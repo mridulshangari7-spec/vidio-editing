@@ -1,250 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Rhino's Gym · Amritsar</title>
-<meta name="description" content="Rhino's Gym, Ranjit Avenue, Amritsar. Order healthy food, track calories, get your workout and diet plan, class timetable, membership plans and more.">
-<meta name="theme-color" content="#0b1218">
-<script>document.documentElement.className="js"</script>
-<link rel="stylesheet" href="style.css">
+<title>Rhino's Gym — Strength · Muscle · Transformation</title>
+<meta name="description" content="Rhino's Gym, D-Block, Ranjit Avenue, Amritsar. Train harder, grow stronger. Order from the Nutrition Treat café, track calories, get your plan.">
+<meta name="theme-color" content="#e3e4e9">
+<link rel="icon" href="img/logo.png">
+<link rel="preload" href="site/poster.jpg" as="image">
+<link rel="preload" href="site/inter-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site/main.css">
+<link rel="stylesheet" href="site/tools.css">
+<script>window.RhinoPoster=new Promise(function(res,rej){var i=new Image();i.decoding="async";i.onload=function(){res(i)};i.onerror=rej;i.src="site/poster.jpg";});</script>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></symbol>
-  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.2 21.8l4.9-1.3A9.8 9.8 0 1 0 12 2.2zm0 1.8a8 8 0 1 1-4.2 14.8l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 0 1 12 4zm-3.2 4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.2 5 4.4 2.5 1 3 .8 3.5.7.6 0 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4l-.5-.3-1.8-.9c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-2c-.2-.5-.4-.4-.6-.4z"/></symbol>
-  <symbol id="i-dumb" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></g></symbol>
-  <symbol id="i-leaf" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-14 15-14 0 10-6 15-14 15"/><path d="M5 19l7-7"/></g></symbol>
-  <symbol id="i-wifi" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M8.6 16a5 5 0 0 1 6.8 0"/><circle cx="12" cy="19" r="1" fill="currentColor"/></g></symbol>
-  <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></g></symbol>
-  <symbol id="i-rupee" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M6 4h12M6 9h12M9 4c6 0 6 9 0 9H6l8 7"/></symbol>
-  <symbol id="i-call" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
-  <symbol id="i-scale" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 9a5 5 0 0 1 8 0M12 9l1.5-2"/></g></symbol>
-  <symbol id="i-ticket" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 8a2 2 0 0 0 0 4a2 2 0 0 0 0 4v2h18v-2a2 2 0 0 1 0-4a2 2 0 0 1 0-4V6H3z"/><path d="M14 6v12" stroke-dasharray="2 2"/></g></symbol>
-  <symbol id="i-share" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/></g></symbol>
-  <symbol id="i-food" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8M4.5 3v5a2.5 2.5 0 0 0 5 0V3M7 11v10M17 21V3c-2.5 1.5-3.5 4-3.5 8h3.5"/></g></symbol>
-  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
-  <symbol id="i-ne" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M8 7h9v9"/></symbol>
-  <symbol id="i-chev" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></symbol>
-  <symbol id="i-fire" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 22c4 0 7-3 7-7 0-5-5-7-5-12-3 2-5 5-5 8-1-1-2-2-2-4-2 2-2 5-2 8 0 4 3 7 7 7z"/></symbol>
-  <symbol id="i-timer" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6M19 6l1.5-1.5"/></g></symbol>
-  <symbol id="i-drop" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M12 3s7 7.5 7 12a7 7 0 0 1-14 0c0-4.5 7-12 7-12z"/></symbol>
-  <symbol id="i-bolt" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M13 2L4 14h7l-1 8 9-12h-7z"/></symbol>
-  <symbol id="i-users" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5M16 4.5a3.5 3.5 0 0 1 0 7M18 14.6c2 .7 3.2 2.6 3.5 5.4"/></g></symbol>
-  <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/></g></symbol>
-  <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v7h4v-7h3l1-4h-4V8.5c0-.3.2-.5.5-.5z"/></symbol>
-  <symbol id="i-snap" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3c3 0 5 2.2 5 5.2v2.3l1.6-.5c.6-.2 1.1.6.5 1l-2 1.2c.5 1.7 2 3 3.6 3.4.4.1.4.6 0 .8-.7.3-1.6.4-2.2.6l-.3 1-1.6-.1c-.9 0-1.6 1.6-4.6 1.6s-3.7-1.6-4.6-1.6l-1.6.1-.3-1c-.6-.2-1.5-.3-2.2-.6-.4-.2-.4-.7 0-.8C5 15.2 6.5 14 7 12.2l-2-1.2c-.6-.4-.1-1.2.5-1l1.5.5V8.2C7 5.2 9 3 12 3z"/></symbol>
-  <symbol id="i-yt" viewBox="0 0 24 24"><path fill="currentColor" d="M21.6 7.2c-.2-1-.9-1.7-1.9-1.9C17.9 5 12 5 12 5s-5.9 0-7.7.3c-1 .2-1.7.9-1.9 1.9C2 9 2 12 2 12s0 3 .4 4.8c.2 1 .9 1.7 1.9 1.9C6.1 19 12 19 12 19s5.9 0 7.7-.3c1-.2 1.7-.9 1.9-1.9.4-1.8.4-4.8.4-4.8s0-3-.4-4.8zM10 15V9l5.2 3z"/></symbol>
-  <symbol id="i-th" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16.5 11.5c-.4-2.8-2.2-4.2-4.6-4.2-2.8 0-4.6 2.1-4.6 4.9 0 3 1.9 5.3 5 5.3 2.6 0 4.6-1.6 4.6-3.8 0-1.8-1.4-3-3.5-3-1.9 0-3.1 1-3.1 2.3 0 1.2 1 2 2.3 2 2 0 3.1-1.7 3.1-4.4C15.7 6.3 13.9 4 11.4 4"/></symbol>
-  <symbol id="i-globe" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></g></symbol>
-  <symbol id="i-inf" viewBox="0 0 64 24"><path fill="none" stroke="currentColor" stroke-width="3" d="M32 12c-5-6-9-8-13-8a8 8 0 0 0 0 16c4 0 8-2 13-8zm0 0c5 6 9 8 13 8a8 8 0 0 0 0-16c-4 0-8 2-13 8z"/></symbol>
-  <symbol id="f-strength" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M8 32h48"/><rect x="12" y="20" width="6" height="24" rx="2"/><rect x="46" y="20" width="6" height="24" rx="2"/><rect x="5" y="25" width="5" height="14" rx="1.5"/><rect x="54" y="25" width="5" height="14" rx="1.5"/></g></symbol>
-  <symbol id="f-cardio" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M32 52S8 38 8 22a12 12 0 0 1 24-3 12 12 0 0 1 24 3c0 16-24 30-24 30z"/><path d="M14 30h10l4-8 6 14 4-6h12"/></g></symbol>
-  <symbol id="f-functional" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M24 22a8 8 0 0 1 16 0"/><path d="M22 22h20l4 6a16 16 0 1 1-28 0z"/></g></symbol>
-  <symbol id="f-machines" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 56V8h40v48M12 16h40M32 16v18"/><rect x="26" y="34" width="12" height="16" rx="2"/><path d="M26 40h12M26 45h12"/></g></symbol>
-  <symbol id="f-yoga" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="12" r="5"/><path d="M32 18v16M18 26l14 4 14-4M12 50c8-2 12-8 20-12 8 4 12 10 20 12M22 50h20"/></g></symbol>
-  <symbol id="f-pt" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="22" cy="14" r="5"/><circle cx="44" cy="20" r="5"/><path d="M22 20v16l-6 16M22 36l6 16M22 26l10 4M44 26v12l-4 14M44 38l4 14"/></g></symbol>
-  <symbol id="f-cafe" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 26h30v12a14 14 0 0 1-14 14h-2a14 14 0 0 1-14-14z"/><path d="M44 30h4a6 6 0 0 1 0 12h-5M22 8c-2 4 2 6 0 10M30 8c-2 4 2 6 0 10M38 8c-2 4 2 6 0 10"/></g></symbol>
-  <symbol id="f-locker" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="12" y="8" width="18" height="48" rx="2"/><rect x="34" y="8" width="18" height="48" rx="2"/><path d="M17 16h8M39 16h8M17 21h8M39 21h8M26 34v6M48 34v6"/></g></symbol>
-  <symbol id="f-steam" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M20 40c-6-6 6-10 0-18M32 40c-6-6 6-10 0-18M44 40c-6-6 6-10 0-18M10 48h44M14 54h36"/></g></symbol>
-  <symbol id="f-parking" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="10" width="44" height="44" rx="10"/><path d="M26 46V20h9a8 8 0 0 1 0 16h-9"/></g></symbol>
-</defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ne" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-food" viewBox="0 0 24 24"><path d="M4 11h16a8 8 0 0 1-16 0ZM12 3v3M8 4.5l1 2M16 4.5l-1 2"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M8.6 16a5 5 0 0 1 6.8 0M5.5 12.5a9.5 9.5 0 0 1 13 0M2.5 9a14 14 0 0 1 19 0M12 19.5h.01"/></symbol>
+  <symbol id="i-dumb" viewBox="0 0 24 24"><path d="M3 10v4M6 7v10M18 7v10M21 10v4M6 12h12"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19C5 10 10 5 20 4c-1 10-6 15-15 15ZM5 19l7-7"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M4 20l1.2-4A8 8 0 1 1 8 19Z"/><path d="M9 9.5c.3 2.3 2.2 4.2 4.5 4.5l1.2-1.2 1.8.8-.3 1.6c-3.7.4-7.6-3.4-7.2-7.2l1.6-.3.8 1.8Z"/></symbol>
+  <symbol id="i-rupee" viewBox="0 0 24 24"><path d="M7 5h10M7 9h10M7 5h3a4 4 0 0 1 0 8H7l7 6"/></symbol>
+  <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M4 8V6h16v2a2 2 0 0 0 0 4v2a2 2 0 0 0 0 4v0H4v-4a2 2 0 0 0 0-4Z"/><path d="M14 6v12" stroke-dasharray="2 2"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4"/></symbol>
+  <symbol id="i-call" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 21a7 7 0 0 0 7-7c0-4-3-6-4-10-2 2-3 4-3 6-1-1-2-2-2-4-2 2-5 5-5 8a7 7 0 0 0 7 7Z"/></symbol>
+  <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s7 7.3 7 12a7 7 0 0 1-14 0c0-4.7 7-12 7-12Z"/></symbol>
+  <symbol id="i-scale" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 9a5 5 0 0 1 8 0l-3 3"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-8-4.6-8-10.2A4.6 4.6 0 0 1 12 7a4.6 4.6 0 0 1 8 2.8C20 15.4 12 20 12 20Z"/><path d="M7 12h2.5l1.5-2.5 2 5 1.5-2.5H17"/></symbol>
+  <symbol id="i-kb" viewBox="0 0 24 24"><circle cx="12" cy="15" r="6"/><path d="M8.5 10.5 8 6a4 4 0 0 1 8 0l-.5 4.5"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></symbol>
+  <symbol id="i-yoga" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M4 11l8 2 8-2M12 13v3l-4 5M12 16l4 5"/></symbol>
+  <symbol id="i-coach" viewBox="0 0 24 24"><circle cx="12" cy="7" r="3.5"/><path d="M5 21a7 7 0 0 1 14 0M15 14l2 2 3-3"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></symbol>
+  <symbol id="i-steam" viewBox="0 0 24 24"><path d="M8 4c-1.5 2 1.5 3 0 5M12 4c-1.5 2 1.5 3 0 5M16 4c-1.5 2 1.5 3 0 5M4 13h16v3a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5Z"/></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24"><path d="M5 16V11l2-5h10l2 5v5M3 16h18v3h-3M6 19H3M5 11h14"/><circle cx="7.5" cy="14" r=".6"/><circle cx="16.5" cy="14" r=".6"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></symbol>
+  <symbol id="i-th" viewBox="0 0 24 24"><path d="M16 11c-1-3-3-4-5-4-3 0-5 2-5 5.5S8 19 12 19c3 0 5-2 5-4.5 0-3-4-3.5-6-2.5-1.5.8-1 3 1 3 3 0 3-4 2.5-6.5C14 5 12 4 11 4"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+</svg>
 
-<!-- preloader -->
-<div class="pre" id="pre" aria-hidden="true">
-  <div class="pre-p p1"></div><div class="pre-p p2"></div>
-  <div class="pre-in"><img src="img/logo.png" alt=""><div class="pre-name"><span>R</span><span>H</span><span>I</span><span>N</span><span>O</span><span>'</span><span>S</span></div>
-    <div class="pre-bar"><i id="preBar"></i></div><div class="pre-n"><b id="preN">0</b>%</div></div>
-</div>
-
-<div class="prog" id="prog"></div>
-<div class="cursor" id="cur"></div>
-
-<header class="top" id="top">
-  <a class="brand" href="#home"><img src="img/logo.png" alt=""><span>RHINO'S</span></a>
-  <nav class="tnav" aria-label="Sections"><a class="on" href="#home" data-nav>Home</a><a href="#facilities" data-nav data-f="facilities">Facilities</a><a href="#toolkit" data-nav data-f="toolkit">Toolkit</a><a href="#classes" data-nav data-f="schedule">Classes</a><a href="#pricing" data-nav data-f="pricing">Plans</a></nav>
-  <div class="tr"><a class="tjoin" id="tJoin" target="_blank" rel="noopener">Join Now</a><button class="burger" id="burger" aria-label="Menu"><i></i><i></i></button></div>
-</header>
-<nav class="menu" id="menu" aria-label="Menu" hidden>
-  <div class="menu-in">
-    <a href="#home" data-nav><small>00</small>Home</a>
-    <a href="#food" data-nav><small>01</small>Order food</a>
-    <a href="#toolkit" data-nav data-f="toolkit"><small>02</small>Member toolkit</a>
-    <a href="#facilities" data-nav data-f="facilities"><small>03</small>Facilities</a>
-    <a href="#classes" data-nav data-f="schedule"><small>04</small>Classes</a>
-    <a href="#pricing" data-nav data-f="pricing"><small>05</small>Membership</a>
-    <a href="#find" data-nav><small>06</small>Find us</a>
-  </div>
-  <div class="menu-ft"><a id="mCall">Call the gym</a><a id="mWa" target="_blank" rel="noopener">WhatsApp</a></div>
-</nav>
-
-<section class="hero" id="home">
-  <canvas id="stars" aria-hidden="true"></canvas>
-  <canvas id="rim" aria-hidden="true"></canvas>
-  <div class="rim-fb" aria-hidden="true"></div>
-  <div class="hero-in">
-    <div class="h-eye" id="hEye"><i class="dot" id="oDot"></i><span id="oTxt"></span><b>★ <span id="gRate"></span></b><span><span id="gRev"></span> reviews</span></div>
-    <h1 class="hl"><span class="ln"><span><em>Rhino's</em> Train Harder,</span></span><span class="ln"><span><span class="dk">Eat Clean, Grow Strong.</span><span class="mb">Grow Stronger.</span></span></span></h1>
-    <p class="lede" id="hLede">Amritsar's premium gym with a nutrition café inside. Order food, track calories, book classes and get your plan, all from this one tap.</p>
-    <div class="cta" id="hCta"><a class="btn-v rp" id="hJoin" target="_blank" rel="noopener">Join Rhino's</a><a class="btn-d rp" id="hOrder" href="menu.html">Order Food</a></div>
-  </div>
-
-  <div class="dash-wrap" id="dashWrap">
-    <div class="dash-glow" aria-hidden="true"></div>
-    <div class="dash" id="dash">
-      <aside class="ds-side">
-        <div class="ds-brand"><img src="img/logo.png" alt=""><b>Member Hub</b><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></g></svg></div>
-        <div class="ds-nav">
-          <button class="ds-i on" data-dsgo="home"><svg><use href="#i-scale"/></svg>Dashboard</button>
-          <a class="ds-i" id="dsOrder" href="menu.html" data-f="order"><svg><use href="#i-food"/></svg>Order food</a>
-          <button class="ds-i" data-tool="cal"><svg><use href="#i-fire"/></svg>Calories</button>
-          <button class="ds-i" data-tool="timer"><svg><use href="#i-timer"/></svg>Workout timer</button>
-          <button class="ds-i" data-dsgo="#classes" data-f="schedule"><svg><use href="#i-users"/></svg>Classes</button>
-          <i class="ds-sep"></i>
-          <button class="ds-i" data-tool="water"><svg><use href="#i-drop"/></svg>Water</button>
-          <button class="ds-i" data-tool="streak"><svg><use href="#i-bolt"/></svg>Streak</button>
-          <a class="ds-i" href="review.html" data-f="review"><svg><use href="#i-star"/></svg>Review us</a>
-        </div>
-        <div class="ds-pro"><b>Rhino Pro ⚡</b><span>Personal trainer + weekly diet plan</span><a id="dsPro" target="_blank" rel="noopener">Upgrade</a></div>
-      </aside>
-      <div class="ds-main">
-        <div class="ds-top">
-          <div class="ds-icons"><button data-sheet="wifiSh" aria-label="Wi-Fi"><svg><use href="#i-wifi"/></svg></button><button data-tool="streak" aria-label="Streak"><svg><use href="#i-fire"/></svg></button><a id="dsCall" aria-label="Call"><svg><use href="#i-call"/></svg></a></div>
-          <div class="ds-user"><span class="av">R</span><div><b id="dsHi">Hi, Champ</b><small id="dsDate"></small></div></div>
-        </div>
-        <div class="ds-grid">
-          <div class="ds-l">
-            <div class="ds-stats">
-              <button class="ds-st" data-tool="cal"><small>Calories today <i>🔥</i></small><b id="dsK">0</b><span><em id="dsKp" class="up">Set goal</em> <span id="dsKg">tap to start</span></span></button>
-              <button class="ds-st" data-tool="streak"><small>Gym streak <i>⚡</i></small><b id="dsS">0</b><span><em id="dsSp" class="up">days</em> <span id="dsSb">check in today</span></span></button>
-            </div>
-            <div class="ds-chart"><div class="ds-h"><b>Your week · calories</b><span id="dsTag"></span></div><svg id="dsChart" viewBox="0 0 600 200" preserveAspectRatio="none"></svg><div class="ds-x" id="dsX"></div></div>
-          </div>
-          <div class="ds-cal">
-            <div class="ds-h"><b id="dsMonth"></b><span class="ds-arr">‹ ›</span></div>
-            <div class="ds-days" id="dsDays"></div>
-            <div class="ds-sub">Today at Rhino's</div>
-            <div class="ds-rows" id="dsRows"></div>
-          </div>
-        </div>
-      </div>
+<section class="hero" id="hero" aria-label="Rhino's Gym">
+  <canvas class="hero__cloth" id="cloth" role="img" tabindex="-1" aria-label="A holographic Rhino's Gym poster hanging from two pins, showing the Rhino's Gym logo above the words Strength, Muscle, Transformation. Grab it and tug it around."></canvas>
+  <img class="hero__still" id="still" alt="" decoding="async" src="site/poster.jpg">
+  <header class="nav">
+    <a class="nav__logo" href="#hero"><img src="img/logo.png" alt="">Rhino's Gym</a>
+    <div class="nav__actions">
+      <button class="pill pill--menu" id="menuBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menu"><span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>More</button>
+      <a class="pill pill--start" id="joinTop" href="#visit">Join Rhino's</a>
     </div>
+  </header>
+  <h1 class="hero__title"><span>Stronger</span><span class="soft">every day.</span></h1>
+  <div class="hero__meta">
+    <span class="chip"><i class="dot" id="oDot"></i><span id="oTxt">Open daily</span></span>
+    <a class="chip" id="gChip" target="_blank" rel="noopener">★ <span id="gRate"></span> · <span id="gRev"></span> Google reviews</a>
+    <a class="chip" href="menu.html" id="cafeChip" data-f="order">Nutrition Treat café →</a>
   </div>
+  <div class="hint" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12M11 11.5V10a1.5 1.5 0 0 1 3 0v2M14 11a1.5 1.5 0 0 1 3 0v1.5M17 12a1.5 1.5 0 0 1 3 0v3a6 6 0 0 1-6 6h-1.5a6 6 0 0 1-4.6-2.2L5 15.4a1.6 1.6 0 0 1 2.4-2L8 14"/></svg>Grab the poster. Tug it.</div>
+  <div class="scrollcue" aria-hidden="true">Scroll<i></i></div>
 </section>
 
-<div class="content">
-  <div class="mq" aria-hidden="true"><div class="mq-t" id="mq1"><span>STRENGTH</span><span>MUSCLE</span><span>TRANSFORMATION</span><span>NO EXCUSES</span><span>STRENGTH</span><span>MUSCLE</span><span>TRANSFORMATION</span><span>NO EXCUSES</span></div></div>
+<nav class="menu" id="menu" aria-label="Site menu" aria-hidden="true">
+  <div class="menu__top">
+    <a class="nav__logo" href="#hero" data-close-menu><img src="img/logo.png" alt="">Rhino's Gym</a>
+    <button class="pill pill--menu" type="button" id="menuClose" aria-label="Close menu"><svg class="ic" viewBox="0 0 24 24" style="width:18px;height:18px"><use href="#i-x"/></svg>Close</button>
+  </div>
+  <div class="menu__links">
+    <a href="#tap" data-close-menu><small>01</small>Tap &amp; go</a>
+    <a href="menu.html" data-f="order"><small>02</small>Nutrition Treat café</a>
+    <a href="#toolkit" data-close-menu data-f="toolkit"><small>03</small>Member toolkit</a>
+    <a href="#facilities" data-close-menu data-f="facilities"><small>04</small>Inside Rhino's</a>
+    <a href="#why" data-close-menu data-f="why"><small>05</small>Why Rhino's</a>
+    <a href="#visit" data-close-menu><small>06</small>Visit us</a>
+  </div>
+  <div class="menu__foot">
+    <span id="mArea"></span>
+    <div class="row"><a class="pill pill--ghost" id="mCall">Call</a><a class="pill pill--start" id="mWa" target="_blank" rel="noopener">WhatsApp</a></div>
+  </div>
+</nav>
 
-  <section class="w mani">
-    <div class="eye">Our promise</div>
-    <p id="mani">At Rhino's we don't just sell memberships. We build stronger people, with premium equipment, coaches who care and a nutrition café right inside. Your transformation starts the moment you walk in.</p>
+<main>
+  <section class="wrap state" id="about">
+    <div class="eyebrow rv">(00) <b>Rhino's Gym, Amritsar</b></div>
+    <p class="rv" id="mani" style="margin-top:22px">At Rhino's we don't just sell memberships. We build stronger people, with premium equipment, coaches who care and a nutrition café right inside. Your transformation starts the moment you walk in.</p>
+    <div class="stats rvs">
+      <div class="stat"><b><span data-count="rate">0</span><small> ★</small></b><span>Google rating</span></div>
+      <div class="stat"><b><span data-count="rev">0</span></b><span>Google reviews</span></div>
+      <div class="stat"><b><span data-count="hrs">0</span><small> hrs</small></b><span>Open every day</span></div>
+      <div class="stat" data-f="order"><b><span data-count="menu">0</span></b><span>Dishes at the café</span></div>
+    </div>
   </section>
 
-  <section class="w s" id="food">
-    <div class="sh2"><div class="eye">Tap &amp; go</div><h2 class="h" data-split>Everything you need, in one tap</h2></div>
-    <div class="bento">
-      <a class="b-order rp" id="orderLink" href="menu.html" data-f="order">
-        <div class="fps" id="fps"></div>
-        <span class="tag">🔥 NUTRITION TREAT CAFÉ</span>
-        <span class="price" id="fPrice"></span>
-        <div class="oc"><div><b>Order food<br>&amp; shakes</b><span>Delivered to you on the gym floor</span></div><span class="go"><svg><use href="#i-arrow"/></svg></span></div>
+  <section class="wrap sec" id="tap">
+    <div class="eyebrow rv">(01) <b>Tap &amp; go</b></div>
+    <h2 class="h2 rv">Everything you need,<br><span class="soft">in one tap.</span></h2>
+    <div class="bento rvs">
+      <a class="card c-order" id="orderLink" href="menu.html" data-f="order">
+        <div><span class="tag"><i class="dot"></i>Nutrition Treat · inside the gym</span>
+          <p class="t" style="margin-top:16px">Order food<br>&amp; shakes</p><p class="d">Protein meals, salads and shakes, brought to you on the gym floor.</p></div>
+        <div class="plates" id="plates" aria-hidden="true"></div>
+        <p class="now" id="plateNow"></p>
+        <span class="ar"><svg class="ic"><use href="#i-ne"/></svg></span>
       </a>
-      <button class="b-goal rp" data-sheet="workSh" data-f="plans"><span class="arr"><svg><use href="#i-ne"/></svg></span><span class="gi"><svg class="lift"><use href="#i-dumb"/></svg></span><b>Workout plan</b><span>Made for your goal</span></button>
-      <button class="b-goal dt rp" data-sheet="dietSh" data-f="plans"><span class="arr"><svg><use href="#i-ne"/></svg></span><span class="gi"><svg class="sway"><use href="#i-leaf"/></svg></span><b>Diet plan</b><span>Veg, non-veg or egg</span></button>
-      <a class="gc b-t rv rp" href="review.html" data-f="review"><span class="ic"><svg><use href="#i-star"/></svg></span><b>Review us</b><span>10 seconds on Google</span></a>
-      <button class="gc b-t rp" data-sheet="wifiSh" data-f="wifi"><span class="ic"><svg><use href="#i-wifi"/></svg></span><b>Wi-Fi</b><span>Name &amp; password</span></button>
-      <button class="gc b-t wa rp b-wide" data-sheet="fbSh" data-f="feedback"><span class="ic"><svg><use href="#i-wa"/></svg></span><div><b>Private feedback to the owner</b><span>Something to improve? Tell us directly.</span></div><span class="ar"><svg><use href="#i-chev"/></svg></span></button>
+      <a class="card c-review" href="review.html" data-f="review">
+        <span class="ar"><svg class="ic"><use href="#i-ne"/></svg></span>
+        <div class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+        <div><p class="t">Review us</p><p class="d">10 seconds on Google. It really helps.</p></div>
+      </a>
+      <button class="card" data-sheet="wifiSh" data-f="wifi" type="button">
+        <span class="ar"><svg class="ic"><use href="#i-ne"/></svg></span>
+        <span class="icn"><svg class="ic"><use href="#i-wifi"/></svg></span>
+        <div><p class="t">Gym Wi-Fi</p><p class="d">Network name &amp; password</p></div>
+      </button>
+      <button class="card" data-sheet="workSh" data-f="plans" type="button">
+        <span class="ar"><svg class="ic"><use href="#i-ne"/></svg></span>
+        <span class="icn"><svg class="ic"><use href="#i-dumb"/></svg></span>
+        <div><p class="t">Workout plan</p><p class="d">Made for your goal, sent on WhatsApp</p></div>
+      </button>
+      <button class="card" data-sheet="dietSh" data-f="plans" type="button">
+        <span class="ar"><svg class="ic"><use href="#i-ne"/></svg></span>
+        <span class="icn"><svg class="ic"><use href="#i-leaf"/></svg></span>
+        <div><p class="t">Diet plan</p><p class="d">Veg, non-veg or egg</p></div>
+      </button>
+      <button class="card c-wide c-wa" data-sheet="fbSh" data-f="feedback" type="button">
+        <span class="icn"><svg class="ic"><use href="#i-wa"/></svg></span>
+        <div><p class="t">Private feedback to the owner</p><p class="d">Something to improve? The owner reads every message.</p></div>
+        <span class="ar" style="position:static"><svg class="ic"><use href="#i-ne"/></svg></span>
+      </button>
+      <button class="card" data-sheet="paySh" data-f="members" type="button">
+        <span class="ar"><svg class="ic"><use href="#i-ne"/></svg></span>
+        <span class="icn"><svg class="ic"><use href="#i-rupee"/></svg></span>
+        <div><p class="t">Pay fees</p><p class="d">GPay, PhonePe, Paytm</p></div>
+      </button>
+      <button class="card" data-sheet="trialSh" data-f="members" type="button">
+        <span class="ar"><svg class="ic"><use href="#i-ne"/></svg></span>
+        <span class="icn"><svg class="ic"><use href="#i-ticket"/></svg></span>
+        <div><p class="t">Free trial</p><p class="d">Book a session for you or a friend</p></div>
+      </button>
+      <button class="card c-wide" id="shareBtn" data-f="members" type="button">
+        <span class="ar"><svg class="ic"><use href="#i-ne"/></svg></span>
+        <span class="icn"><svg class="ic"><use href="#i-share"/></svg></span>
+        <div><p class="t">Refer a friend</p><p class="d">Share Rhino's with your gym buddy</p></div>
+      </button>
+      <a class="card c-wide" id="callLink" data-f="members">
+        <span class="ar"><svg class="ic"><use href="#i-ne"/></svg></span>
+        <span class="icn"><svg class="ic"><use href="#i-call"/></svg></span>
+        <div><p class="t">Call the gym</p><p class="d" id="callNo"></p></div>
+      </a>
     </div>
   </section>
 
-  <section class="hz" id="facilities" data-f="facilities">
-    <div class="hz-pin" id="hzPin">
-      <div class="w hz-head"><div class="eye">Inside Rhino's</div><h2 class="h" data-split>World-class facilities</h2><div class="hz-count"><b id="hzN">01</b> / <span id="hzT"></span></div></div>
-      <div class="hz-track" id="hzTrack"></div>
-      <div class="w"><div class="hz-bar"><i id="hzBar"></i></div></div>
+  <section class="wrap sec" id="cafe" data-f="order">
+    <div class="head">
+      <div><div class="eyebrow rv">(02) <b>Nutrition Treat café</b></div>
+        <h2 class="h2 rv">Fuel after<br><span class="soft">every session.</span></h2></div>
+      <a class="pill pill--menu rv" href="menu.html" id="menuLink2">Open the full menu <svg class="ic" style="width:16px;height:16px"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="rail" id="rail"></div>
+    <div class="rail-foot"><span class="lead" style="margin:0" id="cafeLine"></span><small>Photos are sample photos until the café's own are added.</small></div>
+  </section>
+
+  <section class="wrap sec" id="toolkit" data-f="toolkit">
+    <div class="eyebrow rv">(03) <b>Free member toolkit</b></div>
+    <h2 class="h2 rv">Train smarter,<br><span class="soft">not just harder.</span></h2>
+    <div class="kit rvs">
+      <button class="card k-cal" data-tool="cal" type="button">
+        <span class="ar"><svg class="ic"><use href="#i-ne"/></svg></span>
+        <div><span class="badge">Smart calorie tracker</span><p class="t" style="margin-top:14px">Type or speak what you ate.</p><p class="d">We count calories and protein: dal, roti, paneer, whey and 130+ foods.</p></div>
+        <div class="ring2"><svg viewBox="0 0 120 120"><circle class="rb2" cx="60" cy="60" r="52"/><circle class="rf2" id="kRing2" cx="60" cy="60" r="52"/></svg><div><span><b id="kNum">0</b><span id="kCal">Set your goal</span></span></div></div>
+      </button>
+      <button class="card" data-tool="timer" type="button"><span class="ar"><svg class="ic"><use href="#i-ne"/></svg></span><span class="icn"><svg class="ic"><use href="#i-timer"/></svg></span><div><p class="t">Workout timer</p><p class="d">Tabata, HIIT, EMOM</p></div></button>
+      <button class="card" data-tool="orm" type="button"><span class="ar"><svg class="ic"><use href="#i-ne"/></svg></span><span class="icn"><svg class="ic"><use href="#i-bolt"/></svg></span><div><p class="t">1-rep max</p><p class="d">Know your working weights</p></div></button>
+      <button class="card" data-tool="water" type="button"><span class="ar"><svg class="ic"><use href="#i-ne"/></svg></span><span class="icn"><svg class="ic"><use href="#i-drop"/></svg></span><div><p class="t">Water</p><p class="d" id="kWat">0 glasses today</p></div></button>
+      <button class="card" data-tool="streak" type="button"><span class="ar"><svg class="ic"><use href="#i-ne"/></svg></span><span class="icn"><svg class="ic"><use href="#i-fire"/></svg></span><div><p class="t">Gym streak</p><p class="d" id="kStk">Check in today</p></div></button>
+      <button class="card k-wide" data-sheet="bmiSh" type="button"><span class="icn"><svg class="ic"><use href="#i-scale"/></svg></span><div><p class="t">BMI check</p><p class="d">Where do you stand today?</p></div><span class="ar" style="position:static"><svg class="ic"><use href="#i-ne"/></svg></span></button>
     </div>
   </section>
 
-  <section class="w s" id="toolkit" data-f="toolkit">
-    <div class="sh2"><div class="eye">Free member toolkit</div><h2 class="h" data-split>Train smarter, not just harder</h2></div>
-    <div class="kit">
-      <button class="k-cal rp" data-tool="cal"><div class="kc-l"><span class="badge">NEW · SMART</span><b>Calorie tracker</b><span>Type or speak what you ate. We count calories &amp; protein.</span><em id="kCal">Set your goal</em></div>
-        <div class="kc-r"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" class="rb"/><circle cx="32" cy="32" r="26" class="rf" id="kRing"/></svg><i>🔥</i></div></button>
-      <button class="gc k rp" data-tool="timer"><span class="ic"><svg><use href="#i-timer"/></svg></span><b>Workout timer</b><span>Tabata, HIIT, EMOM</span></button>
-      <button class="gc k rp" data-tool="orm"><span class="ic"><svg><use href="#i-bolt"/></svg></span><b>1-rep max</b><span>Know your lifting weights</span></button>
-      <button class="gc k rp" data-tool="water"><span class="ic"><svg><use href="#i-drop"/></svg></span><b>Water</b><span id="kWat">0 glasses today</span></button>
-      <button class="gc k rp" data-tool="streak"><span class="ic"><svg><use href="#i-fire"/></svg></span><b>Gym streak</b><span id="kStk">Check in today</span></button>
-      <button class="gc k rp k-wide" data-sheet="bmiSh"><span class="ic"><svg><use href="#i-scale"/></svg></span><div><b>BMI check</b><span>Where do you stand today?</span></div><span class="ar"><svg><use href="#i-chev"/></svg></span></button>
+  <section class="wrap sec" id="facilities" data-f="facilities">
+    <div class="eyebrow rv">(04) <b>Inside Rhino's</b></div>
+    <h2 class="h2 rv">Built for<br><span class="soft">serious training.</span></h2>
+    <div class="fac rvs" id="fac"></div>
+  </section>
+
+  <section class="wrap sec" id="why" data-f="why">
+    <div class="eyebrow rv">(05) <b>Why Rhino's</b></div>
+    <h2 class="h2 rv">Five reasons<br><span class="soft">members stay.</span></h2>
+    <div class="why rvs">
+      <div class="card"><span class="num">01</span><div><p class="t">Premium equipment</p><p class="d">Strength, cardio and functional zones with the latest machines.</p></div></div>
+      <div class="card"><span class="num">02</span><div><p class="t">Expert coaching</p><p class="d">Certified trainers on the floor to fix your form and push you.</p></div></div>
+      <div class="card"><span class="num">03</span><div><p class="t">Personal training</p><p class="d">1-on-1 plans and tracking for real, visible results.</p></div></div>
+      <div class="card"><span class="num">04</span><div><p class="t">Nutrition café inside</p><p class="d">Protein meals and shakes right after your workout.</p></div></div>
+      <div class="card"><span class="num">05</span><div><p class="t">Rhino 2.0</p><p class="d">A freshly upgraded, clean, unisex gym with yoga and dance.</p></div></div>
     </div>
   </section>
 
-  <section class="w s" id="classes" data-f="schedule">
-    <div class="sh2"><div class="eye">Group classes <em class="smp" data-sample>sample</em></div><h2 class="h" data-split>This week at Rhino's</h2></div>
-    <div class="days" id="days"></div>
-    <div class="cls" id="cls"></div>
-  </section>
-  <section class="w s" data-f="crowd">
-    <div class="gc crowd"><div class="cr-h"><div><div class="eye">How busy is it? <em class="smp" data-sample>typical</em></div><b id="crNow">—</b></div><span class="cr-ic"><svg><use href="#i-users"/></svg></span></div>
-      <div class="cr-bars" id="crBars"></div><div class="cr-x"><span>6 AM</span><span>12 PM</span><span>6 PM</span><span>11 PM</span></div></div>
-  </section>
-
-  <section class="w s" data-f="why">
-    <div class="sh2"><div class="eye">Why choose us</div><h2 class="h" data-split>Why Rhino's is the best</h2></div>
-    <div class="stack" id="stack">
-      <div class="sc" style="--h:#2b5d6b"><span class="num">01</span><span class="em">🏋️</span><b>Premium equipment</b><span>Strength, cardio and functional zones with the latest machines.</span></div>
-      <div class="sc" style="--h:#33497e"><span class="num">02</span><span class="em">🧑‍🏫</span><b>Expert coaching</b><span>Certified trainers on the floor to fix your form and push you.</span></div>
-      <div class="sc" style="--h:#5e3552"><span class="num">03</span><span class="em">💪</span><b>Personal training</b><span>1-on-1 plans and tracking for real, visible results.</span></div>
-      <div class="sc" style="--h:#2f6047"><span class="num">04</span><span class="em">🥗</span><b>Nutrition café inside</b><span>Protein meals and shakes right after your workout.</span></div>
-      <div class="sc" style="--h:#6e5122"><span class="num">05</span><span class="em">✨</span><b>Rhino 2.0</b><span>A freshly upgraded, clean, unisex gym with yoga &amp; dance.</span></div>
+  <section class="wrap sec" id="visit">
+    <div class="eyebrow rv">(06) <b>Visit us</b></div>
+    <h2 class="h2 rv">Come train<br><span class="soft">with us.</span></h2>
+    <div class="visit rvs">
+      <a class="mapc" id="mapLink" target="_blank" rel="noopener" aria-label="Open Rhino's Gym in Google Maps">
+        <div class="grid"></div>
+        <i class="road" style="left:-10%;right:-10%;top:58%;height:22px;transform:rotate(-8deg)"></i>
+        <i class="road" style="top:-10%;bottom:-10%;left:62%;width:16px;transform:rotate(14deg)"></i>
+        <i class="road" style="left:-10%;right:30%;top:24%;height:12px;transform:rotate(6deg)"></i>
+        <div class="pin"><span><img src="img/logo.png" alt="">Rhino's Gym</span><i></i></div>
+        <div class="open"><span class="chip"><i class="dot" id="oDot2"></i><span id="oTxt2"></span></span><span class="pill pill--menu">Directions <svg class="ic" style="width:16px;height:16px"><use href="#i-ne"/></svg></span></div>
+      </a>
+      <div class="info">
+        <div class="row"><span>Address</span><b style="font-weight:500" id="area"></b></div>
+        <div class="row"><span>Hours</span><b style="font-weight:500" id="hrs"></b></div>
+        <div class="row"><span>Phone</span><a style="font-weight:500" id="callNo2"></a></div>
+        <div class="row" data-f="social"><span>Follow</span><div class="soc" id="soc"></div></div>
+        <div class="btns"><a class="pill pill--start" id="joinWa" target="_blank" rel="noopener">Join on WhatsApp</a><a class="pill pill--ghost" id="callBtn">Call now</a></div>
+      </div>
     </div>
   </section>
+</main>
 
-  <section class="w s">
-    <div class="stats">
-      <div class="gc st"><div class="v"><span data-count="rate">0</span><em>★</em></div><small>Google rating</small></div>
-      <div class="gc st"><div class="v"><span data-count="rev">0</span>+</div><small>Member reviews</small></div>
-      <div class="gc st"><div class="v"><span data-count="hrs">0</span><small class="u"> hrs</small></div><small>Open every day</small></div>
-      <div class="gc st"><div class="v"><span data-count="menu">0</span>+</div><small>Healthy dishes</small></div>
-    </div>
-  </section>
-
-  <div class="mq mq2" aria-hidden="true"><div class="mq-t" id="mq2"><span>TRAIN HARD</span><span>EAT CLEAN</span><span>RHINO'S GYM</span><span>TRAIN HARD</span><span>EAT CLEAN</span><span>RHINO'S GYM</span></div></div>
-
-  <section class="w s" id="pricing" data-f="pricing">
-    <div class="sh2"><div class="eye">Membership <em class="smp" data-sample>sample prices</em></div><h2 class="h" data-split>Pick your plan</h2></div>
-    <div class="per" id="per"><i id="perPill"></i><button data-per="m" class="on">Monthly</button><button data-per="q">3 months</button><button data-per="y">Yearly</button></div>
-    <div class="plans" id="plans"></div>
-  </section>
-
-  <section class="s" data-f="trainers">
-    <div class="w sh2"><div class="eye">Coaches <em class="smp" data-sample>sample</em></div><h2 class="h" data-split>Meet the team</h2></div>
-    <div class="coaches" id="coaches"></div>
-  </section>
-
-  <section class="w s" id="find">
-    <div class="sh2"><div class="eye">Members</div><h2 class="h" data-split>Everything else</h2></div>
-    <div class="rows" data-f="members">
-      <button class="gc r rp" data-sheet="paySh"><span class="ic"><svg><use href="#i-rupee"/></svg></span><div><b>Pay membership fees</b><span>GPay, PhonePe, Paytm</span></div><span class="ar"><svg><use href="#i-chev"/></svg></span></button>
-      <button class="gc r rp" data-sheet="trialSh"><span class="ic"><svg><use href="#i-ticket"/></svg></span><div><b>Book a free trial session</b><span>Bring a friend to try Rhino's</span></div><span class="ar"><svg><use href="#i-chev"/></svg></span></button>
-      <button class="gc r rp" id="shareBtn"><span class="ic"><svg><use href="#i-share"/></svg></span><div><b>Refer a friend</b><span>Share Rhino's with your gym buddy</span></div><span class="ar"><svg><use href="#i-chev"/></svg></span></button>
-      <a class="gc r rp" id="callLink"><span class="ic"><svg><use href="#i-call"/></svg></span><div><b>Call the gym</b><span id="callNo"></span></div><span class="ar"><svg><use href="#i-chev"/></svg></span></a>
-    </div>
-    <a class="gc map rp" id="mapLink" target="_blank" rel="noopener"><span class="gr"></span><span class="pinx"><svg><use href="#i-pin"/></svg></span><div><b>Find us</b><span id="area"></span></div><span class="ar"><svg><use href="#i-arrow"/></svg></span></a>
-    <div class="soc" id="soc" data-f="social"></div>
-  </section>
-
-  <footer class="ft">
-    <div class="ft-big" id="ftBig" aria-hidden="true">RHINO'S</div>
-    <p class="ft-l">Strength · Muscle · Transformation</p>
-    <p class="ft-c">Smart card by <svg><use href="#i-inf"/></svg> Infinity Technologies</p>
-  </footer>
-</div>
+<footer class="ft">
+  <div class="ft-cta wrap" style="padding-left:0;padding-right:0">
+    <p class="rv">Strength · Muscle ·<br><span style="color:var(--ink-soft)">Transformation.</span></p>
+    <a class="pill pill--menu" href="#hero">Back to top ↑</a>
+  </div>
+  <div class="ft-clip"><div class="ft-big" id="ftBig" aria-hidden="true"><span>R</span><span>h</span><span>i</span><span>n</span><span>o</span><span>'</span><span>s</span></div></div>
+  <div class="ft-bot"><span>© <span id="yr"></span> Rhino's Gym, Amritsar</span><a href="https://growwithinfinity.github.io/" target="_blank" rel="noopener">Smart site by Infinity Technologies</a></div>
+</footer>
 
 <nav class="dock" id="dock" aria-label="Shortcuts">
-  <a class="main rp" id="dOrder" href="menu.html"><svg><use href="#i-food"/></svg>Order food</a>
-  <button class="rp" data-tool="cal"><svg><use href="#i-fire"/></svg>Calories</button>
-  <a class="rp" href="review.html"><svg><use href="#i-star"/></svg>Review</a>
-  <a class="rp" id="dCall"><svg><use href="#i-call"/></svg>Call</a>
+  <a class="main" id="dOrder" href="menu.html" data-f="order"><svg class="ic"><use href="#i-food"/></svg>Order food</a>
+  <a href="review.html" data-f="review"><svg class="ic"><use href="#i-star"/></svg>Review</a>
+  <a id="dCall"><svg class="ic"><use href="#i-call"/></svg>Call</a>
 </nav>
 
 <div class="panel" id="panel" hidden><div class="panel-in">
@@ -253,64 +247,61 @@
 </div></div>
 
 <div class="sh" id="workSh" hidden><div class="in">
-  <h3>Your workout plan <button class="x" data-close>✕</button></h3>
+  <h3>Your workout plan <button class="x" data-close aria-label="Close">✕</button></h3>
   <p class="n">Tell us a little and our trainer will send your plan on WhatsApp.</p>
   <label class="f">Your name<input id="wName" autocomplete="given-name"></label>
   <label class="f">Your goal</label><div class="opt" data-group="wGoal"><button>Fat loss</button><button>Muscle gain</button><button>Strength</button><button>Stay fit</button></div>
   <label class="f">Level</label><div class="opt" data-group="wLevel"><button>Beginner</button><button>Intermediate</button><button>Advanced</button></div>
   <label class="f">Days per week</label><div class="opt" data-group="wDays"><button>3</button><button>4</button><button>5</button><button>6</button></div>
-  <button class="btn wa" id="workSend"><svg><use href="#i-wa"/></svg>Get my plan on WhatsApp</button>
+  <button class="btn wa" id="workSend"><svg class="ic"><use href="#i-wa"/></svg>Get my plan on WhatsApp</button>
 </div></div>
 <div class="sh" id="dietSh" hidden><div class="in">
-  <h3>Your diet plan <button class="x" data-close>✕</button></h3>
+  <h3>Your diet plan <button class="x" data-close aria-label="Close">✕</button></h3>
   <p class="n">Our coach will send a simple diet plan on WhatsApp.</p>
   <label class="f">Your name<input id="dName" autocomplete="given-name"></label>
   <div class="two"><label class="f">Weight (kg)<input id="dWt" inputmode="numeric"></label><label class="f">Height (cm)<input id="dHt" inputmode="numeric"></label></div>
   <label class="f">Your goal</label><div class="opt" data-group="dGoal"><button>Fat loss</button><button>Muscle gain</button><button>Maintain</button></div>
   <label class="f">Food</label><div class="opt" data-group="dFood"><button>Veg</button><button>Non-veg</button><button>Eggetarian</button></div>
-  <button class="btn wa" id="dietSend"><svg><use href="#i-wa"/></svg>Get my diet plan on WhatsApp</button>
+  <button class="btn wa" id="dietSend"><svg class="ic"><use href="#i-wa"/></svg>Get my diet plan on WhatsApp</button>
 </div></div>
 <div class="sh" id="wifiSh" hidden><div class="in">
-  <h3>Gym Wi-Fi <button class="x" data-close>✕</button></h3>
+  <h3>Gym Wi-Fi <button class="x" data-close aria-label="Close">✕</button></h3>
   <div class="wv"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8.6 16a5 5 0 0 1 6.8 0"/><path d="M5.5 12.5a9.5 9.5 0 0 1 13 0"/><path d="M2.5 9a14 14 0 0 1 19 0"/></g><circle cx="12" cy="19" r="1.2" fill="currentColor"/></svg></div>
   <p class="n" style="text-align:center">Copy the password, open Wi-Fi settings and pick this network.</p>
   <div class="wifi"><div><div><span>Network</span><b id="wSsid"></b></div></div><div><div><span>Password</span><b id="wPass"></b></div><button id="wCopy">Copy</button></div></div>
 </div></div>
 <div class="sh" id="fbSh" hidden><div class="in">
-  <h3>Private feedback <button class="x" data-close>✕</button></h3>
+  <h3>Private feedback <button class="x" data-close aria-label="Close">✕</button></h3>
   <p class="n">Something we can do better? The owner reads every message personally.</p>
   <label class="f">Your message<textarea id="fbTxt" placeholder="e.g. The AC near the cardio area isn't working"></textarea></label>
-  <button class="btn wa" id="fbSend"><svg><use href="#i-wa"/></svg>Send to the owner</button>
+  <button class="btn wa" id="fbSend"><svg class="ic"><use href="#i-wa"/></svg>Send to the owner</button>
 </div></div>
 <div class="sh" id="paySh" hidden><div class="in">
-  <h3>Pay membership fees <button class="x" data-close>✕</button></h3>
+  <h3>Pay membership fees <button class="x" data-close aria-label="Close">✕</button></h3>
   <p class="n">Pays Rhino's Gym directly with any UPI app. Show the payment screenshot at reception.</p>
-  <label class="f">Amount (₹)<input id="payAmt" inputmode="numeric" placeholder="e.g. 2500"></label>
+  <label class="f">Amount (₹)<input id="payAmt" inputmode="numeric" placeholder="Amount told at reception"></label>
   <label class="f">Your name<input id="payName" autocomplete="name"></label>
-  <a class="btn" id="payGo"><svg><use href="#i-rupee"/></svg>Pay with UPI</a>
+  <a class="btn" id="payGo"><svg class="ic"><use href="#i-rupee"/></svg>Pay with UPI</a>
   <p class="n" style="text-align:center;margin-top:10px">Payee: <b id="payee"></b></p>
 </div></div>
 <div class="sh" id="trialSh" hidden><div class="in">
-  <h3>Free trial session <button class="x" data-close>✕</button></h3>
+  <h3>Free trial session <button class="x" data-close aria-label="Close">✕</button></h3>
   <label class="f">Name<input id="tName" autocomplete="name"></label>
   <label class="f">Preferred time</label><div class="opt" data-group="tTime"><button>Morning</button><button>Afternoon</button><button>Evening</button></div>
-  <button class="btn wa" id="trialSend"><svg><use href="#i-wa"/></svg>Book on WhatsApp</button>
+  <button class="btn wa" id="trialSend"><svg class="ic"><use href="#i-wa"/></svg>Book on WhatsApp</button>
 </div></div>
 <div class="sh" id="bmiSh" hidden><div class="in">
-  <h3>Check your BMI <button class="x" data-close>✕</button></h3>
+  <h3>Check your BMI <button class="x" data-close aria-label="Close">✕</button></h3>
   <div class="two"><label class="f">Weight (kg)<input id="bWt" inputmode="decimal"></label><label class="f">Height (cm)<input id="bHt" inputmode="decimal"></label></div>
   <div class="bmi"><div class="gauge"><svg viewBox="0 0 220 116" width="220" height="116"><g fill="none" stroke-width="16" id="bArcs"></g></svg><div class="nd" id="bNd"></div></div>
     <div class="v" id="bVal">--</div><div class="c" id="bCat">Enter your weight and height</div><p>Want a plan for your goal? Tap "Workout plan".</p></div>
 </div></div>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="shared.js"></script>
 <script src="foods.js"></script>
-<script src="lib/gsap.min.js"></script>
-<script src="lib/ScrollTrigger.min.js"></script>
-<script src="lib/lenis.min.js"></script>
 <script src="tools.js"></script>
-<script src="hero.js"></script>
-<script src="app.js"></script>
+<script src="site/cloth.js"></script>
+<script src="site/site.js"></script>
 </body>
 </html>
