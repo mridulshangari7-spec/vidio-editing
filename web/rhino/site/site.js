@@ -18,6 +18,7 @@ const phonePretty=GYM.phone.replace(/^\+91(\d{5})(\d{5})$/,"+91 $1 $2");
 set("gRate",GYM.rating); set("gRev",GYM.reviews); set("area",GYM.area); set("mArea",GYM.area); set("hrs",GYM.hours.replace(/^Open daily · /,"Every day, ")); set("callNo",phonePretty); set("callNo2",phonePretty);
 set("wSsid",GYM.wifi.ssid); set("wPass",GYM.wifi.pass); set("payee",GYM.upi.pn); set("yr",new Date().getFullYear());
 $("gChip").href=GYM.google; $("mapLink").href=GYM.maps;
+$$("[data-review]").forEach(a=>a.href=GYM.google);   /* Review opens Google reviews directly */
 ["callLink","dCall","mCall","callBtn","callNo2"].forEach(i=>$(i)&&($(i).href="tel:"+GYM.phone));
 $("mWa").href=wa("Hi Rhino's Gym!");
 ["joinWa"].forEach(i=>$(i)&&($(i).href=wa("Hi Rhino's Gym! I want to join. Please share membership details.")));
