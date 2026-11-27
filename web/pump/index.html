@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PumpWatch · Stop fuel and cash leaks</title>
+<meta name="description" content="PumpWatch by Infinity Technologies: NFC-verified shifts, meter photos, cash vs fuel matching, customer reports and tank checks for petrol pumps.">
+<meta name="theme-color" content="#e9eaee">
+<link rel="stylesheet" href="pw.css">
+<style>
+  .hero{padding:5vh 0 10px}
+  .roles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+  .role{display:flex;flex-direction:column;justify-content:space-between;gap:30px;min-height:230px;padding:22px;border-radius:26px;background:#fff;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+  .role:hover{transform:translateY(-4px);box-shadow:0 24px 50px -30px rgba(20,20,40,.45)}
+  .role.dark{background:var(--ink);color:#fff}
+  .role.acc{background:var(--acc);color:#fff}
+  .role b{font-size:26px;font-weight:500;letter-spacing:-.05em;line-height:1.02}
+  .role p{margin-top:8px;font-size:14px;opacity:.7}
+  .role span.ar{align-self:flex-end;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(127,127,127,.18);font-size:18px}
+  .how{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+  .how div{padding:18px;border-radius:20px;background:rgba(255,255,255,.6)}
+  .how i{font-style:normal;font-size:13px;color:var(--faint);font-weight:600}
+  .how b{display:block;margin-top:6px;font-weight:600;letter-spacing:-.02em}
+  .how span{display:block;margin-top:4px;font-size:13.5px;color:var(--soft)}
+  @media (max-width:860px){.roles,.how{grid-template-columns:1fr}.role{min-height:170px}}
+</style>
+</head>
+<body>
+<div class="wide">
+  <div class="top"><div class="brand"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16M3 21h13M15 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3M7 7h5"/></svg></i><div>PumpWatch<small>by Infinity Technologies</small></div></div><span class="demo">DEMO</span></div>
+  <section class="hero">
+    <h1 class="h1" style="font-size:clamp(42px,8vw,104px)">Every litre.<br><span class="soft">Every rupee.</span></h1>
+    <p class="lead" style="max-width:620px">Workers verify their shift with an NFC tap at the nozzle and a meter photo. The system matches fuel sold against cash and UPI, checks the tank, and lets customers report problems straight to the owner.</p>
+  </section>
+  <div class="roles">
+    <a class="role dark" href="owner.html"><div><b>Owner dashboard</b><p>Live sales, shortages, meter gaps, tank check, staff scorecard. Demo PIN 0000.</p></div><span class="ar">↗</span></a>
+    <a class="role" href="worker.html?n=2&amp;k=p2m4"><div><b>Worker shift app</b><p>Opens like an NFC tap on nozzle 2. Try Sunny, PIN 2222.</p></div><span class="ar">↗</span></a>
+    <a class="role acc" href="n.html?n=2&amp;k=p2m4"><div><b>Customer check</b><p>What a customer sees after tapping the nozzle tag: rate, checks, report a problem.</p></div><span class="ar">↗</span></a>
+  </div>
+  <h2 class="h2" style="margin-top:48px">What it <span class="soft">catches</span></h2>
+  <div class="how">
+    <div><i>01</i><b>Cash short</b><span>Litres sold × rate vs cash + UPI + card + credit. Any shortage shows up the moment the shift closes.</span></div>
+    <div><i>02</i><b>Selling between shifts</b><span>Each opening reading must match the last closing on that nozzle. A gap means fuel went out with no one on record.</span></div>
+    <div><i>03</i><b>Fake readings</b><span>A meter photo is required at opening and closing, and the shift starts only from the nozzle's own NFC tag.</span></div>
+    <div><i>04</i><b>Personal QR payments</b><span>Customers see the official pump QR. A shift with very low UPI is flagged.</span></div>
+    <div><i>05</i><b>Short filling</b><span>Customers tap the nozzle tag to check the rate, watch for 0.00 and report problems to the owner, not the staff.</span></div>
+    <div><i>06</i><b>Stock leaks</b><span>Opening stock + fuel received − fuel sold vs the dip reading, per tank, every day.</span></div>
+  </div>
+  <p class="foot">PumpWatch by Infinity Technologies · Demo with sample data. Open the worker and owner pages on two phones to see it live.</p>
+</div>
+</body>
+</html>

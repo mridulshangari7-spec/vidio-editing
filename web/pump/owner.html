@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PumpWatch · Owner dashboard</title>
+<meta name="theme-color" content="#e9eaee">
+<link rel="stylesheet" href="pw.css">
+<style>
+  .gate{min-height:100svh;display:grid;place-items:center}
+  .gate .card{width:min(380px,92vw);text-align:center;padding:28px}
+  .gate input{text-align:center;letter-spacing:.5em;font-size:26px}
+  .kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:18px}
+  .kpi{background:#fff;border-radius:20px;padding:16px}
+  .kpi span{font-size:12.5px;color:var(--soft);font-weight:500}
+  .kpi b{display:block;margin-top:6px;font-size:28px;font-weight:500;letter-spacing:-.05em;line-height:1}
+  .kpi.bad b{color:var(--bad)} .kpi.ok b{color:var(--ok)}
+  .cols{display:grid;grid-template-columns:1.35fr 1fr;gap:14px;margin-top:14px;align-items:start}
+  .stack{display:grid;gap:14px;min-width:0}
+  .cols>*,.stack>*,.al>div{min-width:0}
+  .card h3{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:17px;font-weight:600;letter-spacing:-.03em;margin-bottom:10px}
+  .al{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--hair)}
+  .al:first-of-type{border-top:0}
+  .al i{flex:none;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-style:normal;font-weight:700;font-size:14px}
+  .al.bad i{background:#fde8e6;color:var(--bad)} .al.warn i{background:#fff1dc;color:var(--warn)}
+  .al b{display:block;font-weight:600;font-size:14.5px;letter-spacing:-.01em}
+  .al span{font-size:13px;color:var(--soft)}
+  .al small{margin-left:auto;flex:none;font-size:12px;color:var(--faint)}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{text-align:left;font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);padding:8px 8px;border-bottom:1px solid var(--hair);white-space:nowrap}
+  td{padding:10px 8px;border-bottom:1px solid var(--hair);vertical-align:middle;white-space:nowrap}
+  td.r,th.r{text-align:right}
+  .tw{overflow-x:auto;margin:0 -8px}
+  .ph2{display:flex;gap:4px} .ph2 img{width:40px;height:30px;border-radius:6px;object-fit:cover;cursor:zoom-in;background:#eee}
+  .run{display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;background:#f6f7f9;margin-top:8px}
+  .run b{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:12px;background:var(--ink);color:#fff;font-weight:600}
+  .run span{display:block;font-size:12.5px;color:var(--soft)}
+  .tank{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .tank .f{margin-top:0;font-size:12px}
+  .tank .f input{height:44px;font-size:16px}
+  .var{margin-top:10px;display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:14px;background:#f6f7f9;font-size:14px}
+  .rates{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end}
+  .rates .f{margin-top:0}
+  .rates .f input{height:46px}
+  .score div{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--hair);font-size:14px}
+  .score div:first-child{border-top:0}
+  .zoom{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.7);display:grid;place-items:center} .zoom img{width:min(520px,90vw);border-radius:12px;image-rendering:auto}
+  @media (max-width:1050px){.kpis{grid-template-columns:repeat(3,1fr)}.cols{grid-template-columns:1fr}}
+  @media (max-width:560px){.kpis{grid-template-columns:1fr 1fr}.kpi b{font-size:24px}.tank{grid-template-columns:1fr 1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="gate" id="gate"><div class="card">
+  <div class="brand" style="justify-content:center"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16M3 21h13M15 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3M7 7h5"/></svg></i>PumpWatch</div>
+  <h2 class="h2" style="margin-top:16px">Owner login</h2>
+  <label class="f"><input id="opin" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="off"><small>Demo PIN: 0000</small></label>
+  <div style="margin-top:14px"><button class="btn" id="enter">Open dashboard</button></div>
+</div></div>
+
+<div class="wide" id="app" hidden>
+  <div class="top">
+    <div class="brand"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16M3 21h13M15 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3M7 7h5"/></svg></i><div>PumpWatch<small id="pName"></small></div></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end"><span class="tag ok"><i class="dot"></i>Live</span><button class="pill ghost" id="demoBtn"></button></div>
+  </div>
+  <h1 class="h1">Today at <span class="soft">your pump.</span></h1>
+  <p class="lead" id="today"></p>
+
+  <div class="kpis" id="kpis"></div>
+  <div class="cols">
+    <div class="stack">
+      <div class="card"><h3>Alerts <span class="tag bad" id="aCount"></span></h3><div id="alerts"></div></div>
+      <div class="card"><h3>Shifts today</h3><div class="tw"><table><thead><tr><th>Worker</th><th>Nozzle</th><th>Time</th><th class="r">Litres</th><th class="r">Should be</th><th class="r">Collected</th><th class="r">UPI</th><th class="r">Diff</th><th>Proof</th></tr></thead><tbody id="shifts"></tbody></table></div></div>
+    </div>
+    <div class="stack">
+      <div class="card"><h3>On shift now <span class="tag" id="rCount"></span></h3><div id="running"></div></div>
+      <div class="card"><h3>Tank stock check</h3><p style="font-size:13px;color:var(--soft);margin:-4px 0 10px">Opening stock + fuel received − fuel sold should match today's dip reading.</p><div id="tanks"></div></div>
+      <div class="card"><h3>Staff scorecard</h3><div class="score" id="score"></div></div>
+      <div class="card"><h3>Customer reports <span class="tag" id="rate"></span></h3><div id="reports"></div></div>
+      <div class="card"><h3>Today's rates</h3><div class="rates"><label class="f">Petrol ₹/L<input id="rP" inputmode="decimal"></label><label class="f">Diesel ₹/L<input id="rD" inputmode="decimal"></label><button class="pill" id="saveR" style="height:46px">Save</button></div></div>
+    </div>
+  </div>
+  <p class="foot">PumpWatch by Infinity Technologies · <span class="demo">DEMO</span> · the meter photos are small previews in this demo</p>
+</div>
+<div class="toast" id="toast"></div>
+<script src="pw.js"></script>
+<script>
+const $=id=>document.getElementById(id), esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
+const toast=m=>{ const t=$("toast"); t.textContent=m; t.classList.add("on"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("on"),2400); };
+$("pName").textContent=PW.pump;
+const go=()=>{ $("gate").hidden=true; $("app").hidden=false; draw(); };
+$("enter").onclick=()=>{ if($("opin").value!==PW.ownerPin) return toast("Wrong PIN"); sessionStorage.setItem("pw_owner","1"); go(); };
+$("opin").addEventListener("keydown",e=>{ if(e.key==="Enter") $("enter").click(); });
+
+/* ---------- events: live + clearly-marked demo data ---------- */
+let live=[], showDemo=PW.load("pw_demo",true);
+function demoEvents(){ const d=new Date(); d.setHours(6,0,0,0); const T=h=>d.getTime()+h*3600e3, ev=[];
+  const sh=(w,n,h1,h2,open,close,test,cash,upi,card,cred,nfc=true)=>{ const z=PW.nozzle(n), rate=PW.rates()[z.fuel], litres=close-open-test, exp=litres*rate, col=cash+upi+card+cred, sid="demo"+w+n+h1;
+    ev.push({t:"start",sid,w,n,fuel:z.fuel,rate,open,nfc,start:T(h1),ts:T(h1),demo:1});
+    if(h2) ev.push({t:"close",sid,w,n,fuel:z.fuel,rate,open,close,test,cash,upi,card,cred,litres,exp,col,diff:col-exp,start:T(h1),nfc,ts:T(h2),demo:1}); return exp; };
+  const r=PW.rates();
+  sh("w1",1,0,6,184250.00,184742.30,5, 0,0,0,0); ev[ev.length-1].cash=Math.round(487.3*r.Petrol*.42); ev[ev.length-1].upi=Math.round(487.3*r.Petrol*.5); ev[ev.length-1].card=Math.round(487.3*r.Petrol*.08);
+  sh("w2",2,0,6,96510.00,96902.00,0, 0,0,0,0);
+  sh("w3",3,0,6,210040.00,210668.50,5, 0,0,0,0);
+  sh("w4",4,0.2,6,77320.00,77610.00,0,0,0,0,0,false);
+  // fill in the collections: Sunny short ₹640, Aman with almost no UPI
+  ev.forEach(e=>{ if(e.t!=="close") return; if(e.w==="w1"){ e.col=e.cash+e.upi+e.card; }
+    if(e.w==="w2"){ e.cash=Math.round(e.exp*.45); e.upi=Math.round(e.exp*.5); e.card=Math.round(e.exp*.05)-640; e.col=e.cash+e.upi+e.card; }
+    if(e.w==="w3"){ e.cash=Math.round(e.exp*.35); e.upi=Math.round(e.exp*.55); e.cred=Math.round(e.exp*.1)+20; e.col=e.cash+e.upi+e.card+e.cred; }
+    if(e.w==="w4"){ e.cash=Math.round(e.exp*.94); e.upi=Math.round(e.exp*.06)-30; e.col=e.cash+e.upi; }
+    e.diff=e.col-e.exp; });
+  // second shift: nozzle 3 opens 12.5 L above the last closing (fuel sold with no shift running)
+  sh("w2",3,6.5,0,210681.00);
+  sh("w1",1,6.2,0,184742.30);
+  ev.push({t:"report",n:2,why:"Asked to pay on a personal QR",note:"",ts:T(3.2),demo:1});
+  ev.push({t:"rate",n:1,stars:5,ts:T(2),demo:1},{t:"rate",n:3,stars:4,ts:T(4),demo:1},{t:"rate",n:2,stars:2,ts:T(3.2),demo:1});
+  return ev; }
+PW.RT.listen(o=>{ if(o.t==="rates"){ PW.save("pw_rates",o.rates); } live.push(o); if(!$("app").hidden) draw(); });
+$("demoBtn").onclick=()=>{ showDemo=!showDemo; PW.save("pw_demo",showDemo); draw(); };
+
+function model(){
+  const day=new Date(); day.setHours(0,0,0,0);
+  const ev=[...(showDemo?demoEvents():[]),...live].filter(e=>e.ts>=day.getTime()-86400e3).sort((a,b)=>a.ts-b.ts);
+  const shifts={}, alerts=[], lastClose={}, reports=[], ratings=[];
+  const add=(lvl,title,sub,ts)=>alerts.push({lvl,title,sub,ts});
+  ev.forEach(e=>{
+    if(e.t==="start"){ shifts[e.sid]={...e,closed:false}; const lc=lastClose[e.n];
+      if(lc!=null){ const gap=e.open-lc;
+        if(gap>0.5) add("bad",`Meter gap on nozzle ${e.n}: ${PW.l(gap)} sold with no shift`,`Worth ${PW.inr(gap*e.rate)}. Last closing ${PW.l(lc)}, ${PW.worker(e.w).name} opened at ${PW.l(e.open)}.`,e.ts);
+        else if(gap<-0.5) add("warn",`Nozzle ${e.n} opened below the last closing`,`${PW.worker(e.w).name} typed ${PW.l(e.open)}, last closing was ${PW.l(lc)}. Check the meter photo.`,e.ts); }
+      if(!e.nfc) add("warn",`${PW.worker(e.w).name} started without tapping the nozzle tag`,`Nozzle ${e.n} was picked by hand, not verified at the pump.`,e.ts); }
+    if(e.t==="close"){ const s=shifts[e.sid]||{}; shifts[e.sid]={...s,...e,closed:true,end:e.ts,ph2:e.ph}; lastClose[e.n]=e.close;
+      if(e.diff<-PW.shortLimit) add("bad",`${PW.worker(e.w).name} is short ${PW.inr(-e.diff)}`,`Nozzle ${e.n}: sold ${PW.l(e.litres)}, should collect ${PW.inr(e.exp)}, collected ${PW.inr(e.col)}.`,e.ts);
+      if(e.col>5000&&e.upi/e.col<.15) add("warn",`Very low UPI on ${PW.worker(e.w).name}'s shift (${Math.round(e.upi/e.col*100)}%)`,`Others take about half by UPI. Customers may be paying a personal QR.`,e.ts); }
+    if(e.t==="report"){ const att=Object.values(shifts).filter(s=>s.n===e.n&&s.start<=e.ts&&(!s.closed||s.end>=e.ts)).pop();
+      reports.push({...e,att}); add("bad",`Customer report, nozzle ${e.n}: ${e.why}`,`${att?"Attendant: "+PW.worker(att.w).name+". ":""}${e.note||""}`,e.ts); }
+    if(e.t==="rate") ratings.push(e.stars);
+  });
+  return {ev,shifts:Object.values(shifts),alerts:alerts.sort((a,b)=>b.ts-a.ts),reports,ratings};
+}
+function draw(){
+  const m=model(), closed=m.shifts.filter(s=>s.closed), running=m.shifts.filter(s=>!s.closed);
+  $("today").textContent=new Date().toLocaleDateString([], {weekday:"long",day:"numeric",month:"long"})+(showDemo?" · showing demo data":"");
+  $("demoBtn").textContent=showDemo?"Hide demo data":"Show demo data";
+  const L=closed.reduce((a,s)=>a+s.litres,0), exp=closed.reduce((a,s)=>a+s.exp,0), col=closed.reduce((a,s)=>a+s.col,0), diff=col-exp;
+  $("kpis").innerHTML=[["Fuel sold",PW.l(L).replace(" L","")+" L"],["Should collect",PW.inr(exp)],["Collected",PW.inr(col)],[diff<0?"Short":"Excess",PW.inr(diff),diff<-PW.shortLimit?"bad":"ok"],["On shift now",running.length],["Alerts",m.alerts.length,m.alerts.length?"bad":"ok"]]
+    .map(([k,v,c])=>`<div class="kpi ${c||""}"><span>${k}</span><b>${v}</b></div>`).join("");
+  $("aCount").textContent=m.alerts.length||"0"; $("aCount").className="tag "+(m.alerts.length?"bad":"ok");
+  $("alerts").innerHTML=m.alerts.map(a=>`<div class="al ${a.lvl}"><i>${a.lvl==="bad"?"!":"?"}</i><div><b>${esc(a.title)}</b><span>${esc(a.sub)}</span></div><small>${PW.time(a.ts)}</small></div>`).join("")||`<p style="color:var(--soft)">No alerts. All good ✓</p>`;
+  $("shifts").innerHTML=closed.slice().reverse().map(s=>`<tr><td><b style="font-weight:600">${PW.worker(s.w).name}</b></td><td>${s.n} · ${s.fuel}${s.nfc?" ✓":""}</td><td>${PW.time(s.start)}–${PW.time(s.end)}</td><td class="r">${PW.l(s.litres)}</td><td class="r">${PW.inr(s.exp)}</td><td class="r">${PW.inr(s.col)}</td><td class="r">${s.col?Math.round(s.upi/s.col*100):0}%</td>
+    <td class="r"><span class="tag ${s.diff<-PW.shortLimit?"bad":"ok"}">${PW.inr(s.diff)}</span></td><td><div class="ph2">${s.ph?`<img src="${s.ph}" alt="opening meter">`:""}${s.ph2?`<img src="${s.ph2}" alt="closing meter">`:""}${!s.ph&&!s.ph2?'<span style="color:var(--faint)">demo</span>':""}</div></td></tr>`).join("")||`<tr><td colspan="9" style="color:var(--soft)">No closed shifts yet today.</td></tr>`;
+  $("rCount").textContent=running.length;
+  $("running").innerHTML=running.map(s=>`<div class="run"><b>${s.n}</b><div><strong style="font-weight:600">${PW.worker(s.w).name}</strong> <span>${s.fuel} · since ${PW.time(s.start)} · opened at ${PW.l(s.open)}${s.nfc?" · ✓ NFC":""}</span></div></div>`).join("")||`<p style="color:var(--soft)">Nobody is on shift.</p>`;
+  /* tank check */
+  const tk=PW.load("pw_tank",{Petrol:{o:showDemo?18500:"",r:showDemo?6000:"",d:""},Diesel:{o:showDemo?22300:"",r:"",d:""}});
+  $("tanks").innerHTML=["Petrol","Diesel"].map(f=>{ const sold=closed.filter(s=>s.fuel===f).reduce((a,s)=>a+s.litres,0), t=tk[f]||{}, expC=(+t.o||0)+(+t.r||0)-sold;
+    const v=t.d!==""&&t.d!=null?(+t.d-expC):null, bad=v!=null&&Math.abs(v)>Math.max(5,sold*.005);
+    return `<b style="font-weight:600;font-size:14px">${f}</b><div class="tank" style="margin-top:6px"><label class="f">Opening stock (L)<input data-tk="${f}.o" value="${t.o??""}" inputmode="decimal"></label><label class="f">Received (L)<input data-tk="${f}.r" value="${t.r??""}" inputmode="decimal"></label><label class="f">Dip now (L)<input data-tk="${f}.d" value="${t.d??""}" inputmode="decimal" placeholder="${Math.round(expC)}"></label></div>
+      <div class="var" style="margin-bottom:14px"><span>Sold ${PW.l(sold)} · should be <b style="font-weight:600">${PW.l(expC)}</b></span>${v==null?'<span class="tag">Enter dip</span>':`<span class="tag ${bad?"bad":"ok"}">${v>=0?"+":""}${PW.l(v)}</span>`}</div>`; }).join("");
+  $("tanks").querySelectorAll("[data-tk]").forEach(i=>i.onchange=()=>{ const [f,k]=i.dataset.tk.split("."); tk[f]=tk[f]||{}; tk[f][k]=i.value; PW.save("pw_tank",tk); draw(); });
+  /* scorecard */
+  $("score").innerHTML=PW.workers.map(w=>{ const ss=closed.filter(s=>s.w===w.id), d=ss.reduce((a,s)=>a+s.diff,0), rep=m.reports.filter(r=>r.att&&r.att.w===w.id).length;
+    return `<div><span><b style="font-weight:600">${w.name}</b> <span style="color:var(--soft)">· ${ss.length} shift${ss.length===1?"":"s"}${rep?` · ${rep} report${rep>1?"s":""}`:""}</span></span><span class="tag ${d<-PW.shortLimit||rep?"bad":"ok"}">${ss.length?PW.inr(d):"—"}</span></div>`; }).join("");
+  const avg=m.ratings.length?(m.ratings.reduce((a,b)=>a+b,0)/m.ratings.length).toFixed(1):"–"; $("rate").textContent=`★ ${avg} · ${m.ratings.length}`;
+  $("reports").innerHTML=m.reports.slice().reverse().map(r=>`<div class="al bad"><i>!</i><div><b>${esc(r.why)}</b><span>Nozzle ${r.n}${r.att?" · "+PW.worker(r.att.w).name:""}${r.note?" · "+esc(r.note):""}</span></div><small>${PW.time(r.ts)}</small></div>`).join("")||`<p style="color:var(--soft)">No complaints today.</p>`;
+}
+document.addEventListener("click",e=>{ const im=e.target.closest(".ph2 img"); if(im){ const z=document.createElement("div"); z.className="zoom"; z.innerHTML=`<img src="${im.src}" alt="">`; z.onclick=()=>z.remove(); document.body.appendChild(z); } });
+const R=PW.rates(); $("rP").value=R.Petrol.toFixed(2); $("rD").value=R.Diesel.toFixed(2);
+$("saveR").onclick=async()=>{ const rates={Petrol:+$("rP").value||R.Petrol,Diesel:+$("rD").value||R.Diesel}; PW.save("pw_rates",rates); try{ await PW.RT.send({t:"rates",rates}); }catch(e){} toast("Rates updated on every nozzle ✓"); };
+if(sessionStorage.getItem("pw_owner")) go();
+setInterval(()=>{ if(!$("app").hidden) draw(); },30000);
+</script>
+</body>
+</html>

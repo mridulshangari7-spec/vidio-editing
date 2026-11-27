@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PumpWatch · Staff shift</title>
+<meta name="theme-color" content="#e9eaee">
+<link rel="stylesheet" href="pw.css">
+<style>
+  .step{margin-top:18px;animation:in .45s var(--ease)}
+  @keyframes in{from{opacity:0;transform:translateY(14px)}}
+  .noz{display:flex;align-items:center;gap:14px;margin-top:14px;padding:16px;border-radius:20px;background:#fff}
+  .noz b{display:grid;place-items:center;flex:none;width:54px;height:54px;border-radius:16px;background:var(--ink);color:#fff;font-size:24px;font-weight:600}
+  .noz.ok{box-shadow:inset 0 0 0 2px var(--ok)}
+  .noz span{display:block;font-size:13px;color:var(--soft)}
+  .run{margin-top:18px;padding:22px;border-radius:26px;background:var(--ink);color:#fff}
+  .run .t{font-size:56px;font-weight:500;letter-spacing:-.05em;font-variant-numeric:tabular-nums;line-height:1;margin-top:8px}
+  .run .row{display:flex;justify-content:space-between;margin-top:16px;font-size:14px;color:rgba(255,255,255,.7)}
+  .run .row b{color:#fff;font-weight:600}
+  .sum{margin-top:16px;border-radius:20px;background:#fff;padding:6px 16px}
+  .sum div{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--hair)}
+  .sum div:last-child{border:0}
+  .sum b{font-weight:600}
+  .diff{font-size:24px;font-weight:600;letter-spacing:-.03em}
+  .diff.bad{color:var(--bad)} .diff.ok{color:var(--ok)}
+  .big{text-align:center;padding:30px 10px}
+  .big svg{width:90px;height:90px}
+  .big h2{margin-top:14px}
+</style>
+</head>
+<body>
+<div class="w">
+  <div class="top"><div class="brand"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16M3 21h13M15 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3M7 7h5"/></svg></i><div>PumpWatch<small id="pName"></small></div></div><span class="tag">Staff</span></div>
+
+  <!-- 1. login -->
+  <section class="step" id="sLogin">
+    <h1 class="h1">Start your <span class="soft">shift.</span></h1>
+    <div id="nozBox"></div>
+    <label class="f" style="margin-top:20px">Who are you?</label><div class="chips" id="who"></div>
+    <label class="f">Your 4-digit PIN<input id="pin" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="••••"><small>Demo PINs: Raju 1111 · Sunny 2222 · Gurpreet 3333 · Aman 4444</small></label>
+    <div style="margin-top:20px"><button class="btn" id="goLogin">Continue</button></div>
+  </section>
+
+  <!-- 2. opening reading -->
+  <section class="step" id="sOpen" hidden>
+    <span class="eb">Step 1 of 2 · Opening</span>
+    <h2 class="h2" style="margin-top:8px">Opening meter <span class="soft">reading</span></h2>
+    <p class="lead">Read the big total (totalizer) on the nozzle display before your first sale.</p>
+    <label class="f">Opening reading (litres)<input id="openR" inputmode="decimal" placeholder="e.g. 125430.50"></label>
+    <label class="photo" id="openPh"><input type="file" accept="image/*" capture="environment"><span class="ph">📷</span><div><b>Photo of the meter</b><span>Required. Shows the owner the real reading.</span></div></label>
+    <div style="margin-top:20px"><button class="btn acc" id="goStart">Start shift</button></div>
+  </section>
+
+  <!-- 3. running -->
+  <section class="step" id="sRun" hidden>
+    <div class="run"><span class="eb" style="color:rgba(255,255,255,.55)"><i class="dot" style="display:inline-block;margin-right:6px"></i>Shift running</span>
+      <div class="t" id="clock">00:00:00</div>
+      <div class="row"><span>Worker</span><b id="rW"></b></div>
+      <div class="row"><span>Nozzle</span><b id="rN"></b></div>
+      <div class="row"><span>Opening reading</span><b id="rO"></b></div>
+      <div class="row"><span>Rate</span><b id="rR"></b></div>
+    </div>
+    <p class="lead" style="font-size:14px">Take payments only on the pump's official QR. Customers can tap the nozzle tag to check the rate and report problems.</p>
+    <div style="margin-top:16px"><button class="btn" id="goClose">Close shift</button></div>
+  </section>
+
+  <!-- 4. closing -->
+  <section class="step" id="sClose" hidden>
+    <span class="eb">Step 2 of 2 · Closing</span>
+    <h2 class="h2" style="margin-top:8px">Closing <span class="soft">&amp; cash</span></h2>
+    <label class="f">Closing reading (litres)<input id="closeR" inputmode="decimal"></label>
+    <label class="photo" id="closePh"><input type="file" accept="image/*" capture="environment"><span class="ph">📷</span><div><b>Photo of the meter</b><span>Required</span></div></label>
+    <label class="f">Testing / calibration (litres)<input id="test" inputmode="decimal" value="0"><small>Fuel put back into the tank after a 5-litre test</small></label>
+    <div class="grid2">
+      <label class="f">Cash (₹)<input id="cash" inputmode="numeric" placeholder="0"></label>
+      <label class="f">UPI on pump QR (₹)<input id="upi" inputmode="numeric" placeholder="0"></label>
+      <label class="f">Card / POS (₹)<input id="card" inputmode="numeric" placeholder="0"></label>
+      <label class="f">Credit / khata (₹)<input id="cred" inputmode="numeric" placeholder="0"></label>
+    </div>
+    <div class="sum" id="calc"></div>
+    <div style="margin-top:18px"><button class="btn ok" id="goSubmit">Submit shift to owner</button></div>
+  </section>
+
+  <!-- 5. done -->
+  <section class="step" id="sDone" hidden>
+    <div class="big"><svg viewBox="0 0 120 120" fill="none" stroke="var(--ok)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><circle cx="60" cy="60" r="54" stroke-width="3"/><path d="M38 62l15 15 30-32"/></svg>
+      <h2 class="h2">Shift submitted</h2><p class="lead" id="doneTxt"></p></div>
+    <div class="sum" id="doneSum"></div>
+    <div style="margin-top:18px"><button class="btn ghost" id="again">Start a new shift</button></div>
+  </section>
+  <p class="foot">PumpWatch by Infinity Technologies · <span class="demo">DEMO</span></p>
+</div>
+<div class="toast" id="toast"></div>
+<script src="pw.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const toast=m=>{ const t=$("toast"); t.textContent=m; t.classList.add("on"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("on"),2600); };
+const q=new URLSearchParams(location.search), num=id=>parseFloat($(id).value)||0;
+$("pName").textContent=PW.pump;
+let cur=PW.load("pw_cur",null), pick=null, noz=null, verified=false, phOpen="", phClose="";
+const show=id=>["sLogin","sOpen","sRun","sClose","sDone"].forEach(s=>$(s).hidden=s!==id);
+
+/* nozzle: tapping the NFC tag opens this page with ?n=2&k=secret, which proves the worker is standing at that nozzle */
+const tagN=PW.nozzle(q.get("n"));
+if(tagN&&q.get("k")===tagN.k){ noz=tagN; verified=true;
+  $("nozBox").innerHTML=`<div class="noz ok"><b>${noz.n}</b><div><strong>Nozzle ${noz.n} · ${noz.fuel}</strong><span>✓ Verified by NFC tap at the nozzle</span></div></div>`; }
+else { $("nozBox").innerHTML=`<label class="f">Nozzle<small>Tip: tap the NFC tag on your nozzle to verify automatically</small></label><div class="chips" id="nz">${PW.nozzles.map(z=>`<button data-n="${z.n}">${z.n} · ${z.fuel}</button>`).join("")}</div>`;
+  $("nz").onclick=e=>{ const b=e.target.closest("button"); if(!b) return; noz=PW.nozzle(b.dataset.n); $("nz").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b)); }; }
+$("who").innerHTML=PW.workers.map(w=>`<button data-w="${w.id}">${w.name}</button>`).join("");
+$("who").onclick=e=>{ const b=e.target.closest("button"); if(!b) return; pick=b.dataset.w; $("who").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b)); $("pin").focus(); };
+
+$("goLogin").onclick=()=>{ const w=PW.workers.find(x=>x.id===pick);
+  if(!w) return toast("Pick your name"); if($("pin").value!==w.pin) return toast("Wrong PIN"); if(!noz) return toast("Pick your nozzle"); show("sOpen"); };
+function photo(lbl,set){ const inp=$(lbl).querySelector("input"); inp.onchange=async()=>{ const d=await PW.thumb(inp.files[0]); set(d); $(lbl).classList.toggle("done",!!d); $(lbl).querySelector(".ph").style.backgroundImage=d?`url(${d})`:""; $(lbl).querySelector(".ph").textContent=d?"":"📷"; }; }
+photo("openPh",d=>phOpen=d); photo("closePh",d=>phClose=d);
+
+$("goStart").onclick=async()=>{ const o=num("openR"); if(!o) return toast("Enter the opening reading"); if(!phOpen) return toast("Take a photo of the meter");
+  const rate=PW.rates()[noz.fuel]; cur={sid:PW.RT.rid(),w:pick,n:noz.n,fuel:noz.fuel,rate,open:o,nfc:verified,start:Date.now()};
+  $("goStart").disabled=true; let ok=false; try{ ok=await PW.RT.send({t:"start",...cur,ph:phOpen}); }catch(e){} $("goStart").disabled=false;
+  if(!ok) return toast("No internet. Try again."); PW.save("pw_cur",cur); running(); };
+function running(){ show("sRun"); $("rW").textContent=PW.worker(cur.w).name; $("rN").textContent=`${cur.n} · ${cur.fuel}${cur.nfc?" ✓":""}`; $("rO").textContent=PW.l(cur.open); $("rR").textContent=`₹${cur.rate.toFixed(2)} / L`;
+  clearInterval(running.t); const tick=()=>{ const s=Math.floor((Date.now()-cur.start)/1000); $("clock").textContent=[s/3600,s/60%60,s%60].map(v=>String(Math.floor(v)).padStart(2,"0")).join(":"); }; tick(); running.t=setInterval(tick,1000); }
+$("goClose").onclick=()=>{ show("sClose"); calc(); };
+function totals(){ const c=num("closeR"), litres=Math.max(0,c-cur.open-num("test")), exp=litres*cur.rate, col=num("cash")+num("upi")+num("card")+num("cred"); return {c,litres,exp,col,diff:col-exp}; }
+function calc(){ const t=totals(); const d=Math.round(t.diff);
+  $("calc").innerHTML=`<div><span>Fuel sold</span><b>${PW.l(t.litres)}</b></div><div><span>Should collect</span><b>${PW.inr(t.exp)}</b></div><div><span>Collected</span><b>${PW.inr(t.col)}</b></div>
+  <div><span>${d<0?"Short":"Excess"}</span><span class="diff ${d<-PW.shortLimit?"bad":"ok"}">${PW.inr(d)}</span></div>`; }
+["closeR","test","cash","upi","card","cred"].forEach(i=>$(i).addEventListener("input",calc));
+$("goSubmit").onclick=async()=>{ const t=totals(); if(!t.c||t.c<cur.open) return toast("Closing reading must be more than the opening"); if(!phClose) return toast("Take a photo of the meter");
+  const o={t:"close",sid:cur.sid,w:cur.w,n:cur.n,fuel:cur.fuel,rate:cur.rate,open:cur.open,close:t.c,test:num("test"),cash:num("cash"),upi:num("upi"),card:num("card"),cred:num("cred"),litres:t.litres,exp:t.exp,col:t.col,diff:t.diff,start:cur.start,nfc:cur.nfc,ph:phClose};
+  $("goSubmit").disabled=true; let ok=false; try{ ok=await PW.RT.send(o); }catch(e){} $("goSubmit").disabled=false; if(!ok) return toast("No internet. Try again.");
+  clearInterval(running.t); PW.save("pw_cur",null); show("sDone");
+  $("doneTxt").textContent=Math.round(t.diff)<-PW.shortLimit?"You are short. The owner has been alerted.":"Thank you! The owner can see your shift.";
+  $("doneSum").innerHTML=$("calc").innerHTML; cur=null; };
+$("again").onclick=()=>location.reload();
+PW.RT.listen(o=>{ if(o.t==="rates") PW.save("pw_rates",o.rates); });   /* owner changed today's rate */
+if(cur) running();
+</script>
+</body>
+</html>

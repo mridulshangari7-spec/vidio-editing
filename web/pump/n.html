@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Check your fuel · PumpWatch</title>
+<meta name="theme-color" content="#e9eaee">
+<link rel="stylesheet" href="pw.css">
+<style>
+  .hero{margin-top:8px;padding:22px;border-radius:26px;background:var(--ink);color:#fff}
+  .hero .n{display:flex;justify-content:space-between;align-items:center}
+  .hero .n b{font-size:15px;font-weight:600}
+  .rate{margin-top:14px;font-size:54px;font-weight:500;letter-spacing:-.05em;line-height:1}
+  .rate small{font-size:18px;color:rgba(255,255,255,.6);letter-spacing:-.01em}
+  .att{margin-top:14px;font-size:14px;color:rgba(255,255,255,.7)} .att b{color:#fff;font-weight:600}
+  .chk{margin-top:14px;display:grid;gap:10px}
+  .chk>div{display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:20px;background:#fff}
+  .chk i{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#fff1e8;color:var(--acc);font-style:normal;font-weight:700}
+  .chk b{display:block;font-weight:600;letter-spacing:-.02em}
+  .chk span{font-size:13.5px;color:var(--soft)}
+  .qr{margin-top:14px;padding:18px;border-radius:22px;background:#fff;text-align:center}
+  .qr .box{margin:10px auto 0;width:170px;height:170px;border-radius:16px;border:2px dashed rgba(0,0,0,.18);display:grid;place-items:center;color:var(--faint);font-size:13px;padding:14px}
+  .stars{display:flex;gap:8px;margin-top:10px}
+  .stars button{flex:1;aspect-ratio:1;max-height:64px;border-radius:16px;background:#fff;font-size:26px;color:#d6d8de;transition:transform .2s}
+  .stars button.on{color:#f2a93b} .stars button:active{transform:scale(.9)}
+  .sheet{position:fixed;inset:0;z-index:50;background:rgba(10,10,20,.45);display:flex;align-items:flex-end;justify-content:center}
+  .sheet .in{width:min(560px,100%);background:var(--paper);border-radius:26px 26px 0 0;padding:20px 18px calc(22px + env(safe-area-inset-bottom));animation:up .4s var(--ease)}
+  @keyframes up{from{transform:translateY(40%)}}
+  .why{display:grid;gap:8px;margin-top:12px}
+  .why button{text-align:left;padding:14px 16px;border-radius:16px;background:#fff;font-weight:500;box-shadow:inset 0 0 0 1.5px var(--hair)}
+  .why button.on{background:var(--ink);color:#fff;box-shadow:none}
+  textarea{display:block;width:100%;margin-top:10px;min-height:80px;border:0;border-radius:16px;padding:14px;font:inherit;background:#fff;box-shadow:inset 0 0 0 1.5px var(--hair);outline:0;resize:vertical}
+</style>
+</head>
+<body>
+<div class="w">
+  <div class="top"><div class="brand"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16M3 21h13M15 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3M7 7h5"/></svg></i><div id="pName"></div></div><span class="tag ok"><i class="dot"></i>Verified pump</span></div>
+
+  <div class="hero">
+    <div class="n"><b id="nz"></b><span class="tag" style="background:rgba(255,255,255,.12);color:#fff">Today's rate</span></div>
+    <div class="rate" id="rate"></div>
+    <div class="att" id="att">Attendant: checking…</div>
+  </div>
+
+  <h2 class="h2" style="margin-top:26px">Before you <span class="soft">drive off</span></h2>
+  <div class="chk">
+    <div><i>1</i><div><b>Meter shows 0.00</b><span>Check the amount and litres read zero before filling starts.</span></div></div>
+    <div><i>2</i><div><b>Watch the meter</b><span>The litres should match what you asked for.</span></div></div>
+    <div><i>3</i><div><b>Pay only on the pump's QR</b><span>Never pay to a staff member's personal QR or number.</span></div></div>
+  </div>
+  <div class="qr"><span class="eb">Official payment QR</span><div class="box">The pump's own UPI QR goes here</div></div>
+
+  <div class="card" style="margin-top:14px"><b style="font-weight:600">How was the service?</b><div class="stars" id="stars"></div></div>
+  <div style="margin-top:14px"><button class="btn acc" id="rep">Report a problem</button></div>
+  <p class="foot">Reports go straight to the owner, not the staff.<br><a id="staff" style="text-decoration:underline">Staff: start your shift</a> · PumpWatch by Infinity · <span class="demo">DEMO</span></p>
+</div>
+
+<div class="sheet" id="sheet" hidden><div class="in">
+  <h2 class="h2">What went <span class="soft">wrong?</span></h2>
+  <div class="why" id="why"><button>Meter was not at zero</button><button>Got less fuel than paid for</button><button>Asked to pay on a personal QR</button><button>Wrong rate charged</button><button>Rude behaviour</button><button>Something else</button></div>
+  <textarea id="note" placeholder="Anything else? (optional)"></textarea>
+  <div class="grid2" style="margin-top:14px"><button class="btn ghost" id="cancel">Cancel</button><button class="btn acc" id="send">Send to owner</button></div>
+</div></div>
+<div class="toast" id="toast"></div>
+<script src="pw.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const toast=m=>{ const t=$("toast"); t.textContent=m; t.classList.add("on"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("on"),2600); };
+const q=new URLSearchParams(location.search), z=PW.nozzle(q.get("n"))||PW.nozzles[0];
+$("pName").textContent=PW.pump; $("nz").textContent=`Nozzle ${z.n} · ${z.fuel}`;
+$("rate").innerHTML=`₹${PW.rates()[z.fuel].toFixed(2)}<small> / litre</small>`;
+$("staff").href=`worker.html?n=${z.n}&k=${encodeURIComponent(q.get("k")||"")}${PW.RT.local?"&local":""}`;
+/* who is on this nozzle right now (from the live shift log) */
+const on={}; PW.RT.listen(o=>{ if(o.t==="rates"){ PW.save("pw_rates",o.rates); $("rate").innerHTML=`₹${o.rates[z.fuel].toFixed(2)}<small> / litre</small>`; return; } if(o.n!==z.n) return; if(o.t==="start") on[o.sid]=o; if(o.t==="close") delete on[o.sid];
+  const s=Object.values(on).sort((a,b)=>b.start-a.start)[0]; $("att").innerHTML=s?`Attendant: <b>${PW.worker(s.w).name}</b> · on shift since ${PW.time(s.start)}`:"Attendant: no shift started on this nozzle"; });
+setTimeout(()=>{ if(/checking/.test($("att").textContent)) $("att").textContent="Attendant: no shift started on this nozzle"; },2500);
+let stars=0; $("stars").innerHTML=[1,2,3,4,5].map(i=>`<button aria-label="${i} star">★</button>`).join("");
+$("stars").querySelectorAll("button").forEach((b,i)=>b.onclick=()=>{ stars=i+1; $("stars").querySelectorAll("button").forEach((x,j)=>x.classList.toggle("on",j<stars));
+  PW.RT.send({t:"rate",n:z.n,stars}); toast(stars<=2?"Sorry! Tell us what went wrong.":"Thank you!"); if(stars<=2) $("sheet").hidden=false; });
+$("rep").onclick=()=>$("sheet").hidden=false; $("cancel").onclick=()=>$("sheet").hidden=true;
+let why=""; $("why").onclick=e=>{ const b=e.target.closest("button"); if(!b) return; why=b.textContent; $("why").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b)); };
+$("send").onclick=async()=>{ if(!why) return toast("Pick what went wrong"); const o={t:"report",n:z.n,why,note:$("note").value.trim().slice(0,200)};
+  let ok=false; try{ ok=await PW.RT.send(o); }catch(e){} if(!ok) return toast("No internet. Try again.");
+  if(PW.ownerWa) window.open(`https://wa.me/${PW.ownerWa}?text=${encodeURIComponent(`Complaint at ${PW.pump}, nozzle ${z.n}: ${why}. ${o.note}`)}`,"_blank");
+  $("sheet").hidden=true; toast("Sent to the owner. Thank you!"); };
+</script>
+</body>
+</html>
